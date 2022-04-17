@@ -1,9 +1,9 @@
 import React from 'react';
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 
-import classes from './Image.module.css';
+import classes from './Text.module.css';
 
-const Image = (props) => {
+const Text = (props) => {
 
 
   const pinButtonHandler = (e) =>{
@@ -25,13 +25,13 @@ const Image = (props) => {
   return(
 
       <ResizableAndDraggable dragHandleClassName={classes.Header} bounds={'parent'}>
-        <div className={classes.Image} >
+        <div className={classes.Text} >
           <div className={classes.Header} >
             <div className={classes.PinButton} onMouseDown={stopPropagation} onClick={pinButtonHandler}></div>
-              Imagen
-            <div className={classes.AddButton} onMouseDown={stopPropagation} onClick={addButtonHandler}></div>
+              Texto
           </div>
           <div className={classes.Body} >
+            <textarea placeholder="<Excriba aquí el texto>"/>
             <div className={classes.OptionsButton} onClick={optionsButtonHandler}></div>
           </div>
         </div>
@@ -41,4 +41,4 @@ const Image = (props) => {
 }
 
 
-export default Image;
+export default Text;
