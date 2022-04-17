@@ -1,0 +1,52 @@
+.Image{
+  width: 100%;
+  height: 100%;
+  background-color: lightsteelblue;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #c4c3c3;
+}
+
+.Header{
+  height: 35px;
+  background-color: #d1d6e2;
+  text-align: center;
+  border-bottom: 1px solid #c4c3c3;
+  cursor: move;
+}
+
+.Body{
+  background-color: white;
+  height: 100%;
+}
+
+.PinButton{
+  width: 25px;
+  height:25px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  background-color: lightgreen;
+  cursor: pointer;
+}
+
+.AddButton{
+  width: 25px;
+  height:25px;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background-color: lightgreen;
+  cursor: pointer;
+}
+
+.OptionsButton{
+  width: 25px;
+  height:25px;
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  background-color: lightgreen;
+  cursor: pointer;
+}

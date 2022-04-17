@@ -17,7 +17,12 @@ const ResizableAndDraggable = (props) => {
   }
 
   const HandleStyles = {
-    bottomRight: {right: '2px', bottom: '2px'}
+    bottomRight: {
+        right: '4px', 
+        bottom: '4px',
+        width: '25px',
+        height: '25px'
+      }
   }
 
   const Enable = {
@@ -33,9 +38,12 @@ const ResizableAndDraggable = (props) => {
           width: 320,
           height: 200
         }}
+        minWidth= {160}
+        minHeight={100}
         resizeHandleClasses= {HandleClasses}
         resizeHandleStyles= {HandleStyles}
         enableResizing= {Enable}
+        dragHandleClassName={props.dragHandleClassName}
       >
         {props.children}
       </Rnd>

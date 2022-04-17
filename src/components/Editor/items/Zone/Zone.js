@@ -7,7 +7,7 @@ const Zone = (props) => {
   
   return(
 
-      <ResizableAndDraggable>
+      <ResizableAndDraggable dragHandleClassName={classes.Zone}>
         <div className={classes.Zone} >
           
         </div>
