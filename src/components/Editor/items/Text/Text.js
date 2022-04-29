@@ -10,10 +10,6 @@ const Text = (props) => {
     console.log('Pin Button Pressed');
   }
 
-  const addButtonHandler = (e) =>{
-    console.log('Add Button Pressed');
-  }
-
   const optionsButtonHandler = (e) =>{
     console.log('Options Button Pressed');
   }

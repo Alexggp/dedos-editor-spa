@@ -37,7 +37,8 @@
   },
   "devDependencies": {
     "re-resizable": "^6.9.6",
-    "react-draggable": "^4.4.4",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-rnd": "^10.3.5"
   }
 }
