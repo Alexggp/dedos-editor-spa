@@ -45,6 +45,14 @@ const ResizableAndDraggable = (props) => {
         enableResizing= {Enable}
         dragHandleClassName={props.dragHandleClassName}
         bounds={props.bounds}
+        onDragStop={(e, d) => {console.log({ x: d.x, y: d.y }) }}
+        onResizeStop={(e, direction, ref, delta, position) => {
+          console.log({
+            width: ref.style.width,
+            height: ref.style.height,
+            ...position,
+          });
+        }}
       >
         {props.children}
       </Rnd>
