@@ -6,11 +6,16 @@ const Droppable = (props) => {
 
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: props.accept,
-    drop: () => ({ name: props.type }),
+    // drop: () => ({ name: props.type }),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
     }),
+    drop: (item, monitor) =>{
+      console.log(item.name)
+      console.log(monitor.getClientOffset())
+      return { name: props.type }
+    }
   }))
   const isActive = canDrop && isOver
   let backgroundColor = '#222'

@@ -16,12 +16,15 @@ const Draggable = (props) => {
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
       handlerId: monitor.getHandlerId(),
-    }),
+    })
   }))
-  const opacity = isDragging ? 0.4 : 1
+  const style = {
+    cursor: 'move',
+    opacity: isDragging ? '0.4' : '1'
+  }
 
   return(
-    <div className='Draggable' ref={drag} style={{ opacity }} data-testid={props.type}>  
+    <div className='Draggable' ref={drag} style={style} data-testid={props.type}>  
       {props.children}
     </div>
   )
