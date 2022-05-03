@@ -24,17 +24,21 @@ const Image = (props) => {
   
   return(
 
-      <ResizableAndDraggable dragHandleClassName={classes.Header} bounds={'parent'}>
-        <div className={classes.Image} >
-          <div className={classes.Header} >
-            <div className={classes.PinButton} onMouseDown={stopPropagation} onClick={pinButtonHandler}></div>
-              Imagen
-            <div className={classes.AddButton} onMouseDown={stopPropagation} onClick={addButtonHandler}></div>
+      <ResizableAndDraggable
+        dragHandleClassName={classes.Header}
+        bounds={'parent'}
+        offset={props.offset}
+        size={props.size}>
+          <div className={classes.Image} >
+            <div className={classes.Header} >
+              <div className={classes.PinButton} onMouseDown={stopPropagation} onClick={pinButtonHandler}></div>
+                Imagen
+              <div className={classes.AddButton} onMouseDown={stopPropagation} onClick={addButtonHandler}></div>
+            </div>
+            <div className={classes.Body} >
+              <div className={classes.OptionsButton} onClick={optionsButtonHandler}></div>
+            </div>
           </div>
-          <div className={classes.Body} >
-            <div className={classes.OptionsButton} onClick={optionsButtonHandler}></div>
-          </div>
-        </div>
       </ResizableAndDraggable>
   )
 

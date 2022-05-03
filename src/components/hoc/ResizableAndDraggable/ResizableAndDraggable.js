@@ -1,7 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Rnd } from 'react-rnd'; // resizable and draggable class
 
+import {move} from '../../../store/coordinates/action';
 import classes from './ResizableAndDraggable.module.css';
+
 
 const ResizableAndDraggable = (props) => {
 
@@ -33,10 +36,10 @@ const ResizableAndDraggable = (props) => {
       <Rnd
         style={style}
         default={{
-          x: 0,
-          y: 0,
-          width: 320,
-          height: 200
+          x: props.offset.x,
+          y: props.offset.y,
+          width: props.size.w,
+          height: props.size.h
         }}
         minWidth= {240}
         minHeight={160}
@@ -45,20 +48,19 @@ const ResizableAndDraggable = (props) => {
         enableResizing= {Enable}
         dragHandleClassName={props.dragHandleClassName}
         bounds={props.bounds}
-        onDragStop={(e, d) => {console.log({ x: d.x, y: d.y }) }}
+        onDragStop={(e, d) =>{
+          // props.move(d.x,d.y)
+          console.log(d.x,d.y);
+        } }
         onResizeStop={(e, direction, ref, delta, position) => {
-          console.log({
-            width: ref.style.width,
-            height: ref.style.height,
-            ...position,
-          });
+          console.log(ref.style.width, ref.style.height);
         }}
       >
-        {props.children}
+      {props.children}
       </Rnd>
   )
 
 }
 
 
-export default ResizableAndDraggable;
+export default connect(null,{move})(ResizableAndDraggable);

@@ -20,17 +20,21 @@ const Text = (props) => {
   
   return(
 
-      <ResizableAndDraggable dragHandleClassName={classes.Header} bounds={'parent'}>
-        <div className={classes.Text} >
-          <div className={classes.Header} >
-            <div className={classes.PinButton} onMouseDown={stopPropagation} onClick={pinButtonHandler}></div>
-              Texto
+      <ResizableAndDraggable
+        dragHandleClassName={classes.Header}
+        bounds={'parent'}
+        offset={props.offset}
+        size={props.size}>
+          <div className={classes.Text} >
+            <div className={classes.Header} >
+              <div className={classes.PinButton} onMouseDown={stopPropagation} onClick={pinButtonHandler}></div>
+                Texto
+            </div>
+            <div className={classes.Body} >
+              <textarea placeholder="<Excriba aquí el texto>"/>
+              <div className={classes.OptionsButton} onClick={optionsButtonHandler}></div>
+            </div>
           </div>
-          <div className={classes.Body} >
-            <textarea placeholder="<Excriba aquí el texto>"/>
-            <div className={classes.OptionsButton} onClick={optionsButtonHandler}></div>
-          </div>
-        </div>
       </ResizableAndDraggable>
   )
 
