@@ -22,6 +22,12 @@ const initialState = {
           size:{
             w: 300,
             h: 200
+          },
+          props:{
+            images:[
+              "https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png",
+              "https://i.guim.co.uk/img/media/ef8492feb3715ed4de705727d9f513c168a8b196/37_0_1125_675/master/1125.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=d456a2af571d980d8b2985472c262b31"
+            ]
           }
         },
         {
@@ -33,7 +39,8 @@ const initialState = {
           size:{
             w: 458,
             h: 220
-          }
+          },
+          props:{}
         }
       ]
     },
@@ -101,15 +108,16 @@ const resizeItemInState = (state, stageIndex, itemIndex, size) => {
 
 const createItem = (stageIndex, item, offset) => {
 
-  const itemType = ()=>{ switch(item){
-    case 'AddZone':
-      return 'zone';
-    case 'AddImage':
-      return 'image';
-    case 'AddText':
-      return 'text'
-    default:
-      return null 
+  const itemType = ()=>{ 
+    switch(item){
+      case 'AddZone':
+        return 'zone';
+      case 'AddImage':
+        return 'image';
+      case 'AddText':
+        return 'text'
+      default:
+        return null 
     }
   }
 
@@ -139,11 +147,30 @@ const addItemToState = (state, stageIndex, {type, offset})=>{
       size:{
         w: 360,
         h: 240
-      }
+      },
+      props:{}
     }
   );
   state.stages[stageIndex].itemList = cloneItemList;
   return state;
+}
+
+const changeItemProps  = (stageIndex, itemIndex, props) =>{
+  return {
+    type: "CHANGE_ITEM_PROPS",
+    stageIndex: stageIndex,
+    itemIndex: itemIndex,
+    props: props
+  }
+}
+
+const changeItemPropsInState = (state, stageIndex, itemIndex, props) => {
+  const cloneItemList = [...state.stages[stageIndex].itemList];
+  cloneItemList[itemIndex].props= props;
+  state.stages[stageIndex].itemList = cloneItemList;
+  console.log(state)
+  return state;
+  
 }
 
 const stagesReducer = (state = initialState, action = {})=>{
@@ -154,6 +181,8 @@ const stagesReducer = (state = initialState, action = {})=>{
       return moveItemInState(state, action.stageIndex, action.itemIndex, action.offset);
     case 'RESIZE_ITEM':
       return resizeItemInState(state, action.stageIndex, action.itemIndex, action.size);
+    case 'CHANGE_ITEM_PROPS':
+      return changeItemPropsInState(state, action.stageIndex, action.itemIndex, action.props);
     default:
       return {
         ...state
@@ -161,4 +190,4 @@ const stagesReducer = (state = initialState, action = {})=>{
   }
 }
 
-export {stagesReducer, createItem, moveItem, resizeItem};
+export {stagesReducer, createItem, moveItem, resizeItem, changeItemProps};

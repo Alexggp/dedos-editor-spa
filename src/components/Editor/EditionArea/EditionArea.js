@@ -36,13 +36,13 @@ const EditionArea = (props) => {
   const items = props.itemList.map((item, index)=>{
     switch (item.type) {
       case 'zone':
-        return <Zone key={index} stageIndex={props.currentStage} itemIndex={index} offset={item.offset} size={item.size} moved={moveItem} resized={resizeItem}/>
+        return <Zone key={index} stageIndex={props.currentStage}  props={item.props} itemIndex={index} offset={item.offset} size={item.size} moved={moveItem} resized={resizeItem}/>;
       case 'image':
-        return <Image key={index} stageIndex={props.currentStage} itemIndex={index} offset={item.offset} size={item.size} moved={moveItem} resized={resizeItem}/>
+        return <Image key={index} stageIndex={props.currentStage}  props={item.props} itemIndex={index} offset={item.offset} size={item.size} moved={moveItem} resized={resizeItem}/>;
       case 'text':
-        return <Text key={index} stageIndex={props.currentStage} itemIndex={index} offset={item.offset} size={item.size} moved={moveItem} resized={resizeItem}/>
+        return <Text key={index} stageIndex={props.currentStage}  props={item.props} itemIndex={index} offset={item.offset} size={item.size} moved={moveItem} resized={resizeItem}/>;
       default:
-        return <Text key={index} stageIndex={props.currentStage} itemIndex={index} offset={item.offset} size={item.size} moved={moveItem} resized={resizeItem}/>;
+        return <Text key={index} stageIndex={props.currentStage}  props={item.props} itemIndex={index} offset={item.offset} size={item.size} moved={moveItem} resized={resizeItem}/>;
     }
   })
 

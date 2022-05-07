@@ -48,7 +48,6 @@ const ResizableAndDraggable = (props) => {
         dragHandleClassName={props.dragHandleClassName}
         bounds={props.bounds}
         onDragStop={(e, d) =>{
-          // props.move(d.x,d.y)
           props.moved(d.x,d.y);
         } }
         onResizeStop={(e, direction, ref, delta, position) => {

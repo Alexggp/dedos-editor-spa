@@ -1,7 +1,10 @@
 import React from 'react';
-import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
+import { connect } from 'react-redux';
 
+
+import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 import classes from './Text.module.css';
+import {changeItemProps} from '../../../../store/reducers/stages';
 
 const Text = (props) => {
 
@@ -16,6 +19,10 @@ const Text = (props) => {
 
   const stopPropagation = (e) =>{
     e.stopPropagation();
+  }
+
+  const changeText = (e) => {
+    props.changeItemProps(props.stageIndex, props.itemIndex, {text: e.target.value})
   }
 
   const hasMoved = (x, y)=>{
@@ -42,7 +49,7 @@ const Text = (props) => {
                 Texto
             </div>
             <div className={classes.Body} >
-              <textarea placeholder="<Excriba aquí el texto>"/>
+              <textarea placeholder="<Excriba aquí el texto>" onChange={changeText}/>
               <div className={classes.OptionsButton} onClick={optionsButtonHandler}></div>
             </div>
           </div>
@@ -52,4 +59,4 @@ const Text = (props) => {
 }
 
 
-export default Text;
+export default connect(null, {changeItemProps})(Text);
