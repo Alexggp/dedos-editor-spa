@@ -33,6 +33,7 @@ const Zone = (props) => {
         offset={props.offset}
         moved = {hasMoved}
         resized = {hasResized}
+        zIndex = {100}
         size={props.size}>
           <div className={classes.Zone} >
             <div className={classes.OptionsButton} onMouseDown={stopPropagation} onClick={optionsButtonHandler}></div>

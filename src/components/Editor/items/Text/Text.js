@@ -34,6 +34,7 @@ const Text = (props) => {
         offset={props.offset}
         moved = {hasMoved}
         resized = {hasResized}
+        zIndex = {200}
         size={props.size}>
           <div className={classes.Text} >
             <div className={classes.Header} >

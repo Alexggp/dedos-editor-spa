@@ -38,6 +38,7 @@ const Image = (props) => {
         offset={props.offset}
         moved = {hasMoved}
         resized = {hasResized}
+        zIndex = {300}
         size={props.size}>
           <div className={classes.Image} >
             <div className={classes.Header} >

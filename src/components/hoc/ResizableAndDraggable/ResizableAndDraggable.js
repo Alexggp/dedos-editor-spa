@@ -9,7 +9,8 @@ const ResizableAndDraggable = (props) => {
   const style = {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    zIndex: props.zIndex
   };
 
 
