@@ -11,6 +11,9 @@ const initialState = {
           size:{
             w: 1010,
             h: 792
+          }, 
+          props:{
+            background: "https://i.guim.co.uk/img/media/ef8492feb3715ed4de705727d9f513c168a8b196/37_0_1125_675/master/1125.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=d456a2af571d980d8b2985472c262b31"
           }
         },
         {
@@ -39,8 +42,7 @@ const initialState = {
           size:{
             w: 458,
             h: 220
-          },
-          props:{}
+          }
         }
       ]
     },
@@ -55,7 +57,8 @@ const initialState = {
           size:{
             w: 800,
             h: 700
-          }
+          },
+          props:{}
         }
       ]
     }
@@ -168,7 +171,6 @@ const changeItemPropsInState = (state, stageIndex, itemIndex, props) => {
   const cloneItemList = [...state.stages[stageIndex].itemList];
   cloneItemList[itemIndex].props= props;
   state.stages[stageIndex].itemList = cloneItemList;
-  console.log(state)
   return state;
   
 }

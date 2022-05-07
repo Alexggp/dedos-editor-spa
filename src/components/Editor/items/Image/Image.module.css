@@ -19,6 +19,15 @@
 .Body{
   background-color: white;
   height: 100%;
+  overflow: hidden;
+}
+
+.Body img{
+  width: 76px;
+  height: auto;
+  border: 2px solid black;
+  margin: 2px;
+  float: left;
 }
 
 .PinButton{

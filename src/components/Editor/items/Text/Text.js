@@ -22,7 +22,9 @@ const Text = (props) => {
   }
 
   const changeText = (e) => {
-    props.changeItemProps(props.stageIndex, props.itemIndex, {text: e.target.value})
+    const propsClone = {...props.props}
+    propsClone.text = e.target.value;
+    props.changeItemProps(props.stageIndex, props.itemIndex, propsClone)
   }
 
   const hasMoved = (x, y)=>{

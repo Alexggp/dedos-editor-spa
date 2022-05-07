@@ -5,6 +5,7 @@
   background-color: #cbeffe;
   position: absolute;
   cursor: move;
+  background-size: cover;
 }
 
 .OptionsButton{
