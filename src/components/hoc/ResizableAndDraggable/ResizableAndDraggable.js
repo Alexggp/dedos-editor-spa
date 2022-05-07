@@ -1,8 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Rnd } from 'react-rnd'; // resizable and draggable class
 
-import {move} from '../../../store/coordinates/action';
 import classes from './ResizableAndDraggable.module.css';
 
 
@@ -50,10 +48,10 @@ const ResizableAndDraggable = (props) => {
         bounds={props.bounds}
         onDragStop={(e, d) =>{
           // props.move(d.x,d.y)
-          console.log(d.x,d.y);
+          props.moved(d.x,d.y);
         } }
         onResizeStop={(e, direction, ref, delta, position) => {
-          console.log(ref.style.width, ref.style.height);
+          props.resized(ref.style.width, ref.style.height);
         }}
       >
       {props.children}
@@ -63,4 +61,4 @@ const ResizableAndDraggable = (props) => {
 }
 
 
-export default connect(null,{move})(ResizableAndDraggable);
+export default ResizableAndDraggable;

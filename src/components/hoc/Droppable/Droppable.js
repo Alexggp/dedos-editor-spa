@@ -12,8 +12,7 @@ const Droppable = (props) => {
       canDrop: monitor.canDrop(),
     }),
     drop: (item, monitor) =>{
-      console.log(item.name)
-      console.log(monitor.getClientOffset())
+      props.dropped(item.name, monitor.getClientOffset())
       return { name: props.type }
     }
   }))

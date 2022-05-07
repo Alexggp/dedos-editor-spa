@@ -10,7 +10,7 @@ const Draggable = (props) => {
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult()
       if (item && dropResult) {
-        alert(`You dropped ${item.name} into ${dropResult.name}!`)
+        // alert(`You dropped ${item.name} into ${dropResult.name}!`)
       }
     },
     collect: (monitor) => ({

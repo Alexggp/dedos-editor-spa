@@ -4,7 +4,6 @@ const initialState = {
       itemList: [
         {
           type: 'zone',
-          itemId: 0,
           offset:{
             x: 10,
             y: 15
@@ -16,7 +15,6 @@ const initialState = {
         },
         {
           type: 'image',
-          itemId: 1,
           offset:{
             x: 177,
             y: 104
@@ -28,7 +26,6 @@ const initialState = {
         },
         {
           type: 'text',
-          itemId: 2,
           offset:{
             x: 475,
             y: 506
@@ -44,7 +41,6 @@ const initialState = {
       itemList: [
         {
           type: 'zone',
-          itemId: 0,
           offset:{
             x: 50,
             y: 30
@@ -60,20 +56,109 @@ const initialState = {
 }
 
 
-const move = (x, y) =>{
+const moveItem = (stageIndex, itemIndex, offset) =>{
   return {
     type: "MOVE_ITEM",
-    payload: {
-      x: x,
-      y: y
+    stageIndex: stageIndex,
+    itemIndex: itemIndex,
+    offset: {
+      x: offset.x,
+      y: offset.y
     }
   }
 }
 
-const stagesReducer = (state = initialState, action )=>(
-  {
-    ...state
-  }
-)
+const moveItemInState = (state, stageIndex, itemIndex, offset) => {
 
-export default stagesReducer;
+  const cloneItemList = [...state.stages[stageIndex].itemList];
+  cloneItemList[itemIndex].offset= offset;
+  state.stages[stageIndex].itemList = cloneItemList;
+  return state;
+  
+}
+
+const resizeItem = (stageIndex, itemIndex, size) =>{
+  return {
+    type: "RESIZE_ITEM",
+    stageIndex: stageIndex,
+    itemIndex: itemIndex,
+    size: {
+      // removing px at the end and transfroming it in to an integer
+      w: Number(size.w.replace('px', '')),
+      h: Number(size.h.replace('px', ''))
+    }
+  }
+}
+
+const resizeItemInState = (state, stageIndex, itemIndex, size) => {
+  const cloneItemList = [...state.stages[stageIndex].itemList];
+  cloneItemList[itemIndex].size= size;
+  state.stages[stageIndex].itemList = cloneItemList;
+  return state;
+  
+}
+
+
+const createItem = (stageIndex, item, offset) => {
+
+  const itemType = ()=>{ switch(item){
+    case 'AddZone':
+      return 'zone';
+    case 'AddImage':
+      return 'image';
+    case 'AddText':
+      return 'text'
+    default:
+      return null 
+    }
+  }
+
+  return {
+    type: "CREATE_ITEM",
+    stageIndex: stageIndex,
+    payload:{
+      type: itemType(),
+      offset: {
+        x: offset.x-180,
+        y: offset.y-100
+      }
+    }
+  }
+}
+
+const addItemToState = (state, stageIndex, {type, offset})=>{
+
+  const cloneItemList = [...state.stages[stageIndex].itemList]
+  cloneItemList.push(
+    {
+      type: type,
+      offset:{
+        x: offset.x,
+        y: offset.y
+      },
+      size:{
+        w: 360,
+        h: 240
+      }
+    }
+  );
+  state.stages[stageIndex].itemList = cloneItemList;
+  return state;
+}
+
+const stagesReducer = (state = initialState, action = {})=>{
+  switch(action.type){
+    case 'CREATE_ITEM':
+      return addItemToState(state, action.stageIndex, action.payload);
+    case 'MOVE_ITEM':
+      return moveItemInState(state, action.stageIndex, action.itemIndex, action.offset);
+    case 'RESIZE_ITEM':
+      return resizeItemInState(state, action.stageIndex, action.itemIndex, action.size);
+    default:
+      return {
+        ...state
+      }
+  }
+}
+
+export {stagesReducer, createItem, moveItem, resizeItem};

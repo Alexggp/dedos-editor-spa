@@ -9,19 +9,19 @@ const Toolbar = (props) => {
     <div className={classes.Toolbar}>
       <div className={classes.ButtonArea}>
         <div className={classes.Button}>
-            <Draggable type={'Tool1'}>
+            <Draggable type={'AddZone'}>
               <img alt='' src='https://icones.pro/wp-content/uploads/2021/04/icone-internet-noire.png'/>
             </Draggable>
         </div>
       </div>
       <div className={classes.ButtonArea}>
         <div className={classes.Button}>
-            <Draggable type={'Tool2'}>
+            <Draggable type={'AddText'}>
               <img alt='' src='https://icones.pro/wp-content/uploads/2021/04/icone-internet-noire.png'/>
             </Draggable>
         </div>
         <div className={classes.Button}>
-            <Draggable type={'Tool3'}>
+            <Draggable type={'AddImage'}>
               <img alt='' src='https://icones.pro/wp-content/uploads/2021/04/icone-internet-noire.png'/>
             </Draggable>
         </div>

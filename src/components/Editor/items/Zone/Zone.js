@@ -17,16 +17,30 @@ const Zone = (props) => {
     e.stopPropagation();
   }
 
+  const hasMoved = (x, y)=>{
+    props.moved(props.itemIndex, {x: x, y:y});
+  }
+
+  const hasResized = (w, h)=>{
+    props.resized(props.itemIndex, {w: w, h:h});
+  }
+
   return(
 
       <ResizableAndDraggable 
         dragHandleClassName={classes.Zone}
         bounds={'parent'}
         offset={props.offset}
+        moved = {hasMoved}
+        resized = {hasResized}
         size={props.size}>
           <div className={classes.Zone} >
             <div className={classes.OptionsButton} onMouseDown={stopPropagation} onClick={optionsButtonHandler}></div>
             <div className={classes.AddButton} onMouseDown={stopPropagation} onClick={addButtonHandler}></div>
+
+            <p>offset: {props.offset.x},{props.offset.y}</p>
+            <p>size: {props.size.w}, {props.size.h}</p>
+
           </div>
       </ResizableAndDraggable>
   )

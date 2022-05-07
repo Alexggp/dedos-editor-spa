@@ -17,6 +17,14 @@ const Text = (props) => {
   const stopPropagation = (e) =>{
     e.stopPropagation();
   }
+
+  const hasMoved = (x, y)=>{
+    props.moved(props.itemIndex, {x: x, y:y});
+  }
+
+  const hasResized = (w, h)=>{
+    props.resized(props.itemIndex, {w: w, h:h});
+  }
   
   return(
 
@@ -24,6 +32,8 @@ const Text = (props) => {
         dragHandleClassName={classes.Header}
         bounds={'parent'}
         offset={props.offset}
+        moved = {hasMoved}
+        resized = {hasResized}
         size={props.size}>
           <div className={classes.Text} >
             <div className={classes.Header} >
