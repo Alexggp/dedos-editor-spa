@@ -10,7 +10,9 @@ const Text = (props) => {
 
 
   const pinButtonHandler = (e) =>{
-    console.log('Pin Button Pressed');
+    const propsClone = {...props.props}
+    propsClone.pin = props.props.pin ? false: true;
+    props.changeItemProps(props.stageIndex, props.itemIndex, propsClone)
   }
 
   const optionsButtonHandler = (e) =>{
@@ -34,6 +36,12 @@ const Text = (props) => {
   const hasResized = (w, h)=>{
     props.resized(props.itemIndex, {w: w, h:h});
   }
+
+  let pinButtonClass = classes.PinButton;
+
+  if (props.props.pin) {
+    pinButtonClass = classes.PinButtonPressed;
+  }
   
   return(
 
@@ -47,7 +55,7 @@ const Text = (props) => {
         size={props.size}>
           <div className={classes.Text} >
             <div className={classes.Header} >
-              <div className={classes.PinButton} onMouseDown={stopPropagation} onClick={pinButtonHandler}></div>
+              <div className={pinButtonClass} onMouseDown={stopPropagation} onClick={pinButtonHandler}></div>
                 Texto
             </div>
             <div className={classes.Body} >

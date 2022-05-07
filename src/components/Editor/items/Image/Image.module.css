@@ -30,7 +30,7 @@
   float: left;
 }
 
-.PinButton{
+.PinButton, .PinButtonPressed{
   width: 25px;
   height:25px;
   position: absolute;
@@ -38,6 +38,10 @@
   left: 4px;
   background-color: lightgreen;
   cursor: pointer;
+}
+
+.PinButtonPressed{
+  background-color: rgb(230, 144, 238);
 }
 
 .AddButton{

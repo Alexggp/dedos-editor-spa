@@ -10,8 +10,11 @@ const Image = (props) => {
 
 
   const pinButtonHandler = (e) =>{
-    console.log('Pin Button Pressed');
+    const propsClone = {...props.props}
+    propsClone.pin = props.props.pin ? false: true;
+    props.changeItemProps(props.stageIndex, props.itemIndex, propsClone)
   }
+
 
   const addButtonHandler = (e) =>{
     const image="https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png";
@@ -48,6 +51,12 @@ const Image = (props) => {
     ))
   }
 
+  let pinButtonClass = classes.PinButton;
+
+  if (props.props.pin) {
+    pinButtonClass = classes.PinButtonPressed;
+  }
+  
   return(
 
       <ResizableAndDraggable
@@ -60,7 +69,7 @@ const Image = (props) => {
         size={props.size}>
           <div className={classes.Image} >
             <div className={classes.Header} >
-              <div className={classes.PinButton} onMouseDown={stopPropagation} onClick={pinButtonHandler}></div>
+              <div className={pinButtonClass} onMouseDown={stopPropagation} onClick={pinButtonHandler}></div>
                 Imagen 
               <div className={classes.AddButton} onMouseDown={stopPropagation} onClick={addButtonHandler}></div>
             </div>
