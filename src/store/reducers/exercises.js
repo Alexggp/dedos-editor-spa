@@ -42,7 +42,8 @@ const initialState = {
           size:{
             w: 458,
             h: 220
-          }
+          },
+          props:{}
         }
       ]
     },

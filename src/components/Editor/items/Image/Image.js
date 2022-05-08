@@ -67,6 +67,7 @@ const Image = (props) => {
         resized = {hasResized}
         delete = {props.delete}
         zIndex = {300}
+        notMove={props.props.pin}
         size={props.size}>
           <div className={classes.Image} >
             <div className={classes.Header} >

@@ -27,10 +27,10 @@ const ResizableAndDraggable = (props) => {
 
   const HandleStyles = {
     bottomRight: {
-        right: '6px', 
-        bottom: '6px',
-        width: '30px',
-        height: '30px'
+        right: '4px', 
+        bottom: '4px',
+        width: '25px',
+        height: '25px'
       }
   }
 
@@ -54,6 +54,7 @@ const ResizableAndDraggable = (props) => {
         enableResizing= {Enable}
         dragHandleClassName={props.dragHandleClassName}
         bounds={props.bounds}
+        disableDragging={props.notMove}
         onDragStop={(e, d) =>{
           if (props.trashIsActive){
             props.delete();

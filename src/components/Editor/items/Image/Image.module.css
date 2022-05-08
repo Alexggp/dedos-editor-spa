@@ -6,10 +6,11 @@
   display: flex;
   flex-direction: column;
   border: 1px solid #c4c3c3;
+  line-height: 40px;
 }
 
 .Header{
-  height: 35px;
+  height: 50px;
   background-color: #d1d6e2;
   text-align: center;
   border-bottom: 1px solid #c4c3c3;
@@ -30,28 +31,31 @@
   float: left;
 }
 
-.PinButton, .PinButtonPressed{
-  width: 25px;
-  height:25px;
+.AddButton{
+  width: 30px;
+  height:30px;
   position: absolute;
-  top: 4px;
-  left: 4px;
-  background-color: lightgreen;
+  top: 6px;
+  right: 6px;
+  background-size: cover;
+  background-image: url('../../../../assets/icons/addFolderIcon.png');
+  cursor: pointer;
+}
+
+.PinButton, .PinButtonPressed{
+  width: 30px;
+  height:30px;
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background-size: cover;
+  background-image: url('../../../../assets/icons/pinUnselected.png');
   cursor: pointer;
 }
 
 .PinButtonPressed{
-  background-color: rgb(230, 144, 238);
-}
-
-.AddButton{
-  width: 25px;
-  height:25px;
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  background-color: lightgreen;
-  cursor: pointer;
+  background-size: cover;
+  background-image: url('../../../../assets/icons/pinSelected.png');
 }
 
 .OptionsButton{
@@ -60,6 +64,7 @@
   position: absolute;
   bottom: 4px;
   left: 4px;
-  background-color: lightgreen;
+  background-size: cover;
+  background-image: url('../../../../assets/icons/settingsIcon.png');
   cursor: pointer;
 }

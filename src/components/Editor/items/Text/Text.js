@@ -53,6 +53,7 @@ const Text = (props) => {
         resized = {hasResized}
         delete = {props.delete}
         zIndex = {200}
+        notMove={props.props.pin}
         size={props.size}>
           <div className={classes.Text} >
             <div className={classes.Header} >

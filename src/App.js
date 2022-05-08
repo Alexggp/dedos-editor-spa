@@ -19,7 +19,7 @@ const mapStateToProps = (state) => {
 function App(props) {
 
   useEffect(() => {
-    console.log("DB POST");
+    console.log("DB GET");
   }, [props.exercises]);
 
   return (
