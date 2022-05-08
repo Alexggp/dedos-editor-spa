@@ -1,5 +1,5 @@
 const initialState = {
-  stages:[
+  exercises:[
     {
       itemList: [
         {
@@ -66,10 +66,10 @@ const initialState = {
 }
 
 
-const moveItem = (stageIndex, itemIndex, offset) =>{
+const moveItem = (exerciseIndex, itemIndex, offset) =>{
   return {
     type: "MOVE_ITEM",
-    stageIndex: stageIndex,
+    exerciseIndex: exerciseIndex,
     itemIndex: itemIndex,
     offset: {
       x: offset.x,
@@ -78,19 +78,19 @@ const moveItem = (stageIndex, itemIndex, offset) =>{
   }
 }
 
-const moveItemInState = (state, stageIndex, itemIndex, offset) => {
+const moveItemInState = (state, exerciseIndex, itemIndex, offset) => {
 
-  const cloneItemList = [...state.stages[stageIndex].itemList];
+  const cloneItemList = [...state.exercises[exerciseIndex].itemList];
   cloneItemList[itemIndex].offset= offset;
-  state.stages[stageIndex].itemList = cloneItemList;
+  state.exercises[exerciseIndex].itemList = cloneItemList;
   return state;
   
 }
 
-const resizeItem = (stageIndex, itemIndex, size) =>{
+const resizeItem = (exerciseIndex, itemIndex, size) =>{
   return {
     type: "RESIZE_ITEM",
-    stageIndex: stageIndex,
+    exerciseIndex: exerciseIndex,
     itemIndex: itemIndex,
     size: {
       // removing px at the end and transfroming it in to an integer
@@ -100,16 +100,16 @@ const resizeItem = (stageIndex, itemIndex, size) =>{
   }
 }
 
-const resizeItemInState = (state, stageIndex, itemIndex, size) => {
-  const cloneItemList = [...state.stages[stageIndex].itemList];
+const resizeItemInState = (state, exerciseIndex, itemIndex, size) => {
+  const cloneItemList = [...state.exercises[exerciseIndex].itemList];
   cloneItemList[itemIndex].size= size;
-  state.stages[stageIndex].itemList = cloneItemList;
+  state.exercises[exerciseIndex].itemList = cloneItemList;
   return state;
   
 }
 
 
-const createItem = (stageIndex, item, offset) => {
+const createItem = (exerciseIndex, item, offset) => {
 
   const itemType = ()=>{ 
     switch(item){
@@ -126,7 +126,7 @@ const createItem = (stageIndex, item, offset) => {
 
   return {
     type: "CREATE_ITEM",
-    stageIndex: stageIndex,
+    exerciseIndex: exerciseIndex,
     payload:{
       type: itemType(),
       offset: {
@@ -137,9 +137,9 @@ const createItem = (stageIndex, item, offset) => {
   }
 }
 
-const addItemToState = (state, stageIndex, {type, offset})=>{
+const addItemToState = (state, exerciseIndex, {type, offset})=>{
 
-  const cloneItemList = [...state.stages[stageIndex].itemList]
+  const cloneItemList = [...state.exercises[exerciseIndex].itemList]
   cloneItemList.push(
     {
       type: type,
@@ -154,55 +154,55 @@ const addItemToState = (state, stageIndex, {type, offset})=>{
       props:{}
     }
   );
-  state.stages[stageIndex].itemList = cloneItemList;
+  state.exercises[exerciseIndex].itemList = cloneItemList;
   return state;
 }
 
-const changeItemProps  = (stageIndex, itemIndex, props) =>{
+const changeItemProps  = (exerciseIndex, itemIndex, props) =>{
   return {
     type: "CHANGE_ITEM_PROPS",
-    stageIndex: stageIndex,
+    exerciseIndex: exerciseIndex,
     itemIndex: itemIndex,
     props: props
   }
 }
 
-const changeItemPropsInState = (state, stageIndex, itemIndex, props) => {
-  const cloneItemList = [...state.stages[stageIndex].itemList];
+const changeItemPropsInState = (state, exerciseIndex, itemIndex, props) => {
+  const cloneItemList = [...state.exercises[exerciseIndex].itemList];
   cloneItemList[itemIndex].props= props;
-  state.stages[stageIndex].itemList = cloneItemList;
+  state.exercises[exerciseIndex].itemList = cloneItemList;
   return state;
   
 }
 
-const deleteItem  = (stageIndex, itemIndex) =>{
+const deleteItem  = (exerciseIndex, itemIndex) =>{
   return {
     type: "DELETE_ITEM",
-    stageIndex: stageIndex,
+    exerciseIndex: exerciseIndex,
     itemIndex: itemIndex,
   }
 }
 
-const deleteItemInState = (state, stageIndex, itemIndex) => {
-  const cloneItemList = [...state.stages[stageIndex].itemList];
+const deleteItemInState = (state, exerciseIndex, itemIndex) => {
+  const cloneItemList = [...state.exercises[exerciseIndex].itemList];
   cloneItemList.splice(itemIndex,1);
-  state.stages[stageIndex].itemList = cloneItemList;
+  state.exercises[exerciseIndex].itemList = cloneItemList;
   return state;
   
 }
 
-const stagesReducer = (state = initialState, action = {})=>{
+const exercisesReducer = (state = initialState, action = {})=>{
   switch(action.type){
     case 'CREATE_ITEM':
-      return addItemToState(state, action.stageIndex, action.payload);
+      return addItemToState(state, action.exerciseIndex, action.payload);
     case 'MOVE_ITEM':
-      return moveItemInState(state, action.stageIndex, action.itemIndex, action.offset);
+      return moveItemInState(state, action.exerciseIndex, action.itemIndex, action.offset);
     case 'RESIZE_ITEM':
-      return resizeItemInState(state, action.stageIndex, action.itemIndex, action.size);
+      return resizeItemInState(state, action.exerciseIndex, action.itemIndex, action.size);
     case 'CHANGE_ITEM_PROPS':
-      return changeItemPropsInState(state, action.stageIndex, action.itemIndex, action.props);
+      return changeItemPropsInState(state, action.exerciseIndex, action.itemIndex, action.props);
     case 'DELETE_ITEM':
-      return deleteItemInState(state, action.stageIndex, action.itemIndex);
+      return deleteItemInState(state, action.exerciseIndex, action.itemIndex);
     default:
       return {
         ...state
@@ -210,4 +210,4 @@ const stagesReducer = (state = initialState, action = {})=>{
   }
 }
 
-export {stagesReducer, createItem, moveItem, resizeItem, changeItemProps, deleteItem};
+export {exercisesReducer, createItem, moveItem, resizeItem, changeItemProps, deleteItem};

@@ -1,16 +1,15 @@
 .Toolbar{
   height: 75px;
-  border: 3px solid gray;
-  background-color: lightyellow;
+  border: 5px solid gray;
+  background-color: #c9d8e5;
   display: flex;
   flex-direction: row;
 }
 
 .ButtonArea{
   height: 100%;
-  padding: 0 10px;
-  background-color: lightsalmon;
-  border-right: 3px solid gray;
+  padding: 0 25px;
+  border-right: 5px solid gray;
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -19,7 +18,8 @@
 .Button{
   width: 75px;
   height: 75px;
-  background-color: lightyellow;
+  padding: 5px;
+  box-sizing: border-box;
 }
 
 .Button img{

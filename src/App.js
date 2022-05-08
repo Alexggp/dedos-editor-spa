@@ -1,12 +1,27 @@
+import React, {useEffect} from 'react';
+
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { connect } from 'react-redux';
+
 
 import classes from './App.module.css';
 import Editor from './components/Editor/Editor';
 
 
 
-function App() {
+const mapStateToProps = (state) => {
+  return {
+    exercises: state.exercisesReducer.exercises
+  }
+}
+
+function App(props) {
+
+  useEffect(() => {
+    console.log("DB POST");
+  }, [props.exercises]);
+
   return (
 
     <div className={classes.App}>
@@ -18,4 +33,5 @@ function App() {
   );
 }
 
-export default App;
+
+export default connect(mapStateToProps, null)(App);

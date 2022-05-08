@@ -3,7 +3,8 @@ import { useDrop } from 'react-dnd';
 
 
 const Droppable = (props) => {
-
+  
+  // eslint-disable-next-line 
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: props.accept,
     // drop: () => ({ name: props.type }),
@@ -16,13 +17,6 @@ const Droppable = (props) => {
       return { name: props.type }
     }
   }))
-  const isActive = canDrop && isOver
-  let backgroundColor = '#222'
-  if (isActive) {
-    backgroundColor = 'darkgreen'
-  } else if (canDrop) {
-    backgroundColor = 'darkkhaki'
-  }
 
   const style = props.style || {
     with: '100%',
@@ -30,7 +24,7 @@ const Droppable = (props) => {
   }
   
   return(
-    <div className='Droppable' ref={drop} style={{...style,...{ backgroundColor }}} data-testid={props.type}>  
+    <div className='Droppable' ref={drop} style={style} data-testid={props.type}>  
       {props.children}
     </div>
   )

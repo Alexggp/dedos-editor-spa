@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 
 import classes from './Image.module.css';
-import {changeItemProps} from '../../../../store/reducers/stages';
+import {changeItemProps} from '../../../../store/reducers/exercises';
 
 const Image = (props) => {
 
@@ -12,7 +12,7 @@ const Image = (props) => {
   const pinButtonHandler = (e) =>{
     const propsClone = {...props.props}
     propsClone.pin = props.props.pin ? false: true;
-    props.changeItemProps(props.stageIndex, props.itemIndex, propsClone)
+    props.changeItemProps(props.exerciseIndex, props.itemIndex, propsClone)
   }
 
 
@@ -22,7 +22,7 @@ const Image = (props) => {
     const propsClone = {...props.props}
     images.push(image);
     propsClone.images = images;
-    props.changeItemProps(props.stageIndex, props.itemIndex, propsClone)
+    props.changeItemProps(props.exerciseIndex, props.itemIndex, propsClone)
 
   }
 

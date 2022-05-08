@@ -1,11 +1,11 @@
 import { createStore, combineReducers } from 'redux';
-import {stagesReducer} from './reducers/stages';
-import currentStageReducer from './reducers/currentStage';
+import {exercisesReducer} from './reducers/exercises';
+import currentExerciseReducer from './reducers/currentExercise';
 import { trashIsActiveReducer } from './reducers/trashIsActive';
 
 const reducers = combineReducers({
-  stagesReducer,
-  currentStageReducer,
+  exercisesReducer,
+  currentExerciseReducer,
   trashIsActiveReducer
 })
 

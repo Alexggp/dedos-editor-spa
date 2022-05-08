@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 
 import classes from './Zone.module.css';
-import {changeItemProps} from '../../../../store/reducers/stages';
+import {changeItemProps} from '../../../../store/reducers/exercises';
 
 const Zone = (props) => {
   
   const addButtonHandler = (e) =>{
     const propsClone = {...props.props}
     propsClone.background = 'https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png';
-    props.changeItemProps(props.stageIndex, props.itemIndex, propsClone)
+    props.changeItemProps(props.exerciseIndex, props.itemIndex, propsClone)
   }
 
   const optionsButtonHandler = (e) =>{

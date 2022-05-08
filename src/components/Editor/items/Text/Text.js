@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 import classes from './Text.module.css';
-import {changeItemProps} from '../../../../store/reducers/stages';
+import {changeItemProps} from '../../../../store/reducers/exercises';
 
 const Text = (props) => {
 
@@ -12,7 +12,7 @@ const Text = (props) => {
   const pinButtonHandler = (e) =>{
     const propsClone = {...props.props}
     propsClone.pin = props.props.pin ? false: true;
-    props.changeItemProps(props.stageIndex, props.itemIndex, propsClone)
+    props.changeItemProps(props.exerciseIndex, props.itemIndex, propsClone)
   }
 
   const optionsButtonHandler = (e) =>{
@@ -26,7 +26,7 @@ const Text = (props) => {
   const changeText = (e) => {
     const propsClone = {...props.props}
     propsClone.text = e.target.value;
-    props.changeItemProps(props.stageIndex, props.itemIndex, propsClone)
+    props.changeItemProps(props.exerciseIndex, props.itemIndex, propsClone)
   }
 
   const hasMoved = (x, y)=>{
