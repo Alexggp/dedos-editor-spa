@@ -42,6 +42,7 @@ const Zone = (props) => {
         offset={props.offset}
         moved = {hasMoved}
         resized = {hasResized}
+        delete = {props.delete}
         zIndex = {100}
         size={props.size}>
           <div className={classes.Zone} style={style}>

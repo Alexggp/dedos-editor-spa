@@ -1,8 +1,15 @@
 import React from 'react';
 import { Rnd } from 'react-rnd'; // resizable and draggable class
+import { connect } from 'react-redux';
+
 
 import classes from './ResizableAndDraggable.module.css';
 
+const mapStateToProps = (state) => {
+  return {
+    trashIsActive: state.trashIsActiveReducer.isActive
+  }
+}
 
 const ResizableAndDraggable = (props) => {
 
@@ -48,8 +55,12 @@ const ResizableAndDraggable = (props) => {
         dragHandleClassName={props.dragHandleClassName}
         bounds={props.bounds}
         onDragStop={(e, d) =>{
-          props.moved(d.x,d.y);
-        } }
+          if (props.trashIsActive){
+            props.delete();
+          } else {
+            props.moved(d.x,d.y);
+          }
+        }}
         onResizeStop={(e, direction, ref, delta, position) => {
           props.resized(ref.style.width, ref.style.height);
         }}
@@ -61,4 +72,4 @@ const ResizableAndDraggable = (props) => {
 }
 
 
-export default ResizableAndDraggable;
+export default connect(mapStateToProps, null)(ResizableAndDraggable);

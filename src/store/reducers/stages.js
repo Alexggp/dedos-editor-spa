@@ -175,6 +175,22 @@ const changeItemPropsInState = (state, stageIndex, itemIndex, props) => {
   
 }
 
+const deleteItem  = (stageIndex, itemIndex) =>{
+  return {
+    type: "DELETE_ITEM",
+    stageIndex: stageIndex,
+    itemIndex: itemIndex,
+  }
+}
+
+const deleteItemInState = (state, stageIndex, itemIndex) => {
+  const cloneItemList = [...state.stages[stageIndex].itemList];
+  cloneItemList.splice(itemIndex,1);
+  state.stages[stageIndex].itemList = cloneItemList;
+  return state;
+  
+}
+
 const stagesReducer = (state = initialState, action = {})=>{
   switch(action.type){
     case 'CREATE_ITEM':
@@ -185,6 +201,8 @@ const stagesReducer = (state = initialState, action = {})=>{
       return resizeItemInState(state, action.stageIndex, action.itemIndex, action.size);
     case 'CHANGE_ITEM_PROPS':
       return changeItemPropsInState(state, action.stageIndex, action.itemIndex, action.props);
+    case 'DELETE_ITEM':
+      return deleteItemInState(state, action.stageIndex, action.itemIndex);
     default:
       return {
         ...state
@@ -192,4 +210,4 @@ const stagesReducer = (state = initialState, action = {})=>{
   }
 }
 
-export {stagesReducer, createItem, moveItem, resizeItem, changeItemProps};
+export {stagesReducer, createItem, moveItem, resizeItem, changeItemProps, deleteItem};

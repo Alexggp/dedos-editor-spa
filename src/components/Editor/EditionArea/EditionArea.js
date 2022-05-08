@@ -8,7 +8,8 @@ import Text from '../items/Text/Text';
 
 import Droppable from '../../hoc/Droppable/Droppable';
 
-import {createItem, moveItem, resizeItem} from '../../../store/reducers/stages'; 
+import {createItem, moveItem, resizeItem, deleteItem} from '../../../store/reducers/stages'; 
+import { togleTrash } from '../../../store/reducers/trashIsActive';
 
 
 const mapStateToProps = (state) => {
@@ -33,16 +34,20 @@ const EditionArea = (props) => {
     props.resizeItem(props.currentStage, itemIndex, size);
   }
 
+  const deleteItem = (itemIndex)=>{
+    props.deleteItem(props.currentStage, itemIndex);
+  }
+
   const items = props.itemList.map((item, index)=>{
     switch (item.type) {
       case 'zone':
-        return <Zone key={index} stageIndex={props.currentStage}  props={item.props} itemIndex={index} offset={item.offset} size={item.size} moved={moveItem} resized={resizeItem}/>;
+        return <Zone key={index} stageIndex={props.currentStage}  props={item.props} itemIndex={index} offset={item.offset} size={item.size} moved={moveItem} resized={resizeItem} delete={()=>deleteItem(index)}/>;
       case 'image':
-        return <Image key={index} stageIndex={props.currentStage}  props={item.props} itemIndex={index} offset={item.offset} size={item.size} moved={moveItem} resized={resizeItem}/>;
+        return <Image key={index} stageIndex={props.currentStage}  props={item.props} itemIndex={index} offset={item.offset} size={item.size} moved={moveItem} resized={resizeItem} delete={()=>deleteItem(index)}/>;
       case 'text':
-        return <Text key={index} stageIndex={props.currentStage}  props={item.props} itemIndex={index} offset={item.offset} size={item.size} moved={moveItem} resized={resizeItem}/>;
+        return <Text key={index} stageIndex={props.currentStage}  props={item.props} itemIndex={index} offset={item.offset} size={item.size} moved={moveItem} resized={resizeItem} delete={()=>deleteItem(index)}/>;
       default:
-        return <Text key={index} stageIndex={props.currentStage}  props={item.props} itemIndex={index} offset={item.offset} size={item.size} moved={moveItem} resized={resizeItem}/>;
+        return <Text key={index} stageIndex={props.currentStage}  props={item.props} itemIndex={index} offset={item.offset} size={item.size} moved={moveItem} resized={resizeItem} delete={()=>deleteItem(index)}/>;
     }
   })
 
@@ -55,10 +60,13 @@ const EditionArea = (props) => {
           dropped={addNewItem}>
             <div className={classes.WelcomeText}>
               {items}
-              <p>SOY EL ÁREA DE EDICIÓN:</p>
+              <p>SOY EL ÁREA DE EDICIÓN: {props.trashIsActive ? "true" : "false" } </p>
               <p>ARRASTRA SOBRE MI LOS ICONOS DE LA BARRA DE<br/>HERRAMIENTAS PARA CREAR UNA ACTIVIDAD</p>
             </div>
-            <div className={classes.Trash}></div>
+            <div className={classes.Trash}
+              onMouseEnter={()=>{props.togleTrash(true)}}
+              onMouseLeave={()=>{props.togleTrash(false)}}
+            />
         </Droppable>
       </div>
     
@@ -67,4 +75,4 @@ const EditionArea = (props) => {
 }
 
 
-export default connect(mapStateToProps, {createItem, moveItem, resizeItem})(EditionArea);
+export default connect(mapStateToProps, {createItem, moveItem, resizeItem, deleteItem, togleTrash})(EditionArea);

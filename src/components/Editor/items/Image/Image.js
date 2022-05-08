@@ -47,7 +47,7 @@ const Image = (props) => {
 
   if (props.props.images) {
     images = props.props.images.map((imgSrc, index)=>(
-      <img src={imgSrc} key={index}/>
+      <img src={imgSrc} alt='' key={index}/>
     ))
   }
 
@@ -65,6 +65,7 @@ const Image = (props) => {
         offset={props.offset}
         moved = {hasMoved}
         resized = {hasResized}
+        delete = {props.delete}
         zIndex = {300}
         size={props.size}>
           <div className={classes.Image} >

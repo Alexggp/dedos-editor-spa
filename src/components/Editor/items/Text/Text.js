@@ -51,6 +51,7 @@ const Text = (props) => {
         offset={props.offset}
         moved = {hasMoved}
         resized = {hasResized}
+        delete = {props.delete}
         zIndex = {200}
         size={props.size}>
           <div className={classes.Text} >
