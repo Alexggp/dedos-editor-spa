@@ -8,6 +8,10 @@
   background-size: cover;
 }
 
+.GameZone{
+  background-color: #fefdcb;
+}
+
 .OptionsButton{
   width: 30px;
   height:30px;
@@ -19,7 +23,7 @@
   cursor: pointer;
 }
 
-.GameZone{
+.GameZone .OptionsButton{
   background-image: url('../../../../assets/icons/collaborationIcon.png');
 }
 

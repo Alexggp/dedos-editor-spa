@@ -36,10 +36,11 @@ const Zone = (props) => {
     backgroundImage: `url('${props.props.background || ''}')`
   }
 
-  const optionButtonClasses = [classes.OptionsButton];
+  const zoneClasses = [classes.Zone];
   if (props.props.gameZone){
-    optionButtonClasses.push(classes.GameZone);
+    zoneClasses.push(classes.GameZone);
   }
+
 
   return(
 
@@ -52,8 +53,8 @@ const Zone = (props) => {
         delete = {props.delete}
         zIndex = {100}
         size={props.size}>
-          <div className={classes.Zone} style={style}>
-            <div className={optionButtonClasses.join(' ')} onMouseDown={stopPropagation} onClick={optionsButtonHandler}></div>
+          <div className={zoneClasses.join(' ')} style={style}>
+            <div className={classes.OptionsButton} onMouseDown={stopPropagation} onClick={optionsButtonHandler}></div>
             <div className={classes.AddButton} onMouseDown={stopPropagation} onClick={addBackgroundHandler}></div>
           </div>
       </ResizableAndDraggable>
