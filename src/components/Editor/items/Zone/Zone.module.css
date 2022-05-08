@@ -9,21 +9,27 @@
 }
 
 .OptionsButton{
-  width: 25px;
-  height:25px;
+  width: 30px;
+  height:30px;
   position: absolute;
-  top: 4px;
-  left: 4px;
-  background-color: lightgreen;
+  top: 6px;
+  left: 6px;
+  background-size: cover;
+  background-image: url('../../../../assets/icons/userIcon.png');
   cursor: pointer;
 }
 
+.GameZone{
+  background-image: url('../../../../assets/icons/collaborationIcon.png');
+}
+
 .AddButton{
-  width: 25px;
-  height:25px;
+  width: 30px;
+  height:30px;
   position: absolute;
-  top: 4px;
-  right: 4px;
-  background-color: lightgreen;
+  top: 6px;
+  right: 6px;
+  background-size: cover;
+  background-image: url('../../../../assets/icons/addFolderIcon.png');
   cursor: pointer;
 }

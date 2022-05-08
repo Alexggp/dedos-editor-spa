@@ -8,14 +8,16 @@ import {changeItemProps} from '../../../../store/reducers/exercises';
 
 const Zone = (props) => {
   
-  const addButtonHandler = (e) =>{
+  const addBackgroundHandler = (e) =>{
     const propsClone = {...props.props}
     propsClone.background = 'https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png';
     props.changeItemProps(props.exerciseIndex, props.itemIndex, propsClone)
   }
 
   const optionsButtonHandler = (e) =>{
-    console.log('Options Button Pressed');
+    const propsClone = {...props.props}
+    propsClone.gameZone = props.props.gameZone ? false: true;
+    props.changeItemProps(props.exerciseIndex, props.itemIndex, propsClone)
   }
 
   const stopPropagation = (e) =>{
@@ -34,6 +36,11 @@ const Zone = (props) => {
     backgroundImage: `url('${props.props.background || ''}')`
   }
 
+  const optionButtonClasses = [classes.OptionsButton];
+  if (props.props.gameZone){
+    optionButtonClasses.push(classes.GameZone);
+  }
+
   return(
 
       <ResizableAndDraggable 
@@ -46,12 +53,8 @@ const Zone = (props) => {
         zIndex = {100}
         size={props.size}>
           <div className={classes.Zone} style={style}>
-            <div className={classes.OptionsButton} onMouseDown={stopPropagation} onClick={optionsButtonHandler}></div>
-            <div className={classes.AddButton} onMouseDown={stopPropagation} onClick={addButtonHandler}></div>
-
-            <p>offset: {props.offset.x},{props.offset.y}</p>
-            <p>size: {props.size.w}, {props.size.h}</p>
-
+            <div className={optionButtonClasses.join(' ')} onMouseDown={stopPropagation} onClick={optionsButtonHandler}></div>
+            <div className={classes.AddButton} onMouseDown={stopPropagation} onClick={addBackgroundHandler}></div>
           </div>
       </ResizableAndDraggable>
   )

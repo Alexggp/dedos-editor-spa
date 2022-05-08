@@ -27,10 +27,10 @@ const ResizableAndDraggable = (props) => {
 
   const HandleStyles = {
     bottomRight: {
-        right: '4px', 
-        bottom: '4px',
-        width: '25px',
-        height: '25px'
+        right: '6px', 
+        bottom: '6px',
+        width: '30px',
+        height: '30px'
       }
   }
 
