@@ -3,7 +3,7 @@ import React from 'react';
 import classes from './Toolbar.module.css';
 import Draggable from '../../hoc/Draggable/Draggable';
 
-import addZoneIcon from '../../../assets/icons/addZoneIcon.png';
+import addAreaIcon from '../../../assets/icons/addAreaIcon.png';
 import addTextIcon from '../../../assets/icons/addTextIcon.png';
 import addImageIcon from '../../../assets/icons/addImageIcon.png';
 import dartboardIcon from '../../../assets/icons/dartboardIcon.png';
@@ -19,8 +19,8 @@ const Toolbar = (props) => {
     <div className={classes.Toolbar}>
       <div className={classes.ButtonArea} title='Arrástrame al área de edición para crear una Zona'>
         <div className={classes.Button}>
-            <Draggable type={'AddZone'}>
-              <img alt='' src={addZoneIcon}/>
+            <Draggable type={'AddArea'}>
+              <img alt='' src={addAreaIcon}/>
             </Draggable>
         </div>
       </div>

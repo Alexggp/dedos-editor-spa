@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 
 import classes from './Token.module.css';
-import {createItem, moveItem, resizeItem, deleteItem, changeItemProps} from '../../../../store/reducers/exercises';
+import {createItem, moveItem, resizeItem, deleteItem, changeItemProps} from '../../../../store/reducers/activities';
 
 
 const mapStateToProps = (state) => {
-  const currentExercise = state.currentExerciseReducer.index;
+  const currentActivity = state.currentActivityReducer.index;
   return {
-    currentExercise: currentExercise
+    currentActivity: currentActivity
   }
 }
 
@@ -19,7 +19,7 @@ const Token = (props) => {
   const pinButtonHandler = (e) =>{
     const propsClone = {...props.item.props}
     propsClone.pin = props.item.props.pin ? false: true;
-    props.changeItemProps(props.currentExercise, props.itemIndex, propsClone)
+    props.changeItemProps(props.currentActivity, props.itemIndex, propsClone)
   }
 
   const optionsButtonHandler = (e) =>{
@@ -31,15 +31,15 @@ const Token = (props) => {
   }
 
   const hasMoved = (x, y)=>{
-    props.moveItem(props.currentExercise, props.itemIndex, {x: x, y:y});
+    props.moveItem(props.currentActivity, props.itemIndex, {x: x, y:y});
   }
 
   const hasResized = (w, h)=>{
-    props.resizeItem(props.currentExercise, props.itemIndex, {w: w, h:h});
+    props.resizeItem(props.currentActivity, props.itemIndex, {w: w, h:h});
   }
   
   const deleteItem = ()=>{
-    props.deleteItem(props.currentExercise, props.itemIndex);
+    props.deleteItem(props.currentActivity, props.itemIndex);
   }
 
 

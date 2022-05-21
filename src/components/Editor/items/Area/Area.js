@@ -3,21 +3,21 @@ import { connect } from 'react-redux';
 
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 
-import classes from './Zone.module.css';
-import {changeItemProps} from '../../../../store/reducers/exercises';
+import classes from './Area.module.css';
+import {changeItemProps} from '../../../../store/reducers/activities';
 
-const Zone = (props) => {
+const Area = (props) => {
   
   const addBackgroundHandler = (e) =>{
     const propsClone = {...props.props}
     propsClone.background = 'https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png';
-    props.changeItemProps(props.exerciseIndex, props.itemIndex, propsClone)
+    props.changeItemProps(props.activityIndex, props.itemIndex, propsClone)
   }
 
   const optionsButtonHandler = (e) =>{
     const propsClone = {...props.props}
-    propsClone.gameZone = props.props.gameZone ? false: true;
-    props.changeItemProps(props.exerciseIndex, props.itemIndex, propsClone)
+    propsClone.gameArea = props.props.gameArea ? false: true;
+    props.changeItemProps(props.activityIndex, props.itemIndex, propsClone)
   }
 
   const stopPropagation = (e) =>{
@@ -36,16 +36,16 @@ const Zone = (props) => {
     backgroundImage: `url('${props.props.background || ''}')`
   }
 
-  const zoneClasses = [classes.Zone];
-  if (props.props.gameZone){
-    zoneClasses.push(classes.GameZone);
+  const areaClasses = [classes.Area];
+  if (props.props.gameArea){
+    areaClasses.push(classes.GameArea);
   }
 
 
   return(
 
       <ResizableAndDraggable 
-        dragHandleClassName={classes.Zone}
+        dragHandleClassName={classes.Area}
         bounds={'parent'}
         offset={props.offset}
         moved = {hasMoved}
@@ -53,7 +53,7 @@ const Zone = (props) => {
         delete = {props.delete}
         zIndex = {100}
         size={props.size}>
-          <div className={zoneClasses.join(' ')} style={style}>
+          <div className={areaClasses.join(' ')} style={style}>
             <div className={classes.OptionsButton} onMouseDown={stopPropagation} onClick={optionsButtonHandler}></div>
             <div className={classes.AddButton} onMouseDown={stopPropagation} onClick={addBackgroundHandler}></div>
           </div>
@@ -63,4 +63,4 @@ const Zone = (props) => {
 }
 
 
-export default connect(null, {changeItemProps})(Zone);
+export default connect(null, {changeItemProps})(Area);

@@ -1,9 +1,9 @@
 const initialState = {
-  exercises:[
+  activities:[
     {
       itemList: [
         {
-          type: 'zone',
+          type: 'area',
           offset:{
             x: 10,
             y: 15
@@ -50,7 +50,7 @@ const initialState = {
     {
       itemList: [
         {
-          type: 'zone',
+          type: 'area',
           offset:{
             x: 50,
             y: 30
@@ -67,10 +67,10 @@ const initialState = {
 }
 
 
-const moveItem = (exerciseIndex, itemIndex, offset) =>{
+const moveItem = (activityIndex, itemIndex, offset) =>{
   return {
     type: "MOVE_ITEM",
-    exerciseIndex: exerciseIndex,
+    activityIndex: activityIndex,
     itemIndex: itemIndex,
     offset: {
       x: offset.x,
@@ -79,19 +79,19 @@ const moveItem = (exerciseIndex, itemIndex, offset) =>{
   }
 }
 
-const moveItemInState = (state, exerciseIndex, itemIndex, offset) => {
+const moveItemInState = (state, activityIndex, itemIndex, offset) => {
 
-  const cloneItemList = [...state.exercises[exerciseIndex].itemList];
+  const cloneItemList = [...state.activities[activityIndex].itemList];
   cloneItemList[itemIndex].offset= offset;
-  state.exercises[exerciseIndex].itemList = cloneItemList;
+  state.activities[activityIndex].itemList = cloneItemList;
   return state;
   
 }
 
-const resizeItem = (exerciseIndex, itemIndex, size) =>{
+const resizeItem = (activityIndex, itemIndex, size) =>{
   return {
     type: "RESIZE_ITEM",
-    exerciseIndex: exerciseIndex,
+    activityIndex: activityIndex,
     itemIndex: itemIndex,
     size: {
       // removing px at the end and transfroming it in to an integer
@@ -101,21 +101,21 @@ const resizeItem = (exerciseIndex, itemIndex, size) =>{
   }
 }
 
-const resizeItemInState = (state, exerciseIndex, itemIndex, size) => {
-  const cloneItemList = [...state.exercises[exerciseIndex].itemList];
+const resizeItemInState = (state, activityIndex, itemIndex, size) => {
+  const cloneItemList = [...state.activities[activityIndex].itemList];
   cloneItemList[itemIndex].size= size;
-  state.exercises[exerciseIndex].itemList = cloneItemList;
+  state.activities[activityIndex].itemList = cloneItemList;
   return state;
   
 }
 
 
-const createItem = (exerciseIndex, item, offset) => {
+const createItem = (activityIndex, item, offset) => {
 
   const itemType = ()=>{ 
     switch(item){
-      case 'AddZone':
-        return 'zone';
+      case 'AddArea':
+        return 'area';
       case 'AddImage':
         return 'image';
       case 'AddText':
@@ -127,7 +127,7 @@ const createItem = (exerciseIndex, item, offset) => {
 
   return {
     type: "CREATE_ITEM",
-    exerciseIndex: exerciseIndex,
+    activityIndex: activityIndex,
     payload:{
       type: itemType(),
       offset: {
@@ -138,9 +138,9 @@ const createItem = (exerciseIndex, item, offset) => {
   }
 }
 
-const addItemToState = (state, exerciseIndex, {type, offset})=>{
+const addItemToState = (state, activityIndex, {type, offset})=>{
 
-  const cloneItemList = [...state.exercises[exerciseIndex].itemList]
+  const cloneItemList = [...state.activities[activityIndex].itemList]
   cloneItemList.push(
     {
       type: type,
@@ -155,56 +155,56 @@ const addItemToState = (state, exerciseIndex, {type, offset})=>{
       props:{}
     }
   );
-  state.exercises[exerciseIndex].itemList = cloneItemList;
+  state.activities[activityIndex].itemList = cloneItemList;
   return state;
 }
 
-const changeItemProps  = (exerciseIndex, itemIndex, props) =>{
+const changeItemProps  = (activityIndex, itemIndex, props) =>{
   return {
     type: "CHANGE_ITEM_PROPS",
-    exerciseIndex: exerciseIndex,
+    activityIndex: activityIndex,
     itemIndex: itemIndex,
     props: props
   }
 }
 
-const changeItemPropsInState = (state, exerciseIndex, itemIndex, props) => {
-  const cloneItemList = [...state.exercises[exerciseIndex].itemList];
+const changeItemPropsInState = (state, activityIndex, itemIndex, props) => {
+  const cloneItemList = [...state.activities[activityIndex].itemList];
   const cloneItemPops = {...cloneItemList[itemIndex].props, ...props}
   cloneItemList[itemIndex].props= cloneItemPops;
-  state.exercises[exerciseIndex].itemList = cloneItemList;
+  state.activities[activityIndex].itemList = cloneItemList;
   return state;
   
 }
 
-const deleteItem  = (exerciseIndex, itemIndex) =>{
+const deleteItem  = (activityIndex, itemIndex) =>{
   return {
     type: "DELETE_ITEM",
-    exerciseIndex: exerciseIndex,
+    activityIndex: activityIndex,
     itemIndex: itemIndex,
   }
 }
 
-const deleteItemInState = (state, exerciseIndex, itemIndex) => {
-  const cloneItemList = [...state.exercises[exerciseIndex].itemList];
+const deleteItemInState = (state, activityIndex, itemIndex) => {
+  const cloneItemList = [...state.activities[activityIndex].itemList];
   cloneItemList.splice(itemIndex,1);
-  state.exercises[exerciseIndex].itemList = cloneItemList;
+  state.activities[activityIndex].itemList = cloneItemList;
   return state;
   
 }
 
-const exercisesReducer = (state = initialState, action = {})=>{
+const activitiesReducer = (state = initialState, action = {})=>{
   switch(action.type){
     case 'CREATE_ITEM':
-      return addItemToState(state, action.exerciseIndex, action.payload);
+      return addItemToState(state, action.activityIndex, action.payload);
     case 'MOVE_ITEM':
-      return moveItemInState(state, action.exerciseIndex, action.itemIndex, action.offset);
+      return moveItemInState(state, action.activityIndex, action.itemIndex, action.offset);
     case 'RESIZE_ITEM':
-      return resizeItemInState(state, action.exerciseIndex, action.itemIndex, action.size);
+      return resizeItemInState(state, action.activityIndex, action.itemIndex, action.size);
     case 'CHANGE_ITEM_PROPS':
-      return changeItemPropsInState(state, action.exerciseIndex, action.itemIndex, action.props);
+      return changeItemPropsInState(state, action.activityIndex, action.itemIndex, action.props);
     case 'DELETE_ITEM':
-      return deleteItemInState(state, action.exerciseIndex, action.itemIndex);
+      return deleteItemInState(state, action.activityIndex, action.itemIndex);
     default:
       return {
         ...state
@@ -212,4 +212,4 @@ const exercisesReducer = (state = initialState, action = {})=>{
   }
 }
 
-export {exercisesReducer, createItem, moveItem, resizeItem, changeItemProps, deleteItem};
+export {activitiesReducer, createItem, moveItem, resizeItem, changeItemProps, deleteItem};

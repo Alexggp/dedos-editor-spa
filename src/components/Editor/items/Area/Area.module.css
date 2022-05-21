@@ -1,4 +1,4 @@
-.Zone{
+.Area{
   width: 100%;
   height: 100%;
   border: 3px dashed gray;
@@ -8,7 +8,7 @@
   background-size: cover;
 }
 
-.GameZone{
+.GameArea{
   background-color: #fefdcb;
 }
 
@@ -23,7 +23,7 @@
   cursor: pointer;
 }
 
-.GameZone .OptionsButton{
+.GameArea .OptionsButton{
   background-image: url('../../../../assets/icons/collaborationIcon.png');
 }
 

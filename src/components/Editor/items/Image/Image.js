@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 
 import Token from '../Token/Token';
 import classes from './Image.module.css';
-import {changeItemProps} from '../../../../store/reducers/exercises';
+import {changeItemProps} from '../../../../store/reducers/activities';
 
 const mapStateToProps = (state) => {
-  const currentExercise = state.currentExerciseReducer.index;
+  const currentActivity = state.currentActivityReducer.index;
   return {
-    currentExercise: currentExercise
+    currentActivity: currentActivity
   }
 }
 
@@ -24,7 +24,7 @@ const Image = (props) => {
     const propsClone = {...props.item.props}
     images.push(image);
     propsClone.images = images;
-    props.changeItemProps(props.currentExercise, props.itemIndex, propsClone)
+    props.changeItemProps(props.currentActivity, props.itemIndex, propsClone)
 
   }
 

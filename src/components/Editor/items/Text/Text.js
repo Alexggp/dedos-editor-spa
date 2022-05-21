@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 
 import Token from '../Token/Token';
 import classes from './Text.module.css';
-import {changeItemProps} from '../../../../store/reducers/exercises';
+import {changeItemProps} from '../../../../store/reducers/activities';
 
 const mapStateToProps = (state) => {
-  const currentExercise = state.currentExerciseReducer.index;
+  const currentActivity = state.currentActivityReducer.index;
   return {
-    currentExercise: currentExercise
+    currentActivity: currentActivity
   }
 }
 
@@ -17,7 +17,7 @@ const Text = (props) => {
   const changeText = (e) => {
     const propsClone = {...props.item.props}
     propsClone.text = e.target.value;
-    props.changeItemProps(props.currentExercise, props.itemIndex, propsClone)
+    props.changeItemProps(props.currentActivity, props.itemIndex, propsClone)
   }
 
   

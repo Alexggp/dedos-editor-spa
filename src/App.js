@@ -12,7 +12,7 @@ import Editor from './components/Editor/Editor';
 
 const mapStateToProps = (state) => {
   return {
-    exercises: state.exercisesReducer.exercises
+    activities: state.activitiesReducer.activities
   }
 }
 
@@ -20,7 +20,7 @@ function App(props) {
 
   useEffect(() => {
     console.log("DB GET");
-  }, [props.exercises]);
+  }, [props.activities]);
 
   return (
 
