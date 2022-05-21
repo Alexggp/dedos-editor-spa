@@ -30,10 +30,6 @@ const Token = (props) => {
     e.stopPropagation();
   }
 
-  const hasMoved = (x, y)=>{
-    props.moveItem(props.currentActivity, props.tokenIndex, {x: x, y:y});
-  }
-
   const hasResized = (w, h)=>{
     props.resizeItem(props.currentActivity, props.tokenIndex, {w: w, h:h});
   }
@@ -57,7 +53,7 @@ const Token = (props) => {
         dragHandleClassName={classes.Header}
         bounds={'parent'}
         offset={props.token.offset}
-        moved = {hasMoved}
+        itemId = {props.token.id}
         resized = {hasResized}
         delete = {deleteItem}
         zIndex = {300}
@@ -79,4 +75,4 @@ const Token = (props) => {
 
 }
 
-export default connect(mapStateToProps, {createItem, moveItem, resizeItem, deleteItem, changeItemProps})(Token);
+export default connect(mapStateToProps, {createItem, resizeItem, deleteItem, changeItemProps})(Token);

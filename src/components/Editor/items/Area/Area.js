@@ -24,9 +24,6 @@ const Area = (props) => {
     e.stopPropagation();
   }
 
-  const hasMoved = (x, y)=>{
-    props.moved(props.itemIndex, {x: x, y:y});
-  }
 
   const hasResized = (w, h)=>{
     props.resized(props.itemIndex, {w: w, h:h});
@@ -45,17 +42,19 @@ const Area = (props) => {
   return(
 
       <ResizableAndDraggable 
-        dragHandleClassName={classes.Area}
+        dragHandleClassName={classes.DragHandle}
         bounds={'parent'}
         offset={props.area.offset}
-        moved = {hasMoved}
+        itemId = {props.area.id}
         resized = {hasResized}
         delete = {props.delete}
         zIndex = {100}
         size={props.area.size}>
           <div className={areaClasses.join(' ')} style={style}>
-            <div className={classes.OptionsButton} onMouseDown={stopPropagation} onClick={optionsButtonHandler}></div>
-            <div className={classes.AddButton} onMouseDown={stopPropagation} onClick={addBackgroundHandler}></div>
+            <div className={classes.DragHandle}>
+              <div className={classes.OptionsButton} onMouseDown={stopPropagation} onClick={optionsButtonHandler}></div>
+              <div className={classes.AddButton} onMouseDown={stopPropagation} onClick={addBackgroundHandler}></div>
+            </div>
             {props.children}
           </div>
       </ResizableAndDraggable>

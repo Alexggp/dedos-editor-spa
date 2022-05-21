@@ -27,6 +27,11 @@
   background-image: url('../../../../assets/icons/collaborationIcon.png');
 }
 
+.DragHandle{
+  width: 100%;
+  height:100%;
+}
+
 .AddButton{
   width: 30px;
   height:30px;

@@ -95,12 +95,33 @@ const initialState = {
   ]
 }
 
+const findItem = (state, activityIndex, itemId)=>{
+  let item = {}
 
-const moveItem = (activityIndex, itemIndex, offset) =>{
+  // First looks for the item in tokenList
+
+  const tokenList = state.activities[activityIndex].tokenList;
+  item = tokenList.find(itm=>itm.id===itemId);
+  if (item) return item;
+
+  // If the item was not found, then looks in areaList
+  const areaList = state.activities[activityIndex].areaList;
+  item = areaList.find(area=> area.id === itemId);
+  if (item) return item;
+
+  // At least, looks in every area tokenList
+  areaList.forEach(area=>{
+    const areaItem = area.tokenList.find(token=>token.id === itemId);
+    if (areaItem) item = areaItem;
+  })
+  return item;
+}
+
+const moveItem = (activityIndex, itemId, offset) =>{
   return {
     type: "MOVE_ITEM",
     activityIndex: activityIndex,
-    itemIndex: itemIndex,
+    itemId: itemId,
     offset: {
       x: offset.x,
       y: offset.y
@@ -108,11 +129,14 @@ const moveItem = (activityIndex, itemIndex, offset) =>{
   }
 }
 
-const moveItemInState = (state, activityIndex, itemIndex, offset) => {
+const moveItemInState = (state, activityIndex, itemId, offset) => {
 
-  const cloneItemList = [...state.activities[activityIndex].tokenList];
-  cloneItemList[itemIndex].offset= offset;
-  state.activities[activityIndex].tokenList = cloneItemList;
+  // const cloneItemList = [...state.activities[activityIndex].tokenList];
+  // cloneItemList[itemIndex].offset= offset;
+  // state.activities[activityIndex].tokenList = cloneItemList;
+
+  const item = findItem(state, activityIndex, itemId);
+  console.log(item)
   return state;
   
 }
@@ -227,7 +251,7 @@ const activitiesReducer = (state = initialState, action = {})=>{
     case 'CREATE_ITEM':
       return addItemToState(state, action.activityIndex, action.payload);
     case 'MOVE_ITEM':
-      return moveItemInState(state, action.activityIndex, action.itemIndex, action.offset);
+      return moveItemInState(state, action.activityIndex, action.itemId, action.offset);
     case 'RESIZE_ITEM':
       return resizeItemInState(state, action.activityIndex, action.itemIndex, action.size);
     case 'CHANGE_ITEM_PROPS':

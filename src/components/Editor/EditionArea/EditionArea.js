@@ -8,7 +8,7 @@ import Text from '../items/Text/Text';
 
 import Droppable from '../../hoc/Droppable/Droppable';
 
-import {createItem, moveItem, resizeItem, deleteItem} from '../../../store/reducers/activities'; 
+import {createItem} from '../../../store/reducers/activities'; 
 import { togleTrash } from '../../../store/reducers/trashIsActive';
 
 
@@ -30,18 +30,6 @@ const EditionArea = (props) => {
 
   const addNewItem = (item, offset)=>{
     props.createItem(props.currentActivity, item, offset);
-  }
-
-  const moveItem = (itemIndex, offset)=>{
-    props.moveItem(props.currentActivity, itemIndex, offset);
-  }
-  
-  const resizeItem = (itemIndex, size)=>{
-    props.resizeItem(props.currentActivity, itemIndex, size);
-  }
-
-  const deleteItem = (itemIndex)=>{
-    props.deleteItem(props.currentActivity, itemIndex);
   }
 
   const processTokens = (tokenList)=>tokenList.map((token)=>{
@@ -87,4 +75,4 @@ const EditionArea = (props) => {
 }
 
 
-export default connect(mapStateToProps, {createItem, moveItem, resizeItem, deleteItem, togleTrash})(EditionArea);
+export default connect(mapStateToProps, {createItem, togleTrash})(EditionArea);
