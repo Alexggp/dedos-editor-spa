@@ -17,9 +17,9 @@ const mapStateToProps = (state) => {
 const Token = (props) => {
 
   const pinButtonHandler = (e) =>{
-    const propsClone = {...props.item.props}
-    propsClone.pin = props.item.props.pin ? false: true;
-    props.changeItemProps(props.currentActivity, props.itemIndex, propsClone)
+    const propsClone = {...props.token.props}
+    propsClone.pin = props.token.props.pin ? false: true;
+    props.changeItemProps(props.currentActivity, props.tokenIndex, propsClone)
   }
 
   const optionsButtonHandler = (e) =>{
@@ -31,21 +31,21 @@ const Token = (props) => {
   }
 
   const hasMoved = (x, y)=>{
-    props.moveItem(props.currentActivity, props.itemIndex, {x: x, y:y});
+    props.moveItem(props.currentActivity, props.tokenIndex, {x: x, y:y});
   }
 
   const hasResized = (w, h)=>{
-    props.resizeItem(props.currentActivity, props.itemIndex, {w: w, h:h});
+    props.resizeItem(props.currentActivity, props.tokenIndex, {w: w, h:h});
   }
   
   const deleteItem = ()=>{
-    props.deleteItem(props.currentActivity, props.itemIndex);
+    props.deleteItem(props.currentActivity, props.tokenIndex);
   }
 
 
   let pinButtonClass = classes.PinButton;
 
-  if (props.item.props.pin) {
+  if (!props.token.movable) {
     pinButtonClass = classes.PinButtonPressed;
   }
   
@@ -56,13 +56,13 @@ const Token = (props) => {
       <ResizableAndDraggable
         dragHandleClassName={classes.Header}
         bounds={'parent'}
-        offset={props.item.offset}
+        offset={props.token.offset}
         moved = {hasMoved}
         resized = {hasResized}
         delete = {deleteItem}
         zIndex = {300}
-        notMove={props.item.props.pin}
-        size={props.item.size}>
+        notMove={!props.token.movable}
+        size={props.token.size}>
           <div className={cardClasses} >
             <div className={classes.Header} >
               <div className={pinButtonClass} onMouseDown={stopPropagation} onClick={pinButtonHandler}></div>

@@ -1,9 +1,11 @@
 const initialState = {
   activities:[
     {
-      itemList: [
+      objectives:[],
+      areaList:[
         {
-          type: 'area',
+          id: 1,
+          type: 'Player',
           offset:{
             x: 10,
             y: 15
@@ -12,12 +14,14 @@ const initialState = {
             w: 1010,
             h: 792
           }, 
-          props:{
-            background: "https://i.guim.co.uk/img/media/ef8492feb3715ed4de705727d9f513c168a8b196/37_0_1125_675/master/1125.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=d456a2af571d980d8b2985472c262b31"
-          }
-        },
+          background: "https://i.guim.co.uk/img/media/ef8492feb3715ed4de705727d9f513c168a8b196/37_0_1125_675/master/1125.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=d456a2af571d980d8b2985472c262b31"     ,
+          tokenList: []
+        }
+      ],
+      tokenList: [
         {
-          type: 'image',
+          id: 2,
+          type: 'img',
           offset:{
             x: 177,
             y: 104
@@ -26,15 +30,17 @@ const initialState = {
             w: 300,
             h: 200
           },
-          props:{
-            images:[
+          movable: true,
+          content:{
+            urlList:[
               "https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png",
               "https://i.guim.co.uk/img/media/ef8492feb3715ed4de705727d9f513c168a8b196/37_0_1125_675/master/1125.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=d456a2af571d980d8b2985472c262b31"
             ]
           }
         },
         {
-          type: 'text',
+          id: 3,
+          type: 'txt',
           offset:{
             x: 475,
             y: 506
@@ -43,12 +49,15 @@ const initialState = {
             w: 458,
             h: 220
           },
-          props:{}
+          movable: true,
+          content:{
+            text: 'holita hola holota'
+          }
         }
       ]
     },
     {
-      itemList: [
+      tokenList: [
         {
           type: 'area',
           offset:{
@@ -81,9 +90,9 @@ const moveItem = (activityIndex, itemIndex, offset) =>{
 
 const moveItemInState = (state, activityIndex, itemIndex, offset) => {
 
-  const cloneItemList = [...state.activities[activityIndex].itemList];
+  const cloneItemList = [...state.activities[activityIndex].tokenList];
   cloneItemList[itemIndex].offset= offset;
-  state.activities[activityIndex].itemList = cloneItemList;
+  state.activities[activityIndex].tokenList = cloneItemList;
   return state;
   
 }
@@ -102,9 +111,9 @@ const resizeItem = (activityIndex, itemIndex, size) =>{
 }
 
 const resizeItemInState = (state, activityIndex, itemIndex, size) => {
-  const cloneItemList = [...state.activities[activityIndex].itemList];
+  const cloneItemList = [...state.activities[activityIndex].tokenList];
   cloneItemList[itemIndex].size= size;
-  state.activities[activityIndex].itemList = cloneItemList;
+  state.activities[activityIndex].tokenList = cloneItemList;
   return state;
   
 }
@@ -140,7 +149,7 @@ const createItem = (activityIndex, item, offset) => {
 
 const addItemToState = (state, activityIndex, {type, offset})=>{
 
-  const cloneItemList = [...state.activities[activityIndex].itemList]
+  const cloneItemList = [...state.activities[activityIndex].tokenList]
   cloneItemList.push(
     {
       type: type,
@@ -155,7 +164,7 @@ const addItemToState = (state, activityIndex, {type, offset})=>{
       props:{}
     }
   );
-  state.activities[activityIndex].itemList = cloneItemList;
+  state.activities[activityIndex].tokenList = cloneItemList;
   return state;
 }
 
@@ -169,10 +178,10 @@ const changeItemProps  = (activityIndex, itemIndex, props) =>{
 }
 
 const changeItemPropsInState = (state, activityIndex, itemIndex, props) => {
-  const cloneItemList = [...state.activities[activityIndex].itemList];
+  const cloneItemList = [...state.activities[activityIndex].tokenList];
   const cloneItemPops = {...cloneItemList[itemIndex].props, ...props}
   cloneItemList[itemIndex].props= cloneItemPops;
-  state.activities[activityIndex].itemList = cloneItemList;
+  state.activities[activityIndex].tokenList = cloneItemList;
   return state;
   
 }
@@ -186,9 +195,9 @@ const deleteItem  = (activityIndex, itemIndex) =>{
 }
 
 const deleteItemInState = (state, activityIndex, itemIndex) => {
-  const cloneItemList = [...state.activities[activityIndex].itemList];
+  const cloneItemList = [...state.activities[activityIndex].tokenList];
   cloneItemList.splice(itemIndex,1);
-  state.activities[activityIndex].itemList = cloneItemList;
+  state.activities[activityIndex].tokenList = cloneItemList;
   return state;
   
 }

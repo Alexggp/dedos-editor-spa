@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Token from '../Token/Token';
 import classes from './Image.module.css';
-import {changeItemProps} from '../../../../store/reducers/activities';
+// import {changeItemProps} from '../../../../store/reducers/activities';
 
 const mapStateToProps = (state) => {
   const currentActivity = state.currentActivityReducer.index;
@@ -32,8 +32,8 @@ const Image = (props) => {
 
   let images;
 
-  if (props.item.props.images) {
-    images = props.item.props.images.map((imgSrc, index)=>(
+  if (props.token.content.urlList) {
+    images = props.token.content.urlList.map((imgSrc, index)=>(
       <img src={imgSrc} alt='' key={index}/>
     ))
   }
@@ -44,8 +44,7 @@ const addButton = <div className={classes.AddButton} onMouseDown={stopPropagatio
 
       <Token
         type={'IMAGE'}
-        item={props.item}
-        itemIndex={props.itemIndex}
+        token={props.token}
         title={'Imagen'}
         addButton={addButton}
         addImage={addImage}>
@@ -59,4 +58,4 @@ const addButton = <div className={classes.AddButton} onMouseDown={stopPropagatio
 
 }
 
-export default connect(mapStateToProps, {changeItemProps})(Image);
+export default connect(mapStateToProps, null)(Image);

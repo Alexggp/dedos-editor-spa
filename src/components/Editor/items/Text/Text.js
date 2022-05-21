@@ -25,12 +25,14 @@ const Text = (props) => {
 
     <Token
       type={'TEXT'}
-      item={props.item}
-      title={'Texto'}
-      itemIndex={props.itemIndex}>
+      token={props.token}
+      title={'Texto'}>
 
       <div className={classes.TextContainer} >
-        <textarea placeholder="<Excriba aquí el texto>" onChange={changeText}/>
+        <textarea 
+          placeholder="<Excriba aquí el texto>" 
+          value={props.token.content.text}
+          onChange={changeText}/>
       </div>
 
     </Token>

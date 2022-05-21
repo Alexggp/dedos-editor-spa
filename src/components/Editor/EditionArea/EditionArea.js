@@ -15,7 +15,8 @@ import { togleTrash } from '../../../store/reducers/trashIsActive';
 const mapStateToProps = (state) => {
   const currentActivity = state.currentActivityReducer.index;
   return {
-    itemList: state.activitiesReducer.activities[currentActivity].itemList,
+    tokenList: state.activitiesReducer.activities[currentActivity].tokenList,
+    areaList: state.activitiesReducer.activities[currentActivity].areaList,
     currentActivity: currentActivity,
     activities: state.activitiesReducer.activities
   }
@@ -25,7 +26,7 @@ const EditionArea = (props) => {
 
   useEffect(() => {
     console.log(props.activities);
-  }, [props.itemList, props.activities]);
+  }, [props.tokenList, props.activities]);
 
   const addNewItem = (item, offset)=>{
     props.createItem(props.currentActivity, item, offset);
@@ -42,19 +43,21 @@ const EditionArea = (props) => {
   const deleteItem = (itemIndex)=>{
     props.deleteItem(props.currentActivity, itemIndex);
   }
-
-  const items = props.itemList.map((item, index)=>{
-    switch (item.type) {
-      case 'area':
-        return <Area key={index} activityIndex={props.currentActivity}  props={item.props} itemIndex={index} offset={item.offset} size={item.size} moved={moveItem} resized={resizeItem} delete={()=>deleteItem(index)}/>;
-      case 'image':
-        return <Image key={index} itemIndex={index} item={item}/>;
-      case 'text':
-        return <Text key={index} itemIndex={index} item={item}/>;
+  const processTokens = (tokenList)=>tokenList.map((token)=>{
+    switch (token.type) {
+      // case 'area':
+      //   return <Area key={index} activityIndex={props.currentActivity}  props={token.props} tokenIndex={index} offset={token.offset} size={token.size} moved={movetoken} resized={resizetoken} delete={()=>deletetoken(index)}/>;
+      case 'img':
+        return <Image key={token.id} token={token}/>;
+      case 'txt':
+        return <Text key={token.id} token={token}/>;
       default:
-        return <Text key={index} itemIndex={index} item={item}/>;
+        return <Text key={token.id} token={token}/>;
     }
   })
+
+  
+  const tokens = processTokens(props.tokenList);
 
   return(
     
@@ -64,7 +67,7 @@ const EditionArea = (props) => {
           accept={['AddArea','AddText','AddImage']} 
           dropped={addNewItem}>
             <div className={classes.WelcomeText}>
-              {items}
+              {tokens}
               <p>SOY EL ÁREA DE EDICIÓN:</p>
               <p>ARRASTRA SOBRE MI LOS ICONOS DE LA BARRA DE<br/>HERRAMIENTAS PARA CREAR UNA ACTIVIDAD</p>
             </div>
