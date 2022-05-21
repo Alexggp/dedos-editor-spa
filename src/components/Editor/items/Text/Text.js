@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Card from '../Card/Card';
+import Token from '../Token/Token';
 import classes from './Text.module.css';
 import {changeItemProps} from '../../../../store/reducers/exercises';
 
@@ -23,7 +23,7 @@ const Text = (props) => {
   
   return(
 
-    <Card
+    <Token
       type={'TEXT'}
       item={props.item}
       title={'Texto'}
@@ -33,7 +33,7 @@ const Text = (props) => {
         <textarea placeholder="<Excriba aquí el texto>" onChange={changeText}/>
       </div>
 
-    </Card>
+    </Token>
   )
 
 }

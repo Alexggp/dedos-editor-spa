@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Card from '../Card/Card';
+import Token from '../Token/Token';
 import classes from './Image.module.css';
 import {changeItemProps} from '../../../../store/reducers/exercises';
 
@@ -42,7 +42,7 @@ const addButton = <div className={classes.AddButton} onMouseDown={stopPropagatio
 
   return(
 
-      <Card
+      <Token
         type={'IMAGE'}
         item={props.item}
         itemIndex={props.itemIndex}
@@ -54,7 +54,7 @@ const addButton = <div className={classes.AddButton} onMouseDown={stopPropagatio
           {images}
         </div>
 
-      </Card>
+      </Token>
   )
 
 }

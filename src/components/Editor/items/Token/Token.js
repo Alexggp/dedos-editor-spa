@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 
-import classes from './Card.module.css';
+import classes from './Token.module.css';
 import {createItem, moveItem, resizeItem, deleteItem, changeItemProps} from '../../../../store/reducers/exercises';
 
 
@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const Card = (props) => {
+const Token = (props) => {
 
   const pinButtonHandler = (e) =>{
     const propsClone = {...props.item.props}
@@ -49,7 +49,7 @@ const Card = (props) => {
     pinButtonClass = classes.PinButtonPressed;
   }
   
-  const cardClasses = [classes.Card, classes[`Card_type_${props.type}`]].join(' ');
+  const cardClasses = [classes.Token, classes[`Token_type_${props.type}`]].join(' ');
 
   return(
 
@@ -79,4 +79,4 @@ const Card = (props) => {
 
 }
 
-export default connect(mapStateToProps, {createItem, moveItem, resizeItem, deleteItem, changeItemProps})(Card);
+export default connect(mapStateToProps, {createItem, moveItem, resizeItem, deleteItem, changeItemProps})(Token);

@@ -1,4 +1,4 @@
-.Card{
+.Token{
   width: 100%;
   height: 100%;
   background-color: lightsteelblue;
@@ -23,16 +23,6 @@
   overflow: hidden;
 }
 
-.AddButton{
-  width: 30px;
-  height:30px;
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  background-size: cover;
-  background-image: url('../../../../assets/icons/addFolderIcon.png');
-  cursor: pointer;
-}
 
 .PinButton, .PinButtonPressed{
   width: 30px;
@@ -61,11 +51,11 @@
   cursor: pointer;
 }
 
-.Card_type_IMAGE
+.Token_type_IMAGE
   .Header{
     background-color: #b7bfd3;
   }
-  .Card_type_TEXT
+  .Token_type_TEXT
     .Header{
       background-color: #b6e4ff;
   }
