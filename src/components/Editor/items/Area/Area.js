@@ -33,11 +33,11 @@ const Area = (props) => {
   }
 
   const style = {
-    backgroundImage: `url('${props.props.background || ''}')`
+    backgroundImage: `url('${props.area.background || ''}')`
   }
 
   const areaClasses = [classes.Area];
-  if (props.props.gameArea){
+  if (props.area.type==='Game'){
     areaClasses.push(classes.GameArea);
   }
 
@@ -47,15 +47,16 @@ const Area = (props) => {
       <ResizableAndDraggable 
         dragHandleClassName={classes.Area}
         bounds={'parent'}
-        offset={props.offset}
+        offset={props.area.offset}
         moved = {hasMoved}
         resized = {hasResized}
         delete = {props.delete}
         zIndex = {100}
-        size={props.size}>
+        size={props.area.size}>
           <div className={areaClasses.join(' ')} style={style}>
             <div className={classes.OptionsButton} onMouseDown={stopPropagation} onClick={optionsButtonHandler}></div>
             <div className={classes.AddButton} onMouseDown={stopPropagation} onClick={addBackgroundHandler}></div>
+            {props.children}
           </div>
       </ResizableAndDraggable>
   )

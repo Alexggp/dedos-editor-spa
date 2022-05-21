@@ -43,10 +43,9 @@ const EditionArea = (props) => {
   const deleteItem = (itemIndex)=>{
     props.deleteItem(props.currentActivity, itemIndex);
   }
+
   const processTokens = (tokenList)=>tokenList.map((token)=>{
     switch (token.type) {
-      // case 'area':
-      //   return <Area key={index} activityIndex={props.currentActivity}  props={token.props} tokenIndex={index} offset={token.offset} size={token.size} moved={movetoken} resized={resizetoken} delete={()=>deletetoken(index)}/>;
       case 'img':
         return <Image key={token.id} token={token}/>;
       case 'txt':
@@ -55,9 +54,13 @@ const EditionArea = (props) => {
         return <Text key={token.id} token={token}/>;
     }
   })
-
-  
   const tokens = processTokens(props.tokenList);
+
+  const areas = props.areaList.map((area)=>(
+    <Area key={area.id} area={area}>
+      {processTokens(area.tokenList)}
+    </Area>
+  ))
 
   return(
     
@@ -68,6 +71,7 @@ const EditionArea = (props) => {
           dropped={addNewItem}>
             <div className={classes.WelcomeText}>
               {tokens}
+              {areas}
               <p>SOY EL ÁREA DE EDICIÓN:</p>
               <p>ARRASTRA SOBRE MI LOS ICONOS DE LA BARRA DE<br/>HERRAMIENTAS PARA CREAR UNA ACTIVIDAD</p>
             </div>

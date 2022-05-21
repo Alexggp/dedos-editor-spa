@@ -15,7 +15,27 @@ const initialState = {
             h: 792
           }, 
           background: "https://i.guim.co.uk/img/media/ef8492feb3715ed4de705727d9f513c168a8b196/37_0_1125_675/master/1125.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=d456a2af571d980d8b2985472c262b31"     ,
-          tokenList: []
+          tokenList: [
+            {
+              id: 4,
+              type: 'img',
+              offset:{
+                x: 10,
+                y: 384
+              },
+              size:{
+                w: 300,
+                h: 200
+              },
+              movable: true,
+              content:{
+                urlList:[
+                  "https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png",
+                  "https://i.guim.co.uk/img/media/ef8492feb3715ed4de705727d9f513c168a8b196/37_0_1125_675/master/1125.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=d456a2af571d980d8b2985472c262b31"
+                ]
+              }
+            }
+          ]
         }
       ],
       tokenList: [
