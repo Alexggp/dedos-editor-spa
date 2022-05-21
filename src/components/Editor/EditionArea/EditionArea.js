@@ -48,11 +48,11 @@ const EditionArea = (props) => {
       case 'zone':
         return <Zone key={index} exerciseIndex={props.currentExercise}  props={item.props} itemIndex={index} offset={item.offset} size={item.size} moved={moveItem} resized={resizeItem} delete={()=>deleteItem(index)}/>;
       case 'image':
-        return <Image key={index} exerciseIndex={props.currentExercise}  props={item.props} itemIndex={index} offset={item.offset} size={item.size} moved={moveItem} resized={resizeItem} delete={()=>deleteItem(index)}/>;
+        return <Image key={index} itemIndex={index} item={item}/>;
       case 'text':
-        return <Text key={index} exerciseIndex={props.currentExercise}  props={item.props} itemIndex={index} offset={item.offset} size={item.size} moved={moveItem} resized={resizeItem} delete={()=>deleteItem(index)}/>;
+        return <Text key={index} itemIndex={index} item={item}/>;
       default:
-        return <Text key={index} exerciseIndex={props.currentExercise}  props={item.props} itemIndex={index} offset={item.offset} size={item.size} moved={moveItem} resized={resizeItem} delete={()=>deleteItem(index)}/>;
+        return <Text key={index} itemIndex={index} item={item}/>;
     }
   })
 

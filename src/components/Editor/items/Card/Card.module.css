@@ -1,4 +1,4 @@
-.Text{
+.Card{
   width: 100%;
   height: 100%;
   background-color: lightsteelblue;
@@ -6,43 +6,32 @@
   display: flex;
   flex-direction: column;
   border: 1px solid #c4c3c3;
-}
-
-.Header{
-  height: 60px;
-  background-color: #b6e4ff;
-  text-align: center;
-  border-bottom: 1px solid #c4c3c3;
-  cursor: move;
   line-height: 40px;
 }
 
-.TextContainer{
+.Header{
+  height: 50px;
+  text-align: center;
+  border-bottom: 1px solid #c4c3c3;
+  cursor: move;
+  background-color: #b7bfd3;
+}
+
+.Body{
   background-color: white;
-  box-sizing: border-box;
-  width: 100%;
   height: 100%;
-  display: flex;
-  padding: 10px 35px 30px 35px;
+  overflow: hidden;
 }
 
-.TextContainer textarea{
-  width: 100% !important;
-  height: 100% !important;
-  border: 2px solid lightgray;
-  color: gray;  
-  font-size: inherit;
-  font-family: inherit;
-  resize: none;
-  padding: 0.3em;
-}
-
-.Body textarea::placeholder{
-  color: lightgray;  
-}
-.Body textarea:focus{
-  outline: 1px solid rgb(147, 211, 181); 
-  /* border: 3px solid rgb(93, 192, 146); */
+.AddButton{
+  width: 30px;
+  height:30px;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background-size: cover;
+  background-image: url('../../../../assets/icons/addFolderIcon.png');
+  cursor: pointer;
 }
 
 .PinButton, .PinButtonPressed{
@@ -71,3 +60,12 @@
   background-image: url('../../../../assets/icons/settingsIcon.png');
   cursor: pointer;
 }
+
+.Card_type_IMAGE
+  .Header{
+    background-color: #b7bfd3;
+  }
+  .Card_type_TEXT
+    .Header{
+      background-color: #b6e4ff;
+  }

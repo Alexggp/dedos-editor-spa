@@ -170,7 +170,8 @@ const changeItemProps  = (exerciseIndex, itemIndex, props) =>{
 
 const changeItemPropsInState = (state, exerciseIndex, itemIndex, props) => {
   const cloneItemList = [...state.exercises[exerciseIndex].itemList];
-  cloneItemList[itemIndex].props= props;
+  const cloneItemPops = {...cloneItemList[itemIndex].props, ...props}
+  cloneItemList[itemIndex].props= cloneItemPops;
   state.exercises[exerciseIndex].itemList = cloneItemList;
   return state;
   
