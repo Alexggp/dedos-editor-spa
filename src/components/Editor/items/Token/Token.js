@@ -4,20 +4,10 @@ import { connect } from 'react-redux';
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 
 import classes from './Token.module.css';
-import {moveToken} from '../../../../store/reducers/tokens';
-
-
-const mapStateToProps = (state) => {
-
-}
+import {moveToken, resizeToken, deleteToken, movableToken} from '../../../../store/reducers/tokens';
 
 const Token = (props) => {
 
-  const pinButtonHandler = (e) =>{
-    const propsClone = {...props.token.props}
-    propsClone.pin = props.token.props.pin ? false: true;
-    props.changeItemProps(props.currentActivity, props.tokenIndex, propsClone)
-  }
 
   const optionsButtonHandler = (e) =>{
     console.log('Options Button Pressed');
@@ -27,15 +17,19 @@ const Token = (props) => {
     e.stopPropagation();
   }
 
-  const hasMoved = (offset)=>{
-    props.moveToken(props.token.id, offset);
+  const hasMoved = ({x, y})=>{
+    props.moveToken(props.token.id, {x: x, y: y});
   }
-  const hasResized = (w, h)=>{
-    props.resizeItem(props.currentActivity, props.tokenIndex, {w: w, h:h});
+  const hasResized = ({w, h})=>{
+    props.resizeToken(props.token.id, {w: w, h: h});
   }
   
-  const deleteItem = ()=>{
-    props.deleteItem(props.currentActivity, props.tokenIndex);
+  const deleteToken = ()=>{
+    props.deleteToken(props.token.id);
+  }
+
+  const pinButtonHandler = (e) =>{
+    props.movableToken(props.token.id);
   }
 
 
@@ -55,7 +49,7 @@ const Token = (props) => {
         offset={props.token.offset}
         moved = {hasMoved}
         resized = {hasResized}
-        delete = {deleteItem}
+        delete = {deleteToken}
         zIndex = {300}
         notMove={!props.token.movable}
         size={props.token.size}>
@@ -75,4 +69,4 @@ const Token = (props) => {
 
 }
 
-export default connect(mapStateToProps, {moveToken})(Token);
+export default connect(null, {moveToken, resizeToken, deleteToken, movableToken})(Token);

@@ -65,7 +65,7 @@ const ResizableAndDraggable = (props) => {
           }
         }}
         onResizeStop={(e, direction, ref, delta, position) => {
-          props.resized(ref.style.width, ref.style.height);
+          props.resized({w: ref.style.width, h: ref.style.height});
         }}
       >
       {props.children}

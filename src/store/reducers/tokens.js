@@ -81,6 +81,7 @@ const initialState = {
   ]
 }
 
+// Move token
 const moveToken = (tokenId, offset) =>{
   return {
     type: "MOVE_TOKEN",
@@ -94,22 +95,143 @@ const moveToken = (tokenId, offset) =>{
 
 const moveTokenInState = (state, tokenId, offset) => {
 
-  const cloneItemList = [...state.tokenList];
+  const cloneTokenList = [...state.tokenList];
   const tokenIndex = state.tokenList.findIndex(tkn => tkn.id === tokenId);
-  const coneToken = {...cloneItemList[tokenIndex]}
+  const cloneToken = {...cloneTokenList[tokenIndex]}
 
-  coneToken.offset= offset;
-  cloneItemList[tokenIndex] = coneToken;
-  state.tokenList= cloneItemList;
+  cloneToken.offset= offset;
+  cloneTokenList[tokenIndex] = cloneToken;
+  state.tokenList= cloneTokenList;
 
   return state;
   
 }
 
+// Resize token
+const resizeToken = (tokenId, size) =>{
+  return {
+    type: "RESIZE_TOKEN",
+    tokenId: tokenId,
+    size: {
+      w: size.w,
+      h: size.h
+    }
+  }
+}
+
+const resizeTokenInState = (state, tokenId, size) => {
+
+  const cloneTokenList = [...state.tokenList];
+  const tokenIndex = state.tokenList.findIndex(tkn => tkn.id === tokenId);
+  const cloneToken = {...cloneTokenList[tokenIndex]}
+
+  cloneToken.size= size;
+  cloneTokenList[tokenIndex] = cloneToken;
+  state.tokenList= cloneTokenList;
+
+  return state;
+  
+}
+
+
+// Delete Token
+const deleteToken = (tokenId) =>{
+  return {
+    type: "DELETE_TOKEN",
+    tokenId: tokenId
+  }
+}
+
+const deleteTokenInState = (state, tokenId) => {
+  const cloneTokenList = [...state.tokenList];
+  const tokenIndex = state.tokenList.findIndex(tkn => tkn.id === tokenId);
+  cloneTokenList.splice(tokenIndex,1);
+  state.tokenList= cloneTokenList;
+
+  return state;
+  
+}
+
+// Movable Token
+const movableToken = (tokenId) =>{
+  return {
+    type: "MOVABLE_TOKEN",
+    tokenId: tokenId
+  }
+}
+
+const movableTokenInState = (state, tokenId) => {
+  const cloneTokenList = [...state.tokenList];
+  const tokenIndex = state.tokenList.findIndex(tkn => tkn.id === tokenId);
+  const cloneToken = {...cloneTokenList[tokenIndex]}
+
+  cloneToken.movable= !cloneToken.movable;
+  cloneTokenList[tokenIndex] = cloneToken;
+  state.tokenList= cloneTokenList;
+
+  return state;
+  
+}
+
+// Update Images
+const updateImages = (tokenId, imageList) =>{
+  return {
+    type: "UPDATE_IMAGES",
+    tokenId: tokenId,
+    imageList: imageList
+  }
+}
+
+const updateImagesInState = (state, tokenId, imageList) => {
+  const cloneTokenList = [...state.tokenList];
+  const tokenIndex = state.tokenList.findIndex(tkn => tkn.id === tokenId);
+  const cloneToken = {...cloneTokenList[tokenIndex]}
+
+  cloneToken.content.urlList= imageList;
+  cloneTokenList[tokenIndex] = cloneToken;
+  state.tokenList= cloneTokenList;
+
+  return state;
+  
+}
+
+// Update Text
+const updateText = (tokenId, text) =>{
+  return {
+    type: "UPDATE_TEXT",
+    tokenId: tokenId,
+    text: text
+  }
+}
+
+const updateTextInState = (state, tokenId, text) => {
+  const cloneTokenList = [...state.tokenList];
+  const tokenIndex = state.tokenList.findIndex(tkn => tkn.id === tokenId);
+  const cloneToken = {...cloneTokenList[tokenIndex]}
+
+  cloneToken.content.text= text;
+  cloneTokenList[tokenIndex] = cloneToken;
+  state.tokenList= cloneTokenList;
+
+  return state;
+  
+}
+
+
 const tokensReducer = (state = initialState, action = {})=>{
   switch(action.type){
     case 'MOVE_TOKEN':
       return moveTokenInState(state, action.tokenId, action.offset);
+    case 'RESIZE_TOKEN':
+      return resizeTokenInState(state, action.tokenId, action.size);
+    case 'DELETE_TOKEN':
+      return deleteTokenInState(state, action.tokenId);  
+    case 'MOVABLE_TOKEN':
+      return movableTokenInState(state, action.tokenId);
+    case 'UPDATE_IMAGES':
+      return updateImagesInState(state, action.tokenId, action.imageList);
+    case 'UPDATE_TEXT':
+      return updateTextInState(state, action.tokenId, action.text);        
     default:
       return {
         ...state
@@ -117,4 +239,4 @@ const tokensReducer = (state = initialState, action = {})=>{
   }
 }
 
-export {tokensReducer, moveToken};
+export {tokensReducer, moveToken, resizeToken, deleteToken, movableToken, updateImages, updateText};

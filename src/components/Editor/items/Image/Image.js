@@ -3,12 +3,8 @@ import { connect } from 'react-redux';
 
 import Token from '../Token/Token';
 import classes from './Image.module.css';
-// import {changeItemProps} from '../../../../store/reducers/activities';
-
-const mapStateToProps = (state) => {
-
-  
-}
+import removeIcon from '../../../../assets/icons/removeIcon.png';
+import {updateImages} from '../../../../store/reducers/tokens';
 
 const Image = (props) => {
 
@@ -18,25 +14,28 @@ const Image = (props) => {
 
   const addImage = (e) =>{
     const image="https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png";
-    const images = [...(props.item.props.images || [])]
-    const propsClone = {...props.item.props}
-    images.push(image);
-    propsClone.images = images;
-    props.changeItemProps(props.currentActivity, props.itemIndex, propsClone)
-
+    const imageList = [...props.token.content.urlList];
+    imageList.push(image);
+    props.updateImages(props.token.id, imageList);
   }
 
-
+  const removeImage = (index) =>{
+    const imageList = [...props.token.content.urlList];
+    imageList.splice(index,1);
+    props.updateImages(props.token.id, imageList);
+  }
 
   let images;
-
   if (props.token.content.urlList) {
     images = props.token.content.urlList.map((imgSrc, index)=>(
-      <img src={imgSrc} alt='' key={index}/>
+      <div className={classes.ImageBox} key={index}>
+        <img className={classes.Image} src={imgSrc} alt='' />
+        <img className={classes.RemoveImg} src={removeIcon} onClick={()=>removeImage(index)} title='Eliminar imagen' alt=''/>
+      </div>
     ))
   }
 
-const addButton = <div className={classes.AddButton} onMouseDown={stopPropagation} onClick={addImage}></div>
+  const addButton = <div className={classes.AddButton} onMouseDown={stopPropagation} onClick={addImage}></div>
 
   return(
 
@@ -44,8 +43,7 @@ const addButton = <div className={classes.AddButton} onMouseDown={stopPropagatio
         type={'IMAGE'}
         token={props.token}
         title={'Imagen'}
-        addButton={addButton}
-        addImage={addImage}>
+        addButton={addButton}>
           
         <div className={classes.ImageContainer} >
           {images}
@@ -56,4 +54,4 @@ const addButton = <div className={classes.AddButton} onMouseDown={stopPropagatio
 
 }
 
-export default connect(mapStateToProps, null)(Image);
+export default connect(null, {updateImages})(Image);

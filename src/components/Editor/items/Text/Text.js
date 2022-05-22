@@ -3,23 +3,17 @@ import { connect } from 'react-redux';
 
 import Token from '../Token/Token';
 import classes from './Text.module.css';
-import {changeItemProps} from '../../../../store/reducers/activities';
-
-const mapStateToProps = (state) => {
-
-}
+import {updateText} from '../../../../store/reducers/tokens';
 
 const Text = (props) => {
 
   const changeText = (e) => {
-    const propsClone = {...props.item.props}
-    propsClone.text = e.target.value;
-    props.changeItemProps(props.currentActivity, props.itemIndex, propsClone)
+    const newText = e.target.value;
+    props.updateText(props.token.id, newText);
   }
 
   
   return(
-
     <Token
       type={'TEXT'}
       token={props.token}
@@ -38,4 +32,4 @@ const Text = (props) => {
 }
 
 
-export default connect(mapStateToProps, {changeItemProps})(Text);
+export default connect(null, {updateText})(Text);

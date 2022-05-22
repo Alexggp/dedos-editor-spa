@@ -4,12 +4,27 @@
   padding: 5px;
 }
 
-.ImageContainer img{
+.ImageBox{
   width: 76px;
-  height: auto;
+  height: 76px;
   border: 2px solid black;
   margin: 2px;
   float: left;
+  position: relative;
+}
+
+.Image{
+  width: 100%;
+  height: 100%;
+}
+
+.RemoveImg{
+  width: 20px;
+  height:20px;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  cursor: pointer;
 }
 
 .AddButton{
