@@ -13,19 +13,17 @@ import { togleTrash } from '../../../store/reducers/trashIsActive';
 
 
 const mapStateToProps = (state) => {
-  const currentActivity = state.currentActivityReducer.index;
   return {
-    tokenList: state.activitiesReducer.activities[currentActivity].tokenList,
-    areaList: state.activitiesReducer.activities[currentActivity].areaList,
-    currentActivity: currentActivity,
-    activities: state.activitiesReducer.activities
+    tokenList: state.tokensReducer.tokenList,
+    areaList: state.areasReducer.areaList,
+    currentActivity: state.activitiesReducer.currentActivity,
   }
 }
 
 const EditionArea = (props) => {
 
   useEffect(() => {
-    console.log(props.activities);
+    console.log('state has changed');
   }, [props.tokenList, props.activities]);
 
   const addNewItem = (item, offset)=>{
@@ -42,13 +40,23 @@ const EditionArea = (props) => {
         return <Text key={token.id} token={token}/>;
     }
   })
-  const tokens = processTokens(props.tokenList);
 
-  const areas = props.areaList.map((area)=>(
-    <Area key={area.id} area={area}>
-      {processTokens(area.tokenList)}
-    </Area>
-  ))
+  // getting tokens without area
+  const independentTokenList = props.tokenList.filter((tkn)=>tkn.activityId === props.currentActivity && tkn.areaId === 0);
+  const tokens = processTokens(independentTokenList);
+
+  // getting areas and tokens within area
+  const areaList = props.areaList.filter((area)=>area.activityId === props.currentActivity);
+  const areas = areaList.map((area)=>{
+    // tokens that belongs to this area
+    const areaTokenList = props.tokenList.filter((tkn)=>tkn.activityId === props.currentActivity && tkn.areaId === area.id);
+    return (
+      <Area key={area.id} area={area}>
+        {processTokens(areaTokenList)}
+      </Area>
+    )
+  
+  })
 
   return(
     
@@ -75,4 +83,4 @@ const EditionArea = (props) => {
 }
 
 
-export default connect(mapStateToProps, {createItem, togleTrash})(EditionArea);
+export default connect(mapStateToProps, {togleTrash})(EditionArea);

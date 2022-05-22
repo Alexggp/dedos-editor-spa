@@ -1,11 +1,13 @@
 import { createStore, combineReducers } from 'redux';
 import {activitiesReducer} from './reducers/activities';
-import currentActivityReducer from './reducers/currentActivity';
+import {areasReducer} from './reducers/areas';
+import {tokensReducer} from './reducers/tokens';
 import { trashIsActiveReducer } from './reducers/trashIsActive';
 
 const reducers = combineReducers({
   activitiesReducer,
-  currentActivityReducer,
+  areasReducer,
+  tokensReducer,
   trashIsActiveReducer
 })
 

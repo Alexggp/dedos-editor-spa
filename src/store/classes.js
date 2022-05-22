@@ -8,19 +8,21 @@ export class Activity {
 }
 
 export class Area {
-  constructor(id, {x, y}, {w, h}){
+  constructor(id, activityId, {x, y}, {w, h}){
     this.id = id,
+    this.activityId = activityId,
     this.type = 'Player', // Player / Game
     this.offset = {x: x, y:y},
     this.size = {w: w || 360, h: h || 240},
-    this.background = '',
-    this.tokenList = []
+    this.background = ''
   }
 }
 
 class Token {
-  constructor(id, {x, y}, {w, h}){
+  constructor(id, activityId, areaId, {x, y}, {w, h}){
     this.id = id,
+    this.activityId = activityId,
+    this.areaId = areaId
     this.type = '', // txt / img
     this.numValue = 1,
     this.offset = {x: x, y:y},
@@ -35,8 +37,8 @@ class Token {
 }
 
 export class Text extends Token{
-  constructor(id, {x, y}, {w, h}){
-    super(id, {x, y}, {w, h});
+  constructor(id, activityId, areaId, {x, y}, {w, h}){
+    super(id, activityId, areaId, {x, y}, {w, h});
     this.type = 'txt',
     this.content = {
       text: ''
@@ -45,8 +47,8 @@ export class Text extends Token{
 }
 
 export class Image extends Token{
-  constructor(id, {x, y}, {w, h}){
-    super(id, {x, y}, {w, h});
+  constructor(id, activityId, areaId, {x, y}, {w, h}){
+    super(id, activityId, areaId, {x, y}, {w, h});
     this.type = 'img',
     this.content = {
       urlList: []

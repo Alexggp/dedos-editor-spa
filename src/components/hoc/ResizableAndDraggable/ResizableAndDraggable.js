@@ -1,14 +1,12 @@
 import React from 'react';
 import { Rnd } from 'react-rnd'; // resizable and draggable class
 import { connect } from 'react-redux';
-import {moveItem, resizeItem} from '../../../store/reducers/activities';
 
 import classes from './ResizableAndDraggable.module.css';
 
 const mapStateToProps = (state) => {
   return {
-    trashIsActive: state.trashIsActiveReducer.isActive,
-    currentActivity: state.currentActivityReducer.index
+    trashIsActive: state.trashIsActiveReducer.isActive
   }
 }
 
@@ -40,13 +38,6 @@ const ResizableAndDraggable = (props) => {
     bottomRight: true
   }
 
-
-  const hasMoved = (x, y)=>{
-    console.log(props.itemId)
-    props.moveItem(props.currentActivity, props.itemId, {x: x, y:y});
-  }
-  
-
   return(
 
       <Rnd
@@ -70,7 +61,7 @@ const ResizableAndDraggable = (props) => {
           if (props.trashIsActive){
             props.delete();
           } else {
-            hasMoved(d.x,d.y);
+            props.moved({x:d.x,y:d.y});
           }
         }}
         onResizeStop={(e, direction, ref, delta, position) => {
@@ -84,4 +75,4 @@ const ResizableAndDraggable = (props) => {
 }
 
 
-export default connect(mapStateToProps, {moveItem, resizeItem})(ResizableAndDraggable);
+export default connect(mapStateToProps, null)(ResizableAndDraggable);

@@ -6,10 +6,7 @@ import classes from './Text.module.css';
 import {changeItemProps} from '../../../../store/reducers/activities';
 
 const mapStateToProps = (state) => {
-  const currentActivity = state.currentActivityReducer.index;
-  return {
-    currentActivity: currentActivity
-  }
+
 }
 
 const Text = (props) => {

@@ -1,121 +1,11 @@
 const initialState = {
+  currentActivity: 0,
   activities:[
-    {
-      objectives:[],
-      areaList:[
-        {
-          id: 1,
-          type: 'Player',
-          offset:{
-            x: 10,
-            y: 15
-          },
-          size:{
-            w: 1010,
-            h: 792
-          }, 
-          background: "https://i.guim.co.uk/img/media/ef8492feb3715ed4de705727d9f513c168a8b196/37_0_1125_675/master/1125.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=d456a2af571d980d8b2985472c262b31"     ,
-          tokenList: [
-            {
-              id: 4,
-              type: 'img',
-              offset:{
-                x: 10,
-                y: 384
-              },
-              size:{
-                w: 300,
-                h: 200
-              },
-              movable: true,
-              content:{
-                urlList:[
-                  "https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png",
-                  "https://i.guim.co.uk/img/media/ef8492feb3715ed4de705727d9f513c168a8b196/37_0_1125_675/master/1125.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=d456a2af571d980d8b2985472c262b31"
-                ]
-              }
-            }
-          ]
-        }
-      ],
-      tokenList: [
-        {
-          id: 2,
-          type: 'img',
-          offset:{
-            x: 177,
-            y: 104
-          },
-          size:{
-            w: 300,
-            h: 200
-          },
-          movable: true,
-          content:{
-            urlList:[
-              "https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png",
-              "https://i.guim.co.uk/img/media/ef8492feb3715ed4de705727d9f513c168a8b196/37_0_1125_675/master/1125.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=d456a2af571d980d8b2985472c262b31"
-            ]
-          }
-        },
-        {
-          id: 3,
-          type: 'txt',
-          offset:{
-            x: 475,
-            y: 506
-          },
-          size:{
-            w: 458,
-            h: 220
-          },
-          movable: true,
-          content:{
-            text: 'holita hola holota'
-          }
-        }
-      ]
-    },
-    {
-      tokenList: [
-        {
-          type: 'area',
-          offset:{
-            x: 50,
-            y: 30
-          },
-          size:{
-            w: 800,
-            h: 700
-          },
-          props:{}
-        }
-      ]
-    }
+    {id: 0},
+    {id: 1}
   ]
 }
 
-const findItem = (state, activityIndex, itemId)=>{
-  let item = {}
-
-  // First looks for the item in tokenList
-
-  const tokenList = state.activities[activityIndex].tokenList;
-  item = tokenList.find(itm=>itm.id===itemId);
-  if (item) return item;
-
-  // If the item was not found, then looks in areaList
-  const areaList = state.activities[activityIndex].areaList;
-  item = areaList.find(area=> area.id === itemId);
-  if (item) return item;
-
-  // At least, looks in every area tokenList
-  areaList.forEach(area=>{
-    const areaItem = area.tokenList.find(token=>token.id === itemId);
-    if (areaItem) item = areaItem;
-  })
-  return item;
-}
 
 const moveItem = (activityIndex, itemId, offset) =>{
   return {
@@ -135,8 +25,8 @@ const moveItemInState = (state, activityIndex, itemId, offset) => {
   // cloneItemList[itemIndex].offset= offset;
   // state.activities[activityIndex].tokenList = cloneItemList;
 
-  const item = findItem(state, activityIndex, itemId);
-  console.log(item)
+
+
   return state;
   
 }

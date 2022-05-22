@@ -6,10 +6,8 @@ import classes from './Image.module.css';
 // import {changeItemProps} from '../../../../store/reducers/activities';
 
 const mapStateToProps = (state) => {
-  const currentActivity = state.currentActivityReducer.index;
-  return {
-    currentActivity: currentActivity
-  }
+
+  
 }
 
 const Image = (props) => {

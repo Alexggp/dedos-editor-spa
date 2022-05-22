@@ -4,14 +4,11 @@ import { connect } from 'react-redux';
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 
 import classes from './Token.module.css';
-import {createItem, moveItem, resizeItem, deleteItem, changeItemProps} from '../../../../store/reducers/activities';
+import {moveToken} from '../../../../store/reducers/tokens';
 
 
 const mapStateToProps = (state) => {
-  const currentActivity = state.currentActivityReducer.index;
-  return {
-    currentActivity: currentActivity
-  }
+
 }
 
 const Token = (props) => {
@@ -30,6 +27,9 @@ const Token = (props) => {
     e.stopPropagation();
   }
 
+  const hasMoved = (offset)=>{
+    props.moveToken(props.token.id, offset);
+  }
   const hasResized = (w, h)=>{
     props.resizeItem(props.currentActivity, props.tokenIndex, {w: w, h:h});
   }
@@ -53,7 +53,7 @@ const Token = (props) => {
         dragHandleClassName={classes.Header}
         bounds={'parent'}
         offset={props.token.offset}
-        itemId = {props.token.id}
+        moved = {hasMoved}
         resized = {hasResized}
         delete = {deleteItem}
         zIndex = {300}
@@ -75,4 +75,4 @@ const Token = (props) => {
 
 }
 
-export default connect(mapStateToProps, {createItem, resizeItem, deleteItem, changeItemProps})(Token);
+export default connect(mapStateToProps, {moveToken})(Token);
