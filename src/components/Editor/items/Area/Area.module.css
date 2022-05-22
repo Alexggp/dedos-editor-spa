@@ -12,7 +12,7 @@
   background-color: #fefdcb;
 }
 
-.OptionsButton{
+.AreaTypeButton{
   width: 30px;
   height:30px;
   position: absolute;
@@ -23,7 +23,7 @@
   cursor: pointer;
 }
 
-.GameArea .OptionsButton{
+.GameArea .AreaTypeButton{
   background-image: url('../../../../assets/icons/collaborationIcon.png');
 }
 

@@ -4,20 +4,17 @@ import { connect } from 'react-redux';
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 
 import classes from './Area.module.css';
-import {changeItemProps} from '../../../../store/reducers/activities';
+import {moveArea, resizeArea, deleteArea, typeArea, backgroundArea} from '../../../../store/reducers/areas';
 
 const Area = (props) => {
   
   const addBackgroundHandler = (e) =>{
-    const propsClone = {...props.props}
-    propsClone.background = 'https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png';
-    props.changeItemProps(props.activityIndex, props.itemIndex, propsClone)
+    const backgroundUrl = 'https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png';
+    props.backgroundArea(props.area.id, backgroundUrl);
   }
 
-  const optionsButtonHandler = (e) =>{
-    const propsClone = {...props.props}
-    propsClone.gameArea = props.props.gameArea ? false: true;
-    props.changeItemProps(props.activityIndex, props.itemIndex, propsClone)
+  const typeButtonHandler = (e) =>{
+    props.typeArea(props.area.id);
   }
 
   const stopPropagation = (e) =>{
@@ -25,8 +22,15 @@ const Area = (props) => {
   }
 
 
-  const hasResized = (w, h)=>{
-    props.resized(props.itemIndex, {w: w, h:h});
+  const hasMoved = ({x, y})=>{
+    props.moveArea(props.area.id, {x: x, y: y});
+  }
+  const hasResized = ({w, h})=>{
+    props.resizeArea(props.area.id, {w: w, h: h});
+  }
+  
+  const deleteArea = ()=>{
+    props.deleteArea(props.area.id);
   }
 
   const style = {
@@ -45,14 +49,14 @@ const Area = (props) => {
         dragHandleClassName={classes.DragHandle}
         bounds={'parent'}
         offset={props.area.offset}
-        itemId = {props.area.id}
+        moved = {hasMoved}
         resized = {hasResized}
-        delete = {props.delete}
+        delete = {deleteArea}
         zIndex = {100}
         size={props.area.size}>
           <div className={areaClasses.join(' ')} style={style}>
             <div className={classes.DragHandle}>
-              <div className={classes.OptionsButton} onMouseDown={stopPropagation} onClick={optionsButtonHandler}></div>
+              <div className={classes.AreaTypeButton} onMouseDown={stopPropagation} onClick={typeButtonHandler}></div>
               <div className={classes.AddButton} onMouseDown={stopPropagation} onClick={addBackgroundHandler}></div>
             </div>
             {props.children}
@@ -63,4 +67,4 @@ const Area = (props) => {
 }
 
 
-export default connect(null, {changeItemProps})(Area);
+export default connect(null, {moveArea, resizeArea, deleteArea, typeArea, backgroundArea})(Area);

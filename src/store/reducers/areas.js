@@ -31,11 +31,136 @@ const initialState = {
   ]
 }
 
-
-const areasReducer = (state = initialState, action )=>(
-  {
-    ...state
+// Move area
+const moveArea = (areaId, offset) =>{
+  return {
+    type: "MOVE_AREA",
+    areaId: areaId,
+    offset: {
+      x: offset.x,
+      y: offset.y
+    }
   }
-)
+}
 
-export {areasReducer};
+const moveAreaInState = (state, areaId, offset) => {
+
+  const cloneAreaList = [...state.areaList];
+  const areaIndex = state.areaList.findIndex(ar => ar.id === areaId);
+  const cloneArea = {...cloneAreaList[areaIndex]}
+
+  cloneArea.offset= offset;
+  cloneAreaList[areaIndex] = cloneArea;
+  state.areaList= cloneAreaList;
+
+  return state;
+  
+}
+
+// Resize area
+const resizeArea = (areaId, size) =>{
+  return {
+    type: "RESIZE_AREA",
+    areaId: areaId,
+    size: {
+      w: size.w,
+      h: size.h
+    }
+  }
+}
+
+const resizeAreaInState = (state, areaId, size) => {
+
+  const cloneAreaList = [...state.areaList];
+  const areaIndex = state.areaList.findIndex(ar => ar.id === areaId);
+  const cloneArea = {...cloneAreaList[areaIndex]}
+
+  cloneArea.size= size;
+  cloneAreaList[areaIndex] = cloneArea;
+  state.areaList= cloneAreaList;
+
+  return state;
+  
+}
+
+
+// Delete Area
+const deleteArea = (areaId) =>{
+  return {
+    type: "DELETE_AREA",
+    areaId: areaId
+  }
+}
+
+const deleteAreaInState = (state, areaId) => {
+  const cloneAreaList = [...state.areaList];
+  const areaIndex = state.areaList.findIndex(ar => ar.id === areaId);
+  cloneAreaList.splice(areaIndex,1);
+  state.areaList= cloneAreaList;
+
+  return state;
+  
+}
+
+// Type Area
+const typeArea = (areaId) =>{
+  return {
+    type: "TYPE_AREA",
+    areaId: areaId
+  }
+}
+
+const typeAreaInState = (state, areaId) => {
+  const cloneAreaList = [...state.areaList];
+  const areaIndex = state.areaList.findIndex(ar => ar.id === areaId);
+  const cloneArea = {...cloneAreaList[areaIndex]}
+
+  cloneArea.type= (cloneArea.type === 'Game') ? 'Player' : 'Game';
+  cloneAreaList[areaIndex] = cloneArea;
+  state.areaList= cloneAreaList;
+
+  return state;
+  
+}
+
+// Background Area
+const backgroundArea = (areaId, url) =>{
+  return {
+    type: "BACKGROUND_AREA",
+    areaId: areaId,
+    url: url
+  }
+}
+
+const backgroundAreaInState = (state, areaId, url) => {
+  const cloneAreaList = [...state.areaList];
+  const areaIndex = state.areaList.findIndex(ar => ar.id === areaId);
+  const cloneArea = {...cloneAreaList[areaIndex]}
+
+  cloneArea.background= url;
+  cloneAreaList[areaIndex] = cloneArea;
+  state.areaList= cloneAreaList;
+
+  return state;
+  
+}
+
+const areasReducer = (state = initialState, action = {})=>{
+  switch(action.type){
+    case 'MOVE_AREA':
+      return moveAreaInState(state, action.areaId, action.offset);
+    case 'RESIZE_AREA':
+      return resizeAreaInState(state, action.areaId, action.size);
+    case 'DELETE_AREA':
+      return deleteAreaInState(state, action.areaId);  
+    case 'TYPE_AREA':
+      return typeAreaInState(state, action.areaId);
+    case 'BACKGROUND_AREA':
+      return backgroundAreaInState(state, action.areaId, action.url);
+    default:
+      return {
+        ...state
+      }
+  }
+}
+export {areasReducer, moveArea, resizeArea, deleteArea, typeArea, backgroundArea};

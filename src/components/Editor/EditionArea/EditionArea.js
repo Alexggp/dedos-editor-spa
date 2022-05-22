@@ -23,8 +23,12 @@ const mapStateToProps = (state) => {
 const EditionArea = (props) => {
 
   useEffect(() => {
-    console.log('state has changed');
-  }, [props.tokenList, props.activities]);
+    console.log('tokenList state has changed');
+  }, [props.tokenList]);
+
+  useEffect(() => {
+    console.log('areaList state has changed');
+  }, [props.areaList]);
 
   const addNewItem = (item, offset)=>{
     props.createItem(props.currentActivity, item, offset);
