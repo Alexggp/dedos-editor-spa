@@ -5,6 +5,8 @@ import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableA
 
 import classes from './Area.module.css';
 import {moveArea, resizeArea, deleteArea, typeArea, backgroundArea} from '../../../../store/reducers/areas';
+import {deleteToken} from '../../../../store/reducers/tokens';
+
 
 const Area = (props) => {
   
@@ -30,6 +32,10 @@ const Area = (props) => {
   }
   
   const deleteArea = ()=>{
+    props.tokens.forEach(token => {
+      // Deleting tokens within the area
+      props.deleteToken(token.id);
+    });
     props.deleteArea(props.area.id);
   }
 
@@ -67,4 +73,4 @@ const Area = (props) => {
 }
 
 
-export default connect(null, {moveArea, resizeArea, deleteArea, typeArea, backgroundArea})(Area);
+export default connect(null, {moveArea, resizeArea, deleteArea, typeArea, backgroundArea, deleteToken})(Area);

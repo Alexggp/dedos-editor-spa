@@ -55,7 +55,7 @@ const EditionArea = (props) => {
     // tokens that belongs to this area
     const areaTokenList = props.tokenList.filter((tkn)=>tkn.activityId === props.currentActivity && tkn.areaId === area.id);
     return (
-      <Area key={area.id} area={area}>
+      <Area key={area.id} area={area} tokens={areaTokenList}>
         {processTokens(areaTokenList)}
       </Area>
     )
