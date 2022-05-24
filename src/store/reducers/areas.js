@@ -1,3 +1,5 @@
+import {Area} from '../classes';
+
 const initialState = {
   areaList: [
     {
@@ -145,6 +147,26 @@ const backgroundAreaInState = (state, areaId, url) => {
   
 }
 
+// Add new Area
+const addNewArea = (activity, offset) =>{
+  return {
+    type: "ADD_AREA",
+    offset: offset,
+    activity: activity
+  }
+}
+
+const addNewAreaInState = (state, activity, offset) => {
+  console.log(offset);
+  const cloneAreaList = [...state.areaList];
+  const newArea = new Area(activity, offset);
+  cloneAreaList.push(newArea);
+  state.areaList= cloneAreaList;
+
+  return state;
+  
+}
+
 const areasReducer = (state = initialState, action = {})=>{
   switch(action.type){
     case 'MOVE_AREA':
@@ -157,10 +179,12 @@ const areasReducer = (state = initialState, action = {})=>{
       return typeAreaInState(state, action.areaId);
     case 'BACKGROUND_AREA':
       return backgroundAreaInState(state, action.areaId, action.url);
+    case 'ADD_AREA':
+      return addNewAreaInState(state, action.activity, action.offset);  
     default:
       return {
         ...state
       }
   }
 }
-export {areasReducer, moveArea, resizeArea, deleteArea, typeArea, backgroundArea};
+export {areasReducer, moveArea, resizeArea, deleteArea, typeArea, backgroundArea, addNewArea};

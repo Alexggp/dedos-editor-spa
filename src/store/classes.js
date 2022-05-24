@@ -1,45 +1,45 @@
 export class Activity {
   constructor(){
-    this.objetives = [],
-    this.tokenList = [],
-    this.areaList = [],
-    this.arrows = []
+    this.objetives = [];
+    this.tokenList = [];
+    this.areaList = [];
+    this.arrows = [];
   }
 }
 
 export class Area {
-  constructor(id, activityId, {x, y}, {w, h}){
-    this.id = id,
-    this.activityId = activityId,
-    this.type = 'Player', // Player / Game
-    this.offset = {x: x, y:y},
-    this.size = {w: w || 360, h: h || 240},
-    this.background = ''
+  constructor(activityId, offset){
+    this.id = Date.now();
+    this.activityId = activityId;
+    this.type = 'Player'; // Player / Game
+    this.offset = {x: offset.x, y: offset.y};
+    this.size = {w: 360, h: 240};
+    this.background = '';
   }
 }
 
 class Token {
-  constructor(id, activityId, areaId, {x, y}, {w, h}){
-    this.id = id,
-    this.activityId = activityId,
-    this.areaId = areaId
-    this.type = '', // txt / img
-    this.numValue = 1,
-    this.offset = {x: x, y:y},
-    this.size = {w: w || 360, h: h || 240},
-    this.clickable = true, 
-    this.rotable = true, 
-    this.resizable = true, 
-    this.movable = true
-    this.content= {}
+  constructor(activityId, areaId, offset){
+    this.id = Date.now();
+    this.activityId = activityId;
+    this.areaId = areaId;
+    this.type = ''; // txt / img
+    this.numValue = 1;
+    this.offset = {x: offset.x, y: offset.y};
+    this.size = {w: 360, h: 240};
+    this.clickable = true;
+    this.rotable = true;
+    this.resizable = true;
+    this.movable = true;
+    this.content= {};
   }
 
 }
 
 export class Text extends Token{
-  constructor(id, activityId, areaId, {x, y}, {w, h}){
-    super(id, activityId, areaId, {x, y}, {w, h});
-    this.type = 'txt',
+  constructor(activityId, areaId, offset){
+    super(activityId, areaId, offset);
+    this.type = 'txt';
     this.content = {
       text: ''
     }
@@ -47,9 +47,9 @@ export class Text extends Token{
 }
 
 export class Image extends Token{
-  constructor(id, activityId, areaId, {x, y}, {w, h}){
-    super(id, activityId, areaId, {x, y}, {w, h});
-    this.type = 'img',
+  constructor(activityId, areaId, offset){
+    super(activityId, areaId, offset);
+    this.type = 'img';
     this.content = {
       urlList: []
     }
