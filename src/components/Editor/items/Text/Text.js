@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 
 import Token from '../Token/Token';
 import classes from './Text.module.css';
-import {updateText} from '../../../../store/reducers/tokens';
+import {updateToken} from '../../../../store/reducers/tokens';
 
 const Text = (props) => {
 
   const changeText = (e) => {
-    const newText = e.target.value;
-    props.updateText(props.token.id, newText);
+    const auxToken = {...props.token}
+    auxToken.content.text = e.target.value;
+    props.updateToken(props.token.id, auxToken);
   }
 
   
@@ -32,4 +33,4 @@ const Text = (props) => {
 }
 
 
-export default connect(null, {updateText})(Text);
+export default connect(null, {updateToken})(Text);

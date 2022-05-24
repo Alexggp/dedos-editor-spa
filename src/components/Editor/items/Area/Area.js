@@ -12,13 +12,15 @@ const Area = (props) => {
   
   const addBackgroundHandler = (e) =>{
     const backgroundUrl = 'https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png';
-    props.area.background = backgroundUrl;
-    props.updateArea(props.area.id, props.area);
+    const auxArea = {...props.area}
+    auxArea.background = backgroundUrl;
+    props.updateArea(props.area.id, auxArea);
   }
 
   const typeButtonHandler = (e) =>{
-    props.area.type= (props.area.type === 'Game') ? 'Player' : 'Game';
-    props.updateArea(props.area.id, props.area);
+    const auxArea = {...props.area}
+    auxArea.type= (props.area.type === 'Game') ? 'Player' : 'Game';
+    props.updateArea(props.area.id, auxArea);
   }
 
   const stopPropagation = (e) =>{
@@ -27,12 +29,14 @@ const Area = (props) => {
 
 
   const hasMoved = ({x, y})=>{
-    props.area.offset = {x: x, y: y};
-    props.updateArea(props.area.id, props.area);
+    const auxArea = {...props.area}
+    auxArea.offset = {x: x, y: y};
+    props.updateArea(props.area.id, auxArea);
   }
   const hasResized = ({w, h})=>{
-    props.area.size = {w: w, h: h};
-    props.updateArea(props.area.id, props.area);
+    const auxArea = {...props.area}
+    auxArea.size = {w: w, h: h};
+    props.updateArea(props.area.id, auxArea);
   }
   
   const deleteArea = ()=>{
@@ -66,8 +70,6 @@ const Area = (props) => {
         size={props.area.size}>
           <div className={areaClasses.join(' ')} style={style}>
             <div className={classes.DragHandle}>
-              {JSON.stringify(props.area.offset)}
-              {JSON.stringify(props.area.size)}
               <div className={classes.AreaTypeButton} onMouseDown={stopPropagation} onClick={typeButtonHandler}></div>
               <div className={classes.AddButton} onMouseDown={stopPropagation} onClick={addBackgroundHandler}></div>
             </div>

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Token from '../Token/Token';
 import classes from './Image.module.css';
 import removeIcon from '../../../../assets/icons/removeIcon.png';
-import {updateImages} from '../../../../store/reducers/tokens';
+import {updateToken} from '../../../../store/reducers/tokens';
 
 const Image = (props) => {
 
@@ -14,15 +14,15 @@ const Image = (props) => {
 
   const addImage = (e) =>{
     const image="https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png";
-    const imageList = [...props.token.content.urlList];
-    imageList.push(image);
-    props.updateImages(props.token.id, imageList);
+    const auxToken = {...props.token}
+    auxToken.content.urlList.push(image);
+    props.updateToken(props.token.id, auxToken);
   }
 
   const removeImage = (index) =>{
-    const imageList = [...props.token.content.urlList];
-    imageList.splice(index,1);
-    props.updateImages(props.token.id, imageList);
+    const auxToken = {...props.token}
+    auxToken.content.urlList.splice(index,1);
+    props.updateToken(props.token.id, auxToken);
   }
 
   let images;
@@ -54,4 +54,4 @@ const Image = (props) => {
 
 }
 
-export default connect(null, {updateImages})(Image);
+export default connect(null, {updateToken})(Image);

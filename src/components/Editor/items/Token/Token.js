@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 
 import classes from './Token.module.css';
-import {moveToken, resizeToken, deleteToken, movableToken} from '../../../../store/reducers/tokens';
+import {deleteToken, updateToken} from '../../../../store/reducers/tokens';
 
 const Token = (props) => {
 
@@ -18,10 +18,14 @@ const Token = (props) => {
   }
 
   const hasMoved = ({x, y})=>{
-    props.moveToken(props.token.id, {x: x, y: y});
+    const auxToken = {...props.token}
+    auxToken.offset = {x: x, y: y};
+    props.updateToken(props.token.id, auxToken);
   }
   const hasResized = ({w, h})=>{
-    props.resizeToken(props.token.id, {w: w, h: h});
+    const auxToken = {...props.token}
+    auxToken.size = {w: w, h: h}
+    props.updateToken(props.token.id, auxToken);
   }
   
   const deleteToken = ()=>{
@@ -29,7 +33,9 @@ const Token = (props) => {
   }
 
   const pinButtonHandler = (e) =>{
-    props.movableToken(props.token.id);
+    const auxToken = {...props.token}
+    auxToken.movable = !props.token.movable;
+    props.updateToken(props.token.id, auxToken);
   }
 
 
@@ -69,4 +75,4 @@ const Token = (props) => {
 
 }
 
-export default connect(null, {moveToken, resizeToken, deleteToken, movableToken})(Token);
+export default connect(null, {deleteToken, updateToken})(Token);
