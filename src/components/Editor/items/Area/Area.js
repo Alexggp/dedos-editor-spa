@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 
 import classes from './Area.module.css';
-import {moveArea, resizeArea, deleteArea, typeArea, backgroundArea} from '../../../../store/reducers/areas';
+import {deleteArea, updateArea} from '../../../../store/reducers/areas';
 import {deleteToken} from '../../../../store/reducers/tokens';
 
 
@@ -12,11 +12,13 @@ const Area = (props) => {
   
   const addBackgroundHandler = (e) =>{
     const backgroundUrl = 'https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png';
-    props.backgroundArea(props.area.id, backgroundUrl);
+    props.area.background = backgroundUrl;
+    props.updateArea(props.area.id, props.area);
   }
 
   const typeButtonHandler = (e) =>{
-    props.typeArea(props.area.id);
+    props.area.type= (props.area.type === 'Game') ? 'Player' : 'Game';
+    props.updateArea(props.area.id, props.area);
   }
 
   const stopPropagation = (e) =>{
@@ -25,10 +27,12 @@ const Area = (props) => {
 
 
   const hasMoved = ({x, y})=>{
-    props.moveArea(props.area.id, {x: x, y: y});
+    props.area.offset = {x: x, y: y};
+    props.updateArea(props.area.id, props.area);
   }
   const hasResized = ({w, h})=>{
-    props.resizeArea(props.area.id, {w: w, h: h});
+    props.area.size = {w: w, h: h};
+    props.updateArea(props.area.id, props.area);
   }
   
   const deleteArea = ()=>{
@@ -62,6 +66,8 @@ const Area = (props) => {
         size={props.area.size}>
           <div className={areaClasses.join(' ')} style={style}>
             <div className={classes.DragHandle}>
+              {JSON.stringify(props.area.offset)}
+              {JSON.stringify(props.area.size)}
               <div className={classes.AreaTypeButton} onMouseDown={stopPropagation} onClick={typeButtonHandler}></div>
               <div className={classes.AddButton} onMouseDown={stopPropagation} onClick={addBackgroundHandler}></div>
             </div>
@@ -73,4 +79,4 @@ const Area = (props) => {
 }
 
 
-export default connect(null, {moveArea, resizeArea, deleteArea, typeArea, backgroundArea, deleteToken})(Area);
+export default connect(null, {deleteArea, updateArea, deleteToken})(Area);

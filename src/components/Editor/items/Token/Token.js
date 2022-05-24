@@ -61,7 +61,6 @@ const Token = (props) => {
             </div>
             <div className={classes.Body} >
               <div className={classes.OptionsButton} onClick={optionsButtonHandler}></div>
-              {JSON.stringify(props.token.offset)}
               {props.children}
             </div>
           </div>

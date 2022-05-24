@@ -8,7 +8,7 @@ import Text from '../items/Text/Text';
 
 import Droppable from '../../hoc/Droppable/Droppable';
 
-import {addNewArea} from '../../../store/reducers/areas'; 
+import {createArea} from '../../../store/reducers/areas'; 
 import {addNewToken} from '../../../store/reducers/tokens'; 
 import { togleTrash } from '../../../store/reducers/trashIsActive';
 
@@ -35,7 +35,7 @@ const EditionArea = (props) => {
     console.log(item, offset)
     switch (item) {
       case 'AddArea':
-        props.addNewArea(props.currentActivity, offset);
+        props.createArea(props.currentActivity, offset);
         break;
       case 'AddText':
         props.addNewToken('txt', props.currentActivity, offset);
@@ -101,4 +101,4 @@ const EditionArea = (props) => {
 }
 
 
-export default connect(mapStateToProps, {togleTrash, addNewArea, addNewToken})(EditionArea);
+export default connect(mapStateToProps, {togleTrash, createArea, addNewToken})(EditionArea);
