@@ -157,7 +157,6 @@ const addNewArea = (activity, offset) =>{
 }
 
 const addNewAreaInState = (state, activity, offset) => {
-  console.log(offset);
   const cloneAreaList = [...state.areaList];
   const newArea = new Area(activity, offset);
   cloneAreaList.push(newArea);

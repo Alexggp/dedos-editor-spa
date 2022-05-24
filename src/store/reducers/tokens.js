@@ -1,3 +1,5 @@
+import { Text, Image } from '../classes';
+
 const initialState = {
   tokenList: [
     {
@@ -217,6 +219,30 @@ const updateTextInState = (state, tokenId, text) => {
   
 }
 
+// Add new Token
+const addNewToken = (tokenType, activity, offset) =>{
+  return {
+    type: "ADD_TOKEN",
+    offset: offset,
+    tokenType: tokenType,
+    activity: activity
+  }
+}
+
+const addNewTokenInState = (state, tokenType, activity, offset) => {
+  const cloneTokenList = [...state.tokenList];
+  let newToken;
+  if(tokenType==='txt'){
+    newToken = new Text(activity, offset);
+  } else {
+    newToken = new Image(activity, offset);
+  }
+  cloneTokenList.push(newToken);
+  state.tokenList= cloneTokenList;
+
+  return state;
+  
+}
 
 const tokensReducer = (state = initialState, action = {})=>{
   switch(action.type){
@@ -231,7 +257,9 @@ const tokensReducer = (state = initialState, action = {})=>{
     case 'UPDATE_IMAGES':
       return updateImagesInState(state, action.tokenId, action.imageList);
     case 'UPDATE_TEXT':
-      return updateTextInState(state, action.tokenId, action.text);        
+      return updateTextInState(state, action.tokenId, action.text);    
+    case 'ADD_TOKEN':
+      return addNewTokenInState(state, action.tokenType, action.activity, action.offset);     
     default:
       return {
         ...state
@@ -239,4 +267,4 @@ const tokensReducer = (state = initialState, action = {})=>{
   }
 }
 
-export {tokensReducer, moveToken, resizeToken, deleteToken, movableToken, updateImages, updateText};
+export {tokensReducer, moveToken, resizeToken, deleteToken, movableToken, updateImages, updateText, addNewToken};

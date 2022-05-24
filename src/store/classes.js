@@ -12,20 +12,26 @@ export class Area {
     this.id = Date.now();
     this.activityId = activityId;
     this.type = 'Player'; // Player / Game
-    this.offset = {x: offset.x, y: offset.y};
+    this.offset = {
+      x: offset.x - 180,
+      y: offset.y - 100
+    };
     this.size = {w: 360, h: 240};
     this.background = '';
   }
 }
 
 class Token {
-  constructor(activityId, areaId, offset){
+  constructor(activityId, offset){
     this.id = Date.now();
     this.activityId = activityId;
-    this.areaId = areaId;
+    this.areaId = 0; 
     this.type = ''; // txt / img
     this.numValue = 1;
-    this.offset = {x: offset.x, y: offset.y};
+    this.offset = {
+      x: offset.x - 180,
+      y: offset.y - 100
+    };
     this.size = {w: 360, h: 240};
     this.clickable = true;
     this.rotable = true;
@@ -37,8 +43,8 @@ class Token {
 }
 
 export class Text extends Token{
-  constructor(activityId, areaId, offset){
-    super(activityId, areaId, offset);
+  constructor(activityId, offset){
+    super(activityId, offset);
     this.type = 'txt';
     this.content = {
       text: ''
@@ -47,8 +53,8 @@ export class Text extends Token{
 }
 
 export class Image extends Token{
-  constructor(activityId, areaId, offset){
-    super(activityId, areaId, offset);
+  constructor(activityId, offset){
+    super(activityId, offset);
     this.type = 'img';
     this.content = {
       urlList: []
