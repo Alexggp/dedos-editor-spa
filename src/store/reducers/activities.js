@@ -1,5 +1,5 @@
 const initialState = {
-  currentActivity: 1,
+  currentActivity: 0,
   activities:[
     {id: 0},
     {id: 1}

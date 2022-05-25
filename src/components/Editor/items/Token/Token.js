@@ -2,24 +2,35 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
-
+import checkOverlapping from '../../../../utils/checkOverlapping';
 import classes from './Token.module.css';
 import {deleteToken, updateToken} from '../../../../store/reducers/tokens';
 
+
+
+const mapStateToProps = (state) => {
+  return {
+    areaList: state.areasReducer.areaList,
+    currentActivity: state.activitiesReducer.currentActivity,
+  }
+}
+
 const Token = (props) => {
+
+  const stopPropagation = (e) =>{
+    e.stopPropagation();
+  }
 
 
   const optionsButtonHandler = (e) =>{
     console.log('Options Button Pressed');
   }
 
-  const stopPropagation = (e) =>{
-    e.stopPropagation();
-  }
-
   const hasMoved = ({x, y})=>{
     const auxToken = {...props.token}
     auxToken.offset = {x: x, y: y};
+    auxToken.areaId = checkOverlapping(auxToken, props.areaList, props.currentActivity)[0] || 0;
+    console.log(auxToken.areaId)
     props.updateToken(props.token.id, auxToken);
   }
   const hasResized = ({w, h})=>{
@@ -51,7 +62,6 @@ const Token = (props) => {
 
       <ResizableAndDraggable
         dragHandleClassName={classes.Header}
-        bounds={'parent'}
         offset={props.token.offset}
         moved = {hasMoved}
         resized = {hasResized}
@@ -75,4 +85,4 @@ const Token = (props) => {
 
 }
 
-export default connect(null, {deleteToken, updateToken})(Token);
+export default connect(mapStateToProps, {deleteToken, updateToken})(Token);
