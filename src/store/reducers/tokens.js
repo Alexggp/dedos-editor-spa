@@ -11,6 +11,10 @@ const initialState = {
         x: 10,
         y: 384
       },
+      screenOffset:{
+        x: 0,
+        y: 0
+      },
       size:{
         w: 300,
         h: 200
@@ -31,6 +35,10 @@ const initialState = {
       offset:{
         x: 177,
         y: 104
+      },
+      screenOffset:{
+        x: 0,
+        y: 0
       },
       size:{
         w: 300,
@@ -53,6 +61,10 @@ const initialState = {
         x: 475,
         y: 506
       },
+      screenOffset:{
+        x: 0,
+        y: 0
+      },
       size:{
         w: 458,
         h: 220
@@ -70,6 +82,10 @@ const initialState = {
       offset:{
         x: 475,
         y: 506
+      },
+      screenOffset:{
+        x: 0,
+        y: 0
       },
       size:{
         w: 458,

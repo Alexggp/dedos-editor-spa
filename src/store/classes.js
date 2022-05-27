@@ -32,6 +32,10 @@ class Token {
       x: offset.x - 180,
       y: offset.y - 100
     };
+    this.screenOffset = {
+      x: 0,
+      y: 0
+    };
     this.size = {w: 360, h: 240};
     this.clickable = true;
     this.rotable = true;

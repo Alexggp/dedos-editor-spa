@@ -43,6 +43,7 @@ const Image = (props) => {
         type={'IMAGE'}
         token={props.token}
         title={'Imagen'}
+        area = {props.area}
         addButton={addButton}>
           
         <div className={classes.ImageContainer} >

@@ -35,7 +35,12 @@ const Area = (props) => {
   }
   const hasResized = ({w, h})=>{
     const auxArea = {...props.area}
-    auxArea.size = {w: w, h: h};
+    // Size is returned as a string with px. eg: {w: '10px', y: '30px'}
+    // It must be normalized as a number
+    auxArea.size = {
+      w: Number(w.replace('px','')), 
+      h: Number(h.replace('px',''))
+    };
     props.updateArea(props.area.id, auxArea);
   }
   

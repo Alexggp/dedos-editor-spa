@@ -57,11 +57,12 @@ const ResizableAndDraggable = (props) => {
         bounds={props.bounds}
         disableDragging={props.notMove}
         onDrag={e=> e.stopPropagation()}
-        onDragStop={(e, d) =>{
+        onDragStop={(e, offset) =>{
           if (props.trashIsActive){
             props.delete();
           } else {
-            props.moved({x:d.x,y:d.y});
+            // This offset ir referenced by the draggable parent, not by the window
+            props.moved({x:offset.x,y:offset.y});
           }
         }}
         onResizeStop={(e, direction, ref, delta, position) => {

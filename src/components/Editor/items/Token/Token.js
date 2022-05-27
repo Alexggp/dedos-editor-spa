@@ -1,8 +1,7 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import { connect } from 'react-redux';
 
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
-import checkOverlapping from '../../../../utils/checkOverlapping';
 import classes from './Token.module.css';
 import {deleteToken, updateToken} from '../../../../store/reducers/tokens';
 
@@ -16,9 +15,44 @@ const mapStateToProps = (state) => {
 }
 
 const Token = (props) => {
+  const tokenRef = useRef();
 
   const stopPropagation = (e) =>{
     e.stopPropagation();
+  }
+
+
+  const checkAreaOverlapping = (obj) =>{
+    
+    // Checks if the token overlaps with any area
+  
+    const areaList = props.areaList.filter(ar => ar.activityId === props.currentActivity);
+    let overlapsWith = 0;
+    areaList.forEach(area => {
+
+      // area.top > obj.bottom ||
+      // area.right < obj.left ||
+      // area.bottom < obj.top ||
+      // area.left > obj.right
+  
+      const overlaps = !(
+        area.offset.y > (obj.screenOffset.y + obj.size.h) ||
+        (area.offset.x + area.size.w) < obj.screenOffset.x ||
+        (area.offset.y + area.size.h) < obj.screenOffset.y ||
+        area.offset.x > (obj.screenOffset.x + obj.size.w)
+      );
+      if (overlaps) overlapsWith = area.id;
+      
+    });
+    return overlapsWith;
+  }
+  
+  const calculateNewOffset = (token, partialOffset) =>{
+    const area = props.areaList.find(ar => ar.id === token.areaId);
+    return {
+      x: partialOffset.x - area.offset.x,
+      y: partialOffset.y - area.offset.y
+    }
   }
 
 
@@ -28,14 +62,39 @@ const Token = (props) => {
 
   const hasMoved = ({x, y})=>{
     const auxToken = {...props.token}
-    auxToken.offset = {x: x, y: y};
-    auxToken.areaId = checkOverlapping(auxToken, props.areaList, props.currentActivity)[0] || 0;
-    console.log(auxToken.areaId)
+    
+    // Getting the offset referenced by the Edition Area div
+    auxToken.screenOffset={
+      x: tokenRef.current.getBoundingClientRect().x - 0,
+      y: tokenRef.current.getBoundingClientRect().y - 85
+    }
+    
+    // Checking if a token is dropped within an area
+    auxToken.areaId = checkAreaOverlapping(auxToken);
+
+    // Getting the offset referenced by the parent
+    if (!auxToken.areaId){
+      // If the token is outside any area, offset = screenOffset
+      auxToken.offset = auxToken.screenOffset;
+    }
+    else if (auxToken.areaId !== props.token.areaId){
+      // if the parent area changes, calculates a new offset 
+      auxToken.offset = calculateNewOffset(auxToken, {x, y});
+    } else {
+      // The token has been moved inside the same area
+      auxToken.offset = {x: x, y: y};
+    }
+
     props.updateToken(props.token.id, auxToken);
   }
   const hasResized = ({w, h})=>{
     const auxToken = {...props.token}
-    auxToken.size = {w: w, h: h}
+    // Size is returned as a string with px. eg: {w: '10px', y: '30px'}
+    // It must be normalized as a number
+    auxToken.size = {
+      w: Number(w.replace('px','')), 
+      h: Number(h.replace('px',''))
+    };
     props.updateToken(props.token.id, auxToken);
   }
   
@@ -56,7 +115,7 @@ const Token = (props) => {
     pinButtonClass = classes.PinButtonPressed;
   }
   
-  const cardClasses = [classes.Token, classes[`Token_type_${props.type}`]].join(' ');
+  const tokenClasses = [classes.Token, classes[`Token_type_${props.type}`]].join(' ');
 
   return(
 
@@ -69,7 +128,7 @@ const Token = (props) => {
         zIndex = {300}
         notMove={!props.token.movable}
         size={props.token.size}>
-          <div className={cardClasses} >
+          <div className={tokenClasses}  ref={tokenRef}>
             <div className={classes.Header} >
               <div className={pinButtonClass} onMouseDown={stopPropagation} onClick={pinButtonHandler}></div>
                 {props.title} 

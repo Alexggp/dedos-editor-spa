@@ -48,20 +48,20 @@ const EditionArea = (props) => {
     }
   }
 
-  const processTokens = (tokenList)=>tokenList.map((token)=>{
+  const processTokens = (tokenList, area)=>tokenList.map((token)=>{
     switch (token.type) {
       case 'img':
-        return <Image key={token.id} token={token}/>;
+        return <Image key={token.id} token={token} area={area}/>;
       case 'txt':
-        return <Text key={token.id} token={token}/>;
+        return <Text key={token.id} token={token} area={area}/>;
       default:
-        return <Text key={token.id} token={token}/>;
+        return <Text key={token.id} token={token} area={area}/>;
     }
   })
 
   // getting tokens without area
   const independentTokenList = props.tokenList.filter((tkn)=>tkn.activityId === props.currentActivity && tkn.areaId === 0);
-  const tokens = processTokens(independentTokenList);
+  const tokens = processTokens(independentTokenList, null);
 
   // getting areas and tokens within area
   const areaList = props.areaList.filter((area)=>area.activityId === props.currentActivity);
@@ -70,7 +70,7 @@ const EditionArea = (props) => {
     const areaTokenList = props.tokenList.filter((tkn)=>tkn.activityId === props.currentActivity && tkn.areaId === area.id);
     return (
       <Area key={area.id} area={area} tokens={areaTokenList}>
-        {processTokens(areaTokenList)}
+        {processTokens(areaTokenList, area)}
       </Area>
     )
   

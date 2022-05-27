@@ -18,6 +18,7 @@ const Text = (props) => {
     <Token
       type={'TEXT'}
       token={props.token}
+      area = {props.area}
       title={'Texto'}>
 
       <div className={classes.TextContainer} >
