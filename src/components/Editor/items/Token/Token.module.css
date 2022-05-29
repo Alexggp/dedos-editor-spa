@@ -49,6 +49,7 @@
   background-size: cover;
   background-image: url('../../../../assets/icons/settingsIcon.png');
   cursor: pointer;
+  z-index: 4;
 }
 
 .Token_type_IMAGE

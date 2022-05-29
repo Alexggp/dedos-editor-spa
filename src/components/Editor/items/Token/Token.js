@@ -1,10 +1,10 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import { connect } from 'react-redux';
 
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 import classes from './Token.module.css';
 import {deleteToken, updateToken} from '../../../../store/reducers/tokens';
-
+import Options from './Options/Options';
 
 
 const mapStateToProps = (state) => {
@@ -16,6 +16,8 @@ const mapStateToProps = (state) => {
 
 const Token = (props) => {
   const tokenRef = useRef();
+
+  const [showOptions, setShowOptions] = useState(true)
 
   const stopPropagation = (e) =>{
     e.stopPropagation();
@@ -47,17 +49,17 @@ const Token = (props) => {
     return overlapsWith;
   }
   
-  const calculateNewOffset = (token, partialOffset) =>{
+  const calculateNewOffset = (token) =>{
     const area = props.areaList.find(ar => ar.id === token.areaId);
     return {
-      x: partialOffset.x - area.offset.x,
-      y: partialOffset.y - area.offset.y
+      x: token.screenOffset.x - area.offset.x,
+      y: token.screenOffset.y - area.offset.y
     }
   }
 
 
   const optionsButtonHandler = (e) =>{
-    console.log('Options Button Pressed');
+    setShowOptions(!showOptions);
   }
 
   const hasMoved = ({x, y})=>{
@@ -79,7 +81,7 @@ const Token = (props) => {
     }
     else if (auxToken.areaId !== props.token.areaId){
       // if the parent area changes, calculates a new offset 
-      auxToken.offset = calculateNewOffset(auxToken, {x, y});
+      auxToken.offset = calculateNewOffset(auxToken);
     } else {
       // The token has been moved inside the same area
       auxToken.offset = {x: x, y: y};
@@ -117,6 +119,19 @@ const Token = (props) => {
   
   const tokenClasses = [classes.Token, classes[`Token_type_${props.type}`]].join(' ');
 
+  const headerContent = !showOptions ? (
+    <React.Fragment>
+      <div className={pinButtonClass} onMouseDown={stopPropagation} onClick={pinButtonHandler}></div>
+      {props.title} 
+      {props.addButton}
+    </React.Fragment>
+   
+  ) : '';
+
+  const optionsContainer = showOptions ? (
+    <Options/>
+  ) : '';
+
   return(
 
       <ResizableAndDraggable
@@ -130,13 +145,12 @@ const Token = (props) => {
         size={props.token.size}>
           <div className={tokenClasses}  ref={tokenRef}>
             <div className={classes.Header} >
-              <div className={pinButtonClass} onMouseDown={stopPropagation} onClick={pinButtonHandler}></div>
-                {props.title} 
-                {props.addButton}
+              {headerContent}
             </div>
             <div className={classes.Body} >
               <div className={classes.OptionsButton} onClick={optionsButtonHandler}></div>
               {props.children}
+              {optionsContainer}
             </div>
           </div>
       </ResizableAndDraggable>

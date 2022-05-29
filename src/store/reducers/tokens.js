@@ -29,7 +29,7 @@ const initialState = {
     },
     {
       activityId: 0,
-      areaId: 0,
+      areaId: 1,
       id: 2,
       type: 'img',
       offset:{
@@ -55,7 +55,7 @@ const initialState = {
     {
       id: 3,
       activityId: 0,
-      areaId: 0,
+      areaId: 1,
       type: 'txt',
       offset:{
         x: 475,
