@@ -129,7 +129,7 @@ const Token = (props) => {
   ) : '';
 
   const optionsContainer = showOptions ? (
-    <Options/>
+    <Options token={props.token}/>
   ) : '';
 
   return(

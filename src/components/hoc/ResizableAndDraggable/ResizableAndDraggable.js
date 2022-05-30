@@ -48,8 +48,8 @@ const ResizableAndDraggable = (props) => {
           width: props.size.w,
           height: props.size.h
         }}
-        minWidth= {240}
-        minHeight={160}
+        minWidth= {280}
+        minHeight={190}
         resizeHandleClasses= {HandleClasses}
         resizeHandleStyles= {HandleStyles}
         enableResizing= {Enable}
