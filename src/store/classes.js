@@ -38,9 +38,11 @@ class Token {
     };
     this.size = {w: 360, h: 240};
     this.clickable = true;
-    this.rotable = true;
+    this.rotatable = true;
     this.resizable = true;
     this.movable = true;
+    this.feedback = '';
+    this.mathematics = 1;
     this.content= {};
   }
 

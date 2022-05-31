@@ -20,6 +20,11 @@ const initialState = {
         h: 200
       },
       movable: true,
+      resizable: true, 
+      rotatable: true,
+      clickable: true,
+      feedback: '',
+      mathematics: 1,
       content:{
         urlList:[
           "https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png",
@@ -28,9 +33,9 @@ const initialState = {
       }
     },
     {
+      id: 2,
       activityId: 0,
       areaId: 1,
-      id: 2,
       type: 'img',
       offset:{
         x: 177,
@@ -45,6 +50,11 @@ const initialState = {
         h: 200
       },
       movable: true,
+      resizable: true, 
+      rotatable: true,
+      clickable: true,
+      feedback: '',
+      mathematics: 1,
       content:{
         urlList:[
           "https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png",
@@ -70,6 +80,11 @@ const initialState = {
         h: 220
       },
       movable: true,
+      resizable: true, 
+      rotatable: true,
+      clickable: true,
+      feedback: '',
+      mathematics: 1,
       content:{
         text: 'holita hola holota'
       }
@@ -92,6 +107,11 @@ const initialState = {
         h: 220
       },
       movable: true,
+      resizable: true, 
+      rotatable: true,
+      clickable: true,
+      feedback: '',
+      mathematics: 1,
       content:{
         text: 'testo de la actividad 2'
       }

@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
 const Token = (props) => {
   const tokenRef = useRef();
 
-  const [showOptions, setShowOptions] = useState(true)
+  const [showOptions, setShowOptions] = useState(false)
 
   const stopPropagation = (e) =>{
     e.stopPropagation();
@@ -110,6 +110,10 @@ const Token = (props) => {
     props.updateToken(props.token.id, auxToken);
   }
 
+  const updateOptions = (token) => {
+    props.updateToken(props.token.id, token);
+  }
+
 
   let pinButtonClass = classes.PinButton;
 
@@ -129,7 +133,7 @@ const Token = (props) => {
   ) : '';
 
   const optionsContainer = showOptions ? (
-    <Options token={props.token}/>
+    <Options token={props.token} updateOptions={updateOptions}/>
   ) : '';
 
   return(

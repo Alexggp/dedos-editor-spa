@@ -14,6 +14,36 @@ const Options = (props) => {
     return tabClss.join(' ');
   }
 
+  const changeClickableHandler = (e) => {
+    const auxToken = {...props.token}
+    auxToken.clickable = e.target.checked;
+    props.updateOptions(auxToken);
+  }
+
+  const changeRotatableHandler = (e) => {
+    const auxToken = {...props.token}
+    auxToken.rotatable = e.target.checked;
+    props.updateOptions(auxToken);
+  }
+
+  const changeResizableHandler = (e) => {
+    const auxToken = {...props.token}
+    auxToken.resizable = e.target.checked;
+    props.updateOptions(auxToken);
+  }
+
+  const changeFeedbackHandler = (e) => {
+    const auxToken = {...props.token}
+    auxToken.feedback = e.target.value;
+    props.updateOptions(auxToken);
+  }
+
+  const changeMathsHandler = (e) => {
+    const auxToken = {...props.token}
+    auxToken.mathematics = e.target.value;
+    props.updateOptions(auxToken);
+  }
+
   const actionsContainer = (
     <div className={classes.Container}>
       <div className={classes.InputsContainer}>
@@ -21,8 +51,8 @@ const Options = (props) => {
           <input 
             id={`input1${props.token.id}`}
             type="checkbox"
-            // onChange={changeHandler}
-            // checked = {props.value}
+            onChange={changeClickableHandler}
+            checked = {props.token.clickable}
             name={`input1${props.token.id}`}/>
           <label htmlFor={`input1${props.token.id}`}> Seleccionable </label>
         </div>
@@ -30,8 +60,8 @@ const Options = (props) => {
           <input 
             id={`input2${props.token.id}`}
             type="checkbox"
-            // onChange={changeHandler}
-            // checked = {props.value}
+            onChange={changeRotatableHandler}
+            checked = {props.token.rotatable}
             name={`input2${props.token.id}`}/>
           <label htmlFor={`input2${props.token.id}`}> Girable </label>
         </div>
@@ -39,8 +69,8 @@ const Options = (props) => {
           <input 
             id={`input3${props.token.id}`}
             type="checkbox"
-            // onChange={changeHandler}
-            // checked = {props.value}
+            onChange={changeResizableHandler}
+            checked = {props.token.resizable}
             name={`input3${props.token.id}`}/>
           <label htmlFor={`input3${props.token.id}`}> Redimensionable </label>
         </div>      
@@ -53,8 +83,8 @@ const Options = (props) => {
       <div className={classes.TextContainer} >
         <textarea 
           placeholder="Retroalimentación" 
-          // value={}
-          // onChange={}
+          value={props.token.feedback}
+          onChange={changeFeedbackHandler}
           />
       </div>
     </div>
@@ -66,9 +96,10 @@ const Options = (props) => {
       <div  className={classes.MathsContainer}>
         <label htmlFor={`inputN${props.token.id}`}> Valor numérico </label>
         <input 
+          type='number'
           id= {`inputN${props.token.id}`}
-          // onChange={}
-          // value = {}
+          onChange={changeMathsHandler}
+          value = {props.token.mathematics}
           name={`inputN${props.token.id}`}/>
       </div>
     </div>
