@@ -2,25 +2,20 @@ import React, {useEffect} from 'react';
 
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 import classes from './App.module.css';
 import Editor from './components/Editor/Editor';
 
 
-
-const mapStateToProps = (state) => {
-  return {
-    activities: state.activitiesReducer.activities
-  }
-}
-
 function App(props) {
+
+  const activities = useSelector(state => state.activitiesReducer.activities);
 
   useEffect(() => {
     console.log("DB GET");
-  }, [props.activities]);
+  }, [activities]);
 
   return (
 
@@ -28,10 +23,9 @@ function App(props) {
       <DndProvider backend={HTML5Backend}>
         <Editor/>
 			</DndProvider>
-      
     </div>
   );
 }
 
 
-export default connect(mapStateToProps, null)(App);
+export default App;

@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import classes from './EditionArea.module.css';
 import Area from '../items/Area/Area';
@@ -13,35 +13,33 @@ import {addNewToken} from '../../../store/reducers/tokens';
 import { togleTrash } from '../../../store/reducers/trashIsActive';
 
 
-const mapStateToProps = (state) => {
-  return {
-    tokenList: state.tokensReducer.tokenList,
-    areaList: state.areasReducer.areaList,
-    currentActivity: state.activitiesReducer.currentActivity,
-  }
-}
-
 const EditionArea = (props) => {
+  const dispatch = useDispatch();
+
+  const tokenList = useSelector(state => state.tokensReducer.tokenList);
+  const areaList = useSelector(state => state.areasReducer.areaList);
+  const currentActivity = useSelector(state => state.activitiesReducer.currentActivity);
+
 
   useEffect(() => {
     console.log('tokenList state has changed');
-  }, [props.tokenList]);
+  }, [tokenList]);
 
   useEffect(() => {
     console.log('areaList state has changed');
-  }, [props.areaList]);
+  }, [areaList]);
 
   const addNewItem = (item, offset)=>{
     console.log(item, offset)
     switch (item) {
       case 'AddArea':
-        props.createArea(props.currentActivity, offset);
+        dispatch(createArea(currentActivity, offset));
         break;
       case 'AddText':
-        props.addNewToken('txt', props.currentActivity, offset);
+        dispatch(addNewToken('txt', currentActivity, offset));
         break;
       case 'AddImage':
-        props.addNewToken('img', props.currentActivity, offset);
+        dispatch(addNewToken('img', currentActivity, offset));
         break;
       default:
         return;  
@@ -60,14 +58,14 @@ const EditionArea = (props) => {
   })
 
   // getting tokens without area
-  const independentTokenList = props.tokenList.filter((tkn)=>tkn.activityId === props.currentActivity && tkn.areaId === 0);
+  const independentTokenList = tokenList.filter((tkn)=>tkn.activityId === currentActivity && tkn.areaId === 0);
   const tokens = processTokens(independentTokenList, null);
 
   // getting areas and tokens within area
-  const areaList = props.areaList.filter((area)=>area.activityId === props.currentActivity);
-  const areas = areaList.map((area)=>{
+  const areasFiltered = areaList.filter((area)=>area.activityId === currentActivity);
+  const areas = areasFiltered.map((area)=>{
     // tokens that belongs to this area
-    const areaTokenList = props.tokenList.filter((tkn)=>tkn.activityId === props.currentActivity && tkn.areaId === area.id);
+    const areaTokenList = tokenList.filter((tkn)=>tkn.activityId === currentActivity && tkn.areaId === area.id);
     return (
       <Area key={area.id} area={area} tokens={areaTokenList}>
         {processTokens(areaTokenList, area)}
@@ -90,8 +88,8 @@ const EditionArea = (props) => {
               <p>ARRASTRA SOBRE MI LOS ICONOS DE LA BARRA DE<br/>HERRAMIENTAS PARA CREAR UNA ACTIVIDAD</p>
             </div>
             <div className={classes.Trash}
-              onMouseEnter={()=>{props.togleTrash(true)}}
-              onMouseLeave={()=>{props.togleTrash(false)}}
+              onMouseEnter={()=>{dispatch(togleTrash(true))}}
+              onMouseLeave={()=>{dispatch(togleTrash(false))}}
             />
         </Droppable>
       </div>
@@ -101,4 +99,4 @@ const EditionArea = (props) => {
 }
 
 
-export default connect(mapStateToProps, {togleTrash, createArea, addNewToken})(EditionArea);
+export default EditionArea;

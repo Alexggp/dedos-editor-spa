@@ -1,5 +1,5 @@
-import React, {useRef, useState} from 'react';
-import { connect } from 'react-redux';
+import React, {useEffect, useRef, useState, useCallback} from 'react';
+import { useDispatch, useSelector } from "react-redux";
 
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 import classes from './Token.module.css';
@@ -7,30 +7,24 @@ import {deleteToken, updateToken} from '../../../../store/reducers/tokens';
 import Options from './Options/Options';
 
 
-const mapStateToProps = (state) => {
-  return {
-    areaList: state.areasReducer.areaList,
-    currentActivity: state.activitiesReducer.currentActivity,
-  }
-}
 
 const Token = (props) => {
   const tokenRef = useRef();
+  const dispatch = useDispatch();
 
-  const [showOptions, setShowOptions] = useState(false)
+  
+  const areaList = useSelector((state) => state.areasReducer.areaList);
+  const currentActivity = useSelector((state) => state.activitiesReducer.currentActivity);
 
-  const stopPropagation = (e) =>{
-    e.stopPropagation();
-  }
+  const [showOptions, setShowOptions] = useState(false);
 
-
-  const checkAreaOverlapping = (obj) =>{
+  const checkAreaOverlapping = useCallback((obj) =>{
     
     // Checks if the token overlaps with any area
   
-    const areaList = props.areaList.filter(ar => ar.activityId === props.currentActivity);
+    const areas = areaList.filter(ar => ar.activityId === currentActivity);
     let overlapsWith = 0;
-    areaList.forEach(area => {
+    areas.forEach(area => {
 
       // area.top > obj.bottom ||
       // area.right < obj.left ||
@@ -47,10 +41,33 @@ const Token = (props) => {
       
     });
     return overlapsWith;
+  },[areaList, currentActivity])
+
+
+  useEffect(()=>{
+      console.log(props.token.id)
+      const auxToken = {...props.token};
+      // Getting the offset referenced by the Edition Area div
+      auxToken.screenOffset={
+        x: tokenRef.current.getBoundingClientRect().x - 0,
+        y: tokenRef.current.getBoundingClientRect().y - 85
+      }
+      // Checking if a token is created within an area
+      auxToken.areaId = checkAreaOverlapping(auxToken);
+      if (auxToken.areaId !== props.token.areaId){
+        dispatch(updateToken(props.token.id, auxToken));
+      }
+  },[props.token, checkAreaOverlapping, dispatch])
+
+  const stopPropagation = (e) =>{
+    e.stopPropagation();
   }
+
+
+
   
   const calculateNewOffset = (token) =>{
-    const area = props.areaList.find(ar => ar.id === token.areaId);
+    const area = areaList.find(ar => ar.id === token.areaId);
     return {
       x: token.screenOffset.x - area.offset.x,
       y: token.screenOffset.y - area.offset.y
@@ -87,7 +104,7 @@ const Token = (props) => {
       auxToken.offset = {x: x, y: y};
     }
 
-    props.updateToken(props.token.id, auxToken);
+    dispatch(updateToken(props.token.id, auxToken));
   }
   const hasResized = ({w, h})=>{
     const auxToken = {...props.token}
@@ -97,21 +114,21 @@ const Token = (props) => {
       w: Number(w.replace('px','')), 
       h: Number(h.replace('px',''))
     };
-    props.updateToken(props.token.id, auxToken);
+    dispatch(updateToken(props.token.id, auxToken));
   }
   
-  const deleteToken = ()=>{
-    props.deleteToken(props.token.id);
+  const deleteTokenHandler = ()=>{
+    dispatch(deleteToken(props.token.id));
   }
 
   const pinButtonHandler = (e) =>{
     const auxToken = {...props.token}
     auxToken.movable = !props.token.movable;
-    props.updateToken(props.token.id, auxToken);
+    dispatch(updateToken(props.token.id, auxToken));
   }
 
   const updateOptions = (token) => {
-    props.updateToken(props.token.id, token);
+    dispatch(updateToken(props.token.id, token));
   }
 
 
@@ -143,7 +160,7 @@ const Token = (props) => {
         offset={props.token.offset}
         moved = {hasMoved}
         resized = {hasResized}
-        delete = {deleteToken}
+        delete = {deleteTokenHandler}
         zIndex = {300}
         notMove={!props.token.movable}
         size={props.token.size}>
@@ -162,4 +179,4 @@ const Token = (props) => {
 
 }
 
-export default connect(mapStateToProps, {deleteToken, updateToken})(Token);
+export default Token;

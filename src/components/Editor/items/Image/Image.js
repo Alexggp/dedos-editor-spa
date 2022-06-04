@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import Token from '../Token/Token';
 import classes from './Image.module.css';
@@ -7,6 +7,7 @@ import removeIcon from '../../../../assets/icons/removeIcon.png';
 import {updateToken} from '../../../../store/reducers/tokens';
 
 const Image = (props) => {
+  const dispatch = useDispatch();
 
   const stopPropagation = (e) =>{
     e.stopPropagation();
@@ -16,13 +17,13 @@ const Image = (props) => {
     const image="https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png";
     const auxToken = {...props.token}
     auxToken.content.urlList.push(image);
-    props.updateToken(props.token.id, auxToken);
+    dispatch(updateToken(props.token.id, auxToken));
   }
 
   const removeImage = (index) =>{
     const auxToken = {...props.token}
     auxToken.content.urlList.splice(index,1);
-    props.updateToken(props.token.id, auxToken);
+    dispatch(updateToken(props.token.id, auxToken));
   }
 
   let images;
@@ -55,4 +56,4 @@ const Image = (props) => {
 
 }
 
-export default connect(null, {updateToken})(Image);
+export default Image;

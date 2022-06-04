@@ -1,16 +1,17 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import Token from '../Token/Token';
 import classes from './Text.module.css';
 import {updateToken} from '../../../../store/reducers/tokens';
 
 const Text = (props) => {
+  const dispatch = useDispatch();
 
   const changeText = (e) => {
     const auxToken = {...props.token}
     auxToken.content.text = e.target.value;
-    props.updateToken(props.token.id, auxToken);
+    dispatch(updateToken(props.token.id, auxToken));
   }
 
   
@@ -34,4 +35,4 @@ const Text = (props) => {
 }
 
 
-export default connect(null, {updateToken})(Text);
+export default Text;

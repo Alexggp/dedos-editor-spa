@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 
@@ -9,18 +9,19 @@ import {deleteToken} from '../../../../store/reducers/tokens';
 
 
 const Area = (props) => {
+  const dispatch = useDispatch();
   
   const addBackgroundHandler = (e) =>{
     const backgroundUrl = 'https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png';
     const auxArea = {...props.area}
     auxArea.background = backgroundUrl;
-    props.updateArea(props.area.id, auxArea);
+    dispatch(updateArea(props.area.id, auxArea));
   }
 
   const typeButtonHandler = (e) =>{
     const auxArea = {...props.area}
     auxArea.type= (props.area.type === 'Game') ? 'Player' : 'Game';
-    props.updateArea(props.area.id, auxArea);
+    dispatch(updateArea(props.area.id, auxArea));
   }
 
   const stopPropagation = (e) =>{
@@ -31,7 +32,7 @@ const Area = (props) => {
   const hasMoved = ({x, y})=>{
     const auxArea = {...props.area}
     auxArea.offset = {x: x, y: y};
-    props.updateArea(props.area.id, auxArea);
+    dispatch(updateArea(props.area.id, auxArea));
   }
   const hasResized = ({w, h})=>{
     const auxArea = {...props.area}
@@ -41,15 +42,15 @@ const Area = (props) => {
       w: Number(w.replace('px','')), 
       h: Number(h.replace('px',''))
     };
-    props.updateArea(props.area.id, auxArea);
+    dispatch(updateArea(props.area.id, auxArea));
   }
   
-  const deleteArea = ()=>{
+  const deleteAreaHandler = ()=>{
     props.tokens.forEach(token => {
       // Deleting tokens within the area
-      props.deleteToken(token.id);
+      dispatch(deleteToken(token.id));
     });
-    props.deleteArea(props.area.id);
+    dispatch(deleteArea(props.area.id));
   }
 
   const style = {
@@ -70,7 +71,7 @@ const Area = (props) => {
         offset={props.area.offset}
         moved = {hasMoved}
         resized = {hasResized}
-        delete = {deleteArea}
+        delete = {deleteAreaHandler}
         zIndex = {100}
         size={props.area.size}>
           <div className={areaClasses.join(' ')} style={style}>
@@ -86,4 +87,4 @@ const Area = (props) => {
 }
 
 
-export default connect(null, {deleteArea, updateArea, deleteToken})(Area);
+export default Area;

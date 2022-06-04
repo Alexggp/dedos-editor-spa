@@ -1,17 +1,12 @@
 import React from 'react';
 import { Rnd } from 'react-rnd'; // resizable and draggable class
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import classes from './ResizableAndDraggable.module.css';
 
-const mapStateToProps = (state) => {
-  return {
-    trashIsActive: state.trashIsActiveReducer.isActive
-  }
-}
-
-
 const ResizableAndDraggable = (props) => {
+
+  const trashIsActive = useSelector(state => state.trashIsActiveReducer.isActive);
 
   const style = {
     display: "flex",
@@ -58,7 +53,7 @@ const ResizableAndDraggable = (props) => {
         disableDragging={props.notMove}
         onDrag={e=> e.stopPropagation()}
         onDragStop={(e, offset) =>{
-          if (props.trashIsActive){
+          if (trashIsActive){
             props.delete();
           } else {
             // This offset ir referenced by the draggable parent, not by the window
@@ -76,4 +71,4 @@ const ResizableAndDraggable = (props) => {
 }
 
 
-export default connect(mapStateToProps, null)(ResizableAndDraggable);
+export default ResizableAndDraggable;
