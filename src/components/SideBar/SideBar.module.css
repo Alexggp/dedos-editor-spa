@@ -1,0 +1,31 @@
+.SideBar{
+  height: 100%;
+  width: 250px;
+  display: flex;
+  border: 5px solid gray;
+  background-color: #c9d8e5;
+  box-sizing: border-box;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  align-items: center;
+}
+
+.ActivityContainer{
+  width: 180px;
+  height: 120px;
+  border: 5px solid gray;
+  background-color: #c9d8e5;
+  box-sizing: border-box;
+  margin: 7px 0;
+  flex: none;
+  cursor: pointer;
+}
+
+.AddIcon{
+  margin-top: 40px;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+}

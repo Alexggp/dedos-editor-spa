@@ -1,0 +1,11 @@
+.Area{
+  background-color: #cbeffe;
+  position: absolute;
+  background-size: cover;
+  border: 1px dashed #c4c3c3;
+}
+
+.GameArea{
+  background-color: #fefdcb;
+}
+

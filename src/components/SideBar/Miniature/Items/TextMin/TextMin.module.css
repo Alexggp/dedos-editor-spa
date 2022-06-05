@@ -1,0 +1,10 @@
+.TextContainer{
+  background-color: white;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding: 1px 3px 3px 3px;
+}
+
+

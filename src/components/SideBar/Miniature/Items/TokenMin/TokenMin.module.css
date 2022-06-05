@@ -1,0 +1,31 @@
+.Token{
+  width: 100%;
+  height: 100%;
+  background-color: lightsteelblue;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  font-size: 4px;
+  border: 1px solid #c4c3c3;
+}
+
+.Header{
+  height: 10px;
+  text-align: center;
+  background-color: #b7bfd3;
+}
+
+.Body{
+  background-color: white;
+  height: 100%;
+  overflow: hidden;
+}
+
+.Token_type_IMAGE
+  .Header{
+    background-color: #b7bfd3;
+  }
+  .Token_type_TEXT
+    .Header{
+      background-color: #b6e4ff;
+  }

@@ -1,0 +1,19 @@
+.Miniature{
+  height: 100%;
+  width: 100%;
+  background-color:#fff;
+  position:relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+
+.RemoveImg{
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  cursor: pointer;
+  z-index: 9999;
+}

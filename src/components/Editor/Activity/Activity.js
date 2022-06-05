@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import classes from './EditionArea.module.css';
+import classes from './Activity.module.css';
 import Area from '../items/Area/Area';
 import Image from '../items/Image/Image';
 import Text from '../items/Text/Text';
@@ -13,7 +13,7 @@ import {addNewToken} from '../../../store/reducers/tokens';
 import { togleTrash } from '../../../store/reducers/trashIsActive';
 
 
-const EditionArea = (props) => {
+const Activity = (props) => {
   const dispatch = useDispatch();
 
   const tokenList = useSelector(state => state.tokensReducer.tokenList);
@@ -74,19 +74,23 @@ const EditionArea = (props) => {
   
   })
 
+  const disclaimer = (!tokens.length && !areas.length) ? (
+    <div className={classes.WelcomeText}>
+      <p>SOY EL ÁREA DE EDICIÓN:</p>
+      <p>ARRASTRA SOBRE MI LOS ICONOS DE LA BARRA DE<br/>HERRAMIENTAS PARA CREAR UNA ACTIVIDAD</p>
+    </div>
+  ) : '';
+
   return(
     
-      <div className={classes.EditionArea}>
+      <div id="Activity" className={classes.Activity}>
         <Droppable 
-          type="EditionArea"
+          type="Activity"
           accept={['AddArea','AddText','AddImage']} 
           dropped={addNewItem}>
-            <div className={classes.WelcomeText}>
-              {tokens}
-              {areas}
-              <p>SOY EL ÁREA DE EDICIÓN:</p>
-              <p>ARRASTRA SOBRE MI LOS ICONOS DE LA BARRA DE<br/>HERRAMIENTAS PARA CREAR UNA ACTIVIDAD</p>
-            </div>
+            {tokens}
+            {areas}
+            {disclaimer}
             <div className={classes.Trash}
               onMouseEnter={()=>{dispatch(togleTrash(true))}}
               onMouseLeave={()=>{dispatch(togleTrash(false))}}
@@ -99,4 +103,4 @@ const EditionArea = (props) => {
 }
 
 
-export default EditionArea;
+export default Activity;

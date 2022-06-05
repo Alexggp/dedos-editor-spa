@@ -1,20 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import classes from './Editor.module.css';
 import Toolbar from './Toolbar/Toolbar';
-import EditionArea from './EditionArea/EditionArea';
+import Activity from './Activity/Activity';
 
 
-class Editor extends Component {
+const Editor = () => {
 
-  render(){
-    return(
-      <div className={classes.Editor}>
-        <Toolbar/>
-        <EditionArea/>
-      </div>
-    )
-  }
+
+
+  return(
+    <div className={classes.Editor}>
+      <Toolbar/>
+      <Activity/>
+    </div>
+  )
+  
 }
 
 
