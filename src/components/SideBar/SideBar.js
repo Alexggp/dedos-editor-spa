@@ -11,6 +11,7 @@ const SideBar = (props) => {
   const dispatch = useDispatch();
 
   const activityList = useSelector(state => state.activitiesReducer.activityList);
+  const currentActivity = useSelector(state => state.activitiesReducer.currentActivity);
 
   const addActivity = ()=>{
     dispatch(createActivity());
@@ -19,15 +20,23 @@ const SideBar = (props) => {
     dispatch(updateCurrentActivity(activityId));
   }
   
-  const activitiesContainers = activityList.map((activity)=>(
-    <div 
-      className={classes.ActivityContainer}
-      onClick={()=>selectActivity(activity.id)}
-      key={activity.id} >
-        <Miniature activityId={activity.id}/>
-    </div>
-  ));
 
+
+  const activitiesContainers = activityList.map((activity)=>{
+
+    const miniatureClasses = [classes.MiniatureContainer]
+    if (currentActivity === activity.id) miniatureClasses.push(classes.MiniatureSelected);
+  
+    return (
+      <div 
+        className={miniatureClasses.join(' ')}
+        onClick={()=>selectActivity(activity.id)}
+        key={activity.id} >
+          <Miniature activityId={activity.id}/>
+      </div>
+    )
+  });
+  
 
   return (
 
