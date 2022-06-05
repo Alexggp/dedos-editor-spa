@@ -33,14 +33,18 @@ const Miniature = (props) => {
   })
 
   // // getting tokens without area
-  const tokensFiltered = tokenList.filter((tkn)=>tkn.activityId === props.activityId);
+  const tokensFiltered = tokenList.filter((tkn)=>tkn.activityId === props.activityId && tkn.areaId === 0);
   const tokens = processTokens(tokensFiltered);
 
   // // getting areas and tokens within area
   const areasFiltered = areaList.filter((area)=>area.activityId === props.activityId);
   const areas = areasFiltered.map((area)=>{
+    // tokens that belongs to this area
+    const areaTokenList = tokenList.filter((tkn)=>tkn.activityId === props.activityId && tkn.areaId === area.id);
     return (
-      <AreaMin key={area.id} area={area} />
+      <AreaMin key={area.id} area={area}>
+        {processTokens(areaTokenList)}
+      </AreaMin>
     )
   
   })

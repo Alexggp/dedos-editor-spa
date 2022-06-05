@@ -21,7 +21,9 @@ const AreaMin = (props) => {
   }
 
   return(
-    <div className={areaClasses.join(' ')} style={style}></div>
+    <div className={areaClasses.join(' ')} style={style}>
+      {props.children}
+    </div>
   )
 }
 
