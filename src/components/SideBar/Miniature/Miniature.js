@@ -1,28 +1,24 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import classes from './Miniature.module.css';
 import AreaMin from './Items/AreaMin/AreaMin';
 import ImageMin from './Items/ImageMin/ImageMin';
 import TextMin from './Items/TextMin/TextMin';
 import removeIcon from '../../../assets/icons/removeIcon.png';
-
+import { deleteActivity } from '../../../store/reducers/activities';
 
 
 
 const Miniature = (props) => {
+  const dispatch = useDispatch();
 
   const tokenList = useSelector(state => state.tokensReducer.tokenList);
   const areaList = useSelector(state => state.areasReducer.areaList);
 
-
-  const selectActivity = (activityId) =>{
-    console.log(activityId);
-  }
-  
   const removeActivity = (e, activityId) =>{
     e.stopPropagation();
-    console.log(activityId);
+    dispatch(deleteActivity(activityId));
   }
 
   const processTokens = (tokenList)=>tokenList.map((token)=>{
@@ -51,7 +47,7 @@ const Miniature = (props) => {
 
   return(
     
-      <div className={classes.Miniature} onClick={()=>selectActivity(props.activityId)}>
+      <div className={classes.Miniature}>
         <img className={classes.RemoveImg} src={removeIcon} onClick={(e)=>removeActivity(e, props.activityId)} title='Eliminar actividad' alt=''/>
         {areas}
         {tokens}

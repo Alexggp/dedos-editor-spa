@@ -1,23 +1,30 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { createActivity, updateCurrentActivity } from '../../store/reducers/activities';
 
 import classes from './SideBar.module.css';
 import Miniature from './Miniature/Miniature';
 import addIcon from '../../assets/icons/addIcon.png';
 
 const SideBar = (props) => {
+  const dispatch = useDispatch();
 
-  const activities = useSelector(state => state.activitiesReducer.activities);
+  const activityList = useSelector(state => state.activitiesReducer.activityList);
 
   const addActivity = ()=>{
-    console.log('addActivity');
+    dispatch(createActivity());
   }
-
-  const activitiesContainers = activities.map((activity)=>(
-    <div className={classes.ActivityContainer} key={activity.id}>
-      <Miniature activityId={activity.id}/>
+  const selectActivity = (activityId) =>{
+    dispatch(updateCurrentActivity(activityId));
+  }
+  
+  const activitiesContainers = activityList.map((activity)=>(
+    <div 
+      className={classes.ActivityContainer}
+      onClick={()=>selectActivity(activity.id)}
+      key={activity.id} >
+        <Miniature activityId={activity.id}/>
     </div>
   ));
 

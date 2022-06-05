@@ -1,9 +1,6 @@
 export class Activity {
   constructor(){
-    this.objetives = [];
-    this.tokenList = [];
-    this.areaList = [];
-    this.arrows = [];
+    this.id = Date.now();
   }
 }
 

@@ -11,11 +11,11 @@ import SideBar from './components/SideBar/SideBar';
 
 const App = (props) => {
 
-  const activities = useSelector(state => state.activitiesReducer.activities);
+  const activityList = useSelector(state => state.activitiesReducer.activityList);
 
   useEffect(() => {
     console.log("DB GET");
-  }, [activities]);
+  }, [activityList]);
 
   return (
 
