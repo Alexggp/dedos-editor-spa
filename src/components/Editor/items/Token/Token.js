@@ -49,8 +49,8 @@ const Token = (props) => {
       const auxToken = {...props.token};
       // Getting the offset referenced by the Edition Area div
       auxToken.screenOffset={
-        x: tokenRef.current.getBoundingClientRect().x - 0,
-        y: tokenRef.current.getBoundingClientRect().y - 85
+        x: tokenRef.current.getBoundingClientRect().x - 218,
+        y: tokenRef.current.getBoundingClientRect().y - 84
       }
       // Checking if a token is created within an area
       auxToken.areaId = checkAreaOverlapping(auxToken);
@@ -69,8 +69,8 @@ const Token = (props) => {
   const calculateNewOffset = (token) =>{
     const area = areaList.find(ar => ar.id === token.areaId);
     return {
-      x: token.screenOffset.x - area.offset.x,
-      y: token.screenOffset.y - area.offset.y
+      x: token.screenOffset.x - area.offset.x + 3,
+      y: token.screenOffset.y - area.offset.y + 3
     }
   }
 
@@ -84,8 +84,8 @@ const Token = (props) => {
     
     // Getting the offset referenced by the Edition Area div
     auxToken.screenOffset={
-      x: tokenRef.current.getBoundingClientRect().x - 0,
-      y: tokenRef.current.getBoundingClientRect().y - 85
+      x: tokenRef.current.getBoundingClientRect().x - 218,
+      y: tokenRef.current.getBoundingClientRect().y - 84
     }
     
     // Checking if a token is dropped within an area

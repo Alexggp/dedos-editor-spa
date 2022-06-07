@@ -3,9 +3,18 @@ import {Activity} from '../classes';
 const initialState = {
   currentActivity: 1,
   activityList:[
-    {id: 0},
-    {id: 1},
-    {id: 2}
+    {
+      id: 0,
+      projectId: 0
+    },
+    {
+      id: 1,
+      projectId: 0
+    },
+    {
+      id: 2,
+      projectId: 0
+    }
   ]
 }
 
