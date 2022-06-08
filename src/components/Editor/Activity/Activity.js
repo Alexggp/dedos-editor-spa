@@ -33,13 +33,22 @@ const Activity = (props) => {
     console.log(item, offset)
     switch (item) {
       case 'AddArea':
-        dispatch(createArea(currentActivity, offset));
+        dispatch(createArea(currentActivity, {
+          x: offset.x-220,
+          y: offset.y-20
+        }));
         break;
       case 'AddText':
-        dispatch(addNewToken('txt', currentActivity, offset));
+        dispatch(addNewToken('txt', currentActivity, {
+          x: offset.x-220,
+          y: offset.y-20
+        }));
         break;
       case 'AddImage':
-        dispatch(addNewToken('img', currentActivity, offset));
+        dispatch(addNewToken('img', currentActivity, {
+          x: offset.x-220,
+          y: offset.y-20
+        }));
         break;
       default:
         return;  
