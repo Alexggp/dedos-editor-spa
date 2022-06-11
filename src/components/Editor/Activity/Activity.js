@@ -33,6 +33,7 @@ const Activity = (props) => {
     console.log(item, offset)
     switch (item) {
       case 'AddArea':
+        console.log(currentActivity)
         dispatch(createArea(currentActivity, {
           x: offset.x-220,
           y: offset.y-20

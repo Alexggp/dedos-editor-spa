@@ -45,27 +45,17 @@ const Token = (props) => {
 
 
   useEffect(()=>{
-      console.log(props.token.id)
-      const auxToken = {...props.token};
-      // Getting the offset referenced by the Edition Area div
-      auxToken.screenOffset={
-        x: tokenRef.current.getBoundingClientRect().x - 218,
-        y: tokenRef.current.getBoundingClientRect().y - 84
-      }
-      // Checking if a token is created within an area
-      auxToken.areaId = checkAreaOverlapping(auxToken);
-      if (auxToken.areaId !== props.token.areaId){
-        dispatch(updateToken(props.token.id, auxToken));
-      }
-  },[props.token, checkAreaOverlapping, dispatch])
+      // This functin is only triggered the first time the token is rendered
+      // Calling hasMoved to check overlaping and calculate offsets
+      hasMoved(props.token.offset);
+      // eslint-disable-next-line
+  },[])
 
   const stopPropagation = (e) =>{
     e.stopPropagation();
   }
 
 
-
-  
   const calculateNewOffset = (token) =>{
     const area = areaList.find(ar => ar.id === token.areaId);
     return {
