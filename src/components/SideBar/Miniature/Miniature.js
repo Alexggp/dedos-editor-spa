@@ -16,9 +16,9 @@ const Miniature = (props) => {
   const tokenList = useSelector(state => state.tokensReducer.tokenList);
   const areaList = useSelector(state => state.areasReducer.areaList);
 
-  const removeActivity = (e, activityId) =>{
+  const removeActivity = (e, activityId, isSelected) =>{
     e.stopPropagation();
-    dispatch(deleteActivity(activityId));
+    dispatch(deleteActivity(activityId, isSelected));
   }
 
   const processTokens = (tokenList)=>tokenList.map((token)=>{
@@ -52,7 +52,7 @@ const Miniature = (props) => {
   return(
     
       <div className={classes.Miniature}>
-        <img className={classes.RemoveImg} src={removeIcon} onClick={(e)=>removeActivity(e, props.activityId)} title='Eliminar actividad' alt=''/>
+        <img className={classes.RemoveImg} src={removeIcon} onClick={(e)=>removeActivity(e, props.activityId, props.isSelected)} title='Eliminar actividad' alt=''/>
         {areas}
         {tokens}
       </div>

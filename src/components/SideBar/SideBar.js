@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { createActivity, updateCurrentActivity } from '../../store/reducers/activities';
+import { createActivity, updatecurrentActivityId } from '../../store/reducers/activities';
 
 import classes from './SideBar.module.css';
 import Miniature from './Miniature/Miniature';
@@ -11,28 +11,31 @@ const SideBar = (props) => {
   const dispatch = useDispatch();
 
   const activityList = useSelector(state => state.activitiesReducer.activityList);
-  const currentActivity = useSelector(state => state.activitiesReducer.currentActivity);
+  const currentActivityId = useSelector(state => state.activitiesReducer.currentActivityId);
 
   const addActivity = ()=>{
     dispatch(createActivity());
   }
   const selectActivity = (activityId) =>{
-    dispatch(updateCurrentActivity(activityId));
+    dispatch(updatecurrentActivityId(activityId));
   }
   
 
 
   const activitiesContainers = activityList.map((activity)=>{
-
+    let isSelected = false;
     const miniatureClasses = [classes.MiniatureContainer]
-    if (currentActivity === activity.id) miniatureClasses.push(classes.MiniatureSelected);
+    if (currentActivityId === activity.id){
+      miniatureClasses.push(classes.MiniatureSelected);
+      isSelected = true;
+    }
   
     return (
       <div 
         className={miniatureClasses.join(' ')}
         onClick={()=>selectActivity(activity.id)}
         key={activity.id} >
-          <Miniature activityId={activity.id}/>
+          <Miniature activityId={activity.id} isSelected={isSelected}/>
       </div>
     )
   });

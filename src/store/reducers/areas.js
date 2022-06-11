@@ -4,7 +4,7 @@ const initialState = {
   areaList: [
     {
       id: 1,
-      activityId: 0,
+      activityId: 123412340,
       type: 'Player',
       offset:{
         x: 10,
@@ -18,7 +18,7 @@ const initialState = {
     },
     {
       id: 2,
-      activityId: 0,
+      activityId: 123412340,
       type: 'Player',
       offset:{
         x: 1110,
@@ -32,7 +32,7 @@ const initialState = {
     },
     {
       id: 8,
-      activityId: 1,
+      activityId: 21234234521,
       type: 'Game',
       offset:{
         x: 10,

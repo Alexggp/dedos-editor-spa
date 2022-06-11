@@ -14,7 +14,7 @@ const Token = (props) => {
 
   
   const areaList = useSelector((state) => state.areasReducer.areaList);
-  const currentActivity = useSelector((state) => state.activitiesReducer.currentActivity);
+  const currentActivityId = useSelector((state) => state.activitiesReducer.currentActivityId);
 
   const [showOptions, setShowOptions] = useState(false);
 
@@ -22,7 +22,7 @@ const Token = (props) => {
     
     // Checks if the token overlaps with any area
   
-    const areas = areaList.filter(ar => ar.activityId === currentActivity);
+    const areas = areaList.filter(ar => ar.activityId === currentActivityId);
     let overlapsWith = 0;
     areas.forEach(area => {
 
@@ -41,7 +41,7 @@ const Token = (props) => {
       
     });
     return overlapsWith;
-  },[areaList, currentActivity])
+  },[areaList, currentActivityId])
 
 
   useEffect(()=>{

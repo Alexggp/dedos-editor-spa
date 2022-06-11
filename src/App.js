@@ -14,7 +14,7 @@ const App = (props) => {
   const activityList = useSelector(state => state.activitiesReducer.activityList);
 
   useEffect(() => {
-    console.log("DB GET");
+    // console.log("DB GET");
   }, [activityList]);
 
   return (

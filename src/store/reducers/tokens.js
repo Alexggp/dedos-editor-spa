@@ -4,7 +4,7 @@ const initialState = {
   tokenList: [
     {
       id: 4,
-      activityId: 0,
+      activityId: 123412340,
       areaId: 1,
       type: 'img',
       offset:{
@@ -34,7 +34,7 @@ const initialState = {
     },
     {
       id: 2,
-      activityId: 0,
+      activityId: 123412340,
       areaId: 1,
       type: 'img',
       offset:{
@@ -64,7 +64,7 @@ const initialState = {
     },
     {
       id: 3,
-      activityId: 0,
+      activityId: 123412340,
       areaId: 1,
       type: 'txt',
       offset:{
@@ -91,7 +91,7 @@ const initialState = {
     },
     {
       id: 5,
-      activityId: 1,
+      activityId: 21234234521,
       areaId: 8,
       type: 'txt',
       offset:{

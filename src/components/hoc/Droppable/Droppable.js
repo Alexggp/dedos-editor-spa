@@ -16,7 +16,7 @@ const Droppable = (props) => {
       props.dropped(item.name, monitor.getClientOffset())
       return { name: props.type }
     }
-  }))
+  }), [props.activityId])
 
   const style = props.style || {
     with: '100%',
