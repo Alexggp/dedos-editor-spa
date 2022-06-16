@@ -1,22 +1,12 @@
 import {Project} from '../classes';
 
 const initialState = {
-  currentProject: 1,
+  currentProjectId: '62a4aae238dd5eedb90821b8',
   projectList:[
     {
-      id: 0,
+      id: '62a4aae238dd5eedb90821b8',
       userId: 0,
       title: 'Proyecto 1'
-    },
-    {
-      id: 1,
-      userId: 0,
-      title: 'Proyecto 2'
-    },
-    {
-      id: 2,
-      userId: 0,
-      title: 'Proyecto 3'
     }
   ]
 }
@@ -64,11 +54,11 @@ const updateCurrentProject = (projectId) =>{
 }
 
 const updateCurrentProjectInState = (state, projectId) => {
-  state.currentProject= projectId;
+  state.currentProjectId= projectId;
   return state;
 }
 
-const activitiesReducer = (state = initialState, action = {})=>{
+const projectsReducer = (state = initialState, action = {})=>{
   switch(action.type){
     case 'DELETE_PROJECT':
       return deleteProjectInState(state, action.projectId);   
@@ -83,4 +73,4 @@ const activitiesReducer = (state = initialState, action = {})=>{
   }
 }
 
-export {activitiesReducer, deleteProject, createProject, updateCurrentProject};
+export {projectsReducer, deleteProject, createProject, updateCurrentProject};

@@ -1,3 +1,12 @@
+export class Project {
+  constructor(title, userId){
+    this.id = Date.now();
+    this.userId = userId;
+    this.title = title
+  }
+}
+
+
 export class Activity {
   constructor(){
     this.id = Date.now();
@@ -5,9 +14,10 @@ export class Activity {
 }
 
 export class Area {
-  constructor(activityId, offset){
+  constructor(proyectId, activityId, offset){
     this.id = Date.now();
     this.activityId = activityId;
+    this.proyectId = proyectId;
     this.type = 'Player'; // Player / Game
     this.offset = {
       x: offset.x - 180,
@@ -19,12 +29,12 @@ export class Area {
 }
 
 class Token {
-  constructor(activityId, offset){
+  constructor(proyectId, activityId, offset){
     this.id = Date.now();
     this.activityId = activityId;
+    this.proyectId = proyectId;
     this.areaId = 0; 
     this.type = ''; // txt / img
-    this.numValue = 1;
     this.offset = {
       x: offset.x - 180,
       y: offset.y - 100
@@ -46,8 +56,8 @@ class Token {
 }
 
 export class Text extends Token{
-  constructor(activityId, offset){
-    super(activityId, offset);
+  constructor(proyectId, activityId, offset){
+    super(proyectId, activityId, offset);
     this.type = 'txt';
     this.content = {
       text: ''
@@ -56,8 +66,8 @@ export class Text extends Token{
 }
 
 export class Image extends Token{
-  constructor(activityId, offset){
-    super(activityId, offset);
+  constructor(proyectId, activityId, offset){
+    super(proyectId, activityId, offset);
     this.type = 'img';
     this.content = {
       urlList: []

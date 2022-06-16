@@ -49,30 +49,30 @@ const Options = (props) => {
       <div className={classes.InputsContainer}>
         <div>
           <input 
-            id={`input1${props.token.id}`}
+            id={`input1${props.token._id}`}
             type="checkbox"
             onChange={changeClickableHandler}
             checked = {props.token.clickable}
-            name={`input1${props.token.id}`}/>
-          <label htmlFor={`input1${props.token.id}`}> Seleccionable </label>
+            name={`input1${props.token._id}`}/>
+          <label htmlFor={`input1${props.token._id}`}> Seleccionable </label>
         </div>
         <div>
           <input 
-            id={`input2${props.token.id}`}
+            id={`input2${props.token._id}`}
             type="checkbox"
             onChange={changeRotatableHandler}
             checked = {props.token.rotatable}
-            name={`input2${props.token.id}`}/>
-          <label htmlFor={`input2${props.token.id}`}> Girable </label>
+            name={`input2${props.token._id}`}/>
+          <label htmlFor={`input2${props.token._id}`}> Girable </label>
         </div>
         <div>
           <input 
-            id={`input3${props.token.id}`}
+            id={`input3${props.token._id}`}
             type="checkbox"
             onChange={changeResizableHandler}
             checked = {props.token.resizable}
-            name={`input3${props.token.id}`}/>
-          <label htmlFor={`input3${props.token.id}`}> Redimensionable </label>
+            name={`input3${props.token._id}`}/>
+          <label htmlFor={`input3${props.token._id}`}> Redimensionable </label>
         </div>      
       </div>  
     </div>
@@ -94,13 +94,13 @@ const Options = (props) => {
   const mathsContainer = (
     <div className={classes.Container}>
       <div  className={classes.MathsContainer}>
-        <label htmlFor={`inputN${props.token.id}`}> Valor numérico </label>
+        <label htmlFor={`inputN${props.token._id}`}> Valor numérico </label>
         <input 
           type='number'
-          id= {`inputN${props.token.id}`}
+          id= {`inputN${props.token._id}`}
           onChange={changeMathsHandler}
           value = {props.token.mathematics}
-          name={`inputN${props.token.id}`}/>
+          name={`inputN${props.token._id}`}/>
       </div>
     </div>
   )

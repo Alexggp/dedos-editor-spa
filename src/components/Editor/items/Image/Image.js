@@ -17,13 +17,13 @@ const Image = (props) => {
     const image="https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png";
     const auxToken = {...props.token}
     auxToken.content.urlList.push(image);
-    dispatch(updateToken(props.token.id, auxToken));
+    dispatch(updateToken(props.token._id, auxToken));
   }
 
   const removeImage = (index) =>{
     const auxToken = {...props.token}
     auxToken.content.urlList.splice(index,1);
-    dispatch(updateToken(props.token.id, auxToken));
+    dispatch(updateToken(props.token._id, auxToken));
   }
 
   let images;

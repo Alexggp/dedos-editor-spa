@@ -25,7 +25,7 @@ const SideBar = (props) => {
   const activitiesContainers = activityList.map((activity)=>{
     let isSelected = false;
     const miniatureClasses = [classes.MiniatureContainer]
-    if (currentActivityId === activity.id){
+    if (currentActivityId === activity._id){
       miniatureClasses.push(classes.MiniatureSelected);
       isSelected = true;
     }
@@ -33,9 +33,9 @@ const SideBar = (props) => {
     return (
       <div 
         className={miniatureClasses.join(' ')}
-        onClick={()=>selectActivity(activity.id)}
-        key={activity.id} >
-          <Miniature activityId={activity.id} isSelected={isSelected}/>
+        onClick={()=>selectActivity(activity._id)}
+        key={activity._id} >
+          <Miniature activityId={activity._id} isSelected={isSelected}/>
       </div>
     )
   });

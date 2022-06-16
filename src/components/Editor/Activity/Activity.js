@@ -48,11 +48,11 @@ const Activity = (props) => {
   const processTokens = (tokenList, area)=>tokenList.map((token)=>{
     switch (token.type) {
       case 'img':
-        return <Image key={token.id} token={token} area={area}/>;
+        return <Image key={token._id} token={token} area={area}/>;
       case 'txt':
-        return <Text key={token.id} token={token} area={area}/>;
+        return <Text key={token._id} token={token} area={area}/>;
       default:
-        return <Text key={token.id} token={token} area={area}/>;
+        return <Text key={token._id} token={token} area={area}/>;
     }
   })
 
@@ -62,11 +62,12 @@ const Activity = (props) => {
 
   // getting areas and tokens within area
   const areasFiltered = areaList.filter((area)=>area.activityId === currentActivityId);
+
   const areas = areasFiltered.map((area)=>{
     // tokens that belongs to this area
-    const areaTokenList = tokenList.filter((tkn)=>tkn.activityId === currentActivityId && tkn.areaId === area.id);
+    const areaTokenList = tokenList.filter((tkn)=>tkn.activityId === currentActivityId && tkn.areaId === area._id);
     return (
-      <Area key={area.id} area={area} tokens={areaTokenList}>
+      <Area key={area._id} area={area} tokens={areaTokenList}>
         {processTokens(areaTokenList, area)}
       </Area>
     )

@@ -11,7 +11,7 @@ const Text = (props) => {
   const changeText = (e) => {
     const auxToken = {...props.token}
     auxToken.content.text = e.target.value;
-    dispatch(updateToken(props.token.id, auxToken));
+    dispatch(updateToken(props.token._id, auxToken));
   }
 
   

@@ -37,7 +37,7 @@ const Token = (props) => {
         (area.offset.y + area.size.h) < obj.screenOffset.y ||
         area.offset.x > (obj.screenOffset.x + obj.size.w)
       );
-      if (overlaps) overlapsWith = area.id;
+      if (overlaps) overlapsWith = area._id;
       
     });
     return overlapsWith;
@@ -94,7 +94,7 @@ const Token = (props) => {
       auxToken.offset = {x: x, y: y};
     }
 
-    dispatch(updateToken(props.token.id, auxToken));
+    dispatch(updateToken(props.token._id, auxToken));
   }
   const hasResized = ({w, h})=>{
     const auxToken = {...props.token}
@@ -104,21 +104,21 @@ const Token = (props) => {
       w: Number(w.replace('px','')), 
       h: Number(h.replace('px',''))
     };
-    dispatch(updateToken(props.token.id, auxToken));
+    dispatch(updateToken(props.token._id, auxToken));
   }
   
   const deleteTokenHandler = ()=>{
-    dispatch(deleteToken(props.token.id));
+    dispatch(deleteToken(props.token._id));
   }
 
   const pinButtonHandler = (e) =>{
     const auxToken = {...props.token}
     auxToken.movable = !props.token.movable;
-    dispatch(updateToken(props.token.id, auxToken));
+    dispatch(updateToken(props.token._id, auxToken));
   }
 
   const updateOptions = (token) => {
-    dispatch(updateToken(props.token.id, token));
+    dispatch(updateToken(props.token._id, token));
   }
 
 

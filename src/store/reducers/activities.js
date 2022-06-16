@@ -1,21 +1,22 @@
 import {Activity} from '../classes';
 
 const initialState = {
-  currentActivityId: 3444442,
-  activityList:[
-    {
-      id: 123412340,
-      projectId: 0
-    },
-    {
-      id: 21234234521,
-      projectId: 0
-    },
-    {
-      id: 3444442,
-      projectId: 0
-    }
-  ]
+  currentActivityId: '1',
+  activityList:[]
+}
+
+// Set Activities
+const setActivities = (activities) =>{
+  return {
+    type: "SET_ACTIVITIES",
+    activities: activities
+  }
+}
+
+const setActivitiesInState = (state, activities) => {
+  state.activityList = activities;
+  state.currentActivityId = activities[0]._id;
+  return state;
 }
 
 // Delete Activity
@@ -70,6 +71,8 @@ const updatecurrentActivityIdInState = (state, activityId) => {
 
 const activitiesReducer = (state = initialState, action = {})=>{
   switch(action.type){
+    case 'SET_ACTIVITIES':
+      return setActivitiesInState(state, action.activities);
     case 'DELETE_ACTIVITY':
       return deleteActivityInState(state, action.activityId, action.isSelected);   
     case 'ADD_ACTIVITY':
@@ -83,4 +86,4 @@ const activitiesReducer = (state = initialState, action = {})=>{
   }
 }
 
-export {activitiesReducer, deleteActivity, createActivity, updatecurrentActivityId};
+export {activitiesReducer, setActivities, deleteActivity, createActivity, updatecurrentActivityId};

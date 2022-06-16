@@ -24,25 +24,25 @@ const Miniature = (props) => {
   const processTokens = (tokenList)=>tokenList.map((token)=>{
     switch (token.type) {
       case 'img':
-        return <ImageMin key={token.id} token={token}/>;
+        return <ImageMin key={token._id} token={token}/>;
       case 'txt':
-        return <TextMin key={token.id} token={token}/>;
+        return <TextMin key={token._id} token={token}/>;
       default:
-        return <TextMin key={token.id} token={token}/>;
+        return <TextMin key={token._id} token={token}/>;
     }
   })
 
   // // getting tokens without area
   const tokensFiltered = tokenList.filter((tkn)=>tkn.activityId === props.activityId && tkn.areaId === 0);
   const tokens = processTokens(tokensFiltered);
-
+  
   // // getting areas and tokens within area
   const areasFiltered = areaList.filter((area)=>area.activityId === props.activityId);
   const areas = areasFiltered.map((area)=>{
     // tokens that belongs to this area
-    const areaTokenList = tokenList.filter((tkn)=>tkn.activityId === props.activityId && tkn.areaId === area.id);
+    const areaTokenList = tokenList.filter((tkn)=>tkn.activityId === props.activityId && tkn.areaId === area._id);
     return (
-      <AreaMin key={area.id} area={area}>
+      <AreaMin key={area._id} area={area}>
         {processTokens(areaTokenList)}
       </AreaMin>
     )

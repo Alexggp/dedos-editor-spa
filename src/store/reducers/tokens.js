@@ -1,123 +1,23 @@
 import { Text, Image } from '../classes';
 
 const initialState = {
-  tokenList: [
-    {
-      id: 4,
-      activityId: 123412340,
-      areaId: 1,
-      type: 'img',
-      offset:{
-        x: 10,
-        y: 384
-      },
-      screenOffset:{
-        x: 0,
-        y: 0
-      },
-      size:{
-        w: 300,
-        h: 200
-      },
-      movable: true,
-      resizable: true, 
-      rotatable: true,
-      clickable: true,
-      feedback: '',
-      mathematics: 1,
-      content:{
-        urlList:[
-          "https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png",
-          "https://i.guim.co.uk/img/media/ef8492feb3715ed4de705727d9f513c168a8b196/37_0_1125_675/master/1125.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=d456a2af571d980d8b2985472c262b31"
-        ]
-      }
-    },
-    {
-      id: 2,
-      activityId: 123412340,
-      areaId: 1,
-      type: 'img',
-      offset:{
-        x: 177,
-        y: 104
-      },
-      screenOffset:{
-        x: 0,
-        y: 0
-      },
-      size:{
-        w: 300,
-        h: 200
-      },
-      movable: true,
-      resizable: true, 
-      rotatable: true,
-      clickable: true,
-      feedback: '',
-      mathematics: 1,
-      content:{
-        urlList:[
-          "https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png",
-          "https://i.guim.co.uk/img/media/ef8492feb3715ed4de705727d9f513c168a8b196/37_0_1125_675/master/1125.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=d456a2af571d980d8b2985472c262b31"
-        ]
-      }
-    },
-    {
-      id: 3,
-      activityId: 123412340,
-      areaId: 1,
-      type: 'txt',
-      offset:{
-        x: 475,
-        y: 506
-      },
-      screenOffset:{
-        x: 0,
-        y: 0
-      },
-      size:{
-        w: 458,
-        h: 220
-      },
-      movable: true,
-      resizable: true, 
-      rotatable: true,
-      clickable: true,
-      feedback: '',
-      mathematics: 1,
-      content:{
-        text: 'holita hola holota'
-      }
-    },
-    {
-      id: 5,
-      activityId: 21234234521,
-      areaId: 8,
-      type: 'txt',
-      offset:{
-        x: 475,
-        y: 506
-      },
-      screenOffset:{
-        x: 0,
-        y: 0
-      },
-      size:{
-        w: 458,
-        h: 220
-      },
-      movable: true,
-      resizable: true, 
-      rotatable: true,
-      clickable: true,
-      feedback: '',
-      mathematics: 1,
-      content:{
-        text: 'testo de la actividad 2'
-      }
-    }
-  ]
+  tokenList: []
 }
+
+// Set Tokens
+const setTokens = (tokens) =>{
+  return {
+    type: "SET_TOKENS",
+    tokens: tokens
+  }
+}
+
+const setTokensInState = (state, tokens) => {
+  state.tokenList = tokens;
+  return state;
+}
+
+
 
 // Delete Token
 const deleteToken = (tokenId) =>{
@@ -182,6 +82,8 @@ const addNewTokenInState = (state, tokenType, activity, offset) => {
 
 const tokensReducer = (state = initialState, action = {})=>{
   switch(action.type){
+    case 'SET_TOKENS':
+      return setTokensInState(state, action.tokens);
     case 'DELETE_TOKEN':
       return deleteTokenInState(state, action.tokenId);  
     case 'UPDATE_TOKEN':
@@ -195,4 +97,4 @@ const tokensReducer = (state = initialState, action = {})=>{
   }
 }
 
-export {tokensReducer, deleteToken, updateToken, addNewToken};
+export {tokensReducer, setTokens, deleteToken, updateToken, addNewToken};

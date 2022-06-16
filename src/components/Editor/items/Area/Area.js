@@ -15,13 +15,13 @@ const Area = (props) => {
     const backgroundUrl = 'https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png';
     const auxArea = {...props.area}
     auxArea.background = backgroundUrl;
-    dispatch(updateArea(props.area.id, auxArea));
+    dispatch(updateArea(props.area._id, auxArea));
   }
 
   const typeButtonHandler = (e) =>{
     const auxArea = {...props.area}
     auxArea.type= (props.area.type === 'Game') ? 'Player' : 'Game';
-    dispatch(updateArea(props.area.id, auxArea));
+    dispatch(updateArea(props.area._id, auxArea));
   }
 
   const stopPropagation = (e) =>{
@@ -32,7 +32,7 @@ const Area = (props) => {
   const hasMoved = ({x, y})=>{
     const auxArea = {...props.area}
     auxArea.offset = {x: x, y: y};
-    dispatch(updateArea(props.area.id, auxArea));
+    dispatch(updateArea(props.area._id, auxArea));
   }
   const hasResized = ({w, h})=>{
     const auxArea = {...props.area}
@@ -42,15 +42,15 @@ const Area = (props) => {
       w: Number(w.replace('px','')), 
       h: Number(h.replace('px',''))
     };
-    dispatch(updateArea(props.area.id, auxArea));
+    dispatch(updateArea(props.area._id, auxArea));
   }
   
   const deleteAreaHandler = ()=>{
     props.tokens.forEach(token => {
       // Deleting tokens within the area
-      dispatch(deleteToken(token.id));
+      dispatch(deleteToken(token._id));
     });
-    dispatch(deleteArea(props.area.id));
+    dispatch(deleteArea(props.area._id));
   }
 
   const style = {
