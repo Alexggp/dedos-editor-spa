@@ -18,16 +18,12 @@ const projectsSlice = createSlice({
   initialState,
   reducers: {
     delete(state, action) {
-      const cloneProjectList = [...state.projectList];
       const projectIndex = state.projectList.findIndex(pj => pj._id === action.payload);
-      cloneProjectList.splice(projectIndex,1);
-      state.projectList= cloneProjectList;
+      state.projectList.splice(projectIndex,1);
     },
     create(state) {
-      const cloneProjectList = [...state.projectList];
       const newProject = project();
-      cloneProjectList.push(newProject);
-      state.projectList= cloneProjectList;
+      state.projectList.push(newProject);
     },
     update(state, action) {
       state.currentProjectId= action.payload;

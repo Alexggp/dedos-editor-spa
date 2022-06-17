@@ -13,22 +13,16 @@ const areasSlice = createSlice({
       state.areaList = action.payload;
     },
     delete(state, action) {
-      const cloneAreaList = [...state.areaList];
       const areaIndex = state.areaList.findIndex(ar => ar._id === action.payload);
-      cloneAreaList.splice(areaIndex,1);
-      state.areaList= cloneAreaList;
+      state.areaList.splice(areaIndex,1);
     },
     update(state, action) {
-      const cloneAreaList = [...state.areaList];
       const areaIndex = state.areaList.findIndex(ar => ar._id === action.payload.areaId);
-      cloneAreaList[areaIndex] = action.payload.data;
-      state.areaList= cloneAreaList;
+      state.areaList[areaIndex] = action.payload.data;
     },
     create(state, action) {
-      const cloneAreaList = [...state.areaList];
       const newArea = area(action.payload.projectId, action.payload.activityId, action.payload.offset);
-      cloneAreaList.push(newArea);
-      state.areaList= cloneAreaList;
+      state.areaList.push(newArea);
     }
   },
 });
