@@ -21,7 +21,7 @@ const deleteProject = (projectId) =>{
 
 const deleteProjectInState = (state, projectId) => {
   const cloneProjectList = [...state.projectList];
-  const projectIndex = state.projectList.findIndex(ac => ac.id === projectId);
+  const projectIndex = state.projectList.findIndex(pj => pj._id === projectId);
   cloneProjectList.splice(projectIndex,1);
   state.projectList= cloneProjectList;
   return state;

@@ -29,7 +29,7 @@ const deleteToken = (tokenId) =>{
 
 const deleteTokenInState = (state, tokenId) => {
   const cloneTokenList = [...state.tokenList];
-  const tokenIndex = state.tokenList.findIndex(tkn => tkn.id === tokenId);
+  const tokenIndex = state.tokenList.findIndex(tkn => tkn._id === tokenId);
   cloneTokenList.splice(tokenIndex,1);
   state.tokenList= cloneTokenList;
 
@@ -49,7 +49,7 @@ const updateToken = (tokenId, payload) =>{
 
 const updateTokenInState = (state, tokenId, payload) => {
   const cloneTokenList = [...state.tokenList];
-  const tokenIndex = state.tokenList.findIndex(tkn => tkn.id === tokenId);
+  const tokenIndex = state.tokenList.findIndex(tkn => tkn._id === tokenId);
   cloneTokenList[tokenIndex] = payload;
   state.tokenList= cloneTokenList;
   return state;

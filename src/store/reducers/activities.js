@@ -30,7 +30,7 @@ const deleteActivity = (activityId, isSelected) =>{
 
 const deleteActivityInState = (state, activityId, isSelected) => {
   const cloneActivityList = [...state.activityList];
-  const activityIndex = state.activityList.findIndex(ac => ac.id === activityId);
+  const activityIndex = state.activityList.findIndex(ac => ac._id === activityId);
   // If it is the last activity it can not be deleted
   if (cloneActivityList.length>1) cloneActivityList.splice(activityIndex,1);
   state.activityList= cloneActivityList;

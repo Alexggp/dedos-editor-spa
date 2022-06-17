@@ -28,7 +28,7 @@ const deleteArea = (areaId) =>{
 
 const deleteAreaInState = (state, areaId) => {
   const cloneAreaList = [...state.areaList];
-  const areaIndex = state.areaList.findIndex(ar => ar.id === areaId);
+  const areaIndex = state.areaList.findIndex(ar => ar._id === areaId);
   cloneAreaList.splice(areaIndex,1);
   state.areaList= cloneAreaList;
 
@@ -47,7 +47,7 @@ const updateArea = (areaId, payload) =>{
 
 const updateAreaInState = (state, areaId, payload) => {
   const cloneAreaList = [...state.areaList];
-  const areaIndex = state.areaList.findIndex(ar => ar.id === areaId);
+  const areaIndex = state.areaList.findIndex(ar => ar._id === areaId);
   cloneAreaList[areaIndex] = payload;
   state.areaList= cloneAreaList;
   return state;

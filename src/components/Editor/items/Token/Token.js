@@ -57,7 +57,7 @@ const Token = (props) => {
 
 
   const calculateNewOffset = (token) =>{
-    const area = areaList.find(ar => ar.id === token.areaId);
+    const area = areaList.find(ar => ar._id === token.areaId);
     return {
       x: token.screenOffset.x - area.offset.x + 3,
       y: token.screenOffset.y - area.offset.y + 3
