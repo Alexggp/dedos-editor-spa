@@ -1,4 +1,4 @@
-import {Activity} from '../classes';
+import {activity} from '../classes';
 
 
 // // Set Activities
@@ -107,14 +107,14 @@ const activitiesSlice = createSlice({
       // If it is the last activity it can not be deleted
       if (cloneActivityList.length>1) cloneActivityList.splice(activityIndex,1);
       state.activityList= cloneActivityList;
-      if (action.payload.isSelected) state.currentActivityId = state.activityList[0].id;
+      if (action.payload.isSelected) state.currentActivityId = state.activityList[0]._id;
     },
-    create(state) {
+    create(state, action) {
       const cloneActivityList = [...state.activityList];
-      const newActivity = new Activity();
+      const newActivity = activity(action.payload);
       cloneActivityList.push(newActivity);
       state.activityList= cloneActivityList;
-      state.currentActivityId = state.activityList[state.activityList.length-1].id;
+      state.currentActivityId = state.activityList[state.activityList.length-1]._id;
     },
     updateCurrent(state, action) {
       state.currentActivityId= action.payload;

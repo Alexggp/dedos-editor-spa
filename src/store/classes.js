@@ -1,22 +1,20 @@
-export class Project {
-  constructor(title, userId){
-    this.id = Date.now();
-    this.userId = userId;
-    this.title = title
-  }
-}
+export const project = (title, userId) => ({
+    _id: Date.now(),
+    userId,
+    title
+})
 
 
-export class Activity {
-  constructor(){
-    this.id = Date.now();
-  }
-}
+export const activity = (projectId) => ({
+  _id: Date.now(),
+  projectId, 
+})
+
 
 export const area = (proyectId, activityId, offset) => ({
   _id: Date.now(),
-  activityId: activityId,
-  proyectId: proyectId,
+  activityId,
+  proyectId,
   type: 'Player', // Player / Game
   offset: {
     x: offset.x - 180,
@@ -29,8 +27,8 @@ export const area = (proyectId, activityId, offset) => ({
 const token = (proyectId, activityId, offset) => ({
 
     _id : Date.now(),
-    activityId : activityId,
-    proyectId : proyectId,
+    activityId,
+    proyectId,
     areaId : 0, 
     type : '', // txt / img
     offset : {
@@ -42,11 +40,11 @@ const token = (proyectId, activityId, offset) => ({
       y: 0
     },
     size : {w: 360, h: 240},
-    clickable : true,
-    rotatable : true,
-    resizable : true,
-    movable : true,
-    feedback : '',
+    clickable: true,
+    rotatable: true,
+    resizable: true,
+    movable: true,
+    feedback: '',
     mathematics : 1,
     content: {},
   }

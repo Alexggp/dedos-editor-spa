@@ -1,4 +1,4 @@
-import {Project} from '../classes';
+import {project} from '../classes';
 
 
 
@@ -93,7 +93,7 @@ const projectsSlice = createSlice({
     },
     create(state) {
       const cloneProjectList = [...state.projectList];
-      const newProject = new Project();
+      const newProject = project();
       cloneProjectList.push(newProject);
       state.projectList= cloneProjectList;
     },

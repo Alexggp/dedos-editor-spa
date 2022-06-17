@@ -12,9 +12,10 @@ const SideBar = (props) => {
 
   const activityList = useSelector(state => state.activities.activityList);
   const currentActivityId = useSelector(state => state.activities.currentActivityId);
+  const currentProjectId = useSelector(state => state.projects.currentProjectId);
 
   const addActivity = ()=>{
-    dispatch(activitiesActions.create());
+    dispatch(activitiesActions.create(currentProjectId));
   }
   const selectActivity = (activityId) =>{
     dispatch(activitiesActions.updateCurrent(activityId));
