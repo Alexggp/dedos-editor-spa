@@ -119,7 +119,7 @@ const areasSlice = createSlice({
     },
     create(state, action) {
       const cloneAreaList = [...state.areaList];
-      const newArea = new Area(action.payload.activity, action.payload.offset);
+      const newArea = new Area(action.payload.projectId, action.payload.activityId, action.payload.offset);
       cloneAreaList.push(newArea);
       state.areaList= cloneAreaList;
     }

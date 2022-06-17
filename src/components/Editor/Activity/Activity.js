@@ -19,11 +19,13 @@ const Activity = (props) => {
   const tokenList = useSelector(state => state.tokens.tokenList);
   const areaList = useSelector(state => state.areas.areaList);
   const currentActivityId = useSelector(state => state.activities.currentActivityId);
+  const currentProjectId = useSelector(state => state.projects.currentProjectId);
 
   const addNewItem = (item, offset)=>{
     switch (item) {
       case 'AddArea':
         dispatch(areasActions.create({
+          projectId: currentProjectId,
           activity: currentActivityId,
           offset: {
               x: offset.x-220,
@@ -33,6 +35,7 @@ const Activity = (props) => {
         break;
       case 'AddText':
         dispatch(tokensActions.create({
+          projectId: currentProjectId,
           type: 'txt', 
           activityId: currentActivityId, 
           offset: {
@@ -43,6 +46,7 @@ const Activity = (props) => {
         break;
       case 'AddImage':
         dispatch(tokensActions.create({
+          projectId: currentProjectId,
           type: 'img', 
           activityId: currentActivityId, 
           offset: {

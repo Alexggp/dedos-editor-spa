@@ -1,4 +1,4 @@
-import { Text, Image } from '../classes';
+import { text, image } from '../classes';
 
 // const initialState = {
 //   tokenList: []
@@ -127,15 +127,16 @@ const tokensSlice = createSlice({
       state.tokenList= cloneTokenList;
     },
     create(state, action) {
-      const cloneTokenList = [...state.tokenList];
+      // const cloneTokenList = [...state.tokenList];
       let newToken;
       if(action.payload.type==='txt'){
-        newToken = new Text(action.payload.activity, action.payload.offset);
+        newToken = text(action.payload.projectId, action.payload.activityId, action.payload.offset);
       } else {
-        newToken = new Image(action.payload.activity, action.payload.offset);
+        newToken = image(action.payload.projectId, action.payload.activityId, action.payload.offset);
       }
-      cloneTokenList.push(newToken);
-      state.tokenList= cloneTokenList;
+      // cloneTokenList.push(newToken);
+      // state.tokenList= cloneTokenList;
+      state.tokenList.push(newToken)
     },
   },
 });

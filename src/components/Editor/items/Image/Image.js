@@ -16,7 +16,10 @@ const Image = (props) => {
   const addImage = (e) =>{
     const image="https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png";
     const auxToken = {...props.token}
-    auxToken.content.urlList.push(image);
+    auxToken.content={
+      ...auxToken.content,
+      urlList: [...auxToken.content.urlList, ...[image]]
+    };
     dispatch(tokensActions.update({
       tokenId: props.token._id,
       data: auxToken
@@ -25,7 +28,12 @@ const Image = (props) => {
 
   const removeImage = (index) =>{
     const auxToken = {...props.token}
-    auxToken.content.urlList.splice(index,1);
+    const auxList = [...auxToken.content.urlList]
+    auxList.splice(index,1);
+    auxToken.content={
+      ...auxToken.content,
+      urlList: auxList
+    };
     dispatch(tokensActions.update({
       tokenId: props.token._id,
       data: auxToken
