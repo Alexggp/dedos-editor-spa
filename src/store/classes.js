@@ -13,20 +13,18 @@ export class Activity {
   }
 }
 
-export class Area {
-  constructor(proyectId, activityId, offset){
-    this.id = Date.now();
-    this.activityId = activityId;
-    this.proyectId = proyectId;
-    this.type = 'Player'; // Player / Game
-    this.offset = {
-      x: offset.x - 180,
-      y: offset.y - 100
-    };
-    this.size = {w: 360, h: 240};
-    this.background = '';
-  }
-}
+export const area = (proyectId, activityId, offset) => ({
+  _id: Date.now(),
+  activityId: activityId,
+  proyectId: proyectId,
+  type: 'Player', // Player / Game
+  offset: {
+    x: offset.x - 180,
+    y: offset.y - 100
+  },
+  size: {w: 360, h: 240},
+  background: ''
+})
 
 const token = (proyectId, activityId, offset) => ({
 
@@ -51,7 +49,8 @@ const token = (proyectId, activityId, offset) => ({
     feedback : '',
     mathematics : 1,
     content: {},
-})
+  }
+)
 
 export const text = (proyectId, activityId, offset) => ({
   ...token(proyectId, activityId, offset),

@@ -1,4 +1,4 @@
-import {Area} from '../classes';
+import {area} from '../classes';
 
 // const initialState = {
 //   areaList: []
@@ -119,7 +119,7 @@ const areasSlice = createSlice({
     },
     create(state, action) {
       const cloneAreaList = [...state.areaList];
-      const newArea = new Area(action.payload.projectId, action.payload.activityId, action.payload.offset);
+      const newArea = area(action.payload.projectId, action.payload.activityId, action.payload.offset);
       cloneAreaList.push(newArea);
       state.areaList= cloneAreaList;
     }

@@ -26,7 +26,7 @@ const Activity = (props) => {
       case 'AddArea':
         dispatch(areasActions.create({
           projectId: currentProjectId,
-          activity: currentActivityId,
+          activityId: currentActivityId,
           offset: {
               x: offset.x-220,
               y: offset.y-20
