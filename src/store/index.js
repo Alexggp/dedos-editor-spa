@@ -1,18 +1,19 @@
-import { createStore, combineReducers } from 'redux';
-import { activitiesReducer } from './reducers/activities';
-import { areasReducer } from './reducers/areas';
-import { tokensReducer } from './reducers/tokens';
-import { trashIsActiveReducer } from './reducers/trashIsActive';
-import { projectsReducer } from './reducers/projects';
+import { configureStore } from '@reduxjs/toolkit';
 
-const reducers = combineReducers({
-  activitiesReducer,
-  areasReducer,
-  tokensReducer,
-  projectsReducer,
-  trashIsActiveReducer
-})
+import activities from './reducers/activities';
+import areas from './reducers/areas';
+import tokens from './reducers/tokens';
+import trash from './reducers/trash';
+import projects from './reducers/projects';
 
-const store = createStore(reducers);
+const store = configureStore({
+  reducer: { 
+    activities,
+    areas,
+    tokens,
+    projects,
+    trash
+  }
+});
 
-export default store
+export default store;

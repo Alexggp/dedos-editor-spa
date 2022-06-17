@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import Token from '../Token/Token';
 import classes from './Image.module.css';
 import removeIcon from '../../../../assets/icons/removeIcon.png';
-import {updateToken} from '../../../../store/reducers/tokens';
+import { tokensActions } from '../../../../store/reducers/tokens';
 
 const Image = (props) => {
   const dispatch = useDispatch();
@@ -17,13 +17,19 @@ const Image = (props) => {
     const image="https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png";
     const auxToken = {...props.token}
     auxToken.content.urlList.push(image);
-    dispatch(updateToken(props.token._id, auxToken));
+    dispatch(tokensActions.update({
+      tokenId: props.token._id,
+      data: auxToken
+    }));
   }
 
   const removeImage = (index) =>{
     const auxToken = {...props.token}
     auxToken.content.urlList.splice(index,1);
-    dispatch(updateToken(props.token._id, auxToken));
+    dispatch(tokensActions.update({
+      tokenId: props.token._id,
+      data: auxToken
+    }));
   }
 
   let images;

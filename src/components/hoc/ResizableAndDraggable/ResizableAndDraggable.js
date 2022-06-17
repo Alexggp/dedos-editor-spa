@@ -6,7 +6,7 @@ import classes from './ResizableAndDraggable.module.css';
 
 const ResizableAndDraggable = (props) => {
 
-  const trashIsActive = useSelector(state => state.trashIsActiveReducer.isActive);
+  const trashIsActive = useSelector(state => state.trash.isActive);
 
   const style = {
     display: "flex",

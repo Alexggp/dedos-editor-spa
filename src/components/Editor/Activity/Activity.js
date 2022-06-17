@@ -8,36 +8,47 @@ import Text from '../items/Text/Text';
 
 import Droppable from '../../hoc/Droppable/Droppable';
 
-import {createArea} from '../../../store/reducers/areas'; 
-import {addNewToken} from '../../../store/reducers/tokens'; 
-import { togleTrash } from '../../../store/reducers/trashIsActive';
+import { areasActions } from '../../../store/reducers/areas'; 
+import { tokensActions } from '../../../store/reducers/tokens'; 
+import { trashActions } from '../../../store/reducers/trash';
 
 
 const Activity = (props) => {
   const dispatch = useDispatch();
 
-  const tokenList = useSelector(state => state.tokensReducer.tokenList);
-  const areaList = useSelector(state => state.areasReducer.areaList);
-  const currentActivityId = useSelector(state => state.activitiesReducer.currentActivityId);
+  const tokenList = useSelector(state => state.tokens.tokenList);
+  const areaList = useSelector(state => state.areas.areaList);
+  const currentActivityId = useSelector(state => state.activities.currentActivityId);
 
   const addNewItem = (item, offset)=>{
     switch (item) {
       case 'AddArea':
-        dispatch(createArea(currentActivityId, {
-          x: offset.x-220,
-          y: offset.y-20
+        dispatch(areasActions.create({
+          activity: currentActivityId,
+          offset: {
+              x: offset.x-220,
+              y: offset.y-20
+            }
         }));
         break;
       case 'AddText':
-        dispatch(addNewToken('txt', currentActivityId, {
-          x: offset.x-220,
-          y: offset.y-20
+        dispatch(tokensActions.create({
+          type: 'txt', 
+          activityId: currentActivityId, 
+          offset: {
+            x: offset.x-220,
+            y: offset.y-20
+          }
         }));
         break;
       case 'AddImage':
-        dispatch(addNewToken('img', currentActivityId, {
-          x: offset.x-220,
-          y: offset.y-20
+        dispatch(tokensActions.create({
+          type: 'img', 
+          activityId: currentActivityId, 
+          offset: {
+            x: offset.x-220,
+            y: offset.y-20
+          }
         }));
         break;
       default:
@@ -94,8 +105,8 @@ const Activity = (props) => {
             {areas}
             {disclaimer}
             <div className={classes.Trash}
-              onMouseEnter={()=>{dispatch(togleTrash(true))}}
-              onMouseLeave={()=>{dispatch(togleTrash(false))}}
+              onMouseEnter={()=>{dispatch(trashActions.toggle(true))}}
+              onMouseLeave={()=>{dispatch(trashActions.toggle(false))}}
             />
         </Droppable>
       </div>

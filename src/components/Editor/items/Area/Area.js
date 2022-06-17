@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 
 import classes from './Area.module.css';
-import {deleteArea, updateArea} from '../../../../store/reducers/areas';
-import {deleteToken} from '../../../../store/reducers/tokens';
+import { areasActions } from '../../../../store/reducers/areas';
+import { tokensActions } from '../../../../store/reducers/tokens';
 
 
 const Area = (props) => {
@@ -15,13 +15,19 @@ const Area = (props) => {
     const backgroundUrl = 'https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png';
     const auxArea = {...props.area}
     auxArea.background = backgroundUrl;
-    dispatch(updateArea(props.area._id, auxArea));
+    dispatch(areasActions.update({
+      areaId: props.area._id,
+      data: auxArea
+    }));
   }
 
   const typeButtonHandler = (e) =>{
     const auxArea = {...props.area}
     auxArea.type= (props.area.type === 'Game') ? 'Player' : 'Game';
-    dispatch(updateArea(props.area._id, auxArea));
+    dispatch(areasActions.update({
+      areaId: props.area._id,
+      data: auxArea
+    }));
   }
 
   const stopPropagation = (e) =>{
@@ -32,7 +38,10 @@ const Area = (props) => {
   const hasMoved = ({x, y})=>{
     const auxArea = {...props.area}
     auxArea.offset = {x: x, y: y};
-    dispatch(updateArea(props.area._id, auxArea));
+    dispatch(areasActions.update({
+      areaId: props.area._id,
+      data: auxArea
+    }));
   }
   const hasResized = ({w, h})=>{
     const auxArea = {...props.area}
@@ -42,15 +51,18 @@ const Area = (props) => {
       w: Number(w.replace('px','')), 
       h: Number(h.replace('px',''))
     };
-    dispatch(updateArea(props.area._id, auxArea));
+    dispatch(areasActions.update({
+      areaId: props.area._id,
+      data: auxArea
+    }));
   }
   
   const deleteAreaHandler = ()=>{
     props.tokens.forEach(token => {
       // Deleting tokens within the area
-      dispatch(deleteToken(token._id));
+      dispatch(tokensActions.delete(token._id));
     });
-    dispatch(deleteArea(props.area._id));
+    dispatch(areasActions.delete(props.area._id));
   }
 
   const style = {

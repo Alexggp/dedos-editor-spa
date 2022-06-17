@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 import classes from './Token.module.css';
-import {deleteToken, updateToken} from '../../../../store/reducers/tokens';
+import { tokensActions } from '../../../../store/reducers/tokens';
 import Options from './Options/Options';
 
 
@@ -13,8 +13,8 @@ const Token = (props) => {
   const dispatch = useDispatch();
 
   
-  const areaList = useSelector((state) => state.areasReducer.areaList);
-  const currentActivityId = useSelector((state) => state.activitiesReducer.currentActivityId);
+  const areaList = useSelector((state) => state.areas.areaList);
+  const currentActivityId = useSelector((state) => state.activities.currentActivityId);
 
   const [showOptions, setShowOptions] = useState(false);
 
@@ -94,7 +94,10 @@ const Token = (props) => {
       auxToken.offset = {x: x, y: y};
     }
 
-    dispatch(updateToken(props.token._id, auxToken));
+    dispatch(tokensActions.update({
+      tokenId: props.token._id,
+      data: auxToken
+    }));
   }
   const hasResized = ({w, h})=>{
     const auxToken = {...props.token}
@@ -104,21 +107,30 @@ const Token = (props) => {
       w: Number(w.replace('px','')), 
       h: Number(h.replace('px',''))
     };
-    dispatch(updateToken(props.token._id, auxToken));
+    dispatch(tokensActions.update({
+      tokenId: props.token._id,
+      data: auxToken
+    }));
   }
   
   const deleteTokenHandler = ()=>{
-    dispatch(deleteToken(props.token._id));
+    dispatch(tokensActions.delete(props.token._id));
   }
 
   const pinButtonHandler = (e) =>{
     const auxToken = {...props.token}
     auxToken.movable = !props.token.movable;
-    dispatch(updateToken(props.token._id, auxToken));
+    dispatch(tokensActions.update({
+      tokenId: props.token._id,
+      data: auxToken
+    }));
   }
 
   const updateOptions = (token) => {
-    dispatch(updateToken(props.token._id, token));
+    dispatch(tokensActions.update({
+      tokenId: props.token._id,
+      data: token
+    }));
   }
 
 

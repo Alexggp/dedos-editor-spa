@@ -9,22 +9,22 @@ import Editor from './components/Editor/Editor';
 import SideBar from './components/SideBar/SideBar';
 
 import { getProjectById } from './services/projects'
-import { setActivities } from './store/reducers/activities';
-import { setAreas } from './store/reducers/areas';
-import { setTokens } from './store/reducers/tokens';
+import { activitiesActions } from './store/reducers/activities';
+import { areasActions } from './store/reducers/areas';
+import { tokensActions } from './store/reducers/tokens';
 
 
 const App = (props) => {
 
   const dispatch = useDispatch();
-  const currentProjectId = useSelector(state => state.projectsReducer.currentProjectId);
+  const currentProjectId = useSelector(state => state.projects.currentProjectId);
 
   useEffect(() => {
     getProjectById(currentProjectId)
       .then((response) =>{
-        dispatch(setActivities(response.activities));
-        dispatch(setAreas(response.areas));
-        dispatch(setTokens(response.tokens));
+        dispatch(activitiesActions.set(response.activities));
+        dispatch(areasActions.set(response.areas));
+        dispatch(tokensActions.set(response.tokens));
       })
       .catch(err => console.log(err));
     
