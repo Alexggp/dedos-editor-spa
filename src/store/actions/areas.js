@@ -47,7 +47,6 @@ export const createArea = ({projectId, activityId, offset}) => {
       if (response.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${response.status} - ${response.statusText}`);
       }
-      console.log(response.data)
       newArea._id = response.data._id;
       dispatch(areasActions.create(newArea));
 

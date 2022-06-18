@@ -6,7 +6,7 @@ import AreaMin from './Items/AreaMin/AreaMin';
 import ImageMin from './Items/ImageMin/ImageMin';
 import TextMin from './Items/TextMin/TextMin';
 import removeIcon from '../../../assets/icons/removeIcon.png';
-import { activitiesActions } from '../../../store/reducers/activities';
+import { deleteActivity } from '../../../store/actions/activities';
 
 
 
@@ -18,7 +18,7 @@ const Miniature = (props) => {
 
   const removeActivity = (e, activityId, isSelected) =>{
     e.stopPropagation();
-    dispatch(activitiesActions.delete({activityId, isSelected}));
+    dispatch(deleteActivity({activityId, isSelected}));
   }
 
   const processTokens = (tokenList)=>tokenList.map((token)=>{

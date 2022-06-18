@@ -2,6 +2,8 @@ import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { activitiesActions } from '../../store/reducers/activities';
+import { createActivity } from '../../store/actions/activities';
+
 
 import classes from './SideBar.module.css';
 import Miniature from './Miniature/Miniature';
@@ -15,7 +17,7 @@ const SideBar = (props) => {
   const currentProjectId = useSelector(state => state.projects.currentProjectId);
 
   const addActivity = ()=>{
-    dispatch(activitiesActions.create(currentProjectId));
+    dispatch(createActivity(currentProjectId));
   }
   const selectActivity = (activityId) =>{
     dispatch(activitiesActions.updateCurrent(activityId));

@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {activity} from '../classes';
 
 
 const initialState = {
@@ -22,8 +21,7 @@ const activitiesSlice = createSlice({
       if (action.payload.isSelected) state.currentActivityId = state.activityList[0]._id;
     },
     create(state, action) {
-      const newActivity = activity(action.payload);
-      state.activityList.push(newActivity);
+      state.activityList.push(action.payload);
       state.currentActivityId = state.activityList[state.activityList.length-1]._id;
     },
     updateCurrent(state, action) {

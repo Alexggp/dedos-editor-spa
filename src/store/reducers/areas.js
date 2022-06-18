@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {area} from '../classes';
 
 const initialState = {
   areaList: []
