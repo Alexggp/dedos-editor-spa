@@ -8,7 +8,7 @@ import Text from '../items/Text/Text';
 
 import Droppable from '../../hoc/Droppable/Droppable';
 
-import { areasActions } from '../../../store/reducers/areas'; 
+import { createArea } from '../../../store/actions/areas'; 
 import { createToken } from '../../../store/actions/tokens'; 
 import { trashActions } from '../../../store/reducers/trash';
 
@@ -24,7 +24,7 @@ const Activity = (props) => {
   const addNewItem = (item, offset)=>{
     switch (item) {
       case 'AddArea':
-        dispatch(areasActions.create({
+        dispatch(createArea({
           projectId: currentProjectId,
           activityId: currentActivityId,
           offset: {

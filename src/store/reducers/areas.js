@@ -16,12 +16,11 @@ const areasSlice = createSlice({
       state.areaList = state.areaList.filter(ar => ar._id !== action.payload);
     },
     update(state, action) {
-      const areaIndex = state.areaList.findIndex(ar => ar._id === action.payload.areaId);
-      state.areaList[areaIndex] = action.payload.data;
+      const areaIndex = state.areaList.findIndex(ar => ar._id === action.payload._id);
+      state.areaList[areaIndex] = action.payload;
     },
     create(state, action) {
-      const newArea = area(action.payload.projectId, action.payload.activityId, action.payload.offset);
-      state.areaList.push(newArea);
+      state.areaList.push(action.payload);
     }
   },
 });

@@ -1,18 +1,15 @@
 export const project = (title, userId) => ({
-    _id: Date.now(),
     userId,
     title
 })
 
 
 export const activity = (projectId) => ({
-  _id: Date.now(),
   projectId, 
 })
 
 
 export const area = (projectId, activityId, offset) => ({
-  _id: Date.now(),
   activityId,
   projectId,
   type: 'Player', // Player / Game

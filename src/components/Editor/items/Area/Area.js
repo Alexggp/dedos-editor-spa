@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux';
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 
 import classes from './Area.module.css';
-import { areasActions } from '../../../../store/reducers/areas';
+import { updateArea, deleteArea } from '../../../../store/actions/areas';
+
 import { deleteToken } from '../../../../store/actions/tokens';
 
 
@@ -15,19 +16,13 @@ const Area = (props) => {
     const backgroundUrl = 'https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png';
     const auxArea = {...props.area}
     auxArea.background = backgroundUrl;
-    dispatch(areasActions.update({
-      areaId: props.area._id,
-      data: auxArea
-    }));
+    dispatch(updateArea(auxArea));
   }
 
   const typeButtonHandler = (e) =>{
     const auxArea = {...props.area}
     auxArea.type= (props.area.type === 'Game') ? 'Player' : 'Game';
-    dispatch(areasActions.update({
-      areaId: props.area._id,
-      data: auxArea
-    }));
+    dispatch(updateArea(auxArea));
   }
 
   const stopPropagation = (e) =>{
@@ -38,10 +33,7 @@ const Area = (props) => {
   const hasMoved = ({x, y})=>{
     const auxArea = {...props.area}
     auxArea.offset = {x: x, y: y};
-    dispatch(areasActions.update({
-      areaId: props.area._id,
-      data: auxArea
-    }));
+    dispatch(updateArea(auxArea));
   }
   const hasResized = ({w, h})=>{
     const auxArea = {...props.area}
@@ -51,10 +43,7 @@ const Area = (props) => {
       w: Number(w.replace('px','')), 
       h: Number(h.replace('px',''))
     };
-    dispatch(areasActions.update({
-      areaId: props.area._id,
-      data: auxArea
-    }));
+    dispatch(updateArea(auxArea));
   }
   
   const deleteAreaHandler = ()=>{
@@ -62,7 +51,7 @@ const Area = (props) => {
       // Deleting tokens within the area
       dispatch(deleteToken(token._id));
     });
-    dispatch(areasActions.delete(props.area._id));
+    dispatch(deleteArea(props.area._id));
   }
 
   const style = {
