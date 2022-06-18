@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { text, image } from '../classes';
+
 
 
 const initialState = {
@@ -18,17 +18,11 @@ const tokensSlice = createSlice({
       state.tokenList = state.tokenList.filter(tkn => tkn._id !== action.payload);
     },
     update(state, action) {
-      const tokenIndex = state.tokenList.findIndex(tkn => tkn._id === action.payload.tokenId);
-      state.tokenList[tokenIndex] = action.payload.data;
+      const tokenIndex = state.tokenList.findIndex(tkn => tkn._id === action.payload._id);
+      state.tokenList[tokenIndex] = action.payload;
     },
     create(state, action) {
-      let newToken;
-      if(action.payload.type==='txt'){
-        newToken = text(action.payload.projectId, action.payload.activityId, action.payload.offset);
-      } else {
-        newToken = image(action.payload.projectId, action.payload.activityId, action.payload.offset);
-      }
-      state.tokenList.push(newToken)
+      state.tokenList.push(action.payload)
     },
   },
 });

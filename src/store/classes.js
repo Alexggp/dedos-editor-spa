@@ -11,10 +11,10 @@ export const activity = (projectId) => ({
 })
 
 
-export const area = (proyectId, activityId, offset) => ({
+export const area = (projectId, activityId, offset) => ({
   _id: Date.now(),
   activityId,
-  proyectId,
+  projectId,
   type: 'Player', // Player / Game
   offset: {
     x: offset.x - 180,
@@ -24,11 +24,10 @@ export const area = (proyectId, activityId, offset) => ({
   background: ''
 })
 
-const token = (proyectId, activityId, offset) => ({
+const token = (projectId, activityId, offset) => ({
 
-    _id : Date.now(),
     activityId,
-    proyectId,
+    projectId,
     areaId : 0, 
     type : '', // txt / img
     offset : {
@@ -50,8 +49,8 @@ const token = (proyectId, activityId, offset) => ({
   }
 )
 
-export const text = (proyectId, activityId, offset) => ({
-  ...token(proyectId, activityId, offset),
+export const text = (projectId, activityId, offset) => ({
+  ...token(projectId, activityId, offset),
   ...{
     type: 'txt',
     content: {
@@ -61,8 +60,8 @@ export const text = (proyectId, activityId, offset) => ({
 
 })
 
-export const image = (proyectId, activityId, offset) => ({
-    ...token(proyectId, activityId, offset),
+export const image = (projectId, activityId, offset) => ({
+    ...token(projectId, activityId, offset),
     ...{
       type: 'img',
       content: {

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 import classes from './Token.module.css';
-import { tokensActions } from '../../../../store/reducers/tokens';
+import { updateToken, deleteToken } from '../../../../store/actions/tokens';
 import Options from './Options/Options';
 
 
@@ -94,10 +94,7 @@ const Token = (props) => {
       auxToken.offset = {x: x, y: y};
     }
 
-    dispatch(tokensActions.update({
-      tokenId: props.token._id,
-      data: auxToken
-    }));
+    dispatch(updateToken(auxToken));
   }
   const hasResized = ({w, h})=>{
     const auxToken = {...props.token}
@@ -107,30 +104,21 @@ const Token = (props) => {
       w: Number(w.replace('px','')), 
       h: Number(h.replace('px',''))
     };
-    dispatch(tokensActions.update({
-      tokenId: props.token._id,
-      data: auxToken
-    }));
+    dispatch(updateToken(auxToken));
   }
   
   const deleteTokenHandler = ()=>{
-    dispatch(tokensActions.delete(props.token._id));
+    dispatch(deleteToken(props.token._id));
   }
 
   const pinButtonHandler = (e) =>{
     const auxToken = {...props.token}
     auxToken.movable = !props.token.movable;
-    dispatch(tokensActions.update({
-      tokenId: props.token._id,
-      data: auxToken
-    }));
+    dispatch(updateToken(auxToken));
   }
 
   const updateOptions = (token) => {
-    dispatch(tokensActions.update({
-      tokenId: props.token._id,
-      data: token
-    }));
+    dispatch(updateToken(token));
   }
 
 

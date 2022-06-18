@@ -9,7 +9,7 @@ import Text from '../items/Text/Text';
 import Droppable from '../../hoc/Droppable/Droppable';
 
 import { areasActions } from '../../../store/reducers/areas'; 
-import { tokensActions } from '../../../store/reducers/tokens'; 
+import { createToken } from '../../../store/actions/tokens'; 
 import { trashActions } from '../../../store/reducers/trash';
 
 
@@ -34,7 +34,7 @@ const Activity = (props) => {
         }));
         break;
       case 'AddText':
-        dispatch(tokensActions.create({
+        dispatch(createToken({
           projectId: currentProjectId,
           type: 'txt', 
           activityId: currentActivityId, 
@@ -45,7 +45,7 @@ const Activity = (props) => {
         }));
         break;
       case 'AddImage':
-        dispatch(tokensActions.create({
+        dispatch(createToken({
           projectId: currentProjectId,
           type: 'img', 
           activityId: currentActivityId, 

@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux';
 
 import Token from '../Token/Token';
 import classes from './Text.module.css';
-import { tokensActions } from '../../../../store/reducers/tokens';
+import { updateToken } from '../../../../store/actions/tokens';
+
 
 const Text = (props) => {
   const dispatch = useDispatch();
@@ -14,10 +15,7 @@ const Text = (props) => {
       ...auxToken.content,
       text: e.target.value
     }
-    dispatch(tokensActions.update({
-      tokenId: props.token._id,
-      data: auxToken
-    }));
+    dispatch(updateToken(auxToken));
   }
 
   

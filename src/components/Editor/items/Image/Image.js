@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import Token from '../Token/Token';
 import classes from './Image.module.css';
 import removeIcon from '../../../../assets/icons/removeIcon.png';
-import { tokensActions } from '../../../../store/reducers/tokens';
+import { updateToken } from '../../../../store/actions/tokens';
 
 const Image = (props) => {
   const dispatch = useDispatch();
@@ -20,10 +20,7 @@ const Image = (props) => {
       ...auxToken.content,
       urlList: [...auxToken.content.urlList, ...[image]]
     };
-    dispatch(tokensActions.update({
-      tokenId: props.token._id,
-      data: auxToken
-    }));
+    dispatch(updateToken(auxToken));
   }
 
   const removeImage = (index) =>{
@@ -34,10 +31,7 @@ const Image = (props) => {
       ...auxToken.content,
       urlList: auxList
     };
-    dispatch(tokensActions.update({
-      tokenId: props.token._id,
-      data: auxToken
-    }));
+    dispatch(updateToken(auxToken));
   }
 
   let images;
