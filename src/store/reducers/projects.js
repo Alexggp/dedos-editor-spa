@@ -18,8 +18,7 @@ const projectsSlice = createSlice({
   initialState,
   reducers: {
     delete(state, action) {
-      const projectIndex = state.projectList.findIndex(pj => pj._id === action.payload);
-      state.projectList.splice(projectIndex,1);
+      state.projectList = state.projectList.filter(pj => pj._id !== action.payload);
     },
     create(state) {
       const newProject = project();

@@ -17,9 +17,8 @@ const activitiesSlice = createSlice({
       state.currentActivityId = action.payload[0]._id;
     },
     delete(state, action) {
-      const activityIndex = state.activityList.findIndex(ac => ac._id === action.payload.activityId);
       // If it is the last activity it can not be deleted
-      if (state.activityList.length>1) state.activityList.splice(activityIndex,1);
+      if (state.activityList.length>1) state.activityList = state.activityList.filter(ac => ac._id !== action.payload.activityId);
       if (action.payload.isSelected) state.currentActivityId = state.activityList[0]._id;
     },
     create(state, action) {

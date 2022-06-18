@@ -15,8 +15,7 @@ const tokensSlice = createSlice({
       state.tokenList = action.payload;
     },
     delete(state, action) {
-      const tokenIndex = state.tokenList.findIndex(tkn => tkn._id === action.payload);
-      state.tokenList.splice(tokenIndex,1);
+      state.tokenList = state.tokenList.filter(tkn => tkn._id !== action.payload);
     },
     update(state, action) {
       const tokenIndex = state.tokenList.findIndex(tkn => tkn._id === action.payload.tokenId);

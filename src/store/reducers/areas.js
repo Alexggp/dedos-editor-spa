@@ -13,8 +13,7 @@ const areasSlice = createSlice({
       state.areaList = action.payload;
     },
     delete(state, action) {
-      const areaIndex = state.areaList.findIndex(ar => ar._id === action.payload);
-      state.areaList.splice(areaIndex,1);
+      state.areaList = state.areaList.filter(ar => ar._id !== action.payload);
     },
     update(state, action) {
       const areaIndex = state.areaList.findIndex(ar => ar._id === action.payload.areaId);
