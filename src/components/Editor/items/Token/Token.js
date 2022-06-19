@@ -74,7 +74,7 @@ const Token = (props) => {
     
     // Getting the offset referenced by the Edition Area div
     auxToken.screenOffset={
-      x: tokenRef.current.getBoundingClientRect().x - 218,
+      x: tokenRef.current.getBoundingClientRect().x - 229,
       y: tokenRef.current.getBoundingClientRect().y - 84
     }
     

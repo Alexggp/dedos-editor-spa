@@ -1,7 +1,6 @@
 .SideBar{
   height: 100%;
-  width: 250px;
-  display: flex;
+  width: 230px;
   border: 5px solid gray;
   background-color: #c9d8e5;
   box-sizing: border-box;
@@ -10,6 +9,8 @@
   flex-direction: column;
   overflow: auto;
   align-items: center;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 
 .MiniatureContainer{
