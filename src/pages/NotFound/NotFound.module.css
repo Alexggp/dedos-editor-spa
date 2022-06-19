@@ -1,0 +1,10 @@
+.NotFound {
+  width: 100vw;
+  height: 100vh;
+  background-color: gray;
+  color: white;
+  display: flex;
+  align-items: center;
+  font-size: xxx-large;
+  justify-content: center;
+}

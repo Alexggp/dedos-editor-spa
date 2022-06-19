@@ -1,20 +1,20 @@
 import React  from 'react';
+import { Route, Routes, Navigate } from 'react-router-dom';
 
-
-import classes from './App.module.css';
+// import classes from './App.module.css';
 import EditionPage from './pages/EditorPage/EditionPage';
-
+import NotFound from './pages/NotFound/NotFound';
 
 const App = (props) => {
 
   
   return (
 
-    <div className={classes.App}>
-      
-      <EditionPage/>
-		
-    </div>
+    <Routes>
+      <Route path='/' element={<Navigate replace to='/editor' />} />
+      <Route path='/editor' element={<EditionPage />} />
+      <Route path='*' element={<NotFound />} />
+    </Routes>
   );
 }
 
