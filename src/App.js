@@ -3,6 +3,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 
 // import classes from './App.module.css';
 import EditionPage from './pages/EditorPage/EditionPage';
+import ProjectsPage from './pages/ProjectsPage/ProjectsPage';
 import NotFound from './pages/NotFound/NotFound';
 
 const App = (props) => {
@@ -12,6 +13,7 @@ const App = (props) => {
 
     <Routes>
       <Route path='/' element={<Navigate replace to='/editor' />} />
+      <Route path='/projects' element={<ProjectsPage />} />
       <Route path='/editor' element={<EditionPage />} />
       <Route path='*' element={<NotFound />} />
     </Routes>

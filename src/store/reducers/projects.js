@@ -7,7 +7,20 @@ const initialState = {
     {
       id: '62a4aae238dd5eedb90821b8',
       userId: 0,
-      title: 'Proyecto 1'
+      title: 'Proyecto 1',
+      description: 'orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+    },
+    {
+      id: '62a4aae238dd5ee2220821b8',
+      userId: 0,
+      title: 'Proyecto 2',
+      description: 'orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+    },
+    {
+      id: '62a4aae238dd5e444490821b8',
+      userId: 0,
+      title: 'Proyecto 3',
+      description: 'orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     }
   ]
 }
