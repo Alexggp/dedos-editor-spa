@@ -1,25 +1,29 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import { CardActionArea, CardActions } from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 import classes from './ProjectsPage.module.css';
-import addIcon from '../../assets/icons/addIcon.png';
 
 
 
 const ProjectsPage = (props) => {
 
   const projectList = useSelector(state => state.projects.projectList);
+  const navigate = useNavigate();
 
-  const cardStyle = {
-    // width: "250px",
-    height: "200px"
-  };
+  const selectedProject = (projectId) => {
+    navigate(`/editor/${projectId}`);
+  }
 
   const boxStyle = { 
     flexGrow: 1, 
@@ -28,10 +32,10 @@ const ProjectsPage = (props) => {
   };
 
   const projects = projectList.map(pr=>(
-    <Grid item xs={2} sm={4} md={4} key={pr._id}>
-      <Card onClick={event => console.log("clicked")}>
+    <Grid item xs={2} sm={4} md={4} key={pr._Id}>
+      <Card onClick={() => selectedProject(pr._Id)}>
         <CardActionArea>
-          <CardContent style={cardStyle}>
+          <CardContent sx={{height: "145px"}}>
             <Typography gutterBottom variant="h5" component="div">
               {pr.title}
             </Typography>
@@ -40,6 +44,14 @@ const ProjectsPage = (props) => {
             </Typography>
           </CardContent>
         </CardActionArea>
+        <CardActions  disableSpacing sx={{display: "flex", justifyContent: "flex-end"}}>
+          <IconButton aria-label="Editar">
+            <EditIcon />
+          </IconButton>
+          <IconButton aria-label="Eliminar">
+            <DeleteIcon />
+          </IconButton>
+        </CardActions>
       </Card>
     </Grid>
   ))
@@ -48,12 +60,12 @@ const ProjectsPage = (props) => {
     <Grid item xs={2} sm={4} md={4} key={'Insert'}>
       <Card onClick={event => console.log("clicked")}>
         <CardActionArea>
-          <CardContent style={cardStyle}>
+          <CardContent sx={{height: "200px"}}>
             <Typography gutterBottom variant="h5" component="div">
               Crear nuevo...
             </Typography>
             <Typography style={{display:"flex", alignItems: "center", justifyContent: "center", paddingTop: "5%"}}>
-              <img className={classes.AddIcon} src={addIcon} title='Nuevo proyecto' alt=''/>
+              <AddCircleOutlineIcon sx={{ fontSize: 120 }}/>
             </Typography>
           </CardContent>
         </CardActionArea>

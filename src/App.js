@@ -12,9 +12,9 @@ const App = (props) => {
   return (
 
     <Routes>
-      <Route path='/' element={<Navigate replace to='/editor' />} />
+      <Route path='/' element={<Navigate replace to='/projects' />} />
       <Route path='/projects' element={<ProjectsPage />} />
-      <Route path='/editor' element={<EditionPage />} />
+      <Route path='/editor/:projectId' element={<EditionPage />} />
       <Route path='*' element={<NotFound />} />
     </Routes>
   );

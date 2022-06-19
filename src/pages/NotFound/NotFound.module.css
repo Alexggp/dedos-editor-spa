@@ -4,7 +4,13 @@
   background-color: gray;
   color: white;
   display: flex;
+  flex-direction: column;
   align-items: center;
   font-size: xxx-large;
   justify-content: center;
+}
+
+.NotFound h2{
+  font-size: 0.5em;
+  color: white;
 }

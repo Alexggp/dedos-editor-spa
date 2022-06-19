@@ -1,7 +1,9 @@
 import React, {useEffect} from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 
 import classes from './EditionPage.module.css';
@@ -9,17 +11,30 @@ import Editor from '../../components/Editor/Editor';
 import SideBar from '../../components/SideBar/SideBar';
 
 import { getProjectData } from '../../store/actions/projects';
+import { projectsActions } from '../../store/reducers/projects';
+
 
 
 const EditionPage = (props) => {
 
+  const projectList = useSelector(state => state.projects.projectList);
+
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
-  const currentProjectId = useSelector(state => state.projects.currentProjectId);
+  const params = useParams();
+  const projectId = params.projectId;
 
   useEffect(() => {
-    dispatch(getProjectData(currentProjectId));
-    
-  }, [currentProjectId, dispatch]);
+
+    const projectIndex = projectList.findIndex(pr=> pr._Id === projectId);
+    if(projectIndex<0){
+      navigate(`/not-found`);
+    }
+
+    dispatch(projectsActions.updateCurrent(projectId))
+    dispatch(getProjectData(projectId));
+  }, [projectId, projectList, dispatch, navigate]);
 
   return (
 
