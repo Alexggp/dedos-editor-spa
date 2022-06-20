@@ -17,7 +17,7 @@ const SideBar = (props) => {
   const currentProjectId = useSelector(state => state.projects.currentProjectId);
   const projectList = useSelector(state => state.projects.projectList);
 
-  const project = projectList.find((pr)=>pr._Id === currentProjectId);
+  const project = projectList.find((pr)=>pr._id === currentProjectId);
 
   const addActivity = ()=>{
     dispatch(createActivity(currentProjectId));

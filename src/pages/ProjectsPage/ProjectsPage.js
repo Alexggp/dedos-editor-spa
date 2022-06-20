@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useNavigate } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -13,15 +13,23 @@ import EditIcon from '@mui/icons-material/Edit';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Tooltip from '@mui/material/Tooltip';
 
-
+import { getProjects } from '../../store/actions/projects';
 import classes from './ProjectsPage.module.css';
 
 
 
 const ProjectsPage = (props) => {
 
+
   const projectList = useSelector(state => state.projects.projectList);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProjects(0));
+  }, [dispatch]);
+
+
 
   const selectedProject = (projectId) => {
     navigate(`/editor/${projectId}`);
@@ -34,9 +42,9 @@ const ProjectsPage = (props) => {
   };
 
   const projects = projectList.map(pr=>(
-    <Grid item xs={2} sm={4} md={4} key={pr._Id}>
+    <Grid item xs={2} sm={4} md={4} key={pr._id}>
       <Card >
-        <CardActionArea onClick={() => selectedProject(pr._Id)}>
+        <CardActionArea onClick={() => selectedProject(pr._id)}>
           <CardContent sx={{height: "145px"}}>
             <Typography gutterBottom variant="h5" component="div">
               {pr.title}

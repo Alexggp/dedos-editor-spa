@@ -27,7 +27,7 @@ const EditionPage = (props) => {
 
   useEffect(() => {
 
-    const projectIndex = projectList.findIndex(pr=> pr._Id === projectId);
+    const projectIndex = projectList.findIndex(pr=> pr._id === projectId);
     if(projectIndex<0){
       navigate(`/not-found`);
     }

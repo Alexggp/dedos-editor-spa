@@ -3,14 +3,7 @@ import {project} from '../classes';
 
 const initialState = {
   currentProjectId: '62a4aae238dd5eedb90821b8',
-  projectList:[
-    {
-      _Id: '62a4aae238dd5eedb90821b8',
-      userId: 0,
-      title: 'Proyecto 1',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-    }
-  ]
+  projectList:[]
 }
 
 
@@ -18,8 +11,11 @@ const projectsSlice = createSlice({
   name: 'projects',
   initialState,
   reducers: {
+    set(state, action) {
+      state.projectList = action.payload;
+    },
     delete(state, action) {
-      state.projectList = state.projectList.filter(pj => pj._Id !== action.payload);
+      state.projectList = state.projectList.filter(pj => pj._id !== action.payload);
     },
     create(state) {
       const newProject = project();
