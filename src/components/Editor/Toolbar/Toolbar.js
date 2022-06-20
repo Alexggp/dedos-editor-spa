@@ -1,4 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
+import Avatar from '@mui/material/Avatar';
+import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 
 import classes from './Toolbar.module.css';
 import Draggable from '../../hoc/Draggable/Draggable';
@@ -14,6 +19,11 @@ import clockIcon from '../../../assets/icons/clockIcon.png';
 
 
 const Toolbar = (props) => {
+  const navigate = useNavigate();
+
+  const goToProjects = () =>{
+    navigate(`/projects`);
+  }
 
   return(
     <div className={classes.Toolbar}>
@@ -60,10 +70,26 @@ const Toolbar = (props) => {
       </div>
       <div className={classes.ButtonArea} title='Arrástrame al área de edición para añadir límite de tiempo a la actividad'>
         <div className={classes.Button}>
-            <Draggable type={'Tool8'}>
+            <Draggable type={'Clock'}>
               <img alt='' src={clockIcon}/>
             </Draggable>
         </div>
+      </div>
+      <div className={classes.Controls}>
+        <Tooltip title="Todos los projectos" onClick={goToProjects}>
+          <IconButton aria-label="Todos los projectos">
+            <AppsOutlinedIcon sx={{ fontSize: 50 }}/>
+          </IconButton>
+        </Tooltip>
+        {
+          null ?
+          <Avatar
+          sx={{ bgcolor: "darkred" }}
+          alt="Alejandro"
+          src="/broken-image.jpg"
+          /> :
+          <Avatar src="/broken-image.jpg" />
+        }
       </div>
     </div>
   )

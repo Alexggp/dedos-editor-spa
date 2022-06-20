@@ -11,6 +11,8 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import Tooltip from '@mui/material/Tooltip';
+
 
 import classes from './ProjectsPage.module.css';
 
@@ -33,8 +35,8 @@ const ProjectsPage = (props) => {
 
   const projects = projectList.map(pr=>(
     <Grid item xs={2} sm={4} md={4} key={pr._Id}>
-      <Card onClick={() => selectedProject(pr._Id)}>
-        <CardActionArea>
+      <Card >
+        <CardActionArea onClick={() => selectedProject(pr._Id)}>
           <CardContent sx={{height: "145px"}}>
             <Typography gutterBottom variant="h5" component="div">
               {pr.title}
@@ -45,12 +47,16 @@ const ProjectsPage = (props) => {
           </CardContent>
         </CardActionArea>
         <CardActions  disableSpacing sx={{display: "flex", justifyContent: "flex-end"}}>
-          <IconButton aria-label="Editar">
-            <EditIcon />
-          </IconButton>
-          <IconButton aria-label="Eliminar">
-            <DeleteIcon />
-          </IconButton>
+          <Tooltip title="Editar">
+            <IconButton aria-label="Editar">
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Eliminar">
+            <IconButton aria-label="Eliminar">
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
         </CardActions>
       </Card>
     </Grid>

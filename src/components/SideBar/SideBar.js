@@ -15,6 +15,9 @@ const SideBar = (props) => {
   const activityList = useSelector(state => state.activities.activityList);
   const currentActivityId = useSelector(state => state.activities.currentActivityId);
   const currentProjectId = useSelector(state => state.projects.currentProjectId);
+  const projectList = useSelector(state => state.projects.projectList);
+
+  const project = projectList.find((pr)=>pr._Id === currentProjectId);
 
   const addActivity = ()=>{
     dispatch(createActivity(currentProjectId));
@@ -47,6 +50,9 @@ const SideBar = (props) => {
   return (
 
     <div className={classes.SideBar}>
+      <div className={classes.ProjectTitle}>
+        {project.title}
+      </div>
       {activitiesContainers}
       <img className={classes.AddIcon} src={addIcon} onClick={addActivity} title='Nueva actividad' alt=''/>
     </div>

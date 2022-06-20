@@ -34,3 +34,15 @@
   height: 60px;
   cursor: pointer;
 }
+
+.ProjectTitle{
+  font-size: x-large;
+  background: #b7bfd3;
+  width: 180px;
+  padding: 10px;
+  box-sizing: content-box;
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 40px;
+  cursor: default;
+}
