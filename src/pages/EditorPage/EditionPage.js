@@ -28,7 +28,7 @@ const EditionPage = (props) => {
   useEffect(() => {
     dispatch(projectsActions.updateCurrent(projectId))
     dispatch(getProjectData(projectId));
-  }, [projectId, projectList, dispatch, navigate]);
+  }, [projectId, dispatch]);
 
 
   return (

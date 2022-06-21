@@ -13,7 +13,7 @@ const activitiesSlice = createSlice({
   reducers: {
     set(state, action) {
       state.activityList = action.payload;
-      state.currentActivityId = action.payload[0]._id;
+      state.currentActivityId = action.payload[0] ? action.payload[0]._id : '';
     },
     delete(state, action) {
       // If it is the last activity it can not be deleted
