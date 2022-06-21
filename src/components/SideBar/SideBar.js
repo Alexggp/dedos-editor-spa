@@ -51,7 +51,7 @@ const SideBar = (props) => {
 
     <div className={classes.SideBar}>
       <div className={classes.ProjectTitle}>
-        {project.title}
+        {project ? project.title : ""}
       </div>
       {activitiesContainers}
       <img className={classes.AddIcon} src={addIcon} onClick={addActivity} title='Nueva actividad' alt=''/>

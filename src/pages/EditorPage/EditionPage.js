@@ -26,15 +26,10 @@ const EditionPage = (props) => {
   const projectId = params.projectId;
 
   useEffect(() => {
-
-    const projectIndex = projectList.findIndex(pr=> pr._id === projectId);
-    if(projectIndex<0){
-      navigate(`/not-found`);
-    }
-
     dispatch(projectsActions.updateCurrent(projectId))
     dispatch(getProjectData(projectId));
   }, [projectId, projectList, dispatch, navigate]);
+
 
   return (
 

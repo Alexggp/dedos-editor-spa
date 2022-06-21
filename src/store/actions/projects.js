@@ -16,6 +16,7 @@ export const getProjectData = (projectId) => {
       if (response.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${response.status}`);
       }
+      dispatch(projectsActions.set([response.data.project]));
       dispatch(activitiesActions.set(response.data.activities));
       dispatch(areasActions.set(response.data.areas));
       dispatch(tokensActions.set(response.data.tokens));

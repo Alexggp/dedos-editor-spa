@@ -82,7 +82,7 @@ const Toolbar = (props) => {
           </IconButton>
         </Tooltip>
         {
-          null ?
+          true ?
           <Avatar
           sx={{ bgcolor: "darkred" }}
           alt="Alejandro"
