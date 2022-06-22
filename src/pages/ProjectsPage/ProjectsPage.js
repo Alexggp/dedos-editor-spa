@@ -13,7 +13,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Tooltip from '@mui/material/Tooltip';
 
-import { getProjects } from '../../store/actions/projects';
+import { getProjects, deleteProject } from '../../store/actions/projects';
 import classes from './ProjectsPage.module.css';
 import ProjectForm from '../../components/ProjectForm/ProjectForm';
 
@@ -36,7 +36,11 @@ const ProjectsPage = () => {
     openForm(true);
   }
 
-  const selectedProject = (projectId) => {
+  const deleteHandler = (projectId) => {
+    dispatch(deleteProject(projectId));
+  }
+
+  const selectedProjectHandler = (projectId) => {
     navigate(`/editor/${projectId}`);
   }
 
@@ -49,7 +53,7 @@ const ProjectsPage = () => {
   const projects = projectList.map(pr=>(
     <Grid item xs={2} sm={4} md={4} key={pr._id}>
       <Card >
-        <CardActionArea onClick={() => selectedProject(pr._id)}>
+        <CardActionArea onClick={() => selectedProjectHandler(pr._id)}>
           <CardContent sx={{height: "145px"}}>
             <Typography gutterBottom variant="h5" component="div">
               {pr.title}
@@ -66,7 +70,7 @@ const ProjectsPage = () => {
             </IconButton>
           </Tooltip>
           <Tooltip title="Eliminar">
-            <IconButton aria-label="Eliminar">
+            <IconButton aria-label="Eliminar" onClick={()=>deleteHandler(pr._id)}>
               <DeleteIcon />
             </IconButton>
           </Tooltip>

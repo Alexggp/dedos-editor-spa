@@ -47,7 +47,7 @@ export const getProjects = (userId) => {
 export const createProject = (userId, title, description) => {
   return async (dispatch) => {
 
-    const screenResolution = `${window.screen.availHeight}x${window.screen.availWidth}`;
+    const screenResolution = `${window.screen.availWidth}x${window.screen.availHeight}`;
     const newProject = project(userId, title, description, screenResolution);
 
     try {
@@ -74,6 +74,22 @@ export const updateProject = (project) => {
         throw new Error(`Unexpected API call response with status: ${response.status}`);
       }
       dispatch(projectsActions.update(project));
+
+    } catch (error) {
+      console.log(error)
+    }
+  };
+};
+
+export const deleteProject = (projectId) => {
+  return async (dispatch) => {
+
+    try {
+      const response = await axios.delete(`${config.server.url}/projects/${projectId}`)
+      if (response.status !== 200) {
+        throw new Error(`Unexpected API call response with status: ${response.status} - ${response.statusText}`);
+      }
+      dispatch(projectsActions.delete(projectId));
 
     } catch (error) {
       console.log(error)
