@@ -1,6 +1,8 @@
-export const project = (title, userId) => ({
+export const project = (userId, title, description, screenResolution) => ({
     userId,
-    title
+    title,
+    description,
+    screenResolution
 })
 
 

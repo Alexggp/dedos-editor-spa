@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import config from '../../config/index';
+import { project } from '../classes';
 import { projectsActions } from '../reducers/projects';
 import { activitiesActions } from '../reducers/activities';
 import { areasActions } from '../reducers/areas';
@@ -37,6 +38,43 @@ export const getProjects = (userId) => {
       }
       console.log(response.data)
       dispatch(projectsActions.set(response.data));
+    } catch (error) {
+      console.log(error)
+    }
+  };
+};
+
+export const createProject = (userId, title, description) => {
+  return async (dispatch) => {
+
+    const screenResolution = `${window.screen.availHeight}x${window.screen.availWidth}`;
+    const newProject = project(userId, title, description, screenResolution);
+
+    try {
+      const response = await axios.post(`${config.server.url}/projects`, newProject);
+      if (response.status !== 200) {
+        throw new Error(`Unexpected API call response with status: ${response.status} - ${response.statusText}`);
+      }
+      newProject._id = response.data._id;
+      dispatch(projectsActions.create(newProject));
+
+    } catch (error) {
+      console.log(error)
+    }
+  };
+};
+
+export const updateProject = (project) => {
+  return async (dispatch) => {
+
+    try {
+      const response = await axios.put(`${config.server.url}/projects/${project._id}`,project)
+
+      if (response.status !== 200) {
+        throw new Error(`Unexpected API call response with status: ${response.status}`);
+      }
+      dispatch(projectsActions.update(project));
+
     } catch (error) {
       console.log(error)
     }

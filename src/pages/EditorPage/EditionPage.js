@@ -1,9 +1,8 @@
 import React, {useEffect} from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router';
 
 
 import classes from './EditionPage.module.css';
@@ -16,10 +15,6 @@ import { projectsActions } from '../../store/reducers/projects';
 
 
 const EditionPage = (props) => {
-
-  const projectList = useSelector(state => state.projects.projectList);
-
-  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const params = useParams();

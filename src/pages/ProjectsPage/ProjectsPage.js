@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import Card from '@mui/material/Card';
@@ -15,11 +15,13 @@ import Tooltip from '@mui/material/Tooltip';
 
 import { getProjects } from '../../store/actions/projects';
 import classes from './ProjectsPage.module.css';
+import ProjectForm from '../../components/ProjectForm/ProjectForm';
 
 
+const ProjectsPage = () => {
 
-const ProjectsPage = (props) => {
-
+  const [formIsOpen, openForm] = useState(false);
+  const [formData, setFormData] = useState({});
 
   const projectList = useSelector(state => state.projects.projectList);
   const navigate = useNavigate();
@@ -29,7 +31,10 @@ const ProjectsPage = (props) => {
     dispatch(getProjects(0));
   }, [dispatch]);
 
-
+  const showForm = (pr) => {
+    setFormData(pr);
+    openForm(true);
+  }
 
   const selectedProject = (projectId) => {
     navigate(`/editor/${projectId}`);
@@ -56,7 +61,7 @@ const ProjectsPage = (props) => {
         </CardActionArea>
         <CardActions  disableSpacing sx={{display: "flex", justifyContent: "flex-end"}}>
           <Tooltip title="Editar">
-            <IconButton aria-label="Editar">
+            <IconButton aria-label="Editar" onClick={()=>showForm(pr)}>
               <EditIcon />
             </IconButton>
           </Tooltip>
@@ -72,7 +77,7 @@ const ProjectsPage = (props) => {
 
   projects.push(
     <Grid item xs={2} sm={4} md={4} key={'Insert'}>
-      <Card onClick={event => console.log("clicked")}>
+      <Card onClick={()=>showForm({title:'', description: ''})}>
         <CardActionArea>
           <CardContent sx={{height: "200px"}}>
             <Typography gutterBottom variant="h5" component="div">
@@ -89,6 +94,7 @@ const ProjectsPage = (props) => {
 
   return (
     <div className={classes.ProjectsPage}> 
+      <ProjectForm open={formIsOpen} data={formData} close={()=>openForm(false)}/>
       <div className={classes.Header}>
         <h1>
           Proyectos
@@ -100,7 +106,6 @@ const ProjectsPage = (props) => {
         </Grid>
       </Box>
     </div>
-
   );
 }
 

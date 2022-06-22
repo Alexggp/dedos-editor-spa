@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {project} from '../classes';
 
 const initialState = {
   currentProjectId: '62a4aae238dd5eedb90821b8',
@@ -17,9 +16,12 @@ const projectsSlice = createSlice({
     delete(state, action) {
       state.projectList = state.projectList.filter(pj => pj._id !== action.payload);
     },
-    create(state) {
-      const newProject = project();
-      state.projectList.push(newProject);
+    create(state, action) {
+      state.projectList.push(action.payload);
+    },
+    update(state, action) {
+      const projectIndex = state.projectList.findIndex(pr => pr._id === action.payload._id);
+      state.projectList[projectIndex] = action.payload;
     },
     updateCurrent(state, action) {
       state.currentProjectId= action.payload;
