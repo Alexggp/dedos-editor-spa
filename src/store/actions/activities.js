@@ -12,7 +12,6 @@ export const deleteActivity = ({activityId, isSelected}) => {
         throw new Error(`Unexpected API call response with status: ${response.status} - ${response.statusText}`);
       }
       dispatch(activitiesActions.delete({activityId, isSelected}));
-
     } catch (error) {
       console.log(error)
     }
