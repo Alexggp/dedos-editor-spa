@@ -13,15 +13,20 @@ import EditIcon from '@mui/icons-material/Edit';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Tooltip from '@mui/material/Tooltip';
 
-import { getProjects, deleteProject } from '../../store/actions/projects';
+import { getProjects, deleteProject, createProject, updateProject } from '../../store/actions/projects';
 import classes from './ProjectsPage.module.css';
 import ProjectForm from '../../components/ProjectForm/ProjectForm';
 
-
 const ProjectsPage = () => {
 
+  const emptyForm = {
+    title: '',
+    description: '',
+    _id: '',
+    error: false
+  }
   const [formIsOpen, openForm] = useState(false);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState(emptyForm);
 
   const projectList = useSelector(state => state.projects.projectList);
   const navigate = useNavigate();
@@ -32,12 +37,22 @@ const ProjectsPage = () => {
   }, [dispatch]);
 
   const showForm = (pr) => {
-    setFormData(pr);
+    setFormData({...formData, ...pr});
     openForm(true);
   }
 
   const deleteHandler = (projectId) => {
     dispatch(deleteProject(projectId));
+  }
+
+  const sendHandler = () => {
+    if (formData._id){
+      dispatch(updateProject(formData));
+      openForm(false);
+    } else {
+      dispatch(createProject(0, formData.title, formData.description));
+      openForm(false);
+    }
   }
 
   const selectedProjectHandler = (projectId) => {
@@ -81,7 +96,7 @@ const ProjectsPage = () => {
 
   projects.push(
     <Grid item xs={2} sm={4} md={4} key={'Insert'}>
-      <Card onClick={()=>showForm({title:'', description: ''})}>
+      <Card onClick={()=>showForm(emptyForm)}>
         <CardActionArea>
           <CardContent sx={{height: "200px"}}>
             <Typography gutterBottom variant="h5" component="div">
@@ -98,7 +113,12 @@ const ProjectsPage = () => {
 
   return (
     <div className={classes.ProjectsPage}> 
-      <ProjectForm open={formIsOpen} data={formData} close={()=>openForm(false)}/>
+      <ProjectForm 
+        isOpen={formIsOpen} 
+        formData={formData} 
+        setFormData={setFormData} 
+        send= {sendHandler}
+        close={()=>openForm(false)}/>
       <div className={classes.Header}>
         <h1>
           Proyectos

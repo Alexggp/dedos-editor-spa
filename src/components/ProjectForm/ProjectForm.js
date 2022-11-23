@@ -1,38 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 import Modal from '../hoc/Modal/Modal';
-import { createProject, updateProject } from '../../store/actions/projects';
 
-const ProjectForm = (props) => {
-  const dispatch = useDispatch();
+const ProjectForm = ({
+  isOpen,
+  formData,
+  setFormData,
+  send,
+  close
+}) => {
 
-  const [projectData, setProjectaDta] = useState({});
-
-  useEffect(() => {
-    setProjectaDta(props.data);
-  }, [props.data]);
-
-  const send = ()=>{
-    if(!projectData.title) {
-      setProjectaDta({...projectData, error:true})
+  const acceptHandler = ()=>{
+    if(!formData.title) {
+      setFormData({...formData, error:true})
       return;
     } 
-    if (props.data.title){
-      dispatch(updateProject(projectData));
-      props.close();
-    } else {
-      dispatch(createProject(0, projectData.title, projectData.description));
-      props.close();
-    }
+    send();
   }
 
   return(
-   <Modal open={props.open} close={props.close}>
+   <Modal open={isOpen} close={close}>
       <Box
         component="form"
         sx={{
@@ -43,11 +34,11 @@ const ProjectForm = (props) => {
       >
         <TextField
           required
-          error = {projectData.error}
+          error = {formData.error}
           id="projectTitle"
           label="Título"
-          value={projectData.title}
-          onChange={(e)=>setProjectaDta({...projectData, title:e.currentTarget.value})}
+          value={formData.title}
+          onChange={(e)=>setFormData({...formData, title:e.currentTarget.value})}
         />
         <TextField
           multiline
@@ -55,17 +46,16 @@ const ProjectForm = (props) => {
           maxRows={10}
           id="descriptionTitle"
           label="Descripción"
-          value={projectData.description}
-          onChange={(e)=>setProjectaDta({...projectData, description:e.currentTarget.value})}
+          value={formData.description}
+          onChange={(e)=>setFormData({...formData, description:e.currentTarget.value})}
         />
         <Stack spacing={2} direction="row">
-        <Button variant="outlined" onClick={props.close}>Cancelar</Button>
-        <Button variant="contained" onClick={send}>Aceptar</Button>
-      </Stack>
+          <Button variant="outlined" onClick={close}>Cancelar</Button>
+          <Button variant="contained" onClick={acceptHandler}>Aceptar</Button>
+        </Stack>
      </Box>
    </Modal>
   )
-
 }
 
 
