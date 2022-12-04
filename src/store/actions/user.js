@@ -12,7 +12,11 @@ export const login = (user) => {
       if (response.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${response.status}`);
       }
-      dispatch(userActions.set(response.data));
+      const newUser = {
+        token: response.data.token,
+        user: response.data.user_data
+      }
+      dispatch(userActions.set(newUser));
 
     } catch (error) {
       console.log(error)
@@ -39,5 +43,11 @@ export const signup = (user) => {
     } catch (error) {
       console.log(error)
     }
+  };
+};
+
+export const logout = () => {
+  return async (dispatch) => {
+    dispatch(userActions.unset());
   };
 };

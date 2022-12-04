@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useNavigate } from 'react-router-dom';
 
 
 import classes from './EditionPage.module.css';
@@ -15,7 +15,16 @@ import { projectsActions } from '../../store/reducers/projects';
 
 
 const EditionPage = (props) => {
+  const navigate = useNavigate();
+  const token = useSelector(state => state.user.token);
 
+  useEffect(() => {
+    // If there is no token, redirects to login page
+    if (!token){
+      navigate('/login');
+    }
+  }, [token, navigate]);
+  
   const dispatch = useDispatch();
   const params = useParams();
   const projectId = params.projectId;

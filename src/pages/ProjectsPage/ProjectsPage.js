@@ -18,6 +18,15 @@ import classes from './ProjectsPage.module.css';
 import ProjectForm from '../../components/ProjectForm/ProjectForm';
 
 const ProjectsPage = () => {
+  const navigate = useNavigate();
+  const token = useSelector(state => state.user.token);
+
+  useEffect(() => {
+    // If there is no token, redirects to login page
+    if (!token){
+      navigate('/login');
+    }
+  }, [token, navigate]);
 
   const emptyForm = {
     title: '',
@@ -29,7 +38,6 @@ const ProjectsPage = () => {
   const [formData, setFormData] = useState(emptyForm);
 
   const projectList = useSelector(state => state.projects.projectList);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
