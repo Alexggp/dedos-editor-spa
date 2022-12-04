@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -7,6 +8,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './store';
+
+
+// Add a request interceptor
+axios.interceptors.request.use((config) => {
+  const token = store.getState().user.token;
+  if (token) config.headers.Authorization =  token;
+  return config;
+});
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
