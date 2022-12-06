@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 
-const ProjectForm = ({
+const SignUpForm = ({
   formData,
   setFormData,
   send,
@@ -93,4 +93,4 @@ const ProjectForm = ({
 }
 
 
-export default ProjectForm;
+export default SignUpForm;
