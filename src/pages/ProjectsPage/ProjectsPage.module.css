@@ -20,3 +20,10 @@
   width: 25%;
   height: auto;
 }
+.MenuUser{
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: calc(100vw - 80px);
+  top: 22px;
+}

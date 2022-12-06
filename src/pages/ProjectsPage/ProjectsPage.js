@@ -16,6 +16,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { getProjects, deleteProject, createProject, updateProject } from '../../store/actions/projects';
 import classes from './ProjectsPage.module.css';
 import ProjectForm from '../../components/ProjectForm/ProjectForm';
+import UserMenu from '../../components/UserMenu/UserMenu';
 
 const ProjectsPage = () => {
   const navigate = useNavigate();
@@ -137,6 +138,9 @@ const ProjectsPage = () => {
           {projects}
         </Grid>
       </Box>
+      <div className={classes.MenuUser}>
+        <UserMenu />
+      </div>
     </div>
   );
 }

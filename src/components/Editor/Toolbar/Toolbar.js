@@ -1,12 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
-import Avatar from '@mui/material/Avatar';
 import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
 import classes from './Toolbar.module.css';
 import Draggable from '../../hoc/Draggable/Draggable';
+
+import UserMenu from '../../UserMenu/UserMenu';
 
 import addAreaIcon from '../../../assets/icons/addAreaIcon.png';
 import addTextIcon from '../../../assets/icons/addTextIcon.png';
@@ -81,15 +82,7 @@ const Toolbar = (props) => {
             <AppsOutlinedIcon sx={{ fontSize: 50 }}/>
           </IconButton>
         </Tooltip>
-        {
-          true ?
-          <Avatar
-          sx={{ bgcolor: "darkred" }}
-          alt="Alejandro"
-          src="/broken-image.jpg"
-          /> :
-          <Avatar src="/broken-image.jpg" />
-        }
+        <UserMenu />
       </div>
     </div>
   )
