@@ -8,13 +8,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItem from '@mui/material/ListItem';
 import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
-
 import { useSelector, useDispatch } from 'react-redux';
 
-
-
-
-import classes from './UserMenu.module.css';
+import { userActions } from '../../store/reducers/user';
 
 const UserMenu = (props) => {
   const dispatch = useDispatch();
@@ -29,9 +25,13 @@ const UserMenu = (props) => {
     setAnchorEl(null);
   };
 
-  return (
+  const logout = () => {
+    dispatch(userActions.unset());
+    handleClose();
+  }
 
-    <div className={classes.UserMenu}>
+  return (
+    <>
       <Avatar
         sx={{ bgcolor: "darkred", cursor: "pointer"}}
         alt={user.name}
@@ -57,9 +57,9 @@ const UserMenu = (props) => {
           <ListItemText>{user.email}</ListItemText>
         </ListItem>
         <Divider />
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={logout}>Logout</MenuItem>
       </Menu>
-    </div>
+    </>
   );
 }
 

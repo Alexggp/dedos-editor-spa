@@ -18,7 +18,8 @@ const user = createSlice({
       state.token = action.payload.token;
     },
     unset(state) {
-      state = initialState;
+      state.user = initialState.user;
+      state.token = initialState.token;
     },
   },
 });
