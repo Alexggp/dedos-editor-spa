@@ -29,10 +29,10 @@ export const getProjectData = (projectId) => {
 };
 
 
-export const getProjects = (userId) => {
+export const getProjects = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${config.server.url}/projects/user/${userId}`);
+      const response = await axios.get(`${config.server.url}/projects`);
       if (response.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${response.status}`);
       }
@@ -43,11 +43,11 @@ export const getProjects = (userId) => {
   };
 };
 
-export const createProject = (userId, title, description) => {
+export const createProject = (title, description) => {
   return async (dispatch) => {
 
     const screenResolution = `${window.screen.availWidth}x${window.screen.availHeight}`;
-    const newProject = project(userId, title, description, screenResolution);
+    const newProject = project(title, description, screenResolution);
 
     try {
       const response = await axios.post(`${config.server.url}/projects`, newProject);

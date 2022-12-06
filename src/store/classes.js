@@ -1,5 +1,4 @@
-export const project = (userId, title, description, screenResolution) => ({
-    userId,
+export const project = (title, description, screenResolution) => ({
     title,
     description,
     screenResolution

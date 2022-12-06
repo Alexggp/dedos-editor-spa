@@ -58,7 +58,7 @@ const ProjectsPage = () => {
       dispatch(updateProject(formData));
       openForm(false);
     } else {
-      dispatch(createProject(0, formData.title, formData.description));
+      dispatch(createProject(formData.title, formData.description));
       openForm(false);
     }
   }
