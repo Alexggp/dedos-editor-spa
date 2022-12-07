@@ -24,9 +24,11 @@ const LoginPage = () => {
 
   const emptyForm = {
     name: '',
-    password: '',
+    nameErr: '',
     email: '',
-    error: false
+    emailErr: '',
+    password: '',
+    passwordErr: ''
   }
   const [formData, setFormData] = useState(emptyForm);
   const [isLogin, setIsLogin] = useState(true);

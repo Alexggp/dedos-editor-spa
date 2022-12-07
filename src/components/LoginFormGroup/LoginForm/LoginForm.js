@@ -1,24 +1,55 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+import emailIsValid from '../../../utils/emailIsValid';
 
-const loginForm = ({
+const LoginForm = ({
   formData,
   setFormData,
   send,
   signUp
 }) => {
 
-  const acceptHandler = ()=>{
-    if(!formData.email) {
-      setFormData({...formData, error:true})
-      return;
-    } 
-    send();
+  const [validable, setValidable] = useState(false);
+
+
+  const validate = () =>{
+    let isValid = true;
+    
+    if(!emailIsValid(formData.email)){
+      setFormData({...formData, emailErr: "Formato incorrecto"});
+      return isValid = false;
+    }
+    if (emailIsValid(formData.email) && formData.emailErr){
+      return setFormData({...formData, emailErr: ""});
+    }
+    if(!formData.password){
+      setFormData({...formData, passwordErr: "Este campo es obligatorio"});
+      return isValid = false;
+    }
+    if (formData.password && formData.passwordErr){
+      return setFormData({...formData, passwordErr: ""});
+    }
+    
+    return isValid;
+  }
+
+  useEffect(() => {
+    if(validable){
+      validate();
+    }
+  // eslint-disable-next-line 
+  }, [formData.email, formData.password]);
+
+
+  const handleSend = ()=>{
+    setValidable(true)
+    const isValid = validate();
+    if (isValid) send();
   }
 
   return(
@@ -47,7 +78,8 @@ const loginForm = ({
         required
         fullWidth
         autoComplete='off'
-        error = {formData.error}
+        error = {!!formData.emailErr.length}
+        helperText= {formData.emailErr}
         id="userEmail"
         label="Email"
         type="email"
@@ -58,7 +90,8 @@ const loginForm = ({
         required
         fullWidth
         autoComplete='off'
-        error = {formData.error}
+        error = {!!formData.passwordErr.length}
+        helperText= {formData.passwordErr}
         id="userPassword"
         label="Contraseña"
         type="password"
@@ -75,11 +108,11 @@ const loginForm = ({
         direction="row" 
         justifyContent={"space-between"}>
           <Button variant="outlined" onClick={signUp}>SingUp</Button>
-          <Button variant="contained" onClick={send}>Aceptar</Button>
+          <Button variant="contained" onClick={handleSend}>Aceptar</Button>
       </Stack>
     </Box>
   )
 }
 
 
-export default loginForm;
+export default LoginForm;

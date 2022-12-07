@@ -5,9 +5,12 @@ import { userActions } from '../reducers/user';
 
 export const login = (user) => {
   return async (dispatch) => {
-
     try {
-      const response = await axios.post(`${config.server.url}/user/signin`,user);
+      const payload = {
+        password: user.password,
+        email: user.email
+      }
+      const response = await axios.post(`${config.server.url}/user/signin`,payload);
 
       if (response.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${response.status}`);
@@ -27,9 +30,13 @@ export const login = (user) => {
 
 export const signup = (user) => {
   return async (dispatch) => {
-
     try {
-      const created = await axios.post(`${config.server.url}/user/signip`,user);
+      const payload = {
+        password: user.password,
+        email: user.email,
+        name: user.name
+      }
+      const created = await axios.post(`${config.server.url}/user/signup`,payload);
       if (created.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${created.status}`);
       }
