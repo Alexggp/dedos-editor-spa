@@ -45,7 +45,11 @@ export const signup = (user) => {
       if (logged.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${logged.status}`);
       }
-      dispatch(userActions.set(logged.data));
+      const newUser = {
+        token: logged.data.token,
+        user: logged.data.user_data
+      }
+      dispatch(userActions.set(newUser));
 
     } catch (error) {
       console.log(error)
