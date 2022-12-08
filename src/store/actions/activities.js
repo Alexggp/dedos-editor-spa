@@ -4,6 +4,20 @@ import { activity } from '../classes';
 import config from '../../config/index';
 import { activitiesActions } from '../reducers/activities';
 
+
+export const updateActivity = ({activityId, zIndexTop}) => {
+  return async () => {
+    try {
+      const response = await axios.put(`${config.server.url}/activities/${activityId}`, {zIndexTop});
+      if (response.status !== 200) {
+        throw new Error(`Unexpected API call response with status: ${response.status} - ${response.statusText}`);
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  };
+};
+
 export const deleteActivity = ({activityId, isSelected}) => {
   return async (dispatch) => {
     try {

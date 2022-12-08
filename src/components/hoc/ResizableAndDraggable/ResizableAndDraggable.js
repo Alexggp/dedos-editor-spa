@@ -52,6 +52,7 @@ const ResizableAndDraggable = (props) => {
         bounds={props.bounds}
         disableDragging={props.notMove}
         onDrag={e=> e.stopPropagation()}
+        onDragStart={props.updateZIndex}
         onDragStop={(e, offset) =>{
           if (trashIsActive){
             props.delete();

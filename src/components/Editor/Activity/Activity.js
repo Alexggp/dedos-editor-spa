@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import classes from './Activity.module.css';
@@ -11,6 +11,8 @@ import Droppable from '../../hoc/Droppable/Droppable';
 import { createArea } from '../../../store/actions/areas'; 
 import { createToken } from '../../../store/actions/tokens'; 
 import { trashActions } from '../../../store/reducers/trash';
+import { updateActivity } from '../../../store/actions/activities';
+
 
 
 const Activity = (props) => {
@@ -19,7 +21,16 @@ const Activity = (props) => {
   const tokenList = useSelector(state => state.tokens.tokenList);
   const areaList = useSelector(state => state.areas.areaList);
   const currentActivityId = useSelector(state => state.activities.currentActivityId);
+  const zIndexTop = useSelector(state => state.activities.zIndexTop);
   const currentProjectId = useSelector(state => state.projects.currentProjectId);
+
+  useEffect(()=>{
+    // When the activitiy's zIndexTop changes in the reducer, it updates it in DB
+    dispatch(updateActivity({
+      activityId: currentActivityId,
+      zIndexTop: zIndexTop}))
+    // eslint-disable-next-line
+  },[zIndexTop])
 
   const addNewItem = (item, offset)=>{
     switch (item) {

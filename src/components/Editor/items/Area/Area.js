@@ -1,5 +1,5 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 
@@ -7,11 +7,32 @@ import classes from './Area.module.css';
 import { updateArea, deleteArea } from '../../../../store/actions/areas';
 
 import { deleteToken } from '../../../../store/actions/tokens';
+import { activitiesActions } from '../../../../store/reducers/activities';
 
 
 const Area = (props) => {
+  const zIndexTop = useSelector(state => state.activities.zIndexTop);
+  const [zIndex, setZIndex] = useState(1);
   const dispatch = useDispatch();
   
+  const updateZIndex = () => {
+    const newZIndex = zIndexTop + 1;
+    console.log(newZIndex)
+    dispatch(activitiesActions.updateZIndexTop(newZIndex));
+    setZIndex(zIndexTop);
+  }
+
+  useEffect(()=>{
+    if (props.area.zIndex){
+      console.log(props.area.zIndex)
+      setZIndex(props.area.zIndex);
+    }else{
+      updateZIndex();
+    }
+    // eslint-disable-next-line
+  },[])
+
+
   const addBackgroundHandler = (e) =>{
     const backgroundUrl = 'https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png';
     const auxArea = {...props.area}
@@ -31,8 +52,11 @@ const Area = (props) => {
 
 
   const hasMoved = ({x, y})=>{
+
     const auxArea = {...props.area}
     auxArea.offset = {x: x, y: y};
+    auxArea.zIndex = zIndex;
+    
     dispatch(updateArea(auxArea));
   }
   const hasResized = ({w, h})=>{
@@ -73,7 +97,8 @@ const Area = (props) => {
         moved = {hasMoved}
         resized = {hasResized}
         delete = {deleteAreaHandler}
-        zIndex = {100}
+        zIndex = {zIndex}
+        updateZIndex = {updateZIndex}
         size={props.area.size}>
           <div className={areaClasses.join(' ')} style={style}>
             <div className={classes.DragHandle}>

@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   currentActivityId: '1',
+  zIndexTop: 0,
   activityList:[]
 }
 
@@ -25,6 +26,9 @@ const activitiesSlice = createSlice({
     },
     updateCurrent(state, action) {
       state.currentActivityId= action.payload;
+    },
+    updateZIndexTop(state) {
+      state.zIndexTop= state.zIndexTop+1;
     },
   },
 });
