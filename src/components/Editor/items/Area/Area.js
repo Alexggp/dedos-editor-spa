@@ -17,14 +17,12 @@ const Area = (props) => {
   
   const updateZIndex = () => {
     const newZIndex = zIndexTop + 1;
-    console.log(newZIndex)
     dispatch(activitiesActions.updateZIndexTop(newZIndex));
     setZIndex(zIndexTop);
   }
 
   useEffect(()=>{
     if (props.area.zIndex){
-      console.log(props.area.zIndex)
       setZIndex(props.area.zIndex);
     }else{
       updateZIndex();

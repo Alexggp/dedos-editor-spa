@@ -6,11 +6,32 @@ import classes from './Token.module.css';
 import { updateToken, deleteToken } from '../../../../store/actions/tokens';
 import Options from './Options/Options';
 
+import { activitiesActions } from '../../../../store/reducers/activities';
 
 
 const Token = (props) => {
+  const zIndexTop = useSelector(state => state.activities.zIndexTop);
+  const [zIndex, setZIndex] = useState(1);
+
   const tokenRef = useRef();
   const dispatch = useDispatch();
+
+  const updateZIndex = () => {
+    const newZIndex = zIndexTop + 1;
+    dispatch(activitiesActions.updateZIndexTop(newZIndex));
+    // +1000 to be always over the areas
+    setZIndex(zIndexTop+1000);
+  }
+
+  useEffect(()=>{
+    console.log('entra')
+    if (props.token.zIndex){
+      setZIndex(props.token.zIndex);
+    }else{
+      updateZIndex();
+    }
+    // eslint-disable-next-line
+  },[])
 
   
   const areaList = useSelector((state) => state.areas.areaList);
@@ -93,6 +114,8 @@ const Token = (props) => {
       // The token has been moved inside the same area
       auxToken.offset = {x: x, y: y};
     }
+    auxToken.zIndex = zIndex;
+
 
     dispatch(updateToken(auxToken));
   }
@@ -151,7 +174,8 @@ const Token = (props) => {
         moved = {hasMoved}
         resized = {hasResized}
         delete = {deleteTokenHandler}
-        zIndex = {300}
+        zIndex = {zIndex}
+        updateZIndex = {updateZIndex}
         notMove={!props.token.movable}
         size={props.token.size}>
           <div className={tokenClasses}  ref={tokenRef}>
