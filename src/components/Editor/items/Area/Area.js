@@ -11,14 +11,19 @@ import { activitiesActions } from '../../../../store/reducers/activities';
 
 
 const Area = (props) => {
-  const zIndexTop = useSelector(state => state.activities.zIndexTop);
-  const [zIndex, setZIndex] = useState(1);
   const dispatch = useDispatch();
+
+  const activityList = useSelector(state => state.activities.activityList);
+  const currentActivityId = useSelector((state) => state.activities.currentActivityId);
+  const activity = activityList.find(ac => ac._id === currentActivityId);
+  const [zIndex, setZIndex] = useState(1);
+
   
   const updateZIndex = () => {
-    const newZIndex = zIndexTop + 1;
-    dispatch(activitiesActions.updateZIndexTop(newZIndex));
-    setZIndex(zIndexTop);
+    const auxActivity = {...activity}
+    auxActivity.zIndexTop = auxActivity.zIndexTop + 1;
+    dispatch(activitiesActions.update(auxActivity));
+    setZIndex(activity.zIndexTop);
   }
 
   useEffect(()=>{

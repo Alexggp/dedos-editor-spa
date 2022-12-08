@@ -20,17 +20,18 @@ const Activity = (props) => {
 
   const tokenList = useSelector(state => state.tokens.tokenList);
   const areaList = useSelector(state => state.areas.areaList);
-  const currentActivityId = useSelector(state => state.activities.currentActivityId);
-  const zIndexTop = useSelector(state => state.activities.zIndexTop);
+  const activityList = useSelector(state => state.activities.activityList);
+  const currentActivityId = useSelector((state) => state.activities.currentActivityId);
+  const activity = activityList.find(ac => ac._id === currentActivityId);
   const currentProjectId = useSelector(state => state.projects.currentProjectId);
 
   useEffect(()=>{
     // When the activitiy's zIndexTop changes in the reducer, it updates it in DB
     dispatch(updateActivity({
       activityId: currentActivityId,
-      zIndexTop: zIndexTop}))
+      zIndexTop: activity.zIndexTop}))
     // eslint-disable-next-line
-  },[zIndexTop])
+  },[activity.zIndexTop])
 
   const addNewItem = (item, offset)=>{
     switch (item) {

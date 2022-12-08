@@ -10,17 +10,23 @@ import { activitiesActions } from '../../../../store/reducers/activities';
 
 
 const Token = (props) => {
-  const zIndexTop = useSelector(state => state.activities.zIndexTop);
+  const activityList = useSelector(state => state.activities.activityList);
+  const areaList = useSelector((state) => state.areas.areaList);
+  const currentActivityId = useSelector((state) => state.activities.currentActivityId);
+  const [showOptions, setShowOptions] = useState(false);
+
+  const activity = activityList.find(ac => ac._id === currentActivityId);
   const [zIndex, setZIndex] = useState(1);
 
   const tokenRef = useRef();
   const dispatch = useDispatch();
 
   const updateZIndex = () => {
-    const newZIndex = zIndexTop + 1;
-    dispatch(activitiesActions.updateZIndexTop(newZIndex));
+    const auxActivity = {...activity}
+    auxActivity.zIndexTop = auxActivity.zIndexTop + 1;
+    dispatch(activitiesActions.update(auxActivity));
     // +1000 to be always over the areas
-    setZIndex(zIndexTop+1000);
+    setZIndex(activity.zIndexTop+1000);
   }
 
   useEffect(()=>{
@@ -34,10 +40,7 @@ const Token = (props) => {
   },[])
 
   
-  const areaList = useSelector((state) => state.areas.areaList);
-  const currentActivityId = useSelector((state) => state.activities.currentActivityId);
 
-  const [showOptions, setShowOptions] = useState(false);
 
   const checkAreaOverlapping = useCallback((obj) =>{
     
