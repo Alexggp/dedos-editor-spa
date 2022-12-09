@@ -23,17 +23,18 @@ const Token = (props) => {
   const dispatch = useDispatch();
 
   const updateZIndex = () => {
-    const auxActivity = {...activity}
+    // updating activity zIndexTop index
+    const auxActivity = {...activity};
     auxActivity.zIndexTop = auxActivity.zIndexTop + 1;
     dispatch(activitiesActions.update(auxActivity));
 
     if(props.area){
-      const auxArea = {...props.area}
+      // updating container Area zIndex to be in top layer
+      const auxArea = {...props.area};
       auxArea.zIndex = auxActivity.zIndexTop;
-      dispatch(updateArea(auxArea))
+      dispatch(updateArea(auxArea));
     }
-
-
+    // updating token zIndex
     // +1000 to be always over the areas
     setZIndex(activity.zIndexTop+1000);
   }
@@ -48,14 +49,14 @@ const Token = (props) => {
       updateZIndex();
     }
     // eslint-disable-next-line
-  },[])
+  },[]);
 
   const checkAreaOverlapping = useCallback((obj) =>{
     
     // Checks if the token overlaps with any area
   
     const areas = areaList.filter(ar => ar.activityId === currentActivityId);
-    let overlapsWith = 0;
+    const overlapsWith = [];
     areas.forEach(area => {
 
       // area.top > obj.bottom ||
@@ -69,10 +70,21 @@ const Token = (props) => {
         (area.offset.y + area.size.h) < obj.screenOffset.y ||
         area.offset.x > (obj.screenOffset.x + obj.size.w)
       );
-      if (overlaps) overlapsWith = area._id;
+      if (overlaps) overlapsWith.push(area);
       
     });
-    return overlapsWith;
+
+    if (overlapsWith.length){
+      // if it verlaps with more than one area at the same time, it returns the one
+      // in the top layer (highest zIndex)
+      const area = overlapsWith.reduce((prev, current) => {
+        return (prev.zIndex > current.zIndex) ? prev : current
+      }) //returns object
+      return area._id;
+    } else {
+      return 0;
+    }
+
   },[areaList, currentActivityId])
 
 

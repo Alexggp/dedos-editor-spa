@@ -20,23 +20,26 @@ const Area = (props) => {
 
   
   const updateZIndex = () => {
-    const auxActivity = {...activity}
+    // updating activity zIndexTop index
+    const auxActivity = {...activity};
     auxActivity.zIndexTop = auxActivity.zIndexTop + 1;
     dispatch(activitiesActions.update(auxActivity));
-    setZIndex(activity.zIndexTop);
-    const auxArea = {...props.area}
+    // updating area zIndex
+    const auxArea = {...props.area};
     auxArea.zIndex = auxActivity.zIndexTop;
     dispatch(updateArea(auxArea));
+
   }
 
   useEffect(()=>{
+    // every time the zIndex changes in the reducer, also when it is created
     if (props.area.zIndex){
       setZIndex(props.area.zIndex);
     }else{
       updateZIndex();
     }
     // eslint-disable-next-line
-  },[props.area.zIndex])
+  },[props.area.zIndex]);
 
   useEffect(()=>{
     // If there is a new token inside the Area, it goes to the top layer updating its zIndex
