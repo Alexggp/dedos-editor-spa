@@ -27,9 +27,11 @@ const Token = (props) => {
     auxActivity.zIndexTop = auxActivity.zIndexTop + 1;
     dispatch(activitiesActions.update(auxActivity));
 
-    const auxArea = {...props.area}
-    auxArea.zIndex = auxActivity.zIndexTop;
-    dispatch(updateArea(auxArea))
+    if(props.area){
+      const auxArea = {...props.area}
+      auxArea.zIndex = auxActivity.zIndexTop;
+      dispatch(updateArea(auxArea))
+    }
 
 
     // +1000 to be always over the areas
