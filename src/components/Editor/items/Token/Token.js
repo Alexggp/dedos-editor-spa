@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 import classes from './Token.module.css';
 import { updateToken, deleteToken } from '../../../../store/actions/tokens';
+import { updateArea } from '../../../../store/actions/areas';
 import Options from './Options/Options';
 
 import { activitiesActions } from '../../../../store/reducers/activities';
@@ -25,11 +26,20 @@ const Token = (props) => {
     const auxActivity = {...activity}
     auxActivity.zIndexTop = auxActivity.zIndexTop + 1;
     dispatch(activitiesActions.update(auxActivity));
+
+    const auxArea = {...props.area}
+    auxArea.zIndex = auxActivity.zIndexTop;
+    dispatch(updateArea(auxArea))
+
+
     // +1000 to be always over the areas
     setZIndex(activity.zIndexTop+1000);
   }
 
   useEffect(()=>{
+    // This functin is only triggered the first time the token is rendered
+    // Calling hasMoved to check overlaping and calculate offsets
+    hasMoved(props.token.offset);
     if (props.token.zIndex){
       setZIndex(props.token.zIndex);
     }else{
@@ -65,9 +75,7 @@ const Token = (props) => {
 
 
   useEffect(()=>{
-      // This functin is only triggered the first time the token is rendered
-      // Calling hasMoved to check overlaping and calculate offsets
-      hasMoved(props.token.offset);
+
       // eslint-disable-next-line
   },[])
 

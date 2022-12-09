@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
@@ -24,6 +24,9 @@ const Area = (props) => {
     auxActivity.zIndexTop = auxActivity.zIndexTop + 1;
     dispatch(activitiesActions.update(auxActivity));
     setZIndex(activity.zIndexTop);
+    const auxArea = {...props.area}
+    auxArea.zIndex = auxActivity.zIndexTop;
+    dispatch(updateArea(auxArea));
   }
 
   useEffect(()=>{
@@ -33,8 +36,25 @@ const Area = (props) => {
       updateZIndex();
     }
     // eslint-disable-next-line
-  },[])
+  },[props.area.zIndex])
 
+  useEffect(()=>{
+    // If there is a new token inside the Area, it goes to the top layer updating its zIndex
+    if(previousChildrenLength!== undefined && (props.children.length > previousChildrenLength)){
+      console.log(props.children.length)
+      updateZIndex();
+    }
+    // eslint-disable-next-line
+  },[props.children.length])
+
+  function usePrevious(value) {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = value;
+    });
+    return ref.current;
+  }
+  const previousChildrenLength = usePrevious(props.children.length);
 
   const addBackgroundHandler = (e) =>{
     const backgroundUrl = 'https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png';
@@ -52,7 +72,6 @@ const Area = (props) => {
   const stopPropagation = (e) =>{
     e.stopPropagation();
   }
-
 
   const hasMoved = ({x, y})=>{
 
