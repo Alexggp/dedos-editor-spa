@@ -30,7 +30,6 @@ const Token = (props) => {
   }
 
   useEffect(()=>{
-    console.log('entra')
     if (props.token.zIndex){
       setZIndex(props.token.zIndex);
     }else{
@@ -38,9 +37,6 @@ const Token = (props) => {
     }
     // eslint-disable-next-line
   },[])
-
-  
-
 
   const checkAreaOverlapping = useCallback((obj) =>{
     
@@ -79,7 +75,6 @@ const Token = (props) => {
     e.stopPropagation();
   }
 
-
   const calculateNewOffset = (token) =>{
     const area = areaList.find(ar => ar._id === token.areaId);
     return {
@@ -87,7 +82,6 @@ const Token = (props) => {
       y: token.screenOffset.y - area.offset.y + 3
     }
   }
-
 
   const optionsButtonHandler = (e) =>{
     setShowOptions(!showOptions);

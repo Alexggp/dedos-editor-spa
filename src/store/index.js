@@ -9,6 +9,7 @@ import tokens from './reducers/tokens';
 import trash from './reducers/trash';
 import projects from './reducers/projects';
 import user from './reducers/user';
+import globalError from './reducers/globalError';
 
 const persistConfig = {
   key: 'root',
@@ -17,6 +18,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({ 
   activities,
+  globalError,
   areas,
   tokens,
   projects,

@@ -31,7 +31,7 @@ const Activity = (props) => {
       activityId: currentActivityId,
       zIndexTop: activity.zIndexTop}))
     // eslint-disable-next-line
-  },[activity.zIndexTop])
+  },[activity?.zIndexTop])
 
   const addNewItem = (item, offset)=>{
     switch (item) {

@@ -9,13 +9,31 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { persistor, store } from './store/';
 import { PersistGate } from 'redux-persist/integration/react';
+import { globalErrorActions } from './store/reducers/globalError';
 
-
-// Add a request interceptor
+// Request interceptor
 axios.interceptors.request.use((config) => {
   const token = store.getState().user.token;
   if (token) config.headers.Authorization =  token;
   return config;
+});
+
+// Response interceptor
+axios.interceptors.response.use((response) => {
+  return response;
+}, (error) => {
+  if (error.response && error.response.data) {
+    store.dispatch(globalErrorActions.set({
+      error: error.response.data.status || error.response.status,
+      message: error.response.data.message
+    }));
+    return Promise.reject(error.response.data);
+  }
+  store.dispatch(globalErrorActions.set({
+    error: error.response.status || 500,
+    message: error.response.statusText || error.message
+  }));
+  return Promise.reject(error.message);
 });
 
 
