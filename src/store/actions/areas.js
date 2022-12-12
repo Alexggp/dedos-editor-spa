@@ -16,7 +16,8 @@ export const updateArea = (area) => {
       dispatch(areasActions.update(area));
 
     } catch (error) {
-      console.log(error)
+      // console.log(error)
+      return;
     }
   };
 };
@@ -32,7 +33,8 @@ export const deleteArea = (areaId) => {
       dispatch(areasActions.delete(areaId));
 
     } catch (error) {
-      console.log(error)
+      // console.log(error)
+      return;
     }
   };
 };
@@ -51,7 +53,8 @@ export const createArea = ({projectId, activityId, offset}) => {
       dispatch(areasActions.create(newArea));
 
     } catch (error) {
-      console.log(error)
+      // console.log(error)
+      return;
     }
   };
 };

@@ -22,7 +22,8 @@ export const login = (user) => {
       dispatch(userActions.set(newUser));
 
     } catch (error) {
-      console.log(error)
+      // console.log(error)
+      return;
     }
   };
 };
@@ -52,7 +53,8 @@ export const signup = (user) => {
       dispatch(userActions.set(newUser));
 
     } catch (error) {
-      console.log(error)
+      // console.log(error)
+      return;
     }
   };
 };

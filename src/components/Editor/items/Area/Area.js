@@ -44,7 +44,6 @@ const Area = (props) => {
   useEffect(()=>{
     // If there is a new token inside the Area, it goes to the top layer updating its zIndex
     if(previousChildrenLength!== undefined && (props.children.length > previousChildrenLength)){
-      console.log(props.children.length)
       updateZIndex();
     }
     // eslint-disable-next-line

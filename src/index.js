@@ -10,6 +10,7 @@ import reportWebVitals from './reportWebVitals';
 import { persistor, store } from './store/';
 import { PersistGate } from 'redux-persist/integration/react';
 import { globalErrorActions } from './store/reducers/globalError';
+import { userActions } from './store/reducers/user';
 
 // Request interceptor
 axios.interceptors.request.use((config) => {
@@ -24,9 +25,12 @@ axios.interceptors.response.use((response) => {
 }, (error) => {
   if (error.response && error.response.data) {
     store.dispatch(globalErrorActions.set({
-      error: error.response.data.status || error.response.status,
+      error:  error.response.status,
       message: error.response.data.message
     }));
+    if(error.response.status === 401){
+      store.dispatch(userActions.unset());
+    }
     return Promise.reject(error.response.data);
   }
   store.dispatch(globalErrorActions.set({

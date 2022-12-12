@@ -13,7 +13,8 @@ export const updateActivity = ({activityId, zIndexTop}) => {
         throw new Error(`Unexpected API call response with status: ${response.status} - ${response.statusText}`);
       }
     } catch (error) {
-      console.log(error)
+      // console.log(error)
+      return;    
     }
   };
 };
@@ -27,7 +28,8 @@ export const deleteActivity = ({activityId, isSelected}) => {
       }
       dispatch(activitiesActions.delete({activityId, isSelected}));
     } catch (error) {
-      console.log(error)
+      // console.log(error)
+      return;    
     }
   };
 };
@@ -46,7 +48,8 @@ export const createActivity = (projectId) => {
       dispatch(activitiesActions.create(newActivity));
 
     } catch (error) {
-      console.log(error)
+      // console.log(error)
+      return;    
     }
   };
 };

@@ -23,7 +23,8 @@ export const getProjectData = (projectId) => {
       dispatch(tokensActions.set(response.data.tokens));
 
     } catch (error) {
-      console.log(error)
+      // console.log(error)
+      return;
     }
   };
 };
@@ -38,7 +39,8 @@ export const getProjects = () => {
       }
       dispatch(projectsActions.set(response.data));
     } catch (error) {
-      console.log(error)
+      // console.log(error)
+      return;
     }
   };
 };
@@ -58,7 +60,8 @@ export const createProject = (title, description) => {
       dispatch(projectsActions.create(newProject));
 
     } catch (error) {
-      console.log(error)
+      // console.log(error)
+      return;
     }
   };
 };
@@ -75,7 +78,8 @@ export const updateProject = (project) => {
       dispatch(projectsActions.update(project));
 
     } catch (error) {
-      console.log(error)
+      // console.log(error)
+      return;
     }
   };
 };
@@ -91,7 +95,8 @@ export const deleteProject = (projectId) => {
       dispatch(projectsActions.delete(projectId));
 
     } catch (error) {
-      console.log(error)
+      // console.log(error)
+      return;
     }
   };
 };

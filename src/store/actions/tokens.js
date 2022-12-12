@@ -17,7 +17,8 @@ export const updateToken = (token) => {
       dispatch(tokensActions.update(token));
 
     } catch (error) {
-      console.log(error)
+      // console.log(error)
+      return;
     }
   };
 };
@@ -33,7 +34,8 @@ export const deleteToken = (tokenId) => {
       dispatch(tokensActions.delete(tokenId));
 
     } catch (error) {
-      console.log(error)
+      // console.log(error)
+      return;
     }
   };
 };
@@ -56,7 +58,8 @@ export const createToken = ({projectId, type, activityId, offset}) => {
       dispatch(tokensActions.create(newToken));
 
     } catch (error) {
-      console.log(error)
+      // console.log(error)
+      return;
     }
   };
 };
