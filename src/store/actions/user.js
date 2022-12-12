@@ -1,4 +1,4 @@
-import dedosInstance from '../../apiInstances/dedosInstance';
+import dedosInstance from '../../apis/dedosInstance';
 import { userActions } from '../reducers/user';
 
 export const login = (user) => {

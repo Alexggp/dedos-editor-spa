@@ -1,4 +1,4 @@
-import dedosInstance from '../../apiInstances/dedosInstance';
+import dedosInstance from '../../apis/dedosInstance';
 import { area } from '../classes';
 import { areasActions } from '../reducers/areas';
 

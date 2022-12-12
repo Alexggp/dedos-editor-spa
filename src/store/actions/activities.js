@@ -1,4 +1,4 @@
-import dedosInstance from '../../apiInstances/dedosInstance';
+import dedosInstance from '../../apis/dedosInstance';
 import { activity } from '../classes';
 import { activitiesActions } from '../reducers/activities';
 
