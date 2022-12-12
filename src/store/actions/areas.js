@@ -1,14 +1,12 @@
-import axios from 'axios';
+import dedosInstance from '../../apiInstances/dedosInstance';
 import { area } from '../classes';
-
-import config from '../../config/index';
 import { areasActions } from '../reducers/areas';
 
 export const updateArea = (area) => {
   return async (dispatch) => {
 
     try {
-      const response = await axios.put(`${config.server.url}/areas/${area._id}`,area)
+      const response = await dedosInstance.put(`/areas/${area._id}`,area)
 
       if (response.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${response.status}`);
@@ -26,7 +24,7 @@ export const deleteArea = (areaId) => {
   return async (dispatch) => {
 
     try {
-      const response = await axios.delete(`${config.server.url}/areas/${areaId}`)
+      const response = await dedosInstance.delete(`/areas/${areaId}`)
       if (response.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${response.status} - ${response.statusText}`);
       }
@@ -45,7 +43,7 @@ export const createArea = ({projectId, activityId, offset}) => {
     const newArea = area(projectId, activityId, offset);
 
     try {
-      const response = await axios.post(`${config.server.url}/areas`, newArea);
+      const response = await dedosInstance.post(`/areas`, newArea);
       if (response.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${response.status} - ${response.statusText}`);
       }

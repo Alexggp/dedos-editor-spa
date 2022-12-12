@@ -1,6 +1,4 @@
-import axios from 'axios';
-
-import config from '../../config/index';
+import dedosInstance from '../../apiInstances/dedosInstance';
 import { userActions } from '../reducers/user';
 
 export const login = (user) => {
@@ -10,7 +8,7 @@ export const login = (user) => {
         password: user.password,
         email: user.email
       }
-      const response = await axios.post(`${config.server.url}/user/signin`,payload);
+      const response = await dedosInstance.post(`/user/signin`,payload);
 
       if (response.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${response.status}`);
@@ -37,12 +35,12 @@ export const signup = (user) => {
         email: user.email,
         name: user.name
       }
-      const created = await axios.post(`${config.server.url}/user/signup`,payload);
+      const created = await dedosInstance.post(`/user/signup`,payload);
       if (created.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${created.status}`);
       }
       
-      const logged = await axios.post(`${config.server.url}/user/signin`,user);
+      const logged = await dedosInstance.post(`/user/signin`,user);
       if (logged.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${logged.status}`);
       }

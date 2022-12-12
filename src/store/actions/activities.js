@@ -1,14 +1,12 @@
-import axios from 'axios';
+import dedosInstance from '../../apiInstances/dedosInstance';
 import { activity } from '../classes';
-
-import config from '../../config/index';
 import { activitiesActions } from '../reducers/activities';
 
 
 export const updateActivity = ({activityId, zIndexTop}) => {
   return async () => {
     try {
-      const response = await axios.put(`${config.server.url}/activities/${activityId}`, {zIndexTop});
+      const response = await dedosInstance.put(`/activities/${activityId}`, {zIndexTop});
       if (response.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${response.status} - ${response.statusText}`);
       }
@@ -22,7 +20,7 @@ export const updateActivity = ({activityId, zIndexTop}) => {
 export const deleteActivity = ({activityId, isSelected}) => {
   return async (dispatch) => {
     try {
-      const response = await axios.delete(`${config.server.url}/activities/${activityId}`)
+      const response = await dedosInstance.delete(`/activities/${activityId}`)
       if (response.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${response.status} - ${response.statusText}`);
       }
@@ -40,7 +38,7 @@ export const createActivity = (projectId) => {
     const newActivity = activity(projectId);
 
     try {
-      const response = await axios.post(`${config.server.url}/activities`, newActivity);
+      const response = await dedosInstance.post(`/activities`, newActivity);
       if (response.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${response.status} - ${response.statusText}`);
       }

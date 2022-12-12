@@ -1,7 +1,5 @@
-import axios from 'axios';
+import dedosInstance from '../../apiInstances/dedosInstance';
 import { text, image } from '../classes';
-
-import config from '../../config/index';
 import { tokensActions } from '../reducers/tokens';
 
 export const updateToken = (token) => {
@@ -9,7 +7,7 @@ export const updateToken = (token) => {
 
 
     try {
-      const response = await axios.put(`${config.server.url}/tokens/${token._id}`,token)
+      const response = await dedosInstance.put(`/tokens/${token._id}`,token)
 
       if (response.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${response.status}`);
@@ -27,7 +25,7 @@ export const deleteToken = (tokenId) => {
   return async (dispatch) => {
 
     try {
-      const response = await axios.delete(`${config.server.url}/tokens/${tokenId}`)
+      const response = await dedosInstance.delete(`/tokens/${tokenId}`)
       if (response.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${response.status} - ${response.statusText}`);
       }
@@ -50,7 +48,7 @@ export const createToken = ({projectId, type, activityId, offset}) => {
       newToken = image(projectId, activityId, offset);
     }
     try {
-      const response = await axios.post(`${config.server.url}/tokens`, newToken);
+      const response = await dedosInstance.post(`/tokens`, newToken);
       if (response.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${response.status} - ${response.statusText}`);
       }
