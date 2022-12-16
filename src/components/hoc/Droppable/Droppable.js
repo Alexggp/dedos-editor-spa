@@ -19,7 +19,7 @@ const Droppable = (props) => {
   }), [props.activityId])
 
   const style = props.style || {
-    with: '100%',
+    width: '100%',
     height: '100%'
   }
   

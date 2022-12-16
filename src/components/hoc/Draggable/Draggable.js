@@ -20,7 +20,9 @@ const Draggable = (props) => {
   }))
   const style = {
     cursor: 'move',
-    opacity: isDragging ? '0.4' : '1'
+    opacity: isDragging ? '0.4' : '1',
+    width: '100%',
+    height: '100%'
   }
 
   return(

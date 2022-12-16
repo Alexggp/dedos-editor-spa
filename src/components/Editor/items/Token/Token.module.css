@@ -10,13 +10,7 @@
   user-select: none;
 }
 
-.Header{
-  height: 50px;
-  text-align: center;
-  border-bottom: 1px solid #c4c3c3;
-  cursor: move;
-  background-color: #b7bfd3;
-}
+
 
 .Body{
   background-color: white;
@@ -25,21 +19,6 @@
 }
 
 
-.PinButton, .PinButtonPressed{
-  width: 30px;
-  height:30px;
-  position: absolute;
-  top: 6px;
-  left: 6px;
-  background-size: cover;
-  background-image: url('../../../../assets/icons/pinUnselected.png');
-  cursor: pointer;
-}
-
-.PinButtonPressed{
-  background-size: cover;
-  background-image: url('../../../../assets/icons/pinSelected.png');
-}
 
 .OptionsButton{
   width: 25px;
@@ -57,7 +36,7 @@
   .Header{
     background-color: #b7bfd3;
   }
-  .Token_type_TEXT
-    .Header{
-      background-color: #b6e4ff;
-  }
+.Token_type_TEXT
+  .Header{
+    background-color: #b6e4ff;
+}

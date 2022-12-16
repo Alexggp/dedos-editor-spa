@@ -1,0 +1,35 @@
+.Container{
+  height: 42px;
+  text-align: center;
+  border-bottom: 1px solid #c4c3c3;
+  cursor: move;
+}
+
+.PinButton, .PinButtonPressed{
+  width: 30px;
+  height:30px;
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background-size: cover;
+  background-image: url('../../../../../assets/icons/pinUnselected.png');
+  cursor: pointer;
+}
+
+.Selection{
+  width: 30px;
+  height:30px;
+  position: absolute;
+  top: 6px;
+  left: 50px;
+}
+
+.Selection img{
+  width: 100%;
+  height: auto;
+}
+
+.PinButtonPressed{
+  background-size: cover;
+  background-image: url('../../../../../assets/icons/pinSelected.png');
+}

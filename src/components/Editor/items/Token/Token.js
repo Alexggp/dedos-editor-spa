@@ -3,14 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 
 import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 import classes from './Token.module.css';
+import Header from './Header/Header';
 import { updateToken, deleteToken } from '../../../../store/actions/tokens';
 import { updateArea } from '../../../../store/actions/areas';
 import Options from './Options/Options';
-
+import Droppable from '../../../hoc/Droppable/Droppable';
 import { activitiesActions } from '../../../../store/reducers/activities';
 
 
 const Token = (props) => {
+  const [selection, setSelection] = useState(false);
   const activityList = useSelector(state => state.activities.activityList);
   const areaList = useSelector((state) => state.areas.areaList);
   const currentActivityId = useSelector((state) => state.activities.currentActivityId);
@@ -93,10 +95,6 @@ const Token = (props) => {
       // eslint-disable-next-line
   },[])
 
-  const stopPropagation = (e) =>{
-    e.stopPropagation();
-  }
-
   const calculateNewOffset = (token) =>{
     const area = areaList.find(ar => ar._id === token.areaId);
     return {
@@ -163,21 +161,17 @@ const Token = (props) => {
     dispatch(updateToken(token));
   }
 
-
-  let pinButtonClass = classes.PinButton;
-
-  if (!props.token.movable) {
-    pinButtonClass = classes.PinButtonPressed;
-  }
   
   const tokenClasses = [classes.Token, classes[`Token_type_${props.type}`]].join(' ');
 
-  const headerContent = !showOptions ? (
-    <React.Fragment>
-      <div className={pinButtonClass} onMouseDown={stopPropagation} onClick={pinButtonHandler}></div>
-      {props.title} 
-      {props.addButton}
-    </React.Fragment>
+  const headerComponent = !showOptions ? (
+    <Header 
+      movable = {props.token.movable}
+      addButton = {props.addButton}
+      title = {props.title}
+      pinButtonHandler = {pinButtonHandler}
+      selection = {selection}
+    />
    
   ) : '';
 
@@ -185,29 +179,41 @@ const Token = (props) => {
     <Options token={props.token} updateOptions={updateOptions}/>
   ) : '';
 
+
+  const addNewItem = (item)=>{
+    if (item === 'Selection') setSelection(true)
+  }
+
+
   return(
 
-      <ResizableAndDraggable
-        dragHandleClassName={classes.Header}
-        offset={props.token.offset}
-        moved = {hasMoved}
-        resized = {hasResized}
-        delete = {deleteTokenHandler}
-        zIndex = {zIndex}
-        updateZIndex = {updateZIndex}
-        notMove={!props.token.movable}
-        size={props.token.size}>
-          <div className={tokenClasses}  ref={tokenRef}>
-            <div className={classes.Header} >
-              {headerContent}
-            </div>
-            <div className={classes.Body} >
-              <div className={classes.OptionsButton} onClick={optionsButtonHandler}></div>
-              {props.children}
-              {optionsContainer}
-            </div>
-          </div>
-      </ResizableAndDraggable>
+        <ResizableAndDraggable
+          dragHandleClassName={classes.Header}
+          offset={props.token.offset}
+          moved = {hasMoved}
+          resized = {hasResized}
+          delete = {deleteTokenHandler}
+          zIndex = {zIndex}
+          updateZIndex = {updateZIndex}
+          notMove={!props.token.movable}
+          size={props.token.size}>
+            <Droppable 
+              type="Activity"
+              accept={['Selection','Pairing','Counter']} 
+              activityId = {currentActivityId}
+              dropped={addNewItem}>
+                <div className={tokenClasses}  ref={tokenRef}>
+                  <div className={classes.Header} >
+                    {headerComponent}
+                  </div>
+                  <div className={classes.Body} >
+                    <div className={classes.OptionsButton} onClick={optionsButtonHandler}></div>
+                    {props.children}
+                    {optionsContainer}
+                  </div>
+                </div>
+            </Droppable>
+        </ResizableAndDraggable>
   )
 
 }
