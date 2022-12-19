@@ -20,7 +20,7 @@ export default function CustomizedSnackbars() {
   };
 
   return (
-    <Snackbar open={!!error.error} autoHideDuration={3000} onClose={handleClose}>
+    <Snackbar sx={{ zIndex: '999999' }} open={!!error.error} autoHideDuration={3000} onClose={handleClose}>
       <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
         {error.message}
       </Alert>
