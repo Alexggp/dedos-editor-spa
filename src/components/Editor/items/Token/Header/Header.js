@@ -8,8 +8,10 @@ const Header = ({
   addButton, 
   movable,
   pinButtonHandler,
-  selection
+  objetive
 }) => {
+
+
 
   let pinButtonClass = classes.PinButton;
 
@@ -20,11 +22,14 @@ const Header = ({
   return(
     <div className={classes.Container} >
       <div className={pinButtonClass} onMouseDown={(e) => e.stopPropagation()} onClick={pinButtonHandler}></div>
-      {selection ? 
-        <div className={classes.Selection}  onMouseDown={(e) => e.stopPropagation()}>
-          <Draggable type={'TokenSelection'}>
-            <img alt='' src={dartboardIcon}/>
-          </Draggable>
+      {objetive ? 
+        <div className={classes.Objetive}  onMouseDown={(e) => e.stopPropagation()}>
+          { 
+            (objetive.type === "Selection") ? 
+              <Draggable type={'TokenSelection'}>
+                <img alt='' src={dartboardIcon}/>
+              </Draggable> : <></>
+           }
         </div>
         : <></>
       }

@@ -10,6 +10,9 @@ const objetivesSlice = createSlice({
   name: 'objetives',
   initialState,
   reducers: {
+    set(state, action) {
+      state.objetivesList = action.payload;
+    },
     delete(state, action) {
       state.objetivesList = state.objetivesList.filter(obj => obj._id !== action.payload.objetiveId);
     },

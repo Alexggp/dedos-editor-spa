@@ -16,7 +16,7 @@
   cursor: pointer;
 }
 
-.Selection{
+.Objetive{
   width: 30px;
   height:30px;
   position: absolute;
@@ -24,7 +24,7 @@
   left: 50px;
 }
 
-.Selection img{
+.Objetive img{
   width: 100%;
   height: auto;
 }

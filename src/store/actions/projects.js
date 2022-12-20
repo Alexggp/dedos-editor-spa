@@ -4,6 +4,7 @@ import { projectsActions } from '../reducers/projects';
 import { activitiesActions } from '../reducers/activities';
 import { areasActions } from '../reducers/areas';
 import { tokensActions } from '../reducers/tokens';
+import { objetivesActions } from '../reducers/objetives';
 
 export const getProjectData = (projectId) => {
   return async (dispatch) => {
@@ -19,6 +20,8 @@ export const getProjectData = (projectId) => {
       dispatch(activitiesActions.set(response.data.activities));
       dispatch(areasActions.set(response.data.areas));
       dispatch(tokensActions.set(response.data.tokens));
+      dispatch(objetivesActions.set(response.data.objetives));
+
 
     } catch (error) {
       // console.log(error)

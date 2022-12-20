@@ -9,10 +9,10 @@ import { updateArea } from '../../../../store/actions/areas';
 import Options from './Options/Options';
 import Droppable from '../../../hoc/Droppable/Droppable';
 import { activitiesActions } from '../../../../store/reducers/activities';
+import { createObjetive } from '../../../../store/actions/objetives';
 
 
 const Token = (props) => {
-  const [selection, setSelection] = useState(false);
   const activityList = useSelector(state => state.activities.activityList);
   const areaList = useSelector((state) => state.areas.areaList);
   const currentActivityId = useSelector((state) => state.activities.currentActivityId);
@@ -23,6 +23,10 @@ const Token = (props) => {
 
   const tokenRef = useRef();
   const dispatch = useDispatch();
+
+  const objetivesList = useSelector(state => state.objetives.objetivesList);
+  const objetive = objetivesList.find(obj => obj.origin === props.token._id);
+
 
   const updateZIndex = () => {
     // updating activity zIndexTop index
@@ -170,7 +174,7 @@ const Token = (props) => {
       addButton = {props.addButton}
       title = {props.title}
       pinButtonHandler = {pinButtonHandler}
-      selection = {selection}
+      objetive = {objetive}
     />
    
   ) : '';
@@ -180,8 +184,15 @@ const Token = (props) => {
   ) : '';
 
 
-  const addNewItem = (item)=>{
-    if (item === 'Selection') setSelection(true)
+  const addObjetive = (type)=>{
+    dispatch(createObjetive(
+      props.token.projectId,
+      props.token.activityId,
+      type,
+      props.token._id,
+      null,
+      null
+    ));
   }
 
 
@@ -201,7 +212,7 @@ const Token = (props) => {
               type="Activity"
               accept={['Selection','Pairing','Counter']} 
               activityId = {currentActivityId}
-              dropped={addNewItem}>
+              dropped={addObjetive}>
                 <div className={tokenClasses}  ref={tokenRef}>
                   <div className={classes.Header} >
                     {headerComponent}

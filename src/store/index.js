@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import activities from './reducers/activities';
 import areas from './reducers/areas';
 import tokens from './reducers/tokens';
+import objetives from './reducers/objetives';
 import trash from './reducers/trash';
 import projects from './reducers/projects';
 import user from './reducers/user';
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   globalError,
   areas,
   tokens,
+  objetives,
   projects,
   trash,
   user
