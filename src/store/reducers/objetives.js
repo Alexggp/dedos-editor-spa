@@ -14,7 +14,7 @@ const objetivesSlice = createSlice({
       state.objetivesList = action.payload;
     },
     delete(state, action) {
-      state.objetivesList = state.objetivesList.filter(obj => obj._id !== action.payload.objetiveId);
+      state.objetivesList = state.objetivesList.filter(obj => obj._id !== action.payload);
     },
     create(state, action) {
       state.objetivesList.push(action.payload);

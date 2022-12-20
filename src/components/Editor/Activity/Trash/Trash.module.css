@@ -1,0 +1,14 @@
+.Trash{
+  width: 75px;
+  height: 75px;
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  background-color: #9ad8f1;
+  background-size: 80%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-image: url('../../../../assets/icons/trashIcon.png');
+  border-radius: 100px;
+  z-index: 999999;
+}

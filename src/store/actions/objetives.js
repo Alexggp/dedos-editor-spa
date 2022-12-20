@@ -18,14 +18,14 @@ export const updateObjetive = ({objetiveId, data}) => {
   };
 };
 
-export const deleteObjetive = ({objetiveId}) => {
+export const deleteObjetive = (objetiveId) => {
   return async (dispatch) => {
     try {
       const response = await dedosInstance.delete(`/objetives/${objetiveId}`)
       if (response.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${response.status} - ${response.statusText}`);
       }
-      dispatch(objetivesActions.delete({objetiveId}));
+      dispatch(objetivesActions.delete(objetiveId));
     } catch (error) {
       // console.log(error)
       return;    

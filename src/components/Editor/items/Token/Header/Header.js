@@ -26,7 +26,7 @@ const Header = ({
         <div className={classes.Objetive}  onMouseDown={(e) => e.stopPropagation()}>
           { 
             (objetive.type === "Selection") ? 
-              <Draggable type={'TokenSelection'}>
+              <Draggable type={'TokenSelection'} id={objetive._id}>
                 <img alt='' src={dartboardIcon}/>
               </Draggable> : <></>
            }

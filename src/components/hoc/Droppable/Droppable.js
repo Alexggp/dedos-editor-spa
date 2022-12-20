@@ -13,7 +13,7 @@ const Droppable = (props) => {
       canDrop: monitor.canDrop(),
     }),
     drop: (item, monitor) =>{
-      props.dropped(item.name, monitor.getClientOffset())
+      props.dropped(item, monitor.getClientOffset())
       return { name: props.type }
     }
   }), [props.activityId])

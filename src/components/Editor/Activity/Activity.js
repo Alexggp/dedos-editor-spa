@@ -6,11 +6,11 @@ import Area from '../items/Area/Area';
 import Image from '../items/Image/Image';
 import Text from '../items/Text/Text';
 
+import Trash from './Trash/Trash'
 import Droppable from '../../hoc/Droppable/Droppable';
 
 import { createArea } from '../../../store/actions/areas'; 
 import { createToken } from '../../../store/actions/tokens'; 
-import { trashActions } from '../../../store/reducers/trash';
 import { updateActivity } from '../../../store/actions/activities';
 
 
@@ -34,7 +34,8 @@ const Activity = (props) => {
   },[activity?.zIndexTop])
 
   const addNewItem = (item, offset)=>{
-    switch (item) {
+    console.log(item)
+    switch (item.name) {
       case 'AddArea':
         dispatch(createArea({
           projectId: currentProjectId,
@@ -110,7 +111,7 @@ const Activity = (props) => {
 
   return(
     
-      <div id="Activity" className={classes.Activity} onClick={addNewItem}>
+      <div id="Activity" className={classes.Activity}>
         
         <Droppable 
           type="Activity"
@@ -120,10 +121,7 @@ const Activity = (props) => {
             {tokens}
             {areas}
             {disclaimer}
-            <div className={classes.Trash}
-              onMouseEnter={()=>{dispatch(trashActions.toggle(true))}}
-              onMouseLeave={()=>{dispatch(trashActions.toggle(false))}}
-            />
+            <Trash/>
         </Droppable>
       </div>
     
