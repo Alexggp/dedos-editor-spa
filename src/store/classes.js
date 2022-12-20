@@ -68,3 +68,12 @@ export const image = (projectId, activityId, offset) => ({
     }
   
 })
+
+export const objetive = (projectId, activityId, type, origin, target, value ) => ({
+  projectId, 
+  activityId,
+  type,
+  origin,
+  target, 
+  value
+})
