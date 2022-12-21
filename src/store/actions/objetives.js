@@ -10,7 +10,7 @@ export const updateObjetive = ({objetiveId, data}) => {
       if (response.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${response.status} - ${response.statusText}`);
       }
-      delete response.data.__v
+
       dispatch(objetivesActions.update(response.data));
     } catch (error) {
       // console.log(error)
@@ -34,7 +34,7 @@ export const deleteObjetive = (objetiveId) => {
   };
 };
 
-export const createObjetive = (projectId, activityId, type, origin) => {
+export const createObjetive = ({projectId, activityId, type, origin}) => {
   return async (dispatch) => {
     const objetivesList = store.getState().objetives.objetivesList;
     const obj = objetivesList.find(obj => obj.origin === origin);
@@ -43,7 +43,7 @@ export const createObjetive = (projectId, activityId, type, origin) => {
 
     let target;
     let value;
-    if(type === "Counter"){
+    if(type === "Counter" || type === "Timer"){
       value = 1;
     }
 

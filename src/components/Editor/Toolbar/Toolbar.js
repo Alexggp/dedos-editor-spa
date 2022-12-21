@@ -71,7 +71,7 @@ const Toolbar = (props) => {
       </div>
       <div className={classes.ButtonArea} title='Arrástrame al área de edición para añadir límite de tiempo a la actividad'>
         <div className={classes.Button}>
-            <Draggable type={'Clock'}>
+            <Draggable type={'Timer'}>
               <img alt='' src={clockIcon}/>
             </Draggable>
         </div>

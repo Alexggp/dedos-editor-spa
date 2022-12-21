@@ -185,14 +185,13 @@ const Token = (props) => {
 
 
   const addObjetive = (item)=>{
-    dispatch(createObjetive(
-      props.token.projectId,
-      props.token.activityId,
-      item.name,
-      props.token._id
-    ));
+    dispatch(createObjetive({
+      projectId: props.token.projectId,
+      activityId: props.token.activityId,
+      type: item.name,
+      origin: props.token._id
+    }));
   }
-
 
   return(
 

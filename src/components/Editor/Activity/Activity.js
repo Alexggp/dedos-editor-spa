@@ -6,13 +6,14 @@ import Area from '../items/Area/Area';
 import Image from '../items/Image/Image';
 import Text from '../items/Text/Text';
 
-import Trash from './Trash/Trash'
+import Trash from './Trash/Trash';
+import Timer from '../objetives/Timer/Timer';
 import Droppable from '../../hoc/Droppable/Droppable';
 
 import { createArea } from '../../../store/actions/areas'; 
 import { createToken } from '../../../store/actions/tokens'; 
 import { updateActivity } from '../../../store/actions/activities';
-
+import { createObjetive } from '../../../store/actions/objetives';
 
 
 const Activity = (props) => {
@@ -24,6 +25,8 @@ const Activity = (props) => {
   const currentActivityId = useSelector((state) => state.activities.currentActivityId);
   const activity = activityList.find(ac => ac._id === currentActivityId);
   const currentProjectId = useSelector(state => state.projects.currentProjectId);
+  const objetivesList = useSelector(state => state.objetives.objetivesList);
+  const timerObjetive = objetivesList.find(obj => obj.origin === currentActivityId && obj.type === "Timer");
 
   useEffect(()=>{
     // When the activitiy's zIndexTop changes in the reducer, it updates it in DB
@@ -66,6 +69,14 @@ const Activity = (props) => {
             x: offset.x-220,
             y: offset.y-20
           }
+        }));
+        break;
+      case 'Timer': 
+        dispatch(createObjetive({
+          projectId: currentProjectId,
+          activityId: currentActivityId,
+          type: 'Timer',
+          origin: currentActivityId
         }));
         break;
       default:
@@ -115,13 +126,14 @@ const Activity = (props) => {
         
         <Droppable 
           type="Activity"
-          accept={['AddArea','AddText','AddImage']} 
+          accept={['AddArea','AddText','AddImage', 'Timer']} 
           activityId = {currentActivityId}
           dropped={addNewItem}>
             {tokens}
             {areas}
             {disclaimer}
             <Trash/>
+            {timerObjetive ? <Timer objetive={timerObjetive}/> : <></>}
         </Droppable>
       </div>
     

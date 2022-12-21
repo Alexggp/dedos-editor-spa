@@ -21,7 +21,7 @@ const Trash = () => {
   return (
     <Droppable
       type="Trash"
-      accept={['SelectionObj', 'CounterObj']}
+      accept={['SelectionObj', 'CounterObj', 'TimerObj']}
       dropped={removeItem}>
       <div className={classes.Trash}
         onMouseEnter={() => { dispatch(trashActions.toggle(true)) }}
