@@ -1,7 +1,7 @@
 import dedosInstance from '../../apis/dedosInstance';
 import { objetive } from '../classes';
 import { objetivesActions } from '../reducers/objetives';
-
+import { store } from '..';
 
 export const updateObjetive = ({objetiveId, data}) => {
   return async (dispatch) => {
@@ -35,6 +35,10 @@ export const deleteObjetive = (objetiveId) => {
 
 export const createObjetive = (projectId, activityId, type, origin, target, value) => {
   return async (dispatch) => {
+    const objetivesList = store.getState().objetives.objetivesList;
+    const obj = objetivesList.find(obj => obj.origin === origin);
+    // Only one objetive by origin is allowed 
+    if (obj) return;
 
     const newObjetive = objetive(projectId, activityId, type, origin, target, value);
 
