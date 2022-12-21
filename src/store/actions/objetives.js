@@ -33,12 +33,18 @@ export const deleteObjetive = (objetiveId) => {
   };
 };
 
-export const createObjetive = (projectId, activityId, type, origin, target, value) => {
+export const createObjetive = (projectId, activityId, type, origin) => {
   return async (dispatch) => {
     const objetivesList = store.getState().objetives.objetivesList;
     const obj = objetivesList.find(obj => obj.origin === origin);
     // Only one objetive by origin is allowed 
     if (obj) return;
+
+    let target;
+    let value;
+    if(type === "Counter"){
+      value = 1;
+    }
 
     const newObjetive = objetive(projectId, activityId, type, origin, target, value);
 

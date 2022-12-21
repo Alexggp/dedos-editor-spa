@@ -189,9 +189,7 @@ const Token = (props) => {
       props.token.projectId,
       props.token.activityId,
       item.name,
-      props.token._id,
-      null,
-      null
+      props.token._id
     ));
   }
 

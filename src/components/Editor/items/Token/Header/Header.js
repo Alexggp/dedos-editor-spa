@@ -1,7 +1,8 @@
 import React from 'react';
+
 import classes from './Header.module.css';
-import dartboardIcon from '../../../../../assets/icons/dartboardIcon.png';
-import Draggable from '../../../../hoc/Draggable/Draggable';
+import Selection from '../../../objetives/Selection/Selection';
+import Counter from '../../../objetives/Counter/Counter';
 
 const Header = ({
   title, 
@@ -11,34 +12,37 @@ const Header = ({
   objetive
 }) => {
 
-
-
   let pinButtonClass = classes.PinButton;
 
   if (!movable) {
     pinButtonClass = classes.PinButtonPressed;
   }
+
+  const getIcons = () =>{
+    switch (objetive.type) {
+      case "Selection":
+        return <Selection objetive={objetive}/>
+      case "Counter":   
+        return <Counter objetive={objetive}/>
+      default:
+        return <></>  
+    }
+  } 
+
   
   return(
     <div className={classes.Container} >
       <div className={pinButtonClass} onMouseDown={(e) => e.stopPropagation()} onClick={pinButtonHandler}></div>
       {objetive ? 
         <div className={classes.Objetive}  onMouseDown={(e) => e.stopPropagation()}>
-          { 
-            (objetive.type === "Selection") ? 
-              <Draggable type={'TokenSelection'} id={objetive._id}>
-                <img alt='' src={dartboardIcon}/>
-              </Draggable> : <></>
-           }
+          {getIcons()}
         </div>
         : <></>
       }
-    
-      {title} 
+      {title}
       {addButton}
     </div>
   )
-
 }
 
 

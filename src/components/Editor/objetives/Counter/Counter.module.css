@@ -1,0 +1,16 @@
+.Bubble{
+  width: 15px;
+  height: 15px;
+  border-radius: 100px;
+  background-color: #8b0000;
+  color: #fff;
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  font-size: 12px;
+  line-height: 0;
+  font-weight: 500;
+  padding-top: 7px;
+  box-sizing: border-box;
+  cursor: pointer;
+}

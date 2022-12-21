@@ -24,11 +24,6 @@
   left: 50px;
 }
 
-.Objetive img{
-  width: 100%;
-  height: auto;
-}
-
 .PinButtonPressed{
   background-size: cover;
   background-image: url('../../../../../assets/icons/pinSelected.png');

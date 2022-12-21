@@ -13,7 +13,7 @@ import { deleteObjetive } from '../../../../store/actions/objetives';
 
 const Trash = () => {
   const dispatch = useDispatch();
-
+  
   const removeItem = (item) =>{
     dispatch(deleteObjetive(item.id))
   }
@@ -21,7 +21,7 @@ const Trash = () => {
   return (
     <Droppable
       type="Trash"
-      accept={['TokenSelection']}
+      accept={['SelectionObj', 'CounterObj']}
       dropped={removeItem}>
       <div className={classes.Trash}
         onMouseEnter={() => { dispatch(trashActions.toggle(true)) }}
