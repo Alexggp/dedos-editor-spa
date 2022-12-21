@@ -10,7 +10,8 @@ export const updateObjetive = ({objetiveId, data}) => {
       if (response.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${response.status} - ${response.statusText}`);
       }
-      dispatch(objetivesActions.update(response));
+      delete response.data.__v
+      dispatch(objetivesActions.update(response.data));
     } catch (error) {
       // console.log(error)
       return;    
