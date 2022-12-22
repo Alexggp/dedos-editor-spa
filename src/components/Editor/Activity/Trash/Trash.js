@@ -15,6 +15,7 @@ const Trash = () => {
   const dispatch = useDispatch();
   
   const removeItem = (item) =>{
+    console.log("trash", item)
     dispatch(deleteObjetive(item.id))
   }
 

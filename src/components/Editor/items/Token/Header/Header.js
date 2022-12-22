@@ -18,7 +18,7 @@ const Header = ({
     pinButtonClass = classes.PinButtonPressed;
   }
 
-  const getIcons = () =>{
+  const getObjetiveComponents = () =>{
     switch (objetive.type) {
       case "Selection":
         return <Selection objetive={objetive}/>
@@ -35,7 +35,7 @@ const Header = ({
       <div className={pinButtonClass} onMouseDown={(e) => e.stopPropagation()} onClick={pinButtonHandler}></div>
       {objetive ? 
         <div className={classes.Objetive}  onMouseDown={(e) => e.stopPropagation()}>
-          {getIcons()}
+          {getObjetiveComponents()}
         </div>
         : <></>
       }
