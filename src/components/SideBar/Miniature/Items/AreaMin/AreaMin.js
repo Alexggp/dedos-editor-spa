@@ -12,7 +12,7 @@ const AreaMin = (props) => {
     height: props.area.size.h / 10,
     top: props.area.offset.y / 10,
     left: props.area.offset.x / 10,
-    
+    zIndex: props.area.zIndex
   }
 
   const areaClasses = [classes.Area];

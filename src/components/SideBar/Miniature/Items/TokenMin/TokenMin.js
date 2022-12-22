@@ -10,7 +10,7 @@ const Token = (props) => {
     height: props.token.size.h / 10,
     top: props.token.offset.y / 10,
     left: props.token.offset.x / 10,
-    
+    zIndex: props.token.zIndex
   }
   const tokenClasses = [classes.Token, classes[`Token_type_${props.type}`]].join(' ');
 
