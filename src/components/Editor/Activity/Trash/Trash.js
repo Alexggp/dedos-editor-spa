@@ -15,14 +15,13 @@ const Trash = () => {
   const dispatch = useDispatch();
   
   const removeItem = (item) =>{
-    console.log("trash", item)
     dispatch(deleteObjetive(item.id))
   }
 
   return (
     <Droppable
       type="Trash"
-      accept={['SelectionObj', 'CounterObj', 'TimerObj']}
+      accept={['SelectionObj', 'CounterObj', 'TimerObj', 'PairingObj']}
       dropped={removeItem}>
       <div className={classes.Trash}
         onMouseEnter={() => { dispatch(trashActions.toggle(true)) }}

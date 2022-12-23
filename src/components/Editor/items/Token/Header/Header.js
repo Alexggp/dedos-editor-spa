@@ -3,6 +3,8 @@ import React from 'react';
 import classes from './Header.module.css';
 import Selection from '../../../objetives/Selection/Selection';
 import Counter from '../../../objetives/Counter/Counter';
+import Pairing from '../../../objetives/Pairing/Pairing';
+
 
 const Header = ({
   title, 
@@ -24,6 +26,8 @@ const Header = ({
         return <Selection objetive={objetive}/>
       case "Counter":   
         return <Counter objetive={objetive}/>
+      case "Pairing":   
+        return <Pairing objetive={objetive}/>
       default:
         return <></>  
     }

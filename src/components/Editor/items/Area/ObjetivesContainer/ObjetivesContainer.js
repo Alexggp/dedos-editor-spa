@@ -2,6 +2,7 @@ import React from 'react';
 
 import classes from './ObjetivesContainer.module.css';
 import Counter from '../../../objetives/Counter/Counter';
+import Pairing from '../../../objetives/Pairing/Pairing';
 
 const ObjetivesContainer = ({
   objetive
@@ -11,6 +12,8 @@ const ObjetivesContainer = ({
     switch (objetive.type) {
       case "Counter":   
         return <Counter objetive={objetive}/>
+      case "Pairing":   
+        return <Pairing objetive={objetive}/>
       default:
         return <></>  
     }
