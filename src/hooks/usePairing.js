@@ -17,7 +17,11 @@ const usePairing = ()=>{
     return;
   }
 
-  return setPairing;
+  const cancelPairing = ()=>{
+    dispatch(pairingActions.set(false));
+  }
+
+  return {setPairing, pairingId: objetiveId, cancelPairing};
 }
 
 export default usePairing;

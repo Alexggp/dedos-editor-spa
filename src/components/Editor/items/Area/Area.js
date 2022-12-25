@@ -21,7 +21,7 @@ const Area = (props) => {
   const currentActivityId = useSelector((state) => state.activities.currentActivityId);
   const activity = activityList.find(ac => ac._id === currentActivityId);
   const [zIndex, setZIndex] = useState(1);
-  const setPairing = usePairing();
+  const {setPairing} = usePairing();
 
 
   const objetivesList = useSelector(state => state.objetives.objetivesList);

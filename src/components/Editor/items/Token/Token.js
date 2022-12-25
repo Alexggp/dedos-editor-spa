@@ -17,7 +17,7 @@ const Token = (props) => {
   const areaList = useSelector((state) => state.areas.areaList);
   const currentActivityId = useSelector((state) => state.activities.currentActivityId);
   const [showOptions, setShowOptions] = useState(false);
-  const setPairing = usePairing();
+  const {setPairing} = usePairing();
 
   const activity = activityList.find(ac => ac._id === currentActivityId);
   const [zIndex, setZIndex] = useState(1);
