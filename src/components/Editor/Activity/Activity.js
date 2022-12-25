@@ -32,7 +32,7 @@ const Activity = (props) => {
     // When the activitiy's zIndexTop changes in the reducer, it updates it in DB
     dispatch(updateActivity({
       activityId: currentActivityId,
-      zIndexTop: activity.zIndexTop}))
+      zIndexTop: activity?.zIndexTop}))
     // eslint-disable-next-line
   },[activity?.zIndexTop])
 

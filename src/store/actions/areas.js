@@ -1,6 +1,8 @@
 import dedosInstance from '../../apis/dedosInstance';
 import { area } from '../classes';
 import { areasActions } from '../reducers/areas';
+import { objetivesActions } from '../reducers/objetives';
+import { store } from '..';
 
 export const updateArea = (area) => {
   return async (dispatch) => {
@@ -29,6 +31,13 @@ export const deleteArea = (areaId) => {
         throw new Error(`Unexpected API call response with status: ${response.status} - ${response.statusText}`);
       }
       dispatch(areasActions.delete(areaId));
+
+      const objetivesList = store.getState().objetives.objetivesList;
+      const obj = objetivesList.find(obj => obj.origin === areaId || obj.target === areaId);
+      // Deleting attached objetives
+      if (obj) {
+        dispatch(objetivesActions.delete(obj._id));
+      };
 
     } catch (error) {
       // console.log(error)

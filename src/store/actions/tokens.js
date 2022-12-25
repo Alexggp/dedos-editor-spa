@@ -1,6 +1,8 @@
 import dedosInstance from '../../apis/dedosInstance';
 import { text, image } from '../classes';
 import { tokensActions } from '../reducers/tokens';
+import { objetivesActions } from '../reducers/objetives';
+import { store } from '..';
 
 export const updateToken = (token) => {
   return async (dispatch) => {
@@ -31,6 +33,13 @@ export const deleteToken = (tokenId) => {
       }
       dispatch(tokensActions.delete(tokenId));
 
+      const objetivesList = store.getState().objetives.objetivesList;
+      const obj = objetivesList.find(obj => obj.origin === tokenId || obj.target === tokenId);
+      console.log(obj)
+      // Deleting attached objetives
+      if (obj) {
+        dispatch(objetivesActions.delete(obj._id));
+      };
     } catch (error) {
       // console.log(error)
       return;
