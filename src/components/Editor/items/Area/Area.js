@@ -6,8 +6,9 @@ import Droppable from '../../../../hoc/Droppable/Droppable';
 
 import classes from './Area.module.css';
 import ObjetivesContainer from './ObjetivesContainer/ObjetivesContainer';
-import { updateArea, deleteArea } from '../../../../store/actions/areas';
+import usePairing from '../../../../hooks/usePairing';
 
+import { updateArea, deleteArea } from '../../../../store/actions/areas';
 import { deleteToken } from '../../../../store/actions/tokens';
 import { activitiesActions } from '../../../../store/reducers/activities';
 import { createObjetive } from '../../../../store/actions/objetives';
@@ -20,9 +21,11 @@ const Area = (props) => {
   const currentActivityId = useSelector((state) => state.activities.currentActivityId);
   const activity = activityList.find(ac => ac._id === currentActivityId);
   const [zIndex, setZIndex] = useState(1);
+  const setPairing = usePairing();
+
 
   const objetivesList = useSelector(state => state.objetives.objetivesList);
-  const objetive = objetivesList.find(obj => obj.origin === props.area._id);
+  const objetive = objetivesList.find(obj => obj.origin === props.area._id || obj.target === props.area._id);
 
   const updateZIndex = () => {
     // updating activity zIndexTop index
@@ -125,6 +128,11 @@ const Area = (props) => {
     }));
   }
 
+  const handleClick = (e)=>{
+    e.stopPropagation();
+    setPairing(props.area._id);
+  }
+
   return (
 
     <ResizableAndDraggable
@@ -142,7 +150,7 @@ const Area = (props) => {
         accept={['Pairing', 'Counter']}
         activityId={currentActivityId}
         dropped={addObjetive}>
-        <div className={areaClasses.join(' ')} style={style}>
+        <div className={areaClasses.join(' ')} style={style} onClick={handleClick}>
           <div className={classes.DragHandle}>
             <div className={classes.AreaTypeButton} onMouseDown={stopPropagation} onClick={typeButtonHandler}></div>
             <div className={classes.AddButton} onMouseDown={stopPropagation} onClick={addBackgroundHandler}></div>

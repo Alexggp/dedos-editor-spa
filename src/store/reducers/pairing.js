@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  origin: false
+  objetiveId: false
 }
 
 const pairingSlice = createSlice({
   name: 'pairing',
   initialState,
   reducers: {
-    toggle(state, action) {
-      state.origin= action.payload;
+    set(state, action) {
+      state.objetiveId= action.payload;
     }
   }
 });

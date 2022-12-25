@@ -10,13 +10,14 @@ import Options from './Options/Options';
 import Droppable from '../../../../hoc/Droppable/Droppable';
 import { activitiesActions } from '../../../../store/reducers/activities';
 import { createObjetive } from '../../../../store/actions/objetives';
-
+import usePairing from '../../../../hooks/usePairing';
 
 const Token = (props) => {
   const activityList = useSelector(state => state.activities.activityList);
   const areaList = useSelector((state) => state.areas.areaList);
   const currentActivityId = useSelector((state) => state.activities.currentActivityId);
   const [showOptions, setShowOptions] = useState(false);
+  const setPairing = usePairing();
 
   const activity = activityList.find(ac => ac._id === currentActivityId);
   const [zIndex, setZIndex] = useState(1);
@@ -25,7 +26,7 @@ const Token = (props) => {
   const dispatch = useDispatch();
 
   const objetivesList = useSelector(state => state.objetives.objetivesList);
-  const objetive = objetivesList.find(obj => obj.origin === props.token._id);
+  const objetive = objetivesList.find(obj => obj.origin === props.token._id || obj.target === props.token._id);
 
 
   const updateZIndex = () => {
@@ -193,6 +194,11 @@ const Token = (props) => {
     }));
   }
 
+  const handleClick = (e)=>{
+    e.stopPropagation();
+    setPairing(props.token._id);
+  }
+
   return(
 
         <ResizableAndDraggable
@@ -210,7 +216,7 @@ const Token = (props) => {
               accept={['Selection','Pairing','Counter']} 
               activityId = {currentActivityId}
               dropped={addObjetive}>
-                <div className={tokenClasses}  ref={tokenRef}>
+                <div className={tokenClasses}  ref={tokenRef} onClick={handleClick}>
                   <div className={classes.Header} >
                     {headerComponent}
                   </div>

@@ -1,6 +1,7 @@
 import dedosInstance from '../../apis/dedosInstance';
 import { objetive } from '../classes';
 import { objetivesActions } from '../reducers/objetives';
+import { pairingActions } from '../reducers/pairing';
 import { store } from '..';
 
 export const updateObjetive = ({objetiveId, data}) => {
@@ -56,7 +57,9 @@ export const createObjetive = ({projectId, activityId, type, origin}) => {
       }
       newObjetive._id = response.data._id;
       dispatch(objetivesActions.create(newObjetive));
-
+      if(type === "Pairing"){
+        dispatch(pairingActions.set(newObjetive._id));
+      }
     } catch (error) {
       // console.log(error)
       return;    

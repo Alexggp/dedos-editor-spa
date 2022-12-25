@@ -11,6 +11,7 @@ import trash from './reducers/trash';
 import projects from './reducers/projects';
 import user from './reducers/user';
 import globalError from './reducers/globalError';
+import pairing from './reducers/pairing';
 
 const persistConfig = {
   key: 'root',
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   objetives,
   projects,
   trash,
+  pairing,
   user
 })
 
