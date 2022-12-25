@@ -7,12 +7,15 @@ const Droppable = (props) => {
   // eslint-disable-next-line 
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: props.accept,
-    // drop: () => ({ name: props.type }),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
     }),
     drop: (item, monitor) =>{
+      const didDrop = monitor.didDrop()
+      if (didDrop) {
+        return
+      }
       props.dropped(item, monitor.getClientOffset())
       return { name: props.type }
     }
