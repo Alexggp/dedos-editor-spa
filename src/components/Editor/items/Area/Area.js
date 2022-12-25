@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
-import Droppable from '../../../hoc/Droppable/Droppable';
+import ResizableAndDraggable from '../../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
+import Droppable from '../../../../hoc/Droppable/Droppable';
 
 import classes from './Area.module.css';
 import ObjetivesContainer from './ObjetivesContainer/ObjetivesContainer';

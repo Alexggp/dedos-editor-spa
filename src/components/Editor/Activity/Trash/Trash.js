@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import classes from './Trash.module.css';
-import Droppable from '../../../hoc/Droppable/Droppable';
+import Droppable from '../../../../hoc/Droppable/Droppable';
 import { trashActions } from '../../../../store/reducers/trash';
 import { deleteObjetive } from '../../../../store/actions/objetives';
 

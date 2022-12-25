@@ -8,7 +8,7 @@ import Text from '../items/Text/Text';
 
 import Trash from './Trash/Trash';
 import Timer from '../objetives/Timer/Timer';
-import Droppable from '../../hoc/Droppable/Droppable';
+import Droppable from '../../../hoc/Droppable/Droppable';
 
 import { createArea } from '../../../store/actions/areas'; 
 import { createToken } from '../../../store/actions/tokens'; 

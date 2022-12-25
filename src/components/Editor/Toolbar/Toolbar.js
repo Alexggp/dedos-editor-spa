@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
 import classes from './Toolbar.module.css';
-import Draggable from '../../hoc/Draggable/Draggable';
+import Draggable from '../../../hoc/Draggable/Draggable';
 
 import UserMenu from '../../UserMenu/UserMenu';
 

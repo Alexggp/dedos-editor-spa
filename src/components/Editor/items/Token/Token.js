@@ -1,13 +1,13 @@
 import React, {useEffect, useRef, useState, useCallback} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
-import ResizableAndDraggable from '../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
+import ResizableAndDraggable from '../../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 import classes from './Token.module.css';
 import Header from './Header/Header';
 import { updateToken, deleteToken } from '../../../../store/actions/tokens';
 import { updateArea } from '../../../../store/actions/areas';
 import Options from './Options/Options';
-import Droppable from '../../../hoc/Droppable/Droppable';
+import Droppable from '../../../../hoc/Droppable/Droppable';
 import { activitiesActions } from '../../../../store/reducers/activities';
 import { createObjetive } from '../../../../store/actions/objetives';
 

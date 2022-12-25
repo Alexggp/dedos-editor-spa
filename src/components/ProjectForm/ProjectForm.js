@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
-import Modal from '../hoc/Modal/Modal';
+import Modal from '../../hoc/Modal/Modal';
 
 const ProjectForm = ({
   isOpen,

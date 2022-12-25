@@ -5,8 +5,8 @@ import { updateObjetive } from '../../../../store/actions/objetives';
 import classes from './Counter.module.css';
 import abacusIcon from '../../../../assets/icons/abacusIcon.png';
 import closeIcon from '../../../../assets/icons/removeIcon.png';
-import Draggable from '../../../hoc/Draggable/Draggable';
-import Modal from '../../../hoc/Modal/Modal';
+import Draggable from '../../../../hoc/Draggable/Draggable';
+import Modal from '../../../../hoc/Modal/Modal';
 
 const Counter = ({objetive}) =>{
   const dispatch = useDispatch();

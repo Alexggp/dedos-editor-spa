@@ -5,8 +5,8 @@ import { updateObjetive } from '../../../../store/actions/objetives';
 import classes from './Timer.module.css';
 import clockIcon from '../../../../assets/icons/clockIcon.png';
 import closeIcon from '../../../../assets/icons/removeIcon.png';
-import Draggable from '../../../hoc/Draggable/Draggable';
-import Modal from '../../../hoc/Modal/Modal';
+import Draggable from '../../../../hoc/Draggable/Draggable';
+import Modal from '../../../../hoc/Modal/Modal';
 
 const Timer = ({objetive}) =>{
   const dispatch = useDispatch();
@@ -31,7 +31,9 @@ const Timer = ({objetive}) =>{
         <img alt='' style={{ width: "100%", height: "auto"}} src={clockIcon}/>
       </Draggable>
       <div className={classes.Bubble} onClick={()=>setShowInput(true)}>
-          {objetive.value+'\´\´'}
+          {// eslint-disable-next-line
+            objetive.value+'\´\´'
+          }
       </div>
       <Modal open={showInput} close={closeHandler}>
         <img alt='' className={classes.CloseModal} src={closeIcon} onClick={closeHandler}/>

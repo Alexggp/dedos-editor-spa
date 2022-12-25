@@ -1,6 +1,6 @@
 import React from 'react';
 import pairIcon from '../../../../assets/icons/pairIcon.png';
-import Draggable from '../../../hoc/Draggable/Draggable';
+import Draggable from '../../../../hoc/Draggable/Draggable';
 
 const Pairing = ({objetive}) =>{
   return (
