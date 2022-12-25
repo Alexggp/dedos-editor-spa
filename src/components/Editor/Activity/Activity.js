@@ -1,10 +1,12 @@
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {Xwrapper} from 'react-xarrows';
 
 import classes from './Activity.module.css';
 import Area from '../items/Area/Area';
 import Image from '../items/Image/Image';
 import Text from '../items/Text/Text';
+import Arrow from '../items/Arrows/Arrow';
 
 import Trash from './Trash/Trash';
 import Timer from '../objetives/Timer/Timer';
@@ -113,6 +115,10 @@ const Activity = (props) => {
   
   })
 
+  const arrows = objetivesList.filter(obj=>obj.type==="Pairing").map(obj=>{
+    return <Arrow key={obj._id} origin={obj.origin} target={obj.target}></Arrow>
+  })
+
   const disclaimer = (!tokens.length && !areas.length) ? (
     <div className={classes.WelcomeText}>
       <p>SOY EL ÁREA DE EDICIÓN:</p>
@@ -123,18 +129,21 @@ const Activity = (props) => {
   return(
     
       <div id="Activity" className={classes.Activity}>
-        
-        <Droppable 
-          type="Activity"
-          accept={['AddArea','AddText','AddImage', 'Timer']} 
-          activityId = {currentActivityId}
-          dropped={addNewItem}>
-            {tokens}
-            {areas}
-            {disclaimer}
-            <Trash/>
-            {timerObjetive ? <Timer objetive={timerObjetive}/> : <></>}
-        </Droppable>
+        <Xwrapper>
+          <Droppable 
+            type="Activity"
+            accept={['AddArea','AddText','AddImage', 'Timer']} 
+            activityId = {currentActivityId}
+            dropped={addNewItem}>
+              {tokens}
+              {areas}
+              {arrows}
+              {disclaimer}
+              <Trash/>
+              {timerObjetive ? <Timer objetive={timerObjetive}/> : <></>}
+          </Droppable>
+        </Xwrapper>
+
       </div>
     
   )

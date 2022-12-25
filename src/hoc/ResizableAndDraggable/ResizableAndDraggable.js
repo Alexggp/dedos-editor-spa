@@ -1,11 +1,12 @@
 import React from 'react';
 import { Rnd } from 'react-rnd'; // resizable and draggable class
 import { useSelector } from 'react-redux';
+import {useXarrow} from 'react-xarrows';
 
 import classes from './ResizableAndDraggable.module.css';
 
 const ResizableAndDraggable = (props) => {
-
+  const updateXarrow = useXarrow();
   const trashIsActive = useSelector(state => state.trash.isActive);
 
   const style = {
@@ -51,9 +52,13 @@ const ResizableAndDraggable = (props) => {
         dragHandleClassName={props.dragHandleClassName}
         bounds={props.bounds}
         disableDragging={props.notMove}
-        onDrag={e=> e.stopPropagation()}
+        onDrag={e=> {
+          e.stopPropagation()
+          updateXarrow()
+        }}
         onDragStart={props.updateZIndex}
         onDragStop={(e, offset) =>{
+          updateXarrow();
           if (trashIsActive){
             props.delete();
           } else {

@@ -150,7 +150,7 @@ const Area = (props) => {
         accept={['Pairing', 'Counter']}
         activityId={currentActivityId}
         dropped={addObjetive}>
-        <div className={areaClasses.join(' ')} style={style} onClick={handleClick}>
+        <div className={areaClasses.join(' ')} style={style} onClick={handleClick} id={props.area._id}>
           <div className={classes.DragHandle}>
             <div className={classes.AreaTypeButton} onMouseDown={stopPropagation} onClick={typeButtonHandler}></div>
             <div className={classes.AddButton} onMouseDown={stopPropagation} onClick={addBackgroundHandler}></div>
