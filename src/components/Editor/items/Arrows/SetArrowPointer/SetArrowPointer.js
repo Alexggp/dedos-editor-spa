@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {useXarrow} from 'react-xarrows';
 import { useDispatch } from 'react-redux';
 import { deleteObjetive } from '../../../../../store/actions/objetives';
@@ -12,21 +12,13 @@ const SetArrowPointer = ()=>{
 
   const [mousePos, setMousePos] = useState({});
 
-  useEffect(() => {
-    const handleMouseMove = (event) => {
-      updateXarrow();
-      setMousePos({ x: event.clientX, y: event.clientY });
-    };
 
-    window.addEventListener('mousemove', handleMouseMove);
+  const handleMouseMove = (event) => {
+    updateXarrow();
+    setMousePos({ x: event.clientX, y: event.clientY });
+  };
 
-    return () => {
-      window.removeEventListener(
-        'mousemove',
-        handleMouseMove
-      );
-    };
-  }, []);
+  window.addEventListener('mousemove', handleMouseMove);
 
   const style = {
     position: 'fixed',
