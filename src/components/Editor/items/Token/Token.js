@@ -216,8 +216,8 @@ const Token = (props) => {
               accept={['Selection','Pairing','Counter']} 
               activityId = {currentActivityId}
               dropped={addObjetive}>
-                <div className={tokenClasses}  ref={tokenRef} onClick={handleClick} >
-                  <div className={classes.Header} id={props.token._id}>
+                <div className={tokenClasses}  ref={tokenRef} onClick={handleClick} id={props.token._id}>
+                  <div className={classes.Header} >
                     {headerComponent}
                   </div>
                   <div className={classes.Body} >

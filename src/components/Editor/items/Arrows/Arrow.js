@@ -2,7 +2,6 @@ import React from "react";
 import Xarrow from "react-xarrows";
 
 const Arrow = ({origin, target}) => {
-    console.log(origin, target)
     return (
       <Xarrow
           start={origin} 

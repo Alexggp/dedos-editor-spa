@@ -42,7 +42,6 @@ const Activity = (props) => {
   }, [activity?.zIndexTop])
 
   const addNewItem = (item, offset) => {
-    console.log(item)
     switch (item.name) {
       case 'AddArea':
         dispatch(createArea({
