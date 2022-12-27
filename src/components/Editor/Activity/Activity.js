@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Xwrapper } from 'react-xarrows';
 
 import classes from './Activity.module.css';
 import Area from '../items/Area/Area';
@@ -131,22 +130,19 @@ const Activity = (props) => {
   return (
 
     <div id="Activity" className={classes.Activity}>
-      <Xwrapper>
-        <Droppable
-          type="Activity"
-          accept={['AddArea', 'AddText', 'AddImage', 'Timer']}
-          activityId={currentActivityId}
-          dropped={addNewItem}>
-          {tokens}
-          {areas}
-          {arrows}
-          {pairingId ? <SetArrowPointer/> : <></>}
-          {disclaimer}
-          <Trash />
-          {timerObjetive ? <Timer objetive={timerObjetive} /> : <></>}
-        </Droppable>
-      </Xwrapper>
-
+      <Droppable
+        type="Activity"
+        accept={['AddArea', 'AddText', 'AddImage', 'Timer']}
+        activityId={currentActivityId}
+        dropped={addNewItem}>
+        {tokens}
+        {areas}
+        {arrows}
+        {pairingId ? <SetArrowPointer/> : <></>}
+        {disclaimer}
+        <Trash />
+        {timerObjetive ? <Timer objetive={timerObjetive} /> : <></>}
+      </Droppable>
     </div>
 
   )

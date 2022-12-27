@@ -5,6 +5,7 @@ import classes from './Miniature.module.css';
 import AreaMin from './Items/AreaMin/AreaMin';
 import ImageMin from './Items/ImageMin/ImageMin';
 import TextMin from './Items/TextMin/TextMin';
+import ArrowMin from './Items/ArrowMin/ArrowMin';
 import removeIcon from '../../../assets/icons/removeIcon.png';
 import { deleteActivity } from '../../../store/actions/activities';
 
@@ -49,12 +50,18 @@ const Miniature = (props) => {
   
   })
 
+  const objetivesList = useSelector(state => state.objetives.objetivesList);
+  const arrows = objetivesList.filter(obj => obj.type === "Pairing").map(obj => {
+    return <ArrowMin key={obj._id} origin={obj.origin} target={obj.target}></ArrowMin>
+  })
+
   return(
     
       <div className={classes.Miniature}>
         <img className={classes.RemoveImg} src={removeIcon} onClick={(e)=>removeActivity(e, props.activityId, props.isSelected)} title='Eliminar actividad' alt=''/>
         {areas}
         {tokens}
+        {arrows}
       </div>
     
   )
