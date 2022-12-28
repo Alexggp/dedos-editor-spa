@@ -15,7 +15,7 @@ const Token = (props) => {
   const tokenClasses = [classes.Token, classes[`Token_type_${props.type}`]].join(' ');
 
   return(
-    <div className={tokenClasses} style={style}>
+    <div className={tokenClasses} style={style} id={`min_${props.token._id}`}>
       <div className={classes.Header} >
         {props.title} 
       </div>
