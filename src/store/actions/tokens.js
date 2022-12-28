@@ -6,8 +6,6 @@ import { store } from '..';
 
 export const updateToken = (token) => {
   return async (dispatch) => {
-
-
     try {
       const response = await dedosInstance.put(`/tokens/${token._id}`,token)
 
@@ -35,7 +33,6 @@ export const deleteToken = (tokenId) => {
 
       const objetivesList = store.getState().objetives.objetivesList;
       const obj = objetivesList.find(obj => obj.origin === tokenId || obj.target === tokenId);
-      console.log(obj)
       // Deleting attached objetives
       if (obj) {
         dispatch(objetivesActions.delete(obj._id));

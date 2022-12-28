@@ -9,7 +9,7 @@ import ObjetivesContainer from './ObjetivesContainer/ObjetivesContainer';
 import usePairing from '../../../../hooks/usePairing';
 
 import { updateArea, deleteArea } from '../../../../store/actions/areas';
-import { deleteToken } from '../../../../store/actions/tokens';
+import { deleteToken, updateToken } from '../../../../store/actions/tokens';
 import { activitiesActions } from '../../../../store/reducers/activities';
 import { createObjetive } from '../../../../store/actions/objetives';
 
@@ -39,10 +39,40 @@ const Area = (props) => {
 
   }
 
+
+  const updateChildrenZIndex = () => {
+    // We need to update every children token zIndex in 
+    // order to keep them on the top layer and keep their
+    // arrows on the top layer and visibles all the time 
+
+    const compare = ( a, b ) => {
+      if ( a.zIndex < b.zIndex ){
+        return 1;
+      }
+      if ( a.zIndex > b.zIndex ){
+        return -1;
+      }
+      return 0;
+    }
+
+    const auxActivity = { ...activity };
+    
+    props.tokens.sort(compare).forEach(token => {
+      
+      auxActivity.zIndexTop = auxActivity.zIndexTop + 1;
+      const auxToken = {...token}
+      auxToken.zIndex= auxActivity.zIndexTop;
+      dispatch(updateToken(auxToken));
+    });
+    dispatch(activitiesActions.update(auxActivity));
+  }
+
   useEffect(() => {
     // every time the zIndex changes in the reducer, also when it is created
     if (props.area.zIndex) {
+      updateChildrenZIndex();
       setZIndex(props.area.zIndex);
+      
     } else {
       updateZIndex();
     }

@@ -30,11 +30,12 @@ const Token = (props) => {
 
 
   const updateZIndex = () => {
+    
+    if(activity.zIndexTop === props.token.zIndex) return;
     // updating activity zIndexTop index
     const auxActivity = {...activity};
     auxActivity.zIndexTop = auxActivity.zIndexTop + 1;
     dispatch(activitiesActions.update(auxActivity));
-
     if(props.area){
       // updating container Area zIndex to be in top layer
       const auxArea = {...props.area};
@@ -42,8 +43,10 @@ const Token = (props) => {
       dispatch(updateArea(auxArea));
     }
     // updating token zIndex
-    // +1000 to be always over the areas
-    setZIndex(activity.zIndexTop+1000);
+    setZIndex(auxActivity.zIndexTop);
+    const auxToken = { ...props.token };
+    auxToken.zIndex = auxActivity.zIndexTop;
+    dispatch(updateToken(auxToken));
   }
 
   useEffect(()=>{
@@ -136,9 +139,6 @@ const Token = (props) => {
       // The token has been moved inside the same area
       auxToken.offset = {x: x, y: y};
     }
-    auxToken.zIndex = zIndex;
-
-
     dispatch(updateToken(auxToken));
   }
   const hasResized = ({w, h})=>{
@@ -197,6 +197,7 @@ const Token = (props) => {
   const handleClick = (e)=>{
     e.stopPropagation();
     setPairing(props.token._id);
+    updateZIndex();
   }
 
   return(
@@ -208,8 +209,8 @@ const Token = (props) => {
           resized = {hasResized}
           delete = {deleteTokenHandler}
           zIndex = {zIndex}
-          updateZIndex = {updateZIndex}
           notMove={!props.token.movable}
+          updateZIndex={updateZIndex}
           size={props.token.size}>
             <Droppable 
               type="Activity"

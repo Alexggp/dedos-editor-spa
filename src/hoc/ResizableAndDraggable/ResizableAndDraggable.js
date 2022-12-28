@@ -56,7 +56,7 @@ const ResizableAndDraggable = (props) => {
           e.stopPropagation()
           updateXarrow()
         }}
-        onDragStart={props.updateZIndex}
+        onDragStart={()=>{props.updateZIndex()}}
         onDragStop={(e, offset) =>{
           updateXarrow();
           if (trashIsActive){
