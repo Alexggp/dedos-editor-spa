@@ -16,6 +16,7 @@ import pairing from './reducers/pairing';
 const persistConfig = {
   key: 'root',
   storage,
+  whitelist: ['user'] // only user will be persisted
 }
 
 const rootReducer = combineReducers({ 
