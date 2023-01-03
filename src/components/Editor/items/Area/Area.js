@@ -67,13 +67,17 @@ const Area = (props) => {
     dispatch(activitiesActions.update(auxActivity));
   }
 
+  const firstUpdate = useRef(true); // preventing to call to update on the first loading at setting the value
   useEffect(() => {
     // every time the zIndex changes in the reducer, also when it is created
-    if (props.area.zIndex) {
+    if (props.area.zIndex && !firstUpdate.current) {
       updateChildrenZIndex();
       setZIndex(props.area.zIndex);
-      
-    } else {
+    } 
+    if (firstUpdate.current) {
+      firstUpdate.current = false
+    }
+    if (!props.area.zIndex) {
       updateZIndex();
     }
     // eslint-disable-next-line

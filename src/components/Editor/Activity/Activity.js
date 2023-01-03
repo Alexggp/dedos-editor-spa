@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import classes from './Activity.module.css';
@@ -31,12 +31,16 @@ const Activity = (props) => {
   const objetivesList = useSelector(state => state.objetives.objetivesList);
   const timerObjetive = objetivesList.find(obj => obj.origin === currentActivityId && obj.type === "Timer");
 
+  const firstUpdate = useRef(true); // preventing to call to update on the first loading at setting the value
   useEffect(() => {
-    // When the activitiy's zIndexTop changes in the reducer, it updates it in DB
-    dispatch(updateActivity({
-      activityId: currentActivityId,
-      zIndexTop: activity?.zIndexTop
-    }))
+    if (activity?.zIndexTop && !firstUpdate.current){
+      // When the activitiy's zIndexTop changes in the reducer, it updates it in DB
+      dispatch(updateActivity({
+        activityId: currentActivityId,
+        zIndexTop: activity?.zIndexTop
+      }));
+    }
+    if (activity?.zIndexTop && firstUpdate.current) firstUpdate.current = false
     // eslint-disable-next-line
   }, [activity?.zIndexTop])
 

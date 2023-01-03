@@ -51,8 +51,6 @@ const Token = (props) => {
 
   useEffect(()=>{
     // This functin is only triggered the first time the token is rendered
-    // Calling hasMoved to check overlaping and calculate offsets
-    hasMoved(props.token.offset);
     if (props.token.zIndex){
       setZIndex(props.token.zIndex);
     }else{
