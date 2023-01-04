@@ -33,7 +33,4 @@
   position: absolute;
   top: 6px;
   right: 6px;
-  background-size: cover;
-  background-image: url('../../../../assets/icons/addFolderIcon.png');
-  cursor: pointer;
 }

@@ -1,0 +1,12 @@
+.FileLoaer{
+  width: 100%;
+  height:100%;
+}
+
+.InputButton{
+  width: 100%;
+  height:100%;
+  background-size: cover;
+  background-image: url('../../assets/icons/addFolderIcon.png');
+  cursor: pointer;
+}

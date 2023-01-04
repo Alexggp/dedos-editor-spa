@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ResizableAndDraggable from '../../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 import Droppable from '../../../../hoc/Droppable/Droppable';
+import FileLoaer from '../../../FileLoader/FileLoader';
 
 import classes from './Area.module.css';
 import ObjetivesContainer from './ObjetivesContainer/ObjetivesContainer';
@@ -100,8 +101,7 @@ const Area = (props) => {
   }
   const previousChildrenLength = usePrevious(props.children.length);
 
-  const addBackgroundHandler = (e) => {
-    const backgroundUrl = 'https://images-na.ssl-images-amazon.com/images/I/71+mDoHG4mL.png';
+  const addBackgroundHandler = (backgroundUrl) => {
     const auxArea = { ...props.area }
     auxArea.background = backgroundUrl;
     dispatch(updateArea(auxArea));
@@ -187,7 +187,9 @@ const Area = (props) => {
         <div className={areaClasses.join(' ')} style={style} onClick={handleClick} id={props.area._id}>
           <div className={classes.DragHandle}>
             <div className={classes.AreaTypeButton} onMouseDown={stopPropagation} onClick={typeButtonHandler} ></div>
-            <div className={classes.AddButton} onMouseDown={stopPropagation} onClick={addBackgroundHandler}></div>
+            <div className={classes.AddButton}>
+              <FileLoaer itemId={props.area._id} onLoad={addBackgroundHandler} />
+            </div>
           </div>
           <ObjetivesContainer objetive={objetive}/>
           {props.children}
