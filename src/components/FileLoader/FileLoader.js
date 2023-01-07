@@ -14,29 +14,26 @@ export default function FileLoaer({ children, itemId, onLoad }) {
       return;
     }
     setLoading(true);
-    //Uploading the file 
     try {
+      //Uploading the file 
       const config = {
-        //Set headers manually for single file upload
         headers: {
-          'content-type': file.type,
-          'content-length': `${file.size}`, //Headers need to be a string
+          'content-type': file.type
         }
       };
-      const response = await dedosInstance.post(`/files`, file, config);
+      const formData = new FormData()
+      formData.append('file', file)
+      const response = await dedosInstance.post(`/files`, formData, config);
       if (response.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${response.status} - ${response.statusText}`);
       } else {
         onLoad(response.data.url);
         setLoading(false);
       }
-
-
     } catch (error) {
       setLoading(false);
       return;
     }
-
   };
 
   const onChangeHandler = (e) => {
