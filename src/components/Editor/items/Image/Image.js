@@ -6,6 +6,7 @@ import classes from './Image.module.css';
 import removeIcon from '../../../../assets/icons/removeIcon.png';
 import { updateToken } from '../../../../store/actions/tokens';
 import FileLoaer from '../../../FileLoader/FileLoader';
+import { deleteFile } from '../../../../store/actions/files';
 
 const Image = (props) => {
   const dispatch = useDispatch();
@@ -22,12 +23,15 @@ const Image = (props) => {
   const removeImage = (index) => {
     const auxToken = { ...props.token }
     const auxList = [...auxToken.content.urlList]
+    const imageUrlParsed = auxList[index].split('/');
+    const fileName = imageUrlParsed[imageUrlParsed.length-1];
     auxList.splice(index, 1);
     auxToken.content = {
       ...auxToken.content,
       urlList: auxList
     };
     dispatch(updateToken(auxToken));
+    deleteFile(fileName);
   }
 
   let images;
