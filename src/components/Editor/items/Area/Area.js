@@ -13,7 +13,7 @@ import { updateArea, deleteArea } from '../../../../store/actions/areas';
 import { deleteToken, updateToken } from '../../../../store/actions/tokens';
 import { activitiesActions } from '../../../../store/reducers/activities';
 import { createObjetive } from '../../../../store/actions/objetives';
-
+import { deleteFile } from '../../../../store/actions/files';
 
 const Area = (props) => {
   const dispatch = useDispatch();
@@ -102,6 +102,11 @@ const Area = (props) => {
   const previousChildrenLength = usePrevious(props.children.length);
 
   const addBackgroundHandler = (backgroundUrl) => {
+    if (props.area.background) {
+      const imageUrlParsed = props.area.background.split('/');
+      const fileName = imageUrlParsed[imageUrlParsed.length-1];
+      deleteFile(fileName);
+    }
     const auxArea = { ...props.area }
     auxArea.background = backgroundUrl;
     dispatch(updateArea(auxArea));
