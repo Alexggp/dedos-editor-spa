@@ -17,11 +17,10 @@ export const getProjectData = (projectId) => {
         throw new Error(`Unexpected API call response with status: ${response.status}`);
       }
       dispatch(projectsActions.set([response.data.project]));
-      dispatch(activitiesActions.set(response.data.activities));
-      dispatch(areasActions.set(response.data.areas));
       dispatch(tokensActions.set(response.data.tokens));
       dispatch(objetivesActions.set(response.data.objetives));
-
+      dispatch(areasActions.set(response.data.areas));
+      dispatch(activitiesActions.set(response.data.activities));
 
     } catch (error) {
       // console.log(error)
