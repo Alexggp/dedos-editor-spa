@@ -6,7 +6,8 @@ export const project = (title, description, screenResolution) => ({
 
 
 export const activity = (projectId) => ({
-  projectId, 
+  projectId,
+  zIndexTop: 0,
 })
 
 

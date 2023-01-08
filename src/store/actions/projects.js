@@ -5,6 +5,7 @@ import { activitiesActions } from '../reducers/activities';
 import { areasActions } from '../reducers/areas';
 import { tokensActions } from '../reducers/tokens';
 import { objetivesActions } from '../reducers/objetives';
+import { createActivity } from './activities';
 
 export const getProjectData = (projectId) => {
   return async (dispatch) => {
@@ -58,7 +59,8 @@ export const createProject = (title, description) => {
       }
       newProject._id = response.data._id;
       dispatch(projectsActions.create(newProject));
-
+      // Creating the first activity inside the project
+      dispatch(createActivity(newProject._id));
     } catch (error) {
       // console.log(error)
       return;

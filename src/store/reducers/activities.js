@@ -20,7 +20,6 @@ const activitiesSlice = createSlice({
       if (action.payload.isSelected) state.currentActivityId = state.activityList[0]?._id;
     },
     create(state, action) {
-      action.payload.zIndexTop = 0;
       state.activityList.push(action.payload);
       state.currentActivityId = state.activityList[state.activityList.length-1]._id;
     },
