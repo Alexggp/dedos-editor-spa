@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import classes from './Activity.module.css';
 import Area from '../items/Area/Area';
@@ -20,14 +21,15 @@ import { createObjetive } from '../../../store/actions/objetives';
 
 
 const Activity = (props) => {
+  const params = useParams();
   const dispatch = useDispatch();
   const {pairingId} = usePairing();
   const tokenList = useSelector(state => state.tokens.tokenList);
   const areaList = useSelector(state => state.areas.areaList);
   const activityList = useSelector(state => state.activities.activityList);
-  const currentActivityId = useSelector((state) => state.activities.currentActivityId);
+  const currentActivityId = params.activityId;
   const activity = activityList.find(ac => ac._id === currentActivityId);
-  const currentProjectId = useSelector(state => state.projects.currentProjectId);
+  const currentProjectId = params.projectId;
   const objetivesList = useSelector(state => state.objetives.objetivesList);
   const timerObjetive = objetivesList.find(obj => obj.origin === currentActivityId && obj.type === "Timer");
 

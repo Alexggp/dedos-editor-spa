@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import ResizableAndDraggable from '../../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 import Droppable from '../../../../hoc/Droppable/Droppable';
@@ -17,9 +18,9 @@ import { deleteFile } from '../../../../store/actions/files';
 
 const Area = (props) => {
   const dispatch = useDispatch();
-
+  const params = useParams();
   const activityList = useSelector(state => state.activities.activityList);
-  const currentActivityId = useSelector((state) => state.activities.currentActivityId);
+  const currentActivityId = params.activityId;
   const activity = activityList.find(ac => ac._id === currentActivityId);
   const [zIndex, setZIndex] = useState(1);
   const {setPairing} = usePairing();

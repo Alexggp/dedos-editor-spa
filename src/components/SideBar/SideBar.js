@@ -1,20 +1,21 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { activitiesActions } from '../../store/reducers/activities';
 import { createActivity } from '../../store/actions/activities';
 
 
 import classes from './SideBar.module.css';
 import Miniature from './Miniature/Miniature';
 import addIcon from '../../assets/icons/addIcon.png';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const SideBar = (props) => {
+  const params = useParams();
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const activityList = useSelector(state => state.activities.activityList);
-  const currentActivityId = useSelector(state => state.activities.currentActivityId);
-  const currentProjectId = useSelector(state => state.projects.currentProjectId);
+  const currentActivityId = params.activityId;
+  const currentProjectId = params.projectId;
   const projectList = useSelector(state => state.projects.projectList);
 
   const project = projectList.find((pr)=>pr._id === currentProjectId);
@@ -23,11 +24,9 @@ const SideBar = (props) => {
     dispatch(createActivity(currentProjectId));
   }
   const selectActivity = (activityId) =>{
-    dispatch(activitiesActions.updateCurrent(activityId));
+    navigate(`/editor/${currentProjectId}/${activityId}`);
   }
   
-
-
   const activitiesContainers = activityList.map((activity)=>{
     let isSelected = false;
     const miniatureClasses = [classes.MiniatureContainer]

@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState, useCallback} from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from 'react-router-dom';
 
 import ResizableAndDraggable from '../../../../hoc/ResizableAndDraggable/ResizableAndDraggable';
 import classes from './Token.module.css';
@@ -13,9 +14,10 @@ import { createObjetive } from '../../../../store/actions/objetives';
 import usePairing from '../../../../hooks/usePairing';
 
 const Token = (props) => {
+  const params = useParams();
   const activityList = useSelector(state => state.activities.activityList);
   const areaList = useSelector((state) => state.areas.areaList);
-  const currentActivityId = useSelector((state) => state.activities.currentActivityId);
+  const currentActivityId = params.activityId;
   const [showOptions, setShowOptions] = useState(false);
   const {setPairing} = usePairing();
 

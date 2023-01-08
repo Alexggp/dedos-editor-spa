@@ -13,17 +13,17 @@ const activitiesSlice = createSlice({
   reducers: {
     set(state, action) {
       state.activityList = action.payload;
-      state.currentActivityId = action.payload[0] ? action.payload[0]._id : '';
     },
     delete(state, action) {
       state.activityList = state.activityList.filter(ac => ac._id !== action.payload.activityId);
-      if (action.payload.isSelected) state.currentActivityId = state.activityList[0]?._id;
+      if (action.payload.isSelected) state.currentActivityId = state.activityList[state.activityList.length-1]._id;
     },
     create(state, action) {
       state.activityList.push(action.payload);
       state.currentActivityId = state.activityList[state.activityList.length-1]._id;
     },
     updateCurrent(state, action) {
+      console.log(action.payload)
       state.currentActivityId= action.payload;
     },
     update(state, action) {
