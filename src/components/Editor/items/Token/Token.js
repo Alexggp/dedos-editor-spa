@@ -52,8 +52,11 @@ const Token = (props) => {
   useEffect(()=>{
     // This functin is only triggered the first time the token is rendered
     if (props.token.zIndex){
+      // the token already exists
       setZIndex(props.token.zIndex);
     }else{
+      // the token has just been created
+      hasMoved(props.token.offset);
       updateZIndex();
     }
     // eslint-disable-next-line
@@ -94,12 +97,6 @@ const Token = (props) => {
     }
 
   },[areaList, currentActivityId])
-
-
-  useEffect(()=>{
-
-      // eslint-disable-next-line
-  },[])
 
   const calculateNewOffset = (token) =>{
     const area = areaList.find(ar => ar._id === token.areaId);
