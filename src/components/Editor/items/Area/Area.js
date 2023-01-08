@@ -193,7 +193,11 @@ const Area = (props) => {
           <div className={classes.DragHandle}>
             <div className={classes.AreaTypeButton} onMouseDown={stopPropagation} onClick={typeButtonHandler} ></div>
             <div className={classes.AddButton}>
-              <FileLoaer itemId={props.area._id} onLoad={addBackgroundHandler} />
+              <FileLoaer 
+                containerId={props.area._id} 
+                projectId = {props.area.projectId}
+                activityId = {props.area.activityId}
+                onLoad={addBackgroundHandler} />
             </div>
           </div>
           <ObjetivesContainer objetive={objetive}/>

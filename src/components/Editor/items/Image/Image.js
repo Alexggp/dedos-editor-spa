@@ -46,7 +46,11 @@ const Image = (props) => {
 
   const addButton = (
     <div className={classes.AddButton}>
-      <FileLoaer itemId={props.token._id} onLoad={addImage} />
+      <FileLoaer 
+        containerId={props.token._id} 
+        projectId = {props.token.projectId}
+        activityId = {props.token.activityId}
+        onLoad={addImage} />
     </div>
   )
 

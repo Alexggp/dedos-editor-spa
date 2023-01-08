@@ -5,7 +5,7 @@ import dedosInstance from '../../apis/dedosInstance';
 import classes from './FileLoader.module.css';
 
 
-export default function FileLoaer({ children, itemId, onLoad }) {
+export default function FileLoaer({ containerId, activityId, projectId, onLoad }) {
 
   const [loading, setLoading] = useState(false)
 
@@ -22,7 +22,10 @@ export default function FileLoaer({ children, itemId, onLoad }) {
         }
       };
       const formData = new FormData()
-      formData.append('file', file)
+      formData.append('file', file); 
+      formData.append('containerId', containerId);
+      formData.append('activityId', activityId);
+      formData.append('projectId', projectId);
       const response = await dedosInstance.post(`/files`, formData, config);
       if (response.status !== 200) {
         throw new Error(`Unexpected API call response with status: ${response.status} - ${response.statusText}`);
@@ -44,8 +47,8 @@ export default function FileLoaer({ children, itemId, onLoad }) {
 
   return (
     <div className={classes.FileLoaer}>
-      <input type="file" id={`file_${itemId}`} style={{ display: "none" }} accept="image/png, image/gif, image/jpeg" onChange={onChangeHandler} />
-      <label htmlFor={`file_${itemId}`} onMouseDown={e => e.stopPropagation()}>
+      <input type="file" id={`file_${containerId}`} style={{ display: "none" }} accept="image/png, image/gif, image/jpeg" onChange={onChangeHandler} />
+      <label htmlFor={`file_${containerId}`} onMouseDown={e => e.stopPropagation()}>
         {loading ? <CircularProgress size={30} sx={{ color: 'white.500' }} /> : <div className={classes.InputButton}></div>}
       </label>
     </div>
