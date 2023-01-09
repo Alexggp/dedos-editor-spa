@@ -130,7 +130,7 @@ const Activity = (props) => {
 
   })
 
-  const arrows = objetivesList.filter(obj => obj.activityId === currentActivityId && obj.type === "Pairing").map(obj => {
+  const arrows = objetivesList.filter(obj => obj.activityId === activity?._id && obj.type === "Pairing").map(obj => {
     return <Arrow key={obj._id} origin={obj.origin} target={obj.target} zIndexTop={activity.zIndexTop}></Arrow>
   })
 
