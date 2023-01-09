@@ -62,9 +62,18 @@ const Token = (props) => {
       updateZIndex();
     }
         
-    if(objetive?.marked) dispatch(reprintObjetive(objetive))
+    if(objetive?.marked === 1) dispatch(reprintObjetive(objetive))
     // eslint-disable-next-line
   },[]);
+
+  useEffect(()=>{
+    // reprints the arrows when the activity changes
+    if(objetive?.origin === props.token._id && objetive?.marked === 2) {
+      dispatch(reprintObjetive(objetive))
+    }
+    // eslint-disable-next-line
+  },[objetive?.marked])
+  
 
   const checkAreaOverlapping = useCallback((obj) =>{
     
@@ -129,7 +138,7 @@ const Token = (props) => {
     // Getting the offset referenced by the parent
     if (auxToken.areaId===0 && props.token.areaId !== 0 ){
       console.log('sale')
-      if (objetive?.type === "Pairing") dispatch(markObjetive(objetive._id));
+      if (objetive?.type === "Pairing") dispatch(markObjetive(objetive._id, 1));
     }
     if (!auxToken.areaId){
       // If the token is outside any area, offset = screenOffset
@@ -139,8 +148,7 @@ const Token = (props) => {
     }
     else if (auxToken.areaId !== props.token.areaId){
       // if the parent area changes, calculates a new offset 
-      console.log("entra")
-      if (objetive?.type === "Pairing") dispatch(markObjetive(objetive._id));
+      if (objetive?.type === "Pairing") dispatch(markObjetive(objetive._id, 1));
       auxToken.offset = calculateNewOffset(auxToken);
     } else {
       // The token has been moved inside the same area

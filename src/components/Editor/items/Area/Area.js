@@ -13,7 +13,7 @@ import usePairing from '../../../../hooks/usePairing';
 import { updateArea, deleteArea } from '../../../../store/actions/areas';
 import { deleteToken, updateToken } from '../../../../store/actions/tokens';
 import { activitiesActions } from '../../../../store/reducers/activities';
-import { createObjetive } from '../../../../store/actions/objetives';
+import { createObjetive, reprintObjetive } from '../../../../store/actions/objetives';
 import { deleteFile } from '../../../../store/actions/files';
 
 const Area = (props) => {
@@ -84,6 +84,15 @@ const Area = (props) => {
     }
     // eslint-disable-next-line
   }, [props.area.zIndex]);
+
+  useEffect(()=>{
+    // reprints the arrows when the activity changes
+    if(objetive?.origin === props.area._id && objetive?.marked === 2) {
+      dispatch(reprintObjetive(objetive))
+    }
+    // eslint-disable-next-line
+  },[objetive?.marked])
+  
 
   useEffect(() => {
     // If there is a new token inside the Area, it goes to the top layer updating its zIndex

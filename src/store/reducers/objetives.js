@@ -24,8 +24,8 @@ const objetivesSlice = createSlice({
       state.objetivesList[objIndex]= action.payload;
     },
     mark(state, action){
-      const objIndex = state.objetivesList.findIndex(obj => obj._id === action.payload);
-      state.objetivesList[objIndex]['marked']= true;
+      const objIndex = state.objetivesList.findIndex(obj => obj._id === action.payload.objetiveId);
+      state.objetivesList[objIndex]['marked']= action.payload.value;
     }
   },
 });

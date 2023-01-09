@@ -17,13 +17,13 @@ import usePairing from '../../../hooks/usePairing';
 import { createArea } from '../../../store/actions/areas';
 import { createToken } from '../../../store/actions/tokens';
 import { updateActivity } from '../../../store/actions/activities';
-import { createObjetive } from '../../../store/actions/objetives';
+import { createObjetive, markObjetive } from '../../../store/actions/objetives';
 
 
 const Activity = (props) => {
   const params = useParams();
   const dispatch = useDispatch();
-  const {pairingId} = usePairing();
+  const { pairingId } = usePairing();
   const tokenList = useSelector(state => state.tokens.tokenList);
   const areaList = useSelector(state => state.areas.areaList);
   const activityList = useSelector(state => state.activities.activityList);
@@ -35,7 +35,7 @@ const Activity = (props) => {
 
   const firstUpdate = useRef(true); // preventing to call to update on the first loading at setting the value
   useEffect(() => {
-    if (activity?.zIndexTop && !firstUpdate.current){
+    if (activity?.zIndexTop && !firstUpdate.current) {
       // When the activitiy's zIndexTop changes in the reducer, it updates it in DB
       dispatch(updateActivity({
         activityId: currentActivityId,
@@ -44,7 +44,15 @@ const Activity = (props) => {
     }
     if (activity?.zIndexTop && firstUpdate.current) firstUpdate.current = false
     // eslint-disable-next-line
-  }, [activity?.zIndexTop])
+  }, [activity?.zIndexTop]);
+
+  useEffect(() => {
+    const pairingObj = objetivesList.filter(obj => obj.activityId === currentActivityId && obj.type === "Pairing");
+    pairingObj.forEach(obj => {
+      dispatch(markObjetive(obj._id, 2));
+    });
+    // eslint-disable-next-line 
+  }, [currentActivityId]);
 
   const addNewItem = (item, offset) => {
     switch (item.name) {
@@ -144,7 +152,7 @@ const Activity = (props) => {
         {tokens}
         {areas}
         {arrows}
-        {pairingId ? <SetArrowPointer/> : <></>}
+        {pairingId ? <SetArrowPointer /> : <></>}
         {disclaimer}
         <Trash />
         {timerObjetive ? <Timer objetive={timerObjetive} /> : <></>}

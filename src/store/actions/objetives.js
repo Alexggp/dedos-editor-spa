@@ -66,9 +66,12 @@ export const createObjetive = ({projectId, activityId, type, origin, target}) =>
 };
 
 
-export const markObjetive = (objetiveId) => {
+export const markObjetive = (objetiveId, value) => {
   return async (dispatch) => {
-    dispatch(objetivesActions.mark(objetiveId));
+    // Value: 
+    // 1 -> for moving between areas reprint
+    // 2 -> for moving between activities reprint
+    dispatch(objetivesActions.mark({objetiveId, value}));
   };
 };
 
