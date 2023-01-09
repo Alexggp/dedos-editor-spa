@@ -20,9 +20,13 @@ const objetivesSlice = createSlice({
       state.objetivesList.push(action.payload);
     },
     update(state, action) {
-      const acIndex = state.objetivesList.findIndex(obj => obj._id === action.payload._id);
-      state.objetivesList[acIndex]= action.payload;
+      const objIndex = state.objetivesList.findIndex(obj => obj._id === action.payload._id);
+      state.objetivesList[objIndex]= action.payload;
     },
+    mark(state, action){
+      const objIndex = state.objetivesList.findIndex(obj => obj._id === action.payload);
+      state.objetivesList[objIndex]['marked']= true;
+    }
   },
 });
 

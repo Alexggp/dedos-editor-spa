@@ -23,7 +23,6 @@ const activitiesSlice = createSlice({
       state.currentActivityId = state.activityList[state.activityList.length-1]._id;
     },
     updateCurrent(state, action) {
-      console.log(action.payload)
       state.currentActivityId= action.payload;
     },
     update(state, action) {

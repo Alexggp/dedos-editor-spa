@@ -10,7 +10,7 @@ import { updateArea } from '../../../../store/actions/areas';
 import Options from './Options/Options';
 import Droppable from '../../../../hoc/Droppable/Droppable';
 import { activitiesActions } from '../../../../store/reducers/activities';
-import { createObjetive } from '../../../../store/actions/objetives';
+import { createObjetive, markObjetive, reprintObjetive } from '../../../../store/actions/objetives';
 import usePairing from '../../../../hooks/usePairing';
 
 const Token = (props) => {
@@ -61,6 +61,8 @@ const Token = (props) => {
       hasMoved(props.token.offset);
       updateZIndex();
     }
+        
+    if(objetive?.marked) dispatch(reprintObjetive(objetive))
     // eslint-disable-next-line
   },[]);
 
@@ -125,12 +127,20 @@ const Token = (props) => {
     auxToken.areaId = checkAreaOverlapping(auxToken);
 
     // Getting the offset referenced by the parent
+    if (auxToken.areaId===0 && props.token.areaId !== 0 ){
+      console.log('sale')
+      if (objetive?.type === "Pairing") dispatch(markObjetive(objetive._id));
+    }
     if (!auxToken.areaId){
       // If the token is outside any area, offset = screenOffset
       auxToken.offset = auxToken.screenOffset;
+    } else if (auxToken.areaId===0 && props.token.areaId !== 0 ){
+      
     }
     else if (auxToken.areaId !== props.token.areaId){
       // if the parent area changes, calculates a new offset 
+      console.log("entra")
+      if (objetive?.type === "Pairing") dispatch(markObjetive(objetive._id));
       auxToken.offset = calculateNewOffset(auxToken);
     } else {
       // The token has been moved inside the same area

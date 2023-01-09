@@ -35,14 +35,12 @@ export const deleteObjetive = (objetiveId) => {
   };
 };
 
-export const createObjetive = ({projectId, activityId, type, origin}) => {
+export const createObjetive = ({projectId, activityId, type, origin, target}) => {
   return async (dispatch) => {
     const objetivesList = store.getState().objetives.objetivesList;
     const obj = objetivesList.find(obj => obj.origin === origin || obj.target === origin);
     // Only one objetive by origin is allowed 
     if (obj) return;
-
-    let target;
     let value;
     if(type === "Counter" || type === "Timer"){
       value = 1;
@@ -60,6 +58,28 @@ export const createObjetive = ({projectId, activityId, type, origin}) => {
       if(type === "Pairing"){
         dispatch(pairingActions.set(newObjetive._id));
       }
+    } catch (error) {
+      // console.log(error)
+      return;    
+    }
+  };
+};
+
+
+export const markObjetive = (objetiveId) => {
+  return async (dispatch) => {
+    dispatch(objetivesActions.mark(objetiveId));
+  };
+};
+
+
+export const reprintObjetive = (objetive) => {
+  return async (dispatch) => {
+    try {
+      const auxObjetive = {...objetive}
+      delete auxObjetive.marked;
+      await dispatch(objetivesActions.delete(objetive._id));
+      dispatch(objetivesActions.create(auxObjetive));
     } catch (error) {
       // console.log(error)
       return;    
