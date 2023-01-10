@@ -19,7 +19,6 @@ const App = (props) => {
         <Route path='/' element={root} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/projects' element={<ProjectsPage />} />
-        <Route path='/editor/:projectId' element={<EditionPage />} />
         <Route path='/editor/:projectId/:activityId' element={<EditionPage />} />
         <Route path='*' element={<NotFound />} />
       </Routes>

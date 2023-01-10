@@ -52,6 +52,13 @@ const LoginForm = ({
     if (isValid) send();
   }
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSend();
+    }
+  }
+
+
   return(
 
     <Box
@@ -63,6 +70,7 @@ const LoginForm = ({
         backgroundColor: 'white',        
         '& .MuiTextField-root': { m: 1, width: '300px' },
       }}
+      onKeyDown={handleKeyDown}
     >
       <Typography 
         sx={{
