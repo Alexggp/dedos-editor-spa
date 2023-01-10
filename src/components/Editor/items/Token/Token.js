@@ -137,7 +137,6 @@ const Token = (props) => {
 
     // Getting the offset referenced by the parent
     if (auxToken.areaId===0 && props.token.areaId !== 0 ){
-      console.log('sale')
       if (objetive?.type === "Pairing") dispatch(markObjetive(objetive._id, 1));
     }
     if (!auxToken.areaId){

@@ -13,7 +13,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Tooltip from '@mui/material/Tooltip';
 
-import { getProjects, deleteProject, createProject, updateProject } from '../../store/actions/projects';
+import { getProjects, deleteProject, createProject, updateProject, getProjectActivities, getProjectData } from '../../store/actions/projects';
 import classes from './ProjectsPage.module.css';
 import ProjectForm from '../../components/ProjectForm/ProjectForm';
 import UserMenu from '../../components/UserMenu/UserMenu';
@@ -64,8 +64,9 @@ const ProjectsPage = () => {
     }
   }
 
-  const selectedProjectHandler = (projectId) => {
-    navigate(`/editor/${projectId}`);
+  const selectedProjectHandler = async (projectId) => {
+    const pData = await dispatch(getProjectData(projectId));
+    navigate(`/editor/${projectId}/${pData.activities[0]._id}`);
   }
 
   const boxStyle = { 

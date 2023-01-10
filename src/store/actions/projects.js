@@ -23,11 +23,28 @@ export const getProjectData = (projectId) => {
       dispatch(areasActions.set(response.data.areas));
       dispatch(activitiesActions.set(response.data.activities));
 
+      return response.data;
+
     } catch (error) {
       // console.log(error)
       return;
     }
   };
+};
+
+export const getProjectActivities = async (projectId) => {
+  try {
+    const response = await dedosInstance.get(`/projects/${projectId}`);
+
+    if (response.status !== 200) {
+      throw new Error(`Unexpected API call response with status: ${response.status}`);
+    }
+    return response.data.activities;
+
+  } catch (error) {
+    // console.log(error)
+    return;
+  }
 };
 
 

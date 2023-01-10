@@ -41,7 +41,6 @@ const EditionPage = (props) => {
   useEffect(() => {
     if (activityList.length && activityList[0].projectId === projectId) {
       // Navigating to the first acitivity of the project when the project is loaded for the first time
-      if (!activityId) navigate(`/editor/${projectId}/${activityList[0]._id}`);
       setLogin(false);
     } else {
       setLogin(true);
@@ -54,12 +53,6 @@ const EditionPage = (props) => {
     if(currentActivityId && currentActivityId !== activityId) navigate(`/editor/${projectId}/${currentActivityId}`);
       // eslint-disable-next-line 
   }, [currentActivityId]);
-
-  useEffect(() => {
-    // When navigate to a new activityId, it updates the current activity on the store
-    if(currentActivityId !== activityId) dispatch(activitiesActions.updateCurrent(activityId));
-    // eslint-disable-next-line 
-  }, [activityId]);
 
   return (
     <>
