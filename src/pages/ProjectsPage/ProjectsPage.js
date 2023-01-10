@@ -65,8 +65,8 @@ const ProjectsPage = () => {
   }
 
   const selectedProjectHandler = async (projectId) => {
-    const pData = await dispatch(getProjectData(projectId));
-    navigate(`/editor/${projectId}/${pData.activities[0]._id}`);
+    const activities = await getProjectActivities(projectId);
+    navigate(`/editor/${projectId}/${activities[0]._id}`);
   }
 
   const boxStyle = { 

@@ -9,8 +9,6 @@ import { createActivity } from './activities';
 
 export const getProjectData = (projectId) => {
   return async (dispatch) => {
-
-
     try {
       const response = await dedosInstance.get(`/projects/${projectId}`);
 
