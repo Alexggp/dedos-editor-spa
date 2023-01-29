@@ -20,10 +20,10 @@ dedosInstance.interceptors.request.use((config) => {
 dedosInstance.interceptors.response.use((response) => {
   return response;
 }, (error) => {
-  if (error.response && error.response.data) {
+  if (error.response?.data) {
     store.dispatch(globalErrorActions.set({
       error:  error.response.status,
-      message: error.response.data.message
+      message: error.response.data.message || error.message
     }));
     if(error.response.status === 401){
       store.dispatch(userActions.unset());
