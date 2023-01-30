@@ -30,22 +30,6 @@ export const getProjectData = (projectId) => {
   };
 };
 
-export const getProjectActivities = async (projectId) => {
-  try {
-    const response = await dedosInstance.get(`/projects/${projectId}`);
-
-    if (response.status !== 200) {
-      throw new Error(`Unexpected API call response with status: ${response.status}`);
-    }
-    return response.data.activities;
-
-  } catch (error) {
-    // console.log(error)
-    return;
-  }
-};
-
-
 export const getProjects = () => {
   return async (dispatch) => {
     try {

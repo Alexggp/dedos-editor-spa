@@ -10,16 +10,14 @@ import classes from './EditionPage.module.css';
 import Editor from '../../components/Editor/Editor';
 import SideBar from '../../components/SideBar/SideBar';
 import LoadingPage from '../LoadingPage/LoadingPage';
-import { activitiesActions } from '../../store/reducers/activities';
 
 import { getProjectData } from '../../store/actions/projects';
 
 const EditionPage = (props) => {
   const navigate = useNavigate();
   const token = useSelector(state => state.user.token);
-  const [login, setLogin] = useState(true);
   const activityList = useSelector(state => state.activities.activityList);
-  const currentActivityId = useSelector(state => state.activities.currentActivityId);
+  const [login, setLogin] = useState(false);
 
 
   useEffect(() => {
@@ -32,27 +30,17 @@ const EditionPage = (props) => {
   const dispatch = useDispatch();
   const params = useParams();
   const projectId = params.projectId;
-  const activityId = params.activityId;
 
   useEffect(() => {
-    dispatch(getProjectData(projectId));
-  }, [projectId, dispatch]);
-
-  useEffect(() => {
-    if (activityList.length && activityList[0].projectId === projectId) {
-      // Navigating to the first acitivity of the project when the project is loaded for the first time
-      setLogin(false);
-    } else {
-      setLogin(true);
+    if(!activityList.length){
+      // if page is reloaded the data is lost so we need to fetch it again
+      (async () =>{
+        setLogin(true);
+        await dispatch(getProjectData(projectId));
+        setLogin(false);
+      })()
     }
-    // eslint-disable-next-line 
-  }, [activityList]);
-
-  useEffect(() => {
-    // if the current activity on the store changes (because of removing or adding activities) it navigates to the current activity
-    if(currentActivityId && currentActivityId !== activityId) navigate(`/editor/${projectId}/${currentActivityId}`);
-      // eslint-disable-next-line 
-  }, [currentActivityId]);
+  }, [projectId, dispatch, activityList]);
 
   return (
     <>

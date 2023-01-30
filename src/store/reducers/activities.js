@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 
 const initialState = {
-  currentActivityId: '',
   activityList:[]
 }
 
@@ -21,9 +20,6 @@ const activitiesSlice = createSlice({
     create(state, action) {
       state.activityList.push(action.payload);
       state.currentActivityId = state.activityList[state.activityList.length-1]._id;
-    },
-    updateCurrent(state, action) {
-      state.currentActivityId= action.payload;
     },
     update(state, action) {
       const acIndex = state.activityList.findIndex(ac => ac._id === action.payload._id);

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import Card from '@mui/material/Card';
@@ -13,10 +13,12 @@ import EditIcon from '@mui/icons-material/Edit';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Tooltip from '@mui/material/Tooltip';
 
-import { getProjects, deleteProject, createProject, updateProject, getProjectActivities, getProjectData } from '../../store/actions/projects';
+import { getProjects, deleteProject, createProject, updateProject, getProjectData } from '../../store/actions/projects';
 import classes from './ProjectsPage.module.css';
 import ProjectForm from '../../components/ProjectForm/ProjectForm';
 import UserMenu from '../../components/UserMenu/UserMenu';
+import LoadingPage from '../LoadingPage/LoadingPage';
+
 
 const ProjectsPage = () => {
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ const ProjectsPage = () => {
 
   useEffect(() => {
     // If there is no token, redirects to login page
-    if (!token){
+    if (!token) {
       navigate('/login');
     }
   }, [token, navigate]);
@@ -37,16 +39,22 @@ const ProjectsPage = () => {
   }
   const [formIsOpen, openForm] = useState(false);
   const [formData, setFormData] = useState(emptyForm);
+  const [loading, setLoading] = useState(false);
 
   const projectList = useSelector(state => state.projects.projectList);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getProjects(0));
+    // fetching data
+    (async () => {
+      setLoading(true);
+      await dispatch(getProjects());
+      setLoading(false);
+    })();
   }, [dispatch]);
 
   const showForm = (pr) => {
-    setFormData({...formData, ...pr});
+    setFormData({ ...formData, ...pr });
     openForm(true);
   }
 
@@ -55,7 +63,7 @@ const ProjectsPage = () => {
   }
 
   const sendHandler = () => {
-    if (formData._id){
+    if (formData._id) {
       dispatch(updateProject(formData));
       openForm(false);
     } else {
@@ -65,21 +73,22 @@ const ProjectsPage = () => {
   }
 
   const selectedProjectHandler = async (projectId) => {
-    const activities = await getProjectActivities(projectId);
-    navigate(`/editor/${projectId}/${activities[0]._id}`);
+    setLoading(true);
+    const projectData = await dispatch(getProjectData(projectId));
+    navigate(`/editor/${projectId}/${projectData.activities[0]._id}`);
   }
 
-  const boxStyle = { 
-    flexGrow: 1, 
-    width: '75%', 
+  const boxStyle = {
+    flexGrow: 1,
+    width: '75%',
     height: '50%'
   };
 
-  const projects = projectList.map(pr=>(
+  const projects = projectList.map(pr => (
     <Grid item xs={2} sm={4} md={4} key={pr._id}>
       <Card >
         <CardActionArea onClick={() => selectedProjectHandler(pr._id)}>
-          <CardContent sx={{height: "145px"}}>
+          <CardContent sx={{ height: "145px" }}>
             <Typography gutterBottom variant="h5" component="div">
               {pr.title}
             </Typography>
@@ -88,14 +97,14 @@ const ProjectsPage = () => {
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions  disableSpacing sx={{display: "flex", justifyContent: "flex-end"}}>
+        <CardActions disableSpacing sx={{ display: "flex", justifyContent: "flex-end" }}>
           <Tooltip title="Editar">
-            <IconButton aria-label="Editar" onClick={()=>showForm(pr)}>
+            <IconButton aria-label="Editar" onClick={() => showForm(pr)}>
               <EditIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="Eliminar">
-            <IconButton aria-label="Eliminar" onClick={()=>deleteHandler(pr._id)}>
+            <IconButton aria-label="Eliminar" onClick={() => deleteHandler(pr._id)}>
               <DeleteIcon />
             </IconButton>
           </Tooltip>
@@ -106,14 +115,14 @@ const ProjectsPage = () => {
 
   projects.push(
     <Grid item xs={2} sm={4} md={4} key={'Insert'}>
-      <Card onClick={()=>showForm(emptyForm)}>
+      <Card onClick={() => showForm(emptyForm)}>
         <CardActionArea>
-          <CardContent sx={{height: "200px"}}>
+          <CardContent sx={{ height: "200px" }}>
             <Typography gutterBottom variant="h5" component="div">
               Crear nuevo...
             </Typography>
-            <Typography style={{display:"flex", alignItems: "center", justifyContent: "center", paddingTop: "5%"}}>
-              <AddCircleOutlineIcon sx={{ fontSize: 120 }}/>
+            <Typography style={{ display: "flex", alignItems: "center", justifyContent: "center", paddingTop: "5%" }}>
+              <AddCircleOutlineIcon sx={{ fontSize: 120 }} />
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -122,27 +131,35 @@ const ProjectsPage = () => {
   )
 
   return (
-    <div className={classes.ProjectsPage}> 
-      <ProjectForm 
-        isOpen={formIsOpen} 
-        formData={formData} 
-        setFormData={setFormData} 
-        send= {sendHandler}
-        close={()=>openForm(false)}/>
-      <div className={classes.Header}>
-        <h1>
-          Proyectos
-        </h1>
-      </div>
-      <Box sx={boxStyle}>
-        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-          {projects}
-        </Grid>
-      </Box>
-      <div className={classes.MenuUser}>
-        <UserMenu />
-      </div>
-    </div>
+    <>
+      {
+        loading ?
+          <LoadingPage />
+          :
+          <div className={classes.ProjectsPage}>
+            <ProjectForm
+              isOpen={formIsOpen}
+              formData={formData}
+              setFormData={setFormData}
+              send={sendHandler}
+              close={() => openForm(false)} />
+            <div className={classes.Header}>
+              <h1>
+                Proyectos
+              </h1>
+            </div>
+            <Box sx={boxStyle}>
+              <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                {projects}
+              </Grid>
+            </Box>
+            <div className={classes.MenuUser}>
+              <UserMenu />
+            </div>
+          </div>
+      }
+    </>
+
   );
 }
 
