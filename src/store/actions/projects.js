@@ -48,7 +48,8 @@ export const getProjects = () => {
 export const createProject = (title, description) => {
   return async (dispatch) => {
 
-    const screenResolution = `${window.screen.availWidth}x${window.screen.availHeight}`;
+    // We have to substract the height and width of the side and upper bars in order to have the real resolution of edition area
+    const screenResolution = `${window.screen.availWidth-230}x${window.screen.availHeight-85}`;
     const newProject = project(title, description, screenResolution);
 
     try {
@@ -100,4 +101,24 @@ export const deleteProject = (projectId) => {
       return;
     }
   };
+};
+
+
+export const downloadProject = async (project) => {
+    try {
+      const response = await dedosInstance.get(`/download/${project._id}`, {responseType: 'blob'})
+      if (response.status !== 200) {
+        throw new Error(`Unexpected API call response with status: ${response.status} - ${response.statusText}`);
+      }
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', project.title+'.zip');
+      document.body.appendChild(link);
+      link.click();
+    } catch (error) {
+       console.log(error)
+      return;
+    }
+
 };

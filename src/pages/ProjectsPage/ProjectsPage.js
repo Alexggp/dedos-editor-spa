@@ -10,10 +10,11 @@ import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import DownloadIcon from '@mui/icons-material/Download';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Tooltip from '@mui/material/Tooltip';
 
-import { getProjects, deleteProject, createProject, updateProject, getProjectData } from '../../store/actions/projects';
+import { getProjects, deleteProject, createProject, updateProject, getProjectData, downloadProject } from '../../store/actions/projects';
 import classes from './ProjectsPage.module.css';
 import ProjectForm from '../../components/ProjectForm/ProjectForm';
 import UserMenu from '../../components/UserMenu/UserMenu';
@@ -72,6 +73,10 @@ const ProjectsPage = () => {
     }
   }
 
+  const downloadHandler = (project) => {
+    downloadProject(project);
+  }
+
   const selectedProjectHandler = async (projectId) => {
     setLoading(true);
     const projectData = await dispatch(getProjectData(projectId));
@@ -98,6 +103,11 @@ const ProjectsPage = () => {
           </CardContent>
         </CardActionArea>
         <CardActions disableSpacing sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Tooltip title="Descargar">
+            <IconButton aria-label="Descargar" onClick={() => downloadHandler(pr)}>
+              <DownloadIcon />
+            </IconButton>
+          </Tooltip>
           <Tooltip title="Editar">
             <IconButton aria-label="Editar" onClick={() => showForm(pr)}>
               <EditIcon />
