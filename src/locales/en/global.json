@@ -1,0 +1,12 @@
+{
+    "items":{
+      "text": {
+        "textarea": "<Excriba aquí el texto>",
+        "title": "Texto"
+      },
+      "image":{
+        "title": "Imagen",
+        "remove": "Eliminar imagen"
+      }
+    }
+  }

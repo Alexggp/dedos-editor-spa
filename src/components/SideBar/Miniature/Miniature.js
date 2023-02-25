@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import classes from './Miniature.module.css';
 import AreaMin from './Items/AreaMin/AreaMin';
@@ -11,6 +12,7 @@ import removeIcon from '../../../assets/icons/removeIcon.png';
 
 
 const Miniature = (props) => {
+  const { t } = useTranslation('global');
 
   const tokenList = useSelector(state => state.tokens.tokenList);
   const areaList = useSelector(state => state.areas.areaList);
@@ -52,7 +54,7 @@ const Miniature = (props) => {
   return(
     
       <div className={classes.Miniature}>
-        <img className={classes.RemoveImg} src={removeIcon} onClick={(e)=>props.removeActivity(e, props.activityId, props.isSelected)} title='Eliminar actividad' alt=''/>
+        <img className={classes.RemoveImg} src={removeIcon} onClick={(e)=>props.removeActivity(e, props.activityId, props.isSelected)} title={t('sideBar.delete')} alt=''/>
         {areas}
         {tokens}
         {arrows}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { updateObjetive } from '../../../../store/actions/objetives';
 import classes from './Timer.module.css';
@@ -10,6 +11,7 @@ import Modal from '../../../../hoc/Modal/Modal';
 
 const Timer = ({objetive}) =>{
   const dispatch = useDispatch();
+  const { t } = useTranslation('global');
   const [showInput, setShowInput] = useState(false);
   const [inputValue, setInputValue] = useState(objetive.value);
 
@@ -37,7 +39,7 @@ const Timer = ({objetive}) =>{
       </div>
       <Modal open={showInput} close={closeHandler}>
         <img alt='' className={classes.CloseModal} src={closeIcon} onClick={closeHandler}/>
-        <label htmlFor={'TimerInput'}> La actividad finaliza en (s):  </label>
+        <label htmlFor={'TimerInput'}> {t('objetives.timer')}:  </label>
         <input 
           type='number'
           name={'TimerInput'}

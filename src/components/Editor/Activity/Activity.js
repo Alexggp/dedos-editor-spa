@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 
 import classes from './Activity.module.css';
 import Area from '../items/Area/Area';
@@ -22,6 +24,7 @@ import { createObjetive, markObjetive } from '../../../store/actions/objetives';
 
 const Activity = (props) => {
   const params = useParams();
+  const { t } = useTranslation('global');
   const dispatch = useDispatch();
   const { pairingId } = usePairing();
   const tokenList = useSelector(state => state.tokens.tokenList);
@@ -138,8 +141,8 @@ const Activity = (props) => {
 
   const disclaimer = (!tokens.length && !areas.length) ? (
     <div className={classes.WelcomeText}>
-      <p>SOY EL ÁREA DE EDICIÓN:</p>
-      <p>ARRASTRA SOBRE MI LOS ICONOS DE LA BARRA DE<br />HERRAMIENTAS PARA CREAR UNA ACTIVIDAD</p>
+      <p>{t('activity.welcome1')}:</p>
+      <p>{t('activity.welcome2')}<br />{t('activity.welcome3')}</p>
     </div>
   ) : '';
 

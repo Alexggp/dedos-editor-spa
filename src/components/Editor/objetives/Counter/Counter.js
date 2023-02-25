@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { updateObjetive } from '../../../../store/actions/objetives';
 import classes from './Counter.module.css';
@@ -10,6 +11,7 @@ import Modal from '../../../../hoc/Modal/Modal';
 
 const Counter = ({objetive}) =>{
   const dispatch = useDispatch();
+  const { t } = useTranslation('global');
   const [showInput, setShowInput] = useState(false);
   const [inputValue, setInputValue] = useState(objetive.value);
 
@@ -35,7 +37,7 @@ const Counter = ({objetive}) =>{
       </div>
       <Modal open={showInput} close={closeHandler}>
         <img alt='' className={classes.CloseModal} src={closeIcon} onClick={closeHandler}/>
-        <label htmlFor={'CounterInput'}> Contador:  </label>
+        <label htmlFor={'CounterInput'}> {t('objetives.counter')}:  </label>
         <input 
           type='number'
           name={'CounterInput'}

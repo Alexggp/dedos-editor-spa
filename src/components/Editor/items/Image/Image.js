@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import Token from '../Token/Token';
 import classes from './Image.module.css';
@@ -10,6 +11,7 @@ import { deleteFile } from '../../../../store/actions/files';
 
 const Image = (props) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation('global');
 
   const addImage = (imageUrl) => {
     const auxToken = { ...props.token }
@@ -39,7 +41,7 @@ const Image = (props) => {
     images = props.token.content.urlList.map((imgSrc, index) => (
       <div className={classes.ImageBox} key={index}>
         <img className={classes.Image} src={imgSrc} alt='' />
-        <img className={classes.RemoveImg} src={removeIcon} onClick={() => removeImage(index)} title='Eliminar imagen' alt='' />
+        <img className={classes.RemoveImg} src={removeIcon} onClick={() => removeImage(index)} title={t('items.image.remove')} alt='' />
       </div>
     ))
   }
@@ -59,7 +61,7 @@ const Image = (props) => {
     <Token
       type={'IMAGE'}
       token={props.token}
-      title={'Imagen'}
+      title={t('items.image.title')}
       area={props.area}
       addButton={addButton}>
 

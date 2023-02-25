@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Token from '../TokenMin/TokenMin';
 import classes from './ImageMin.module.css';
@@ -6,6 +7,7 @@ import classes from './ImageMin.module.css';
 
 
 const Image = (props) => {
+  const { t } = useTranslation('global');
 
   let images;
   if (props.token.content.urlList) {
@@ -22,7 +24,7 @@ const Image = (props) => {
       <Token
         type={'IMAGE'}
         token={props.token}
-        title={'Imagen'}>
+        title={t('items.image.title')}>
           
         <div className={classes.ImageContainer} >
           {images}

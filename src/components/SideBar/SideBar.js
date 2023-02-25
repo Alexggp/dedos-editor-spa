@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { createActivity, deleteActivity } from '../../store/actions/activities';
@@ -10,6 +11,7 @@ import addIcon from '../../assets/icons/addIcon.png';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const SideBar = (props) => {
+  const { t } = useTranslation('global');
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -67,7 +69,7 @@ const SideBar = (props) => {
         {project ? project.title : ""}
       </div>
       {activitiesContainers}
-      <img className={classes.AddIcon} src={addIcon} onClick={addActivity} title='Nueva actividad' alt=''/>
+      <img className={classes.AddIcon} src={addIcon} onClick={addActivity} title={t('sideBar.new')} alt=''/>
     </div>
   );
 }

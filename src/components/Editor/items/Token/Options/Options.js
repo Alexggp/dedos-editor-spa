@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import classes from './Options.module.css';
+import { useTranslation } from 'react-i18next';
 
 
 const Options = (props) => {
+  const { t } = useTranslation('global');
 
   const [currentTab, setCurrentTab] = useState(0);
 
@@ -54,7 +56,7 @@ const Options = (props) => {
             onChange={changeClickableHandler}
             checked = {props.token.clickable}
             name={`input1${props.token._id}`}/>
-          <label htmlFor={`input1${props.token._id}`}> Seleccionable </label>
+          <label htmlFor={`input1${props.token._id}`}> {t('items.token.options.clickable')} </label>
         </div>
         <div>
           <input 
@@ -63,7 +65,7 @@ const Options = (props) => {
             onChange={changeRotatableHandler}
             checked = {props.token.rotatable}
             name={`input2${props.token._id}`}/>
-          <label htmlFor={`input2${props.token._id}`}> Girable </label>
+          <label htmlFor={`input2${props.token._id}`}> {t('items.token.options.rotatable')} </label>
         </div>
         <div>
           <input 
@@ -72,7 +74,7 @@ const Options = (props) => {
             onChange={changeResizableHandler}
             checked = {props.token.resizable}
             name={`input3${props.token._id}`}/>
-          <label htmlFor={`input3${props.token._id}`}> Redimensionable </label>
+          <label htmlFor={`input3${props.token._id}`}> {t('items.token.options.resizable')} </label>
         </div>      
       </div>  
     </div>
@@ -94,7 +96,7 @@ const Options = (props) => {
   const mathsContainer = (
     <div className={classes.Container}>
       <div  className={classes.MathsContainer}>
-        <label htmlFor={`inputN${props.token._id}`}> Valor numérico </label>
+        <label htmlFor={`inputN${props.token._id}`}> {t('items.token.options.value')} </label>
         <input 
           type='number'
           id= {`inputN${props.token._id}`}
@@ -122,9 +124,9 @@ const Options = (props) => {
   return(
     <div className={classes.Options}>
       <div className={classes.TabBar}>
-        <div className={getTabClasses(0)} onClick={()=>setCurrentTab(0)}>Acciones</div>
-        <div className={getTabClasses(1)} onClick={()=>setCurrentTab(1)}>Feedback</div>
-        <div className={getTabClasses(2)} onClick={()=>setCurrentTab(2)}>Matemática</div>
+        <div className={getTabClasses(0)} onClick={()=>setCurrentTab(0)}>{t('items.token.options.actions')}</div>
+        <div className={getTabClasses(1)} onClick={()=>setCurrentTab(1)}>{t('items.token.options.feedback')}</div>
+        <div className={getTabClasses(2)} onClick={()=>setCurrentTab(2)}>{t('items.token.options.maths')}</div>
       </div>
       <div className={classes.OptionsContainer}>
         {getOptionsForm()}

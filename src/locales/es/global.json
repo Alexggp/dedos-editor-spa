@@ -1,0 +1,78 @@
+{
+    "items":{
+      "text": {
+        "textarea": "Excriba aquí el texto",
+        "title": "Texto"
+      },
+      "image":{
+        "title": "Imagen",
+        "remove": "Eliminar imagen"
+      },
+      "token":{
+        "options":{
+            "actions": "Acciones",
+            "feedback": "Feedback",
+            "maths": "Matemáticas",
+            "value": "Valor numérico",
+            "resizable": "Redimensionable",
+            "rotatable": "Girable",
+            "clickable": "Seleccionable"
+        }
+      }
+    },
+    "objetives":{
+        "counter": "Contador",
+        "timer": "La actividad finaliza en (s)"
+    },
+    "toolbar":{
+       "area": "Arrástrame al área de edición para crear una Zona",
+       "text": "Arrástrame al área de edición para crear una tarjeta de texto",
+       "image": "Arrástrame al área de edición para crear una tarjeta de imágenes",
+       "selection": "Arrástrame a una tarjeta para crear un objetivo de selección",
+       "pairing": "Arrástrame a una tarjeta o zona para crear un objetivo de emparejamiento",
+       "path": "Arrástrame a una tarjeta para crear un objetivo de caminos",
+       "counter": "Contador de tarjetas",
+       "timer": "Arrástrame al área de edición para añadir límite de tiempo a la actividad",
+       "menu": "Todos los projectos"
+    },
+    "activity":{
+        "welcome1":"SOY EL ÁREA DE EDICIÓN",
+        "welcome2":"ARRASTRA SOBRE MI LOS ICONOS DE LA BARRA DE",
+        "welcome3":"HERRAMIENTAS PARA CREAR UNA ACTIVIDAD"
+    },
+    "login":{
+      "email": "Email",
+      "password": "Contraseña",
+      "name": "Nombre",
+      "signup": "Registrarse",
+      "logIn": "LogIn",
+      "logOut": "LogOut",
+      "accept": "Aceptar",
+      "formatError": "Formato incorrecto",
+      "required":"Este campo es obligatorio"
+    },
+    "projectForm":{
+      "accept": "Aceptar",
+      "cancel": "Cancelar",
+      "title": "Título",
+      "description": "Descripción"
+    },
+    "sideBar":{
+      "new": "Nueva actividad",
+      "delete": "Eliminar actividad"
+    },
+    "loadingPage":{
+      "loading":"Cargando"
+    },
+    "notFoundPage":{
+      "goToHome": "Ir a la página principal"
+    },
+    "projectsPage":{
+      "title": "Proyectos",
+      "new": "Crear nuevo",
+      "delete": "Eliminar",
+      "edit": "Editar",
+      "download": "Descargar"
+    }
+
+  }

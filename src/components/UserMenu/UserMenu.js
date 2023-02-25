@@ -9,10 +9,12 @@ import ListItem from '@mui/material/ListItem';
 import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { userActions } from '../../store/reducers/user';
 
 const UserMenu = (props) => {
+  const { t } = useTranslation('global');
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);  
   const open = Boolean(anchorEl);
@@ -57,7 +59,7 @@ const UserMenu = (props) => {
           <ListItemText>{user.email}</ListItemText>
         </ListItem>
         <Divider />
-        <MenuItem onClick={logout}>Logout</MenuItem>
+        <MenuItem onClick={logout}>{t('login.logOut')}</MenuItem>
       </Menu>
     </>
   );

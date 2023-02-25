@@ -237,7 +237,7 @@ const Token = (props) => {
                   </div>
                   <div className={classes.Body} >
                     <div className={classes.OptionsButton} onClick={optionsButtonHandler}></div>
-                    {props.children}
+                    {!showOptions ? props.children : ''}
                     {optionsContainer}
                   </div>
                 </div>

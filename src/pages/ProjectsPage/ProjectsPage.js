@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import Card from '@mui/material/Card';
@@ -22,6 +23,7 @@ import LoadingPage from '../LoadingPage/LoadingPage';
 
 
 const ProjectsPage = () => {
+  const { t } = useTranslation('global');
   const navigate = useNavigate();
   const token = useSelector(state => state.user.token);
 
@@ -104,17 +106,17 @@ const ProjectsPage = () => {
         </CardActionArea>
         <CardActions disableSpacing sx={{ display: "flex", justifyContent: "flex-end" }}>
           <Tooltip title="Descargar">
-            <IconButton aria-label="Descargar" onClick={() => downloadHandler(pr)}>
+            <IconButton aria-label={t('projectsPage.download')} onClick={() => downloadHandler(pr)}>
               <DownloadIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="Editar">
-            <IconButton aria-label="Editar" onClick={() => showForm(pr)}>
+            <IconButton aria-label={t('projectsPage.edit')} onClick={() => showForm(pr)}>
               <EditIcon />
             </IconButton>
           </Tooltip>
           <Tooltip title="Eliminar">
-            <IconButton aria-label="Eliminar" onClick={() => deleteHandler(pr._id)}>
+            <IconButton aria-label={t('projectsPage.new')} onClick={() => deleteHandler(pr._id)}>
               <DeleteIcon />
             </IconButton>
           </Tooltip>
@@ -129,7 +131,7 @@ const ProjectsPage = () => {
         <CardActionArea>
           <CardContent sx={{ height: "200px" }}>
             <Typography gutterBottom variant="h5" component="div">
-              Crear nuevo...
+              {t('projectsPage.new')}...
             </Typography>
             <Typography style={{ display: "flex", alignItems: "center", justifyContent: "center", paddingTop: "5%" }}>
               <AddCircleOutlineIcon sx={{ fontSize: 120 }} />
@@ -155,7 +157,7 @@ const ProjectsPage = () => {
               close={() => openForm(false)} />
             <div className={classes.Header}>
               <h1>
-                Proyectos
+                {t('projectsPage.title')}
               </h1>
             </div>
             <Box sx={boxStyle}>
