@@ -6,6 +6,7 @@ const initialState = {
     name: null,
     id: null
   },
+  locale: 'es',
   token: null
 }
 
@@ -21,6 +22,9 @@ const user = createSlice({
       state.user = initialState.user;
       state.token = initialState.token;
     },
+    changeLocale(state, action){
+      state.locale = action.payload
+    }
   },
 });
 

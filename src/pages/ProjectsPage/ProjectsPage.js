@@ -19,6 +19,7 @@ import { getProjects, deleteProject, createProject, updateProject, getProjectDat
 import classes from './ProjectsPage.module.css';
 import ProjectForm from '../../components/ProjectForm/ProjectForm';
 import UserMenu from '../../components/UserMenu/UserMenu';
+import LocaleMenu from '../../components/LocaleMenu/LocaleMenu';
 import LoadingPage from '../LoadingPage/LoadingPage';
 
 
@@ -166,6 +167,7 @@ const ProjectsPage = () => {
               </Grid>
             </Box>
             <div className={classes.MenuUser}>
+              <LocaleMenu />
               <UserMenu />
             </div>
           </div>
