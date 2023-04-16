@@ -1,12 +1,76 @@
 {
-    "items":{
-      "text": {
-        "textarea": "<Excriba aquí el texto>",
-        "title": "Texto"
-      },
-      "image":{
-        "title": "Imagen",
-        "remove": "Eliminar imagen"
+  "items": {
+    "text": {
+      "textarea": "Type the text here",
+      "title": "Text"
+    },
+    "image": {
+      "title": "Image",
+      "remove": "Remove image"
+    },
+    "token": {
+      "options": {
+        "actions": "Actions",
+        "feedback": "Feedback",
+        "maths": "Maths",
+        "value": "Numeric value",
+        "resizable": "Resizable",
+        "rotatable": "Rotatable",
+        "clickable": "Clickable"
       }
     }
+  },
+  "objetives": {
+    "counter": "Counter",
+    "timer": "Activity ends in (s)"
+  },
+  "toolbar": {
+    "area": "Drag me to the editing area to create a Zone",
+    "text": "Drag me to the editing area to create a text card",
+    "image": "Drag me to the editing area to create an image card",
+    "selection": "Drag me to a card to create a selection objective",
+    "pairing": "Drag me to a card or zone to create a pairing objective",
+    "path": "Drag me to a card to create a path objective",
+    "counter": "Card counter",
+    "timer": "Drag me to the editing area to add a time limit to the activity",
+    "menu": "All projects"
+  },
+  "activity": {
+    "welcome1": "I AM THE EDITING AREA",
+    "welcome2": "DRAG THE TOOLS BAR ICONS ON ME TO CREATE AN ACTIVITY"
+  },
+  "login": {
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "signup": "Sign Up",
+    "logIn": "Log In",
+    "logOut": "Log Out",
+    "accept": "Accept",
+    "formatError": "Wrong format",
+    "required": "This field is required"
+  },
+  "projectForm": {
+    "accept": "Accept",
+    "cancel": "Cancel",
+    "title": "Title",
+    "description": "Description"
+  },
+  "sideBar": {
+    "new": "New activity",
+    "delete": "Delete activity"
+  },
+  "loadingPage": {
+    "loading": "Loading"
+  },
+  "notFoundPage": {
+    "goToHome": "Go to home page"
+  },
+  "projectsPage": {
+    "title": "Projects",
+    "new": "Create new",
+    "delete": "Delete",
+    "edit": "Edit",
+    "download": "Download"
   }
+}

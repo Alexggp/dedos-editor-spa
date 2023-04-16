@@ -1,12 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const languages = ['es', 'en'];
+const selectedLang = (navigator.language || navigator.userLanguage).split('-')[0];
+
+const locale = languages.find((item)=>item===selectedLang) ? selectedLang : 'es';
+
+
 const initialState = {
   user: {
     email: null,
     name: null,
     id: null
   },
-  locale: 'es',
+  locale: locale,
   token: null
 }
 

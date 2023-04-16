@@ -17,10 +17,7 @@ import i18next from 'i18next';
 import global_es from './locales/es/global.json';
 import global_en from './locales/en/global.json';
 
-
-const languages = ['es', 'en'];
-const selectedLang = (navigator.language || navigator.userLanguage).split('-')[0];
-const locale = languages.find((item)=>item===selectedLang) ? selectedLang : 'es';
+const locale = store.getState().user.locale;
 
 i18next.init({
   interpolation: { escapeValue: false },
