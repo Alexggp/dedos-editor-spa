@@ -6,6 +6,7 @@ import { areasActions } from '../reducers/areas';
 import { tokensActions } from '../reducers/tokens';
 import { objetivesActions } from '../reducers/objetives';
 import { createActivity } from './activities';
+import { store } from '..';
 
 export const getProjectData = (projectId) => {
   return async (dispatch) => {
@@ -48,9 +49,11 @@ export const getProjects = () => {
 export const createProject = (title, description) => {
   return async (dispatch) => {
 
+    const locale = store.getState().user.locale;
+
     // We have to substract the height and width of the side and upper bars in order to have the real resolution of edition area
     const screenResolution = `${window.screen.availWidth-230}x${window.screen.availHeight-85}`;
-    const newProject = project(title, description, screenResolution);
+    const newProject = project(title, description, locale, screenResolution);
 
     try {
       const response = await dedosInstance.post(`/projects`, newProject);

@@ -1,6 +1,7 @@
-export const project = (title, description, screenResolution) => ({
+export const project = (title, description, locale, screenResolution) => ({
     title,
     description,
+    locale,
     screenResolution
 })
 
