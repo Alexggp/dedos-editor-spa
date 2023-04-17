@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -7,12 +7,23 @@ import EditionPage from './pages/EditorPage/EditionPage';
 import ProjectsPage from './pages/ProjectsPage/ProjectsPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import NotFound from './pages/NotFound/NotFound';
-import ErrorBanner from './components/ErrorBanner/ErrorBanner'
+import ErrorBanner from './components/ErrorBanner/ErrorBanner';
+import { useTranslation } from 'react-i18next'
 
 const App = (props) => {
   const token = useSelector(state => state.user.token);
+  const locale = useSelector(state => state.user.locale);
 
   const root = !token ? <Navigate replace to='/login' /> : <Navigate replace to='/projects' />;
+
+  const { i18n } = useTranslation()
+
+  useEffect(() => {
+    i18n.changeLanguage(locale);
+    // eslint-disable-next-line
+  }, []);
+
+
   return (
     <>
       <Routes>

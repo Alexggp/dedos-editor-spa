@@ -37,7 +37,8 @@
   },
   "activity": {
     "welcome1": "I AM THE EDITING AREA",
-    "welcome2": "DRAG THE TOOLS BAR ICONS ON ME TO CREATE AN ACTIVITY"
+    "welcome2": "DRAG THE TOOLS BAR ICONS ON ME TO CREATE AN ACTIVITY",
+    "welcome3":""
   },
   "login": {
     "email": "Email",
