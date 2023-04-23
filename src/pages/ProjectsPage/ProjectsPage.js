@@ -2,18 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import { CardActionArea, CardActions } from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import DownloadIcon from '@mui/icons-material/Download';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import Tooltip from '@mui/material/Tooltip';
 
 import { getProjects, deleteProject, createProject, updateProject, getProjectData, downloadProject } from '../../store/actions/projects';
 import classes from './ProjectsPage.module.css';
@@ -21,7 +11,8 @@ import ProjectForm from '../../components/ProjectForm/ProjectForm';
 import UserMenu from '../../components/UserMenu/UserMenu';
 import LocaleMenu from '../../components/LocaleMenu/LocaleMenu';
 import LoadingPage from '../LoadingPage/LoadingPage';
-
+import ProjectCard from '../../components/ProjectCard/ProjectCard';
+import ProjectAddCard from '../../components/ProjectAddCard/ProjectAddCard';
 
 const ProjectsPage = () => {
   const { t } = useTranslation('global');
@@ -93,54 +84,17 @@ const ProjectsPage = () => {
   };
 
   const projects = projectList.map(pr => (
-    <Grid item xs={2} sm={4} md={4} key={pr._id}>
-      <Card >
-        <CardActionArea onClick={() => selectedProjectHandler(pr._id)}>
-          <CardContent sx={{ height: "145px" }}>
-            <Typography gutterBottom variant="h5" component="div">
-              {pr.title}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {pr.description}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions disableSpacing sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <Tooltip title="Descargar">
-            <IconButton aria-label={t('projectsPage.download')} onClick={() => downloadHandler(pr)}>
-              <DownloadIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Editar">
-            <IconButton aria-label={t('projectsPage.edit')} onClick={() => showForm(pr)}>
-              <EditIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Eliminar">
-            <IconButton aria-label={t('projectsPage.new')} onClick={() => deleteHandler(pr._id)}>
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-        </CardActions>
-      </Card>
-    </Grid>
+    <ProjectCard 
+      pr={pr}
+      downloadHandler={downloadHandler}
+      showForm={showForm}
+      deleteHandler={deleteHandler}
+      selectedProjectHandler={selectedProjectHandler}
+    />
   ))
 
   projects.push(
-    <Grid item xs={2} sm={4} md={4} key={'Insert'}>
-      <Card onClick={() => showForm(emptyForm)}>
-        <CardActionArea>
-          <CardContent sx={{ height: "200px" }}>
-            <Typography gutterBottom variant="h5" component="div">
-              {t('projectsPage.new')}...
-            </Typography>
-            <Typography style={{ display: "flex", alignItems: "center", justifyContent: "center", paddingTop: "5%" }}>
-              <AddCircleOutlineIcon sx={{ fontSize: 120 }} />
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-    </Grid>
+    <ProjectAddCard showForm={showForm} emptyForm={emptyForm}/>
   )
 
   return (
