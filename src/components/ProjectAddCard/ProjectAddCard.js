@@ -13,7 +13,7 @@ const ProjectAddCard = ({showForm, emptyForm}) => {
 
   return (
     <Grid item xs={2} sm={4} md={4} key={'Insert'}>
-    <Card onClick={() => showForm(emptyForm)}>
+    <Card  sx={{ background: "#dceaf1" }} onClick={() => showForm(emptyForm)}>
       <CardActionArea>
         <CardContent sx={{ height: "200px" }}>
           <Typography gutterBottom variant="h5" component="div">

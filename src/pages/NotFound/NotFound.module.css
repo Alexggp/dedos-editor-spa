@@ -1,7 +1,10 @@
 .NotFound {
   width: 100vw;
   height: 100vh;
-  background-color: gray;
+  background-image: url('../../assets/background.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
   color: white;
   display: flex;
   flex-direction: column;
@@ -10,7 +13,13 @@
   justify-content: center;
 }
 
+.NotFound h1{
+  background-color: #d5c3dd
+}
+
+
 .NotFound h2{
+  background-color: #d5c3dd;
   font-size: 0.5em;
   color: white;
 }

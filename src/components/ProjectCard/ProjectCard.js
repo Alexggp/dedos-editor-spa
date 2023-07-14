@@ -22,7 +22,7 @@ const ProjectCard = ({
 
   return (
     <Grid item xs={2} sm={4} md={4} key={pr._id}>
-      <Card >
+      <Card sx={{ background: "#dceaf1" }}>
         <CardActionArea onClick={() => selectedProjectHandler(pr._id)}>
           <CardContent sx={{ height: "145px" }}>
             <Typography gutterBottom variant="h5" component="div">

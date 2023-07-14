@@ -73,10 +73,10 @@ const SignUpForm = ({
       component="form"
       autoComplete='off'
       sx={{
-        width: 320,
+        width: 500,
         padding: 5,
-        backgroundColor: 'white',        
-        '& .MuiTextField-root': { m: 1, width: '300px' },
+        backgroundColor: "#dceaf1",        
+        '& .MuiTextField-root': { m: 1, width: '480px' },
       }}
       onKeyDown={handleKeyDown}
     >
@@ -84,7 +84,7 @@ const SignUpForm = ({
         sx={{
           marginBottom: 3,
         }}
-        color="black"
+        color="#1976d2"
         align="center"
         variant="h4"
         component="div">
